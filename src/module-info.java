@@ -1,5 +1,5 @@
 module Risk {
 	requires javafx.controls;
 	
-	opens risk to javafx.graphics, javafx.fxml;
+	opens risk.main to javafx.graphics, javafx.fxml;
 }
