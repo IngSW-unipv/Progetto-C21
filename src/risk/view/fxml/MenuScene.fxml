@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="backgroundAnchor" prefHeight="600.0" prefWidth="450.0" stylesheets="@../css/MenuStyleSheet.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="risk.controller.MenuController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text id="titleMenu_text" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="2.5" text="RISK" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text id="infoMenu_text" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD PLAYER'S NAMES OR CHOOSE AI PLAYERS&#10;(MIN 3 PLAYERS). WHEN READY PRESS PLAY" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </top>
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
+                     <children>
+                        <Text id="playerMenu_text" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField id="p1name" fx:id="p1name" />
+                        <CheckBox id="checkMenu_text" fx:id="p1check" disable="true" mnemonicParsing="false" text="AI Player" visible="false" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
+                     <children>
+                        <Text id="playerMenu_text" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField id="p2name" fx:id="p2name" />
+                        <CheckBox id="checkMenu_text" fx:id="p2check" mnemonicParsing="false" text="AI Player" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
+                     <children>
+                        <Text id="playerMenu_text" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 3">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField id="p3name" fx:id="p3name" />
+                        <CheckBox id="checkMenu_text" fx:id="p3check" mnemonicParsing="false" text="AI Player" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
+                     <children>
+                        <Text id="playerMenu_text" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 4">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField id="p4name" fx:id="p4name" />
+                        <CheckBox id="checkMenu_text" fx:id="p4check" mnemonicParsing="false" text="AI Player" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
+                     <children>
+                        <Text id="playerMenu_text" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 5">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField id="p5name" fx:id="p5name" />
+                        <CheckBox id="checkMenu_text" fx:id="p5check" mnemonicParsing="false" text="AI Player" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
+                     <children>
+                        <Text id="playerMenu_text" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 6">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField id="p6name" fx:id="p6name" />
+                        <CheckBox id="checkMenu_text" fx:id="p6check" mnemonicParsing="false" text="AI Player" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <Button id="playButton" fx:id="playButton" alignment="CENTER" mnemonicParsing="false" onAction="#play" prefHeight="50.0" prefWidth="400.0" text="P L A Y" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Button>
+         </bottom>
+      </BorderPane>
+      <ImageView disable="true" fitHeight="150.0" fitWidth="50.0" layoutX="50.0" layoutY="532.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/war-thunder-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView disable="true" fitHeight="150.0" fitWidth="50.0" layoutX="350.0" layoutY="532.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../images/war-thunder-icon.png" />
+         </image>
+         <rotationAxis>
+            <Point3D y="1.0" />
+         </rotationAxis>
+      </ImageView>
+      <Button id="exitButton" fx:id="exitButton" layoutX="400.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="25.0" />
+   </children>
+</AnchorPane>
