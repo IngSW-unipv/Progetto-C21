@@ -19,6 +19,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import risk.model.Player;
+import risk.model.PlayersList;
+import risk.model.util.Color;
 
 public class MenuController implements Initializable {
 	
@@ -242,31 +245,37 @@ public class MenuController implements Initializable {
 	@FXML
 	private void play(final ActionEvent event) {
 		event.consume();
-		
-		/* DA IMPLEMENTARE
+		setPlayersList();
 
-		ArrayList<Player> playersList = new ArrayList<>();
-		### playersList.add(new Player(NAME<String>, AI<Boolean>, COLOR<Color>)); ###
-		if(!p1name.getText().isBlank())
-			playersList.add(new Player(players.get(0), false, Color.RED));
-		if(!p2name.getText().isBlank())
-			playersList.add(new Player(players.get(1), p2check.isSelected(), Color.BLUE);
-		...
-		...
-		PlayersList.setPlayers(playersList);
-		 */
 		try {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/risk/view/fxml/GameScene.fxml"));
 			Scene scene = new Scene(root);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
-			window.setResizable(true);
 			window.setTitle("RISK!");
-			window.setScene(scene);
 			window.show();    
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/* Method used to set the static ArrayList of Players */
+	private void setPlayersList() {
+		ArrayList<Player> list = new ArrayList<>();
+		if(!p1name.getText().isBlank())
+			list.add(new Player(p1name.getText(), Color.YELLOW, false));
+		if(!p2name.getText().isBlank())
+			list.add(new Player(p2name.getText(), Color.RED, p2check.isSelected()));
+		if(!p3name.getText().isBlank())
+			list.add(new Player(p3name.getText(), Color.GREEN, p3check.isSelected()));
+		if(!p4name.getText().isBlank())
+			list.add(new Player(p4name.getText(), Color.BLUE, p4check.isSelected()));
+		if(!p5name.getText().isBlank())
+			list.add(new Player(p5name.getText(), Color.PINK, p5check.isSelected()));
+		if(!p6name.getText().isBlank())
+			list.add(new Player(p6name.getText(), Color.BLACK, p6check.isSelected()));
+
+		PlayersList.setPlayers(list);
 	}
 
 }
