@@ -20,7 +20,7 @@ public class GameController implements Initializable {
 	private Pane rootPane;
 	
 	@FXML
-	private Text territoryText;
+	private Text territoryText, yellowName, redName, greenName, blueName, pinkName, blackName;
 	
 	@FXML
 	private VBox usersBox;
@@ -30,8 +30,10 @@ public class GameController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		/* DA ELIMINARE */
 		for(Player p : PlayersList.getPlayers())
 			System.out.println(p);	
+		/****************/
 		
 		initializeUserBar();
 	}
@@ -41,24 +43,41 @@ public class GameController implements Initializable {
 		
 		switch(PlayersList.getPlayers().size()) {
 		case 3:
-			for(int i = 0; i < 3; i++)
+			for(int i = 0; i < 6; i++) {
 				usersBox.getChildren().remove(usersBox.getChildren().size()-1);
+			}
 			break;
 		case 4:
-			for(int i = 0; i < 2; i++)
+			for(int i = 0; i < 4; i++) {
 				usersBox.getChildren().remove(usersBox.getChildren().size()-1);
+			}
 			break;
 		case 5:
-			usersBox.getChildren().remove(usersBox.getChildren().size()-1);
+			for(int i = 0; i < 2; i++)
+				usersBox.getChildren().remove(usersBox.getChildren().size()-1);
 			break;
 		default:
 			break;
 		}
 		
+		initializeUserNames();
 		double windowHeight = rootPane.getPrefHeight();
-		double usersBoxHeight = usersBox.getChildren().size() * 50;	// children is a square 50x50
+		double usersBoxHeight = usersBox.getChildren().size()/2 * 59;	// children is a square 50x50 + text is widthx9 = 59
 		double height = (windowHeight - usersBoxHeight)/2;
 		usersBox.setLayoutY(height);
+	}
+	
+	private void initializeUserNames() {
+		try {
+			yellowName.setText(PlayersList.getPlayers().get(0).getName());
+			redName.setText(PlayersList.getPlayers().get(1).getName());
+			greenName.setText(PlayersList.getPlayers().get(2).getName());
+			blueName.setText(PlayersList.getPlayers().get(3).getName());
+			pinkName.setText(PlayersList.getPlayers().get(4).getName());
+			blackName.setText(PlayersList.getPlayers().get(5).getName());
+		} catch (IndexOutOfBoundsException e) {
+			// ...
+		}	
 	}
 
 	@FXML

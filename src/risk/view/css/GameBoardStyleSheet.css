@@ -4,9 +4,16 @@
 }
 
 Text {
+	-fx-font-family: "Arial";
 	-fx-fill: white;
 }
 
+/* User's names style */
+.userNames {
+	-fx-font-size: 8;
+}
+
+/* VBox style */
 #usersBox {
 	-fx-background-color: #00000050;
 	-fx-background-radius: 20px;
