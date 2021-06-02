@@ -17,7 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import risk.model.Player;
 import risk.model.PlayersList;
@@ -248,7 +248,7 @@ public class MenuController implements Initializable {
 		setPlayersList();
 
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/risk/view/fxml/GameScene.fxml"));
+			Pane root = (Pane)FXMLLoader.load(getClass().getResource("/risk/view/fxml/GameBoardScene.fxml"));
 			Scene scene = new Scene(root);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
