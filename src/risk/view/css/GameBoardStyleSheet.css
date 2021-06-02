@@ -7,6 +7,11 @@ Text {
 	-fx-fill: white;
 }
 
+#usersBox {
+	-fx-background-color: #00000050;
+	-fx-background-radius: 20px;
+}
+
 SVGPath {
     -fx-opacity: 1; /* .0 */
     -fx-fill: lightblue;

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -67,5 +70,38 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Text>
+      <VBox id="usersBox" fx:id="usersBox" layoutX="1210.0" layoutY="249.0" prefHeight="100.0" prefWidth="50.0">
+         <children>
+            <ImageView id="yellowUser" fx:id="yellowUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/users/yellow-user.png" />
+               </image>
+            </ImageView>
+            <ImageView id="redUser" fx:id="redUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/users/red-user.png" />
+               </image>
+            </ImageView>
+            <ImageView id="greenUser" fx:id="greenUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/users/green-user.png" />
+               </image>
+            </ImageView>
+            <ImageView id="blueUser" fx:id="blueUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/users/blue-user.png" />
+               </image>
+            </ImageView>
+            <ImageView id="pinkUser" fx:id="pinkUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/users/pink-user.png" />
+               </image>
+            </ImageView>
+            <ImageView id="blackUser" fx:id="blackUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/users/black-user.png" />
+               </image>
+            </ImageView>
+         </children></VBox>
    </children>
 </Pane>

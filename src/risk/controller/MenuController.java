@@ -14,6 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -276,6 +278,14 @@ public class MenuController implements Initializable {
 			list.add(new Player(p6name.getText(), Color.BLACK, p6check.isSelected()));
 
 		PlayersList.setPlayers(list);
+		
+		if(PlayersList.getPlayers().size() < 3) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setContentText("Ooops, there was an error! Number of players less than 3...");
+			alert.showAndWait();
+		}
+		
 	}
 
 }
