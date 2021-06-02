@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
@@ -14,6 +15,9 @@ import risk.model.Player;
 import risk.model.PlayersList;
 
 public class GameController implements Initializable {
+	
+	@FXML
+	private Pane rootPane;
 	
 	@FXML
 	private Text territoryText;
@@ -50,6 +54,11 @@ public class GameController implements Initializable {
 		default:
 			break;
 		}
+		
+		double windowHeight = rootPane.getPrefHeight();
+		double usersBoxHeight = usersBox.getChildren().size() * 50;	// children is a square 50x50
+		double height = (windowHeight - usersBoxHeight)/2;
+		usersBox.setLayoutY(height);
 	}
 
 	@FXML
