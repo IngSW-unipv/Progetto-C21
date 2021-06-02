@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .root {
-   -fx-background-color: radial-gradient(center 50% 50% , radius 65% , rgb(120,162,210), rgb(15,47,90)); /* #ffebcd, #008080 */
+   -fx-background-color: radial-gradient(center 50% 50% , radius 65% , rgb(120,162,210), rgb(15,47,90)); /* rgb(120,162,210), rgb(15,47,90) */
 }
 
 Text {
