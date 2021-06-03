@@ -1,4 +1,5 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* GLOBAL STYLE */
 .root {
    -fx-background-color: radial-gradient(center 50% 50% , radius 65% , rgb(120,162,210), rgb(15,47,90)); /* rgb(120,162,210), rgb(15,47,90) */
 }
@@ -8,9 +9,14 @@ Text {
 	-fx-fill: white;
 }
 
+/* RIGHT USER BOX STYLE */
 /* User's names style */
 .userNames {
 	-fx-font-size: 8;
+}
+.userImage:hover {
+	-fx-scale-x: 1.1;
+	-fx-scale-y: 1.1;
 }
 
 /* VBox style */
@@ -19,6 +25,8 @@ Text {
 	-fx-background-radius: 20px;
 }
 
+
+/* TERRITORY STYLE */
 SVGPath {
     -fx-opacity: 1; /* .0 */
     -fx-fill: lightblue;

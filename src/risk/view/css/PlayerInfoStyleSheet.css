@@ -1,0 +1,25 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#backgroundAnchor {
+    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 90% , rgb(120,162,210), rgb(15,47,90));/* 120% #43a0d2, #0C2634 */
+}
+
+Text {
+	-fx-font-family: "Arial Black";
+	-fx-font-size: 14;
+	-fx-fill: white;
+}
+
+.singlePlayerInfoBackground {
+	-fx-background-color: #00000050;
+	-fx-background-radius: 20px;
+}
+
+.nameText {
+	-fx-font-size: 24;
+	-fx-stroke: black;
+	-fx-stroke-width: .2;
+}
+
+.nameBackground {
+	-fx-background-radius: 30px;
+}

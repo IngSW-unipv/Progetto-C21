@@ -72,37 +72,37 @@
       </Text>
       <VBox id="usersBox" fx:id="usersBox" alignment="CENTER" layoutX="1210.0" layoutY="249.0" maxWidth="50.0" minWidth="50.0" prefWidth="50.0">
          <children>
-            <ImageView id="userImage1" fx:id="userImage1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="userImage1" fx:id="userImage1" fitHeight="50.0" fitWidth="50.0" onMousePressed="#playerIconPressed" pickOnBounds="true" preserveRatio="true" styleClass="userImage">
                <image>
                   <Image url="@../images/users/yellow.png" />
                </image>
             </ImageView>
             <Text id="userName1" fx:id="userName1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player1" translateY="-8.0" />
-            <ImageView id="userImage2" fx:id="userImage2" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="userImage2" fx:id="userImage2" fitHeight="150.0" fitWidth="50.0" onMousePressed="#playerIconPressed" pickOnBounds="true" preserveRatio="true" styleClass="userImage">
                <image>
                   <Image url="@../images/users/red.png" />
                </image>
             </ImageView>
             <Text id="userName2" fx:id="userName2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player2" translateY="-8.0" />
-            <ImageView id="userImage3" fx:id="userImage3" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="userImage3" fx:id="userImage3" fitHeight="150.0" fitWidth="50.0" onMousePressed="#playerIconPressed" pickOnBounds="true" preserveRatio="true" styleClass="userImage">
                <image>
                   <Image url="@../images/users/green.png" />
                </image>
             </ImageView>
             <Text id="userName3" fx:id="userName3" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player3" translateY="-8.0" />
-            <ImageView id="userImage4" fx:id="userImage4" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="userImage4" fx:id="userImage4" fitHeight="150.0" fitWidth="50.0" onMousePressed="#playerIconPressed" pickOnBounds="true" preserveRatio="true" styleClass="userImage">
                <image>
                   <Image url="@../images/users/blue.png" />
                </image>
             </ImageView>
             <Text id="userName4" fx:id="userName4" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player4" translateY="-8.0" />
-            <ImageView id="userImage5" fx:id="userImage5" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="userImage5" fx:id="userImage5" fitHeight="150.0" fitWidth="50.0" onMousePressed="#playerIconPressed" pickOnBounds="true" preserveRatio="true" styleClass="userImage">
                <image>
                   <Image url="@../images/users/pink.png" />
                </image>
             </ImageView>
             <Text id="userName5" fx:id="userName5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player5" translateY="-8.0" />
-            <ImageView id="userImage6" fx:id="userImage6" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="userImage6" fx:id="userImage6" fitHeight="150.0" fitWidth="50.0" onMousePressed="#playerIconPressed" pickOnBounds="true" preserveRatio="true" styleClass="userImage">
                <image>
                   <Image url="@../images/users/black.png" />
                </image>

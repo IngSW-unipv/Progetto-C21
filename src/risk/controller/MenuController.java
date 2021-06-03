@@ -293,8 +293,7 @@ public class MenuController implements Initializable {
 			alert.setTitle("Error Dialog");
 			alert.setContentText("Ooops, there was an error! Number of players less than 3...");
 			alert.showAndWait();
-		}
-		
+		}	
 	}
 
 }

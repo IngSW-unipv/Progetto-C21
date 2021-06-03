@@ -2,12 +2,18 @@ package risk.controller;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +21,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import risk.model.Player;
 import risk.model.PlayersList;
 
@@ -34,10 +43,6 @@ public class GameController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		/* DA ELIMINARE */
-		for(Player p : PlayersList.getPlayers())
-			System.out.println(p);	
-		/****************/
 		
 		initializeUserBar();
 	}
@@ -87,9 +92,9 @@ public class GameController implements Initializable {
 				Image image = new Image(stream);
 				userImages[i].setImage(image);
 			}
-		} catch (IndexOutOfBoundsException e) {
+		} catch(IndexOutOfBoundsException e) {
 			// ...
-		} catch (FileNotFoundException e) {
+		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}	
 	}
@@ -104,6 +109,42 @@ public class GameController implements Initializable {
 	private void handleSVGPathHover(MouseEvent event) {
 		event.consume();
 		territoryText.setText(((SVGPath)event.getSource()).getId());
+	}
+	
+	/**
+	 * Method that allows to load a scene in a new window
+	 * @param scene is the path of the scene to load
+	 * @param title is the title of the window
+	 * @param cantclose specifies if the window can be closed until an event occurs (if true new window can't be closed)
+	 * @throws IOException
+	 */
+	private void windowLoader(String scene, String title, boolean cantclose) throws IOException{
+		Parent sceneParent = FXMLLoader.load(getClass().getResource(scene));
+		Scene mScene = new Scene(sceneParent);
+		Stage window = new Stage();
+		window.setResizable(false);
+		window.setTitle(title);
+		window.setScene(mScene);
+		
+		if (cantclose) {
+			window.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent event) {
+					event.consume();
+				}
+			});
+		}
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.showAndWait();
+	}
+
+	@FXML
+	public void playerIconPressed(MouseEvent event){
+		try {
+			windowLoader("/risk/view/fxml/PlayerInfoWindow.fxml", "Player info", false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
