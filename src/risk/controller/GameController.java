@@ -50,26 +50,13 @@ public class GameController implements Initializable {
 	/* Method that draw on the game scene the right number of colored users */
 	private void initializeUserBar() {
 		
-		switch(PlayersList.getPlayers().size()) {
-		case 3:
-			for(int i = 0; i < 6; i++) {
-				usersBox.getChildren().remove(usersBox.getChildren().size()-1);
-			}
-			break;
-		case 4:
-			for(int i = 0; i < 4; i++) {
-				usersBox.getChildren().remove(usersBox.getChildren().size()-1);
-			}
-			break;
-		case 5:
-			for(int i = 0; i < 2; i++)
-				usersBox.getChildren().remove(usersBox.getChildren().size()-1);
-			break;
-		default:
-			break;
+		// removing useless imageview and text
+		for(int i = PlayersList.getPlayers().size()*2; i < 12; i++) {
+			usersBox.getChildren().remove(usersBox.getChildren().size()-1);
 		}
-		
+
 		initializeUserNames();
+		
 		double windowHeight = rootPane.getPrefHeight();
 		double usersBoxHeight = usersBox.getChildren().size()/2 * 59;	// children is a square 50x50 + text is widthx9 = 59
 		double height = (windowHeight - usersBoxHeight)/2;
@@ -81,7 +68,7 @@ public class GameController implements Initializable {
 			Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
 			ImageView[] userImages = {userImage1, userImage2, userImage3, userImage4, userImage5, userImage6};
 			
-			// player 1
+			// for every player get color and name to set gui elements
 			for(int i = 0; i < 6; i++) {
 				String name = PlayersList.getPlayers().get(i).getName();
 				String color = PlayersList.getPlayers().get(i).getColor().toString().toLowerCase();

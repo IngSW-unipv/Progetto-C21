@@ -256,7 +256,8 @@ public class MenuController implements Initializable {
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
 			window.setTitle("RISK!");
-			window.show();    
+			window.show();
+			window.centerOnScreen();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
