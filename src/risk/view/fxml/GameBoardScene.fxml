@@ -72,42 +72,42 @@
       </Text>
       <VBox id="usersBox" fx:id="usersBox" alignment="CENTER" layoutX="1210.0" layoutY="249.0" maxWidth="50.0" minWidth="50.0" prefWidth="50.0">
          <children>
-            <ImageView id="yellowUser" fx:id="yellowUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="userImage1" fx:id="userImage1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/users/yellow-user.png" />
+                  <Image url="@../images/users/yellow.png" />
                </image>
             </ImageView>
-            <Text id="yellowName" fx:id="yellowName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player1" translateY="-8.0" />
-            <ImageView id="redUser" fx:id="redUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <Text id="userName1" fx:id="userName1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player1" translateY="-8.0" />
+            <ImageView id="userImage2" fx:id="userImage2" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/users/red-user.png" />
+                  <Image url="@../images/users/red.png" />
                </image>
             </ImageView>
-            <Text id="redName" fx:id="redName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player2" translateY="-8.0" />
-            <ImageView id="greenUser" fx:id="greenUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <Text id="userName2" fx:id="userName2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player2" translateY="-8.0" />
+            <ImageView id="userImage3" fx:id="userImage3" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/users/green-user.png" />
+                  <Image url="@../images/users/green.png" />
                </image>
             </ImageView>
-            <Text id="greenName" fx:id="greenName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player3" translateY="-8.0" />
-            <ImageView id="blueUser" fx:id="blueUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <Text id="userName3" fx:id="userName3" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player3" translateY="-8.0" />
+            <ImageView id="userImage4" fx:id="userImage4" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/users/blue-user.png" />
+                  <Image url="@../images/users/blue.png" />
                </image>
             </ImageView>
-            <Text id="blueName" fx:id="blueName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player4" translateY="-8.0" />
-            <ImageView id="pinkUser" fx:id="pinkUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <Text id="userName4" fx:id="userName4" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player4" translateY="-8.0" />
+            <ImageView id="userImage5" fx:id="userImage5" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/users/pink-user.png" />
+                  <Image url="@../images/users/pink.png" />
                </image>
             </ImageView>
-            <Text id="pinkName" fx:id="pinkName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player5" translateY="-8.0" />
-            <ImageView id="blackUser" fx:id="blackUser" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <Text id="userName5" fx:id="userName5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player5" translateY="-8.0" />
+            <ImageView id="userImage6" fx:id="userImage6" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/users/black-user.png" />
+                  <Image url="@../images/users/black.png" />
                </image>
             </ImageView>
-            <Text id="blackName" fx:id="blackName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player6" translateY="-8.0" />
+            <Text id="userName6" fx:id="userName6" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="userNames" text="player6" translateY="-8.0" />
          </children></VBox>
    </children>
 </Pane>

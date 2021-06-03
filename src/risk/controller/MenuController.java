@@ -3,6 +3,7 @@ package risk.controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -261,22 +262,30 @@ public class MenuController implements Initializable {
 		}
 	}
 	
-	/* Method used to set the static ArrayList of Players */
+	/* 
+	 * Method used to set the static ArrayList of Players
+	 * Color assignment is random
+	 * Player list is shuffled
+	 */
 	private void setPlayersList() {
 		ArrayList<Player> list = new ArrayList<>();
+		ArrayList<Color> colorList = new ArrayList<>( Arrays.asList(Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.PINK, Color.BLACK));
+		Collections.shuffle(colorList);
+		
 		if(!p1name.getText().isBlank())
-			list.add(new Player(p1name.getText(), Color.YELLOW, false));
+			list.add(new Player(p1name.getText(), colorList.get(0), false));
 		if(!p2name.getText().isBlank())
-			list.add(new Player(p2name.getText(), Color.RED, p2check.isSelected()));
+			list.add(new Player(p2name.getText(), colorList.get(1), p2check.isSelected()));
 		if(!p3name.getText().isBlank())
-			list.add(new Player(p3name.getText(), Color.GREEN, p3check.isSelected()));
+			list.add(new Player(p3name.getText(), colorList.get(2), p3check.isSelected()));
 		if(!p4name.getText().isBlank())
-			list.add(new Player(p4name.getText(), Color.BLUE, p4check.isSelected()));
+			list.add(new Player(p4name.getText(), colorList.get(3), p4check.isSelected()));
 		if(!p5name.getText().isBlank())
-			list.add(new Player(p5name.getText(), Color.PINK, p5check.isSelected()));
+			list.add(new Player(p5name.getText(), colorList.get(4), p5check.isSelected()));
 		if(!p6name.getText().isBlank())
-			list.add(new Player(p6name.getText(), Color.BLACK, p6check.isSelected()));
+			list.add(new Player(p6name.getText(), colorList.get(5), p6check.isSelected()));
 
+		Collections.shuffle(list);
 		PlayersList.setPlayers(list);
 		
 		if(PlayersList.getPlayers().size() < 3) {
