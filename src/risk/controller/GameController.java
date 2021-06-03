@@ -55,15 +55,17 @@ public class GameController implements Initializable {
 			usersBox.getChildren().remove(usersBox.getChildren().size()-1);
 		}
 
-		initializeUserNames();
+		initializeUserColorsAndNames();
 		
+		// place UserBar position to right-center 
 		double windowHeight = rootPane.getPrefHeight();
-		double usersBoxHeight = usersBox.getChildren().size()/2 * 59;	// children is a square 50x50 + text is widthx9 = 59
+		double usersBoxHeight = usersBox.getChildren().size()/2 * 59;	// children is a square 50x50 (ImageView) + text width is 9 = 59
 		double height = (windowHeight - usersBoxHeight)/2;
 		usersBox.setLayoutY(height);
 	}
 	
-	private void initializeUserNames() {
+	/* Method to set the right color and name to gui elemets for each player */
+	private void initializeUserColorsAndNames() {
 		try {
 			Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
 			ImageView[] userImages = {userImage1, userImage2, userImage3, userImage4, userImage5, userImage6};
