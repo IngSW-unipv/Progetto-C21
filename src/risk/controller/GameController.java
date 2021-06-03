@@ -102,7 +102,7 @@ public class GameController implements Initializable {
 	 * Method that allows to load a scene in a new window
 	 * @param scene is the path of the scene to load
 	 * @param title is the title of the window
-	 * @param cantclose specifies if the window can be closed until an event occurs (if true new window can't be closed)
+	 * @param cantclose specifies if the window can be closed until an event occurs (if TRUE, new window can't be closed)
 	 * @throws IOException
 	 */
 	private void windowLoader(String scene, String title, boolean cantclose) throws IOException{
@@ -120,7 +120,7 @@ public class GameController implements Initializable {
 					event.consume();
 				}
 			});
-		}
+		} 
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.showAndWait();
 	}
