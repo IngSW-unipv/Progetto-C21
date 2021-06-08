@@ -1,8 +1,6 @@
 package risk.model;
 
-import model.entities.Card;
-import model.entities.FIGURE;
-import model.entities.Territory;
+import risk.model.util.FIGURE;
 
 public class Card {
 	
