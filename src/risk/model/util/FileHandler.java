@@ -1,6 +1,6 @@
 package risk.model.util;
 
-import java.awt.color.*;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class FileHandler {
 	private ArrayList<Card> card;
 	private ArrayList<Mission> missions;
 	private ArrayList<Continent> continents;
-	//private ArrayList<Pixel> pixels;
+	private ArrayList<Pixel> pixels;
 	private int nLine = 0;
 	private int nLineC=0;
 	private int nLineM=0;
