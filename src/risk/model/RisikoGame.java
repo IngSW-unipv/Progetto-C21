@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import model.entities.Continent;
-import model.entities.Territory;
-import model.entities.RisikoGame.GAME_PHASE;
+import risk.model.Continent;
+import risk.model.Territory;
+import risk.model.RisikoGame.GAME_PHASE;
 import risk.model.util.FIGURE;
 
 
