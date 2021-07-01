@@ -9,7 +9,7 @@ public class Territory {
 	private int tanks;
 	private ArrayList<Territory> confinanti;
 	private int id;
-	
+	Continent c;
 	
 
 	
@@ -159,6 +159,11 @@ public class Territory {
 		for(Territory t : confinanti) {
 			System.out.println(t.toString());	
 		}
+	}
+
+	public Continent getContinent() {
+		// TODO Auto-generated method stub
+		return c;
 	}
 
 	
