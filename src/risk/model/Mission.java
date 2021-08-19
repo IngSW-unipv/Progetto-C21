@@ -1,6 +1,6 @@
 package risk.model;
 
-
+import risk.model.util.MISSION_TYPE;
 
 public class Mission {
 	
@@ -13,12 +13,7 @@ public class Mission {
 	private int codMission;
 	private MISSION_TYPE type;
 	
-	/**
-	 * Types that describe the possible objectives of a mission
-	 */
-	public enum MISSION_TYPE {
-		TYPE1, TYPE2;
-	};
+
 	
 	/**
 	 * Creates a new type1 mission

@@ -1,4 +1,5 @@
 package risk.model;
+
 import java.util.Arrays;
 
 
@@ -10,7 +11,7 @@ public class DiceShaker {
 	private Die die3;
 	
 	private int[] results;			
-
+//	private int[] defResults;
 
 	/**
 	 * Creates a DiceShaker with 3 dice, used for battles
@@ -31,6 +32,8 @@ public class DiceShaker {
 	 */
 	public int[] rollDices(int n) {		
 		
+//		loss[0] = 0;
+//		loss[1] = 0;
 
 		switch(n) {								//switch per tirare 1,2 o 3 dadi dell'attaccante
 		case 1:
@@ -56,6 +59,9 @@ public class DiceShaker {
 	           results[i] = results[j];
 	           results[j] = tmp;
 	       }
+
+
 		return results;
+
 	}
 }

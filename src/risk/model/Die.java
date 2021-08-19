@@ -14,7 +14,8 @@ public class Die {
 	}
 
 	/**
-	 * Alternative constructor to create a due
+	 * Alternative constructor to create a due (inutile????)
+	 * 
 	 * @param value is used to set the face showing on the die
 	 */
 	public Die(int value) {

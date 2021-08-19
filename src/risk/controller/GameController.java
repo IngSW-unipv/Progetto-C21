@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +23,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import risk.model.Player;
 import risk.model.PlayersList;
 
 public class GameController implements Initializable {
@@ -64,7 +62,7 @@ public class GameController implements Initializable {
 		usersBox.setLayoutY(height);
 	}
 	
-	/* Method to set the right color and name to gui elemets for each player */
+	/* Method to set the right color and name to gui elements for each player */
 	private void initializeUserColorsAndNames() {
 		try {
 			Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};

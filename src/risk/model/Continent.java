@@ -1,6 +1,6 @@
 package risk.model;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 
 public class Continent {
@@ -69,7 +69,19 @@ public class Continent {
 	}
 	
 	
-	
+	/**
+	 * Returns a random territory
+	 * 
+	 * @return territory
+	 */
+
+	/*
+	 * //per i player AI ???? 
+	 * public Territory getRandomTerritory() { 
+	 * return territories.get(2); }
+	 */
+
+
 	/**
 	 * Returns the list of this continent's territories
 	 * @return code
