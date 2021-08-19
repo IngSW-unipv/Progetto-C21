@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-// ca
+//  ksndi
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
