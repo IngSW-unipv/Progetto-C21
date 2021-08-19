@@ -2,12 +2,12 @@ package risk.main;
 	
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-
+// ca
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
