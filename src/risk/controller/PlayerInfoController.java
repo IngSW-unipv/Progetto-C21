@@ -61,4 +61,5 @@ public class PlayerInfoController implements Initializable {
 
 	}
 
+	
 }
