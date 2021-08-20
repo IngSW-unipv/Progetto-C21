@@ -47,7 +47,7 @@ public class GameController implements Initializable {
 	
 	
 	
-	/* Method that draw on the game scene the right number of colored users  */
+	/* Method that draw on the game scene the right number of colored users*/
 	private void initializeUserBar() {
 		
 		// removing useless imageview and text
