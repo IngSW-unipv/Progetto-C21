@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 //  ksndi sdfdddd
 //succhiamel 
 public class Main extends Application {
-	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
