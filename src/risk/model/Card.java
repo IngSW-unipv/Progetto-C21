@@ -10,7 +10,7 @@ public class Card {
 	
 	/**
 	 * Creates a new territory card
-	 * @param figure is the type of the card described by the enum FIGURE: JOLLY, FANTE, CANNONE o CAVALIERE
+	 * @param figure is the type of the card described by the enum FIGURE: JOLLY, INFANTRY, ARTILLERY o CAVALRY
 	 * @param territory is the territory associated to the card
 	 * @param id number to identify the territory
 	 */

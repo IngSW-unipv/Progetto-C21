@@ -403,14 +403,14 @@ public class RisikoGame {
 		}
 		// tris di figure uguali
 		if(ca1.getFigure() == ca2.getFigure() && ca2.getFigure() == ca3.getFigure()) {
-			if(ca1.getFigure() == FIGURE.CANNONE) {
+			if(ca1.getFigure() == FIGURE.ARTILLERY) {
 				return 4+bonus;
-			} else if (ca1.getFigure() == FIGURE.CAVALIERE) {
+			} else if (ca1.getFigure() == FIGURE.CAVALRY) {
 				return 8+bonus;
-			} else if (ca1.getFigure() == FIGURE.FANTE) {
+			} else if (ca1.getFigure() == FIGURE.INFANTRY) {
 				return 6+bonus;
 			} // tris di figure tutte diverse
-		} else if (figures.contains(FIGURE.CANNONE) && figures.contains(FIGURE.FANTE) && figures.contains(FIGURE.CAVALIERE)) {
+		} else if (figures.contains(FIGURE.ARTILLERY) && figures.contains(FIGURE.INFANTRY) && figures.contains(FIGURE.CAVALRY)) {
 			return 10+bonus;
 		} else if (figures.contains(FIGURE.JOLLY)) { // manca il controllo sulle altre due figure che devono essere
 														// uguali

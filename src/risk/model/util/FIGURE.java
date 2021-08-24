@@ -5,5 +5,5 @@ package risk.model.util;
  *
  */
 public enum FIGURE {
-	JOLLY, FANTE, CANNONE, CAVALIERE;
+	JOLLY, INFANTRY, ARTILLERY, CAVALRY;
 }
