@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -138,5 +139,47 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </HBox>
+      <Label id="Alberta" fx:id="Alberta" layoutX="289.0" layoutY="174.0" text="1" />
+      <Label id="Brazile" layoutX="424.0" layoutY="430.0" text="1" />
+      <Label id="SouthernEurope" layoutX="641.0" layoutY="260.0" text="1" />
+      <Label id="Siberia" layoutX="846.0" layoutY="120.0" text="1" />
+      <Label id="Afghanistan" layoutX="787.0" layoutY="267.0" prefHeight="17.0" prefWidth="6.0" text="1" />
+      <Label id="EastAfrica" layoutX="677.0" layoutY="419.0" text="1" />
+      <Label id="WesternAustrailia" layoutX="942.0" layoutY="541.0" text="1" />
+      <Label id="Greenland" layoutX="520.0" layoutY="68.0" text="1" />
+      <Label id="Argentina" layoutX="376.0" layoutY="528.0" text="1" />
+      <Label id="Scandinavia" layoutX="614.0" layoutY="139.0" text="1" />
+      <Label id="Kamchatka" layoutX="1073.0" layoutY="120.0" text="1" />
+      <Label id="EasternUnited States" layoutX="371.0" layoutY="247.0" text="1" />
+      <Label id="Siam" layoutX="907.0" layoutY="365.0" text="1" />
+      <Label id="Mongolia" layoutX="966.0" layoutY="230.0" text="1" />
+      <Label id="WesternUnited States" layoutX="292.0" layoutY="230.0" text="1" />
+      <Label id="Peru" layoutX="360.0" layoutY="467.0" text="1" />
+      <Label id="Congo" layoutX="637.0" layoutY="470.0" text="1" />
+      <Label id="WesternEurope" layoutX="572.0" layoutY="248.0" prefWidth="14.0" text="1" />
+      <Label id="NorthAfrica" layoutX="581.0" layoutY="384.0" text="1" />
+      <Label id="Egypt" layoutX="642.0" layoutY="350.0" text="1" />
+      <Label id="SouthAfrica" layoutX="628.0" layoutY="558.0" text="1" />
+      <Label id="NorthwestTerritory" layoutX="310.0" layoutY="127.0" text="1" />
+      <Label id="Alaska" layoutX="192.0" layoutY="114.0" text="1" />
+      <Label id="Venezuela" layoutX="347.0" layoutY="380.0" text="1" />
+      <Label id="Ukraine" layoutX="700.0" layoutY="187.0" text="1" />
+      <Label id="CentralAmerica" layoutX="307.0" layoutY="296.0" prefHeight="17.0" prefWidth="4.0" text="1" />
+      <Label id="GreatBritain" layoutX="568.0" layoutY="212.0" text="1" />
+      <Label id="Quebec" layoutX="430.0" layoutY="182.0" prefHeight="3.0" prefWidth="4.0" text="1" />
+      <Label id="Ontario" layoutX="358.0" layoutY="180.0" text="1" />
+      <Label id="MiddleEast" layoutX="711.0" layoutY="320.0" text="1" />
+      <Label id="Ural" layoutX="810.0" layoutY="163.0" text="1" />
+      <Label id="China" layoutX="904.0" layoutY="284.0" text="1" />
+      <Label id="India" layoutX="836.0" layoutY="354.0" text="1" />
+      <Label id="Irkutsk" layoutX="955.0" layoutY="175.0" text="1" />
+      <Label id="Yakutsk" layoutX="968.0" layoutY="119.0" text="1" />
+      <Label id="Iceland" layoutX="559.0" layoutY="140.0" text="1" />
+      <Label id="EasternAustrailia" layoutX="1021.0" layoutY="541.0" text="1" />
+      <Label id="Madagascar" layoutX="715.0" layoutY="557.0" text="1" />
+      <Label id="Indonesia" layoutX="938.0" layoutY="440.0" text="1" />
+      <Label id="Japan" layoutX="1033.0" layoutY="253.0" text="1" />
+      <Label id="NewGuniea" layoutX="1037.0" layoutY="459.0" text="1" />
+      <Label id="NorthernEurope" layoutX="612.0" layoutY="217.0" text="1" />
    </children>
 </Pane>

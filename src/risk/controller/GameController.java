@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
@@ -13,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -29,6 +31,9 @@ public class GameController implements Initializable {
 	
 	@FXML
 	private Pane rootPane;
+	
+	@FXML
+	private Label Alberta; 
 	
 	@FXML
 	private Text territoryText, userName1, userName2, userName3, userName4, userName5, userName6;
@@ -91,14 +96,27 @@ public class GameController implements Initializable {
 	@FXML
 	private void handleSVGPathPressed(MouseEvent event) {
 		event.consume();
+		Integer n = Integer.parseInt(Alberta.getText());
+		
+		if(((SVGPath)event.getSource()).getId().equals(Alberta.getId())) {
+			n += 1;
+			Alberta.setText(""+n);
+		}
+		
 		System.out.println(((SVGPath)event.getSource()).getId());
 	}
+	
+	
+	
+	
 	
 	@FXML
 	private void handleSVGPathHover(MouseEvent event) {
 		event.consume();
 		territoryText.setText(((SVGPath)event.getSource()).getId());
 	}
+	
+	
 	
 	/**
 	 * Method that allows to load a scene in a new window
