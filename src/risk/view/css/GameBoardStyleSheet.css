@@ -9,6 +9,7 @@ Text {
 	-fx-fill: white;
 }
 
+
 /* RIGHT USER BOX STYLE */
 /* User's names style */
 .userNames {
@@ -42,18 +43,62 @@ Text {
 
 /* TERRITORY STYLE */
 SVGPath {
-    -fx-opacity: 1; /* .0 */
-    /*-fx-fill: lightblue;*/
+    -fx-opacity: 1;
     -fx-stroke: black;
     -fx-stroke-width: 1.5;
 }
-SVGPath:hover {
-    -fx-opacity: 1; /* .15 */
-    -fx-fill: grey;
-    -fx-stroke-width: 1.5;
+/* CONTINENTS */
+.northAmerica {
+	-fx-fill: SANDYBROWN;
 }
-SVGPath:pressed {
-    -fx-opacity: 1; /* .3 */
-    -fx-fill: darkgrey;
-    -fx-stroke-width: 1.5;
+.northAmerica:hover {
+	-fx-fill: #E68761;
+}
+.northAmerica:pressed {
+	-fx-fill: #CC6D47;
+}
+.southAmerica {
+	-fx-fill: LIGHTBLUE;
+}
+.southAmerica:hover {
+	-fx-fill: #94BFCD;
+}
+.southAmerica:pressed {
+	-fx-fill: #7AA5B3;
+}
+.europa {
+	-fx-fill: THISTLE;
+}
+.europa:hover {
+	-fx-fill: #BFA6BF;
+}
+.europa:pressed {
+	-fx-fill: #A58CA5;
+}
+.oceania {
+	-fx-fill: PEACHPUFF;
+}
+.oceania:hover {
+	-fx-fill: #E6C1A0;
+}
+.oceania:pressed {
+	-fx-fill: #CCA786;
+}
+.africa {
+	-fx-fill: BURLYWOOD;
+}
+.africa:hover {
+	-fx-fill: #C59F6E;
+}
+.africa:pressed {
+	-fx-fill: #AB8554;
+}
+.asia {
+	-fx-fill: LIGHTGREEN;
+}
+.asia:hover {
+	-fx-fill: #77D577;
+}
+.asia:pressed {
+	-fx-fill: #5DBB5D;
 }
