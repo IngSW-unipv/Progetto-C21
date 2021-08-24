@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="backgroundAnchor" prefWidth="450.0" stylesheets="@../css/PlayerInfoStyleSheet.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="risk.controller.PlayerInfoController">
+<AnchorPane id="backgroundAnchor" prefWidth="450.0" stylesheets="@../css/PlayerInfoStyleSheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="risk.controller.PlayerInfoController">
    <children>
       <BorderPane AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <center>
@@ -27,19 +27,19 @@
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Territories:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
+                                          <Text fx:id="playerInfoTerritories1" strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Troops" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tanks" />
+                                          <Text fx:id="playerInfoTanks1" strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                                          <Text fx:id="playerInfoCards1" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -71,19 +71,19 @@
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Territories:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
+                                          <Text fx:id="playerInfoTerritories2" strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Troops" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tanks" />
+                                          <Text fx:id="playerInfoTanks2" strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                                          <Text fx:id="playerInfoCards2" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -115,19 +115,19 @@
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Territories:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
+                                          <Text fx:id="playerInfoTerritories3" strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Troops" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tanks" />
+                                          <Text fx:id="playerInfoTanks3" strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                                          <Text fx:id="playerInfoCards3" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -159,19 +159,19 @@
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Territories:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
+                                          <Text fx:id="playerInfoTerritories4" strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Troops" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tanks" />
+                                          <Text fx:id="playerInfoTanks4" strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                                          <Text fx:id="playerInfoCards4" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -203,19 +203,19 @@
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Territories:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
+                                          <Text fx:id="playerInfoTerritories5" strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Troops" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tanks" />
+                                          <Text fx:id="playerInfoTanks5" strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                                          <Text fx:id="playerInfoCards5" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -247,19 +247,19 @@
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Territories:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
+                                          <Text fx:id="playerInfoTerritories6" strokeType="OUTSIDE" strokeWidth="0.0" text="14/42" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Troops" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tanks" />
+                                          <Text fx:id="playerInfoTanks6" strokeType="OUTSIDE" strokeWidth="0.0" text="57" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cards:" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                                          <Text fx:id="playerInfoCards6" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                                        </children>
                                     </HBox>
                                  </children>
