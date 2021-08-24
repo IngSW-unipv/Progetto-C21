@@ -50,7 +50,6 @@ public class RisikoGame {
 		
 		// assegno a ogni player i territori casualmente
 		initTerritoryOwners();
-				
 		
 		setGamePhase(GAME_PHASE.FIRSTTURN);
 		
@@ -244,22 +243,13 @@ public class RisikoGame {
 	 */
 	public Continent getTerrContinent(Territory ti) {
 		for(Continent co : continents) {
-			if (co.equals(ti.getContinentName())) {				//se nella classe Territory ho messo Continent continent invece di String continent
+			if (co.getName().equals(ti.getContinentName())) {				//se nella classe Territory ho messo Continent continent invece di String continent
 				return co;
 			}
 		}
 		return null;
 	}
 	
-	
-	
-	
-	
-	
-	
-
-
-
 	/**
 	 * Verifies if the continent is owned completely by a player
 	 * @return owned

@@ -35,7 +35,7 @@ public class GameController implements Initializable {
 	private Pane rootPane;
 	
 	@FXML
-	private Label Alberta; 
+	private Label Alberta;
 	
 	@FXML
 	private Text territoryText, userName1, userName2, userName3, userName4, userName5, userName6;
@@ -167,6 +167,24 @@ public class GameController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	public void missionIconPressed(MouseEvent event){
+		try {
+			windowLoader("/risk/view/fxml/MissionImageWindow.fxml", "Mission", false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void cardsIconPressed(MouseEvent event){
+//		try {
+//			windowLoader("/risk/view/fxml/PlayerInfoWindow.fxml", "Player info", false);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }

@@ -13,8 +13,6 @@ public class Mission {
 	private int codMission;
 	private MISSION_TYPE type;
 	
-
-	
 	/**
 	 * Creates a new type1 mission
 	 * @param nty is the number of territories to conquer
@@ -27,7 +25,7 @@ public class Mission {
 		numberOfTerritories = nty;
 		numberOfTanks = ntk;
 		this.codMission=codMission;
-		description="Il tuo obiettivo è di conquistare " +nty+ " territori con almeno " +ntk+ " armate su ogni terriorio\n";
+		description="Occupy " +nty+ " territories of your choice and occupy each one with al least " +ntk+ " armies\n";
 	}
 	
 	/**
@@ -44,9 +42,9 @@ public class Mission {
 		con2 = cont2;
 		con3 = cont3;
 		this.codMission=codMission;
-		description="Il tuo obiettivo è di conquistare la totalità di " +getContinent1().getName()+ ", " +getContinent2().getName();
+		description="Conquer the continents of " +getContinent1().getName()+ " and " +getContinent2().getName();
 		if(cont3) {
-			description += " e di un altro continente a tua scelta\n";
+			description += " PLUS a third continent of your choice\n";
 		}
 	}
 

@@ -181,5 +181,23 @@
       <Label id="Japan" layoutX="1033.0" layoutY="253.0" text="1" />
       <Label id="NewGuniea" layoutX="1037.0" layoutY="459.0" text="1" />
       <Label id="NorthernEurope" layoutX="612.0" layoutY="217.0" text="1" />
+      <VBox layoutY="644.0" onMousePressed="#missionIconPressed" scaleX="0.6" scaleY="0.6" styleClass="missionBox">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+               <image>
+                  <Image url="@../images/mission-icon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <VBox layoutX="115.0" layoutY="644.0" onMousePressed="#cardsIconPressed" scaleX="0.6" scaleY="0.6" styleClass="missionBox">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+               <image>
+                  <Image url="@../images/card-icon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
    </children>
 </Pane>
