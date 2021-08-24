@@ -37,6 +37,7 @@ public class RisikoGame {
 		this.players = shufflePlayers();
 		
 		giveStarterTanks();
+		System.out.println(PlayersList.getPlayers().get(0).getTanks());
 		/*  //setto territori, continenti, missioni e carte leggendole da file
 		territories = fileHandler.addConfinanti(fileHandler.genTerritories(terrFile), terrFile);
 		continents = fileHandler.genContinents(continentsFile);
