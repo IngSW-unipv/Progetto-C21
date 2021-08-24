@@ -25,7 +25,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import risk.model.Player;
 import risk.model.PlayersList;
+import risk.model.RisikoGame;
 
 public class GameController implements Initializable {
 	
@@ -44,17 +46,28 @@ public class GameController implements Initializable {
 	@FXML
 	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6;
 	
+	static RisikoGame game;
+	static String terrFile = "../asset/territories.txt", continentsFile = "../asset/continents.txt", missionsFile = "../asset/missions.txt";
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ArrayList<Player> playersList = PlayersList.getPlayers();
+		Player[] playersArr = new Player[playersList.size()];
+		playersArr = playersList.toArray(playersArr);
+		
+		try {
+			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
+		} catch (NumberFormatException | IOException e) {
+			System.err.println("Impossible to load assets. Aborting...");
+		}
 		
 		initializeUserBar();
 	}
-	
-	
+
+
 	
 	/* Method that draw on the game scene the right number of colored users*/
 	private void initializeUserBar() {
-		
 		// removing useless imageview and text
 		for(int i = PlayersList.getPlayers().size()*2; i < 12; i++) {
 			usersBox.getChildren().remove(usersBox.getChildren().size()-1);

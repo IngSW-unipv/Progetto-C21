@@ -51,7 +51,9 @@ public class RisikoGame {
 		cards = fileHandler.genCards(territories, terrFile);
 		shuffleCards();
 		*/
-		initTerritoryOwners();
+		
+		// commento perchÃ¨ non funzione -> arraylist di territori Ã¨ null
+		//initTerritoryOwners();
 		
 		
 		
@@ -382,7 +384,7 @@ public class RisikoGame {
 		figures.add(ca3.getFigure());
 		for (Territory t: territories) {
 			if(!(ca1.getFigure().equals(FIGURE.JOLLY))) {
-				if(ca1.getTerritory().equals(t)) {   //se la figura è diversa dal Jolly ma raffigura un territorio posseduto dal
+				if(ca1.getTerritory().equals(t)) {   //se la figura ï¿½ diversa dal Jolly ma raffigura un territorio posseduto dal
 													//giocatore corrente
 					if (t.getOwner().equals(currentTurn)) 
 						bonus = bonus + 2;
@@ -423,7 +425,9 @@ public class RisikoGame {
 	 * Gives starter tanks for each player
 	 */
 	private void giveStarterTanks() {
-		switch(this.players.length) {
+		
+		
+		switch(players.length) {
 		case 3:
 			for(Player p : players) {
 				p.giveBonusTanks(35);
@@ -469,7 +473,7 @@ public class RisikoGame {
         for(Card c: shuffledCards) {
         	temp.add(c);
         }
-        cards = temp;		//assegno solo le cards all'ArrayList poichè non si fanno operazioni di init, a differenza di mission e territory
+        cards = temp;		//assegno solo le cards all'ArrayList poichï¿½ non si fanno operazioni di init, a differenza di mission e territory
         					//che vengono usate subito di metodi initTerritoryOwners() e giveMission()
     }
 
