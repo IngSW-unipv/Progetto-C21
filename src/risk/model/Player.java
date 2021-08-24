@@ -193,17 +193,17 @@ public class Player {
 	public String getColorName() {
 		switch (this.color) {
 		case GREEN:
-			return "Verde";
+			return "Green";
 		case YELLOW:
-			return "Giallo";
+			return "Yellow";
 		case RED:
-			return "Rosso";
+			return "Red";
 		case PINK:
-			return "Rosa";
+			return "Pink";
 		case BLUE:
-			return "Blu";
+			return "Blue";
 		case BLACK:
-			return "Nero";
+			return "Black";
 		}
 		return null;
 	}

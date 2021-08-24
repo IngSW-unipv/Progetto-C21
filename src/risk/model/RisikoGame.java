@@ -36,27 +36,21 @@ public class RisikoGame {
 		this.players = players;
 		this.players = shufflePlayers();
 		
+		// assegno a ogni player i tank
 		giveStarterTanks();
-		System.out.println(PlayersList.getPlayers().get(0).getTanks());
-		/*  //setto territori, continenti, missioni e carte leggendole da file
+		
+		//setto territori, continenti, missioni e carte leggendole da file
 		territories = fileHandler.addConfinanti(fileHandler.genTerritories(terrFile), terrFile);
 		continents = fileHandler.genContinents(continentsFile);
-		for (Continent c : continents) {
-			setContinent(c);	
-		}
-		
-		missions = fileHandler.genMissions(missionsFile, continents);  // per funzionamento corretto partita (definitivo)
-//		missions = fileHandler.genMissions("assets/obiettiviTest.txt", continents);  // per testare la vittoria
+		for (Continent c : continents) { setContinent(c); }
+		missions = fileHandler.genMissions(missionsFile, continents);
 		giveMissions();
-		
 		cards = fileHandler.genCards(territories, terrFile);
 		shuffleCards();
-		*/
 		
-		// commento perchè non funzione -> arraylist di territori è null
-		//initTerritoryOwners();
-		
-		
+		// assegno a ogni player i territori casualmente
+		initTerritoryOwners();
+				
 		
 		setGamePhase(GAME_PHASE.FIRSTTURN);
 		
@@ -218,17 +212,17 @@ public class RisikoGame {
 //		}
 //	}
 
-//	/**
-//	 * Adds territories to a continent
-//	 * @param c is the continent
-//	 */
-//	public void setContinent(Continent c) {
-//		for(Territory t: territories) {
-//			if (t.getContinent().contentEquals(c.getName())) {		//se uso String continent invece di Continent continent nella classe Terrytory
-//				c.addTerritory(t);
-//			}
-//		}
-//	}
+	/**
+	 * Adds territories to a continent
+	 * @param c is the continent
+	 */
+	public void setContinent(Continent c) {
+		for(Territory t : territories) {
+			if (t.getContinentName().equals(c.getName())) {
+				c.addTerritory(t);
+			}
+		}
+	}
 
 //	/**
 //	 * Adds territories to a continent
@@ -250,7 +244,7 @@ public class RisikoGame {
 	 */
 	public Continent getTerrContinent(Territory ti) {
 		for(Continent co : continents) {
-			if (co.equals(ti.getContinent())) {				//se nella classe Territory ho messo Continent continent invece di String continent
+			if (co.equals(ti.getContinentName())) {				//se nella classe Territory ho messo Continent continent invece di String continent
 				return co;
 			}
 		}
@@ -427,8 +421,7 @@ public class RisikoGame {
 	 */
 	private void giveStarterTanks() {
 		
-		
-		switch(players.length) {
+		switch(this.players.length) {
 		case 3:
 			for(Player p : players) {
 				p.giveBonusTanks(35);

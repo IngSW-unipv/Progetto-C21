@@ -47,7 +47,7 @@ public class GameController implements Initializable {
 	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6;
 	
 	static RisikoGame game;
-	static String terrFile = "../asset/territories.txt", continentsFile = "../asset/continents.txt", missionsFile = "../asset/missions.txt";
+	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -59,6 +59,8 @@ public class GameController implements Initializable {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
 		}
 		
 		initializeUserBar();

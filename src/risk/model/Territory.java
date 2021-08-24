@@ -10,7 +10,8 @@ public class Territory {
 	private int tanks;
 	private ArrayList<Territory> confinanti;
 	private int id;
-	Continent continent;
+	//Continent continent;
+	private String continent;
 
 
 	
@@ -38,12 +39,12 @@ public class Territory {
 	 * //@param continent is the continent where the territory is located
 	 * @param hexaColor is the color of the territory on the map
 	 */
-	public Territory(String name, int id) {
+	public Territory(String name, int id, String continent) {
 		this.name = name;
 		tanks = 0;
 		this.id = id;
 //		this.hexaColor = hexaColor;
-//		this.continent = continent;		
+		this.continent = continent;	
 	}
 
 	/**
@@ -188,10 +189,17 @@ public class Territory {
 		}
 	}
 
+//	/**
+//	 * @return the continent
+//	 */
+//	public Continent getContinent() {
+//		return continent;
+//	}
+	
 	/**
-	 * @return the continent
+	 * @return the continent's name
 	 */
-	public Continent getContinent() {
+	public String getContinentName() {
 		return continent;
 	}
 	

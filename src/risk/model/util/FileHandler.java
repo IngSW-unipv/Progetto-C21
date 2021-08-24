@@ -56,7 +56,7 @@ public class FileHandler {
 			name = s.nextToken();
 			continent = s.nextToken();
 			
-			if(!addTerritory(new Territory(name, code))) {
+			if(!addTerritory(new Territory(name, code, continent))) {
 				break;
 			}
 		}
