@@ -1,7 +1,7 @@
 6
-01	NordAmerica 5
-02	SudAmerica 2
+01	NorthAmerica 5
+02	SouthAmerica 2
 03	Africa 3
 04	Asia 7
-05	Europa 5
+05	Europe 5
 06	Oceania 2
