@@ -147,17 +147,17 @@ public class FileHandler {
 					territory=null;
 					break;
 				case 2:
-					figure=FIGURE.FANTE;
+					figure=FIGURE.INFANTRY;
 					if(code<43)
 						territory=list.get((code)-1);
 					break;
 				case 3:
-					figure=FIGURE.CANNONE;
+					figure=FIGURE.ARTILLERY;
 					if(code<43)
 						territory=list.get((code)-1);
 					break;
 				case 4:
-					figure=FIGURE.CAVALIERE;
+					figure=FIGURE.CAVALRY;
 					if(code<43)
 						territory=list.get((code)-1);
 					break;
