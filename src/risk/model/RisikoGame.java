@@ -162,23 +162,32 @@ public class RisikoGame {
 	 * Makes a ATTACK between 2 players
 	
 	 */
-	public void ATTACK(int[] atkResults, int[] defResults, int atk, int def) {
+	public void battle(int[] atkResults, int[] defResults,ArrayList<Player> player  ,ArrayList<Territory> list,Territory attac ,Territory defender) {
 
-//		int n = Math.min(atk, def);
+		int n = Math.min(atkResults.length, defResults.length);
 //		
-//		for(int i=0; i < n; i++) {
-//			if(atkResults[i] > defResults[i]) {
-//				getTerritory(GameSceneController.territory2).removeTanks(1);
-//				getPlayer(GameSceneController.territory2.getOwner()).removeTanks(1);
-//			} else {
-//				getTerritory(GameSceneController.territory1).removeTanks(1);
-//				currentTurn.removeTanks(1);
-//			}
-//		}
-//		if(getPlayer(GameSceneController.territory2.getOwner()).getTanks()==0) {
-//			getPlayer(GameSceneController.territory2.getOwner()).setEliminated(true);
-//		}
+		for(int i=0; i < n; i++) {
+			if(atkResults[i] > defResults[i]) {
+				
+			//bisogna passare il territorio ed aggiungere un metodo che trova il territorio del player dato il territorio
+				list.get(list.indexOf(defender)).removeTanks(1);
+				
+			
+		} else {
+				
+			list.get(list.indexOf(attac)).removeTanks(1);
+			}
 	}
+		if(	list.get(list.indexOf(defender)).getTanks()==0) {
+			player.get(player.indexOf(attac)).addTerritory();
+			player.get(player.indexOf(defender)).removeTerritory();
+			list.get(list.indexOf(defender)).setOwner(player.get(player.indexOf(attac)));
+			
+			
+			
+			
+		}
+	} 
 	
 	/**
 	 * A player conquers a territory
