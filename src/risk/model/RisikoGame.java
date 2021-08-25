@@ -730,5 +730,13 @@ public class RisikoGame {
 	public Player[] getPlayers() {
 		return players;
 	}
+	
+	/**
+	 * Returns a number between 0 and the numbers of players -1
+	 * @return int, turnCounter
+	 */
+	public int getTurnCounter() {
+		return turnCounter;
+	}
 
 }

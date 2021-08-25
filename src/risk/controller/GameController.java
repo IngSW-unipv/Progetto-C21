@@ -155,6 +155,9 @@ public class GameController implements Initializable {
 				InputStream stream = new FileInputStream("src/risk/view/images/users/" + color + ".png");
 				Image image = new Image(stream);
 				userImages[i].setImage(image);
+				
+				if(i == 0)
+					userNames[i].setUnderline(true);
 			}
 		} catch(IndexOutOfBoundsException e) {
 			// ...
@@ -210,8 +213,9 @@ public class GameController implements Initializable {
 	 */
 	public void nextTurn() {
 	
+		// passa il turno al giocatore successivo
 		game.nextTurn();
-		if(game.getGamePhase() == GAME_PHASE.FIRSTTURN) {
+		if(game.getGamePhase() == GAME_PHASE.FIRSTTURN) {	// circlo per il first turn
 			int i = 0;
 			while(game.getCurrentTurn().getBonusTanks() == 0) {
 				if(i == game.getPlayers().length) {
@@ -221,6 +225,14 @@ public class GameController implements Initializable {
 				i++;
 			}
 		}
+		
+		// Ogni volta che il turno passa ad un altro giocatore, il suo nome viene sottolineato
+		Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
+		for(Text t : userNames) {
+			t.setUnderline(false);
+		}
+		userNames[game.getTurnCounter()].setUnderline(true);
+		
 //		if(!(game.getGamePhase() == GAME_PHASE.FIRSTTURN))
 //			nextPhase();
 //		

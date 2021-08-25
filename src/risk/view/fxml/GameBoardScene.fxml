@@ -221,253 +221,253 @@
       <Circle fill="DODGERBLUE" layoutX="922.0" layoutY="396.0" radius="3.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: darkred;" />
       <Circle fill="DODGERBLUE" layoutX="160.0" layoutY="103.0" radius="3.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: darkred;" />
       <Circle fill="DODGERBLUE" layoutX="1141.0" layoutY="125.0" radius="3.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: darkred;" />
-      <StackPane layoutX="183.0" layoutY="113.0">
+      <StackPane layoutX="183.0" layoutY="113.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleAlaska" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelAlaska" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="296.0" layoutY="117.0">
+      <StackPane layoutX="296.0" layoutY="117.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleNorthWestTerritory" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelNorthWestTerritory" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="283.0" layoutY="166.0">
+      <StackPane layoutX="283.0" layoutY="166.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleAlberta" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelAlberta" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="294.0" layoutY="226.0">
+      <StackPane layoutX="294.0" layoutY="226.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleWesternUnitedStates" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelWesternUnitedStates" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="311.0" layoutY="306.0">
+      <StackPane layoutX="311.0" layoutY="306.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleCentralAmerica" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelCentralAmerica" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="365.0" layoutY="253.0">
+      <StackPane layoutX="365.0" layoutY="253.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleEasternUnitedStates" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelEasternUnitedStates" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="355.0" layoutY="181.0">
+      <StackPane layoutX="355.0" layoutY="181.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleOntario" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelOntario" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="424.0" layoutY="179.0">
+      <StackPane layoutX="424.0" layoutY="179.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleQuebec" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelQuebec" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="513.0" layoutY="67.0">
+      <StackPane layoutX="513.0" layoutY="67.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleGreenland" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelGreenland" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="337.0" layoutY="379.0">
+      <StackPane layoutX="337.0" layoutY="379.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleVenezuela" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelVenezuela" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="416.0" layoutY="435.0">
+      <StackPane layoutX="416.0" layoutY="435.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleBrazil" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelBrazil" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="352.0" layoutY="462.0">
+      <StackPane layoutX="352.0" layoutY="462.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circlePeru" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelPeru" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="365.0" layoutY="531.0">
+      <StackPane layoutX="365.0" layoutY="531.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleArgentina" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelArgentina" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="562.0" layoutY="387.0">
+      <StackPane layoutX="562.0" layoutY="387.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleNorthAfrica" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelNorthAfrica" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="623.0" layoutY="474.0">
+      <StackPane layoutX="623.0" layoutY="474.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleCongo" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelCongo" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="625.0" layoutY="556.0">
+      <StackPane layoutX="625.0" layoutY="556.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleSouthAfrica" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelSouthAfrica" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="682.0" layoutY="434.0">
+      <StackPane layoutX="682.0" layoutY="434.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleEastAfrica" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelEastAfrica" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="632.0" layoutY="352.0">
+      <StackPane layoutX="632.0" layoutY="352.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleEgypt" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelEgypt" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="707.0" layoutY="323.0">
+      <StackPane layoutX="707.0" layoutY="323.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleMiddleEast" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelMiddleEast" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="827.0" layoutY="350.0">
+      <StackPane layoutX="827.0" layoutY="350.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleIndia" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelIndia" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="900.0" layoutY="352.0">
+      <StackPane layoutX="900.0" layoutY="352.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleSiam" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelSiam" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="629.0" layoutY="260.0">
+      <StackPane layoutX="629.0" layoutY="260.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleSouthernEurope" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelSouthernEurope" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="702.0" layoutY="178.0">
+      <StackPane layoutX="702.0" layoutY="178.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleUkraine" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelUkraine" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="617.0" layoutY="132.0">
+      <StackPane layoutX="617.0" layoutY="132.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleScandinavia" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelScandinavia" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="611.0" layoutY="209.0">
+      <StackPane layoutX="611.0" layoutY="209.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleNorthernEurope" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelNorthernEurope" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="560.0" layoutY="256.0">
+      <StackPane layoutX="560.0" layoutY="256.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleWesternEurope" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelWesternEurope" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="545.0" layoutY="190.0">
+      <StackPane layoutX="545.0" layoutY="190.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleGreatBritain" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelGreatBritain" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="532.0" layoutY="146.0">
+      <StackPane layoutX="532.0" layoutY="146.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleIceland" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelIceland" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="776.0" layoutY="241.0">
+      <StackPane layoutX="776.0" layoutY="241.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleAfghanistan" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelAfghanistan" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="801.0" layoutY="158.0">
+      <StackPane layoutX="801.0" layoutY="158.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleUral" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelUral" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="865.0" layoutY="138.0">
+      <StackPane layoutX="865.0" layoutY="138.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleSiberia" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelSiberia" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="885.0" layoutY="284.0">
+      <StackPane layoutX="885.0" layoutY="284.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleChina" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelChina" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="932.0" layoutY="177.0">
+      <StackPane layoutX="932.0" layoutY="177.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleIrkutsk" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelIrkutsk" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="954.0" layoutY="230.0">
+      <StackPane layoutX="954.0" layoutY="230.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleMongolia" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelMongolia" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="969.0" layoutY="117.0">
+      <StackPane layoutX="969.0" layoutY="117.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleYakutsk" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelYakutsk" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="1061.0" layoutY="116.0">
+      <StackPane layoutX="1061.0" layoutY="116.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleKamchatka" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelKamchatka" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="1035.0" layoutY="262.0">
+      <StackPane layoutX="1035.0" layoutY="262.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleJapan" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelJapan" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="923.0" layoutY="537.0">
+      <StackPane layoutX="923.0" layoutY="537.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleWesternAustralia" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelWesternAustralia" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="1019.0" layoutY="540.0">
+      <StackPane layoutX="1019.0" layoutY="540.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleEasternAustralia" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelEasternAustralia" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="897.0" layoutY="454.0">
+      <StackPane layoutX="897.0" layoutY="454.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleIndonesia" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelIndonesia" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="1043.0" layoutY="447.0">
+      <StackPane layoutX="1043.0" layoutY="447.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleNewGuinea" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelNewGuinea" text="34" />
          </children>
       </StackPane>
-      <StackPane layoutX="714.0" layoutY="570.0">
+      <StackPane layoutX="714.0" layoutY="570.0" mouseTransparent="true">
          <children>
             <Circle fx:id="circleMadagascar" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
             <Label fx:id="labelMadagascar" text="34" />
