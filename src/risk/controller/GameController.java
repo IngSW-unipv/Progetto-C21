@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 
 import com.sun.javafx.geom.Rectangle;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -303,6 +305,13 @@ public class GameController implements Initializable {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
+	}
+	
+	/* Method called when exit button is pressed */
+	@FXML
+	private void exit(final ActionEvent event) {
+		event.consume();
+		Platform.exit();
 	}
 
 }

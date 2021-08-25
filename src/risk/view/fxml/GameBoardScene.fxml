@@ -498,5 +498,6 @@
             <Label fx:id="labelMadagascar" text="34" />
          </children>
       </StackPane>
+      <Button id="exitButton" fx:id="exitButton" layoutX="1240.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="25.0" />
    </children>
 </Pane>
