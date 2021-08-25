@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,7 @@ import javafx.stage.WindowEvent;
 import risk.model.Player;
 import risk.model.PlayersList;
 import risk.model.RisikoGame;
+import risk.model.util.GAME_PHASE;
 
 public class GameController implements Initializable {
 	
@@ -38,10 +40,13 @@ public class GameController implements Initializable {
 	private Label Alberta;
 	
 	@FXML
-	private Text territoryText, userName1, userName2, userName3, userName4, userName5, userName6;
+	private Text territoryText, TurnText, userName1, userName2, userName3, userName4, userName5, userName6;
 	
 	@FXML
 	private VBox usersBox;
+	
+	@FXML
+	private Button PhaseSwitch;
 	
 	@FXML
 	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6;
@@ -57,6 +62,8 @@ public class GameController implements Initializable {
 		
 		try {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
+			System.out.println("Tocca al player "+game.getCurrentTurn());
+			TurnText.setText(""+game.getGamePhase());
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
@@ -131,6 +138,16 @@ public class GameController implements Initializable {
 		territoryText.setText(((SVGPath)event.getSource()).getId());
 	}
 	
+	@FXML
+	private void handlePhaseSwitchPressed(MouseEvent event) {
+		event.consume();
+		if(game.getGamePhase().equals(GAME_PHASE.FORTIFY)) {
+			game.nextTurn(); 
+			System.out.println(""+game.getCurrentTurn());
+		} 
+		game.nextPhase();
+		TurnText.setText(""+game.getGamePhase());
+	}
 	
 	
 	/**

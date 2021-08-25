@@ -88,7 +88,7 @@ public class RisikoGame {
 	public void nextPhase() {
 		switch(gamePhase) {
 		case FIRSTTURN:
-			gamePhase = GAME_PHASE.REINFORCEMENT; 
+			gamePhase = GAME_PHASE.DRAFT; 
 			currentTurn = this.players[0];
 			turnCounter = 0;
 			giveBonus(currentTurn);
@@ -96,21 +96,21 @@ public class RisikoGame {
 			 * if(currentTurn.isAI()) { currentTurn.playTurn(); }
 			 */
 			break;
-		case REINFORCEMENT:
-			gamePhase = GAME_PHASE.BATTLE;
+		case DRAFT:
+			gamePhase = GAME_PHASE.ATTACK;
 			
 			break;
-		case BATTLE:
+		case ATTACK:
 			/*
 			 * if(conquerMade) { giveCard(); }
 			 */
-			gamePhase = GAME_PHASE.FINALMOVE;
+			gamePhase = GAME_PHASE.FORTIFY;
 			
 			break;
-		case FINALMOVE:
+		case FORTIFY:
 			
 			giveBonus(currentTurn);
-			gamePhase = GAME_PHASE.REINFORCEMENT;
+			gamePhase = GAME_PHASE.DRAFT;
 			
 			break;
 		}
@@ -159,10 +159,10 @@ public class RisikoGame {
 	}
 	
 	/**
-	 * Makes a battle between 2 players
+	 * Makes a ATTACK between 2 players
 	
 	 */
-	public void battle(int[] atkResults, int[] defResults, int atk, int def) {
+	public void ATTACK(int[] atkResults, int[] defResults, int atk, int def) {
 
 //		int n = Math.min(atk, def);
 //		
