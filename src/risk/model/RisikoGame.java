@@ -180,7 +180,7 @@ public class RisikoGame {
 	}
 		if(	list.get(list.indexOf(defender)).getTanks()==0) {
 			player.get(player.indexOf(attac)).addTerritory();
-			player.get(player.indexOf(def)).removeTerritory();
+			player.get(player.indexOf(defender)).removeTerritory();
 			list.get(list.indexOf(defender)).setOwner(player.get(player.indexOf(attac)));
 			
 			
