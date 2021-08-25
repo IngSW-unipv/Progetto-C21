@@ -192,7 +192,7 @@ public class GameController implements Initializable {
 			System.out.println("success");
 
 		System.out.println(((SVGPath)event.getSource()).getId());
-
+//####
 	}
 
 
