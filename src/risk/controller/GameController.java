@@ -155,7 +155,7 @@ public class GameController implements Initializable {
 
 		Integer n = Integer.parseInt(labelAlberta.getText());
 
-		if (((SVGPath) event.getSource()).getId().equals(labelAlberta.getId())) {
+		if (((SVGPath)event.getSource()).getId().equals(labelAlberta.getId())) {
 			n += 1;
 			labelAlberta.setText("" + n);
 		}
