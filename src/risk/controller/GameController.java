@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
-import com.sun.javafx.geom.Rectangle;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,6 +29,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -54,7 +53,7 @@ public class GameController implements Initializable {
 	private VBox usersBox;
 	
 	@FXML
-	private HBox phaseGraphic0, phaseGraphic1, phaseGraphic2, phaseGraphic3;
+	private HBox phaseGraphic;
 	
 	@FXML
 	private Button phaseSwitch;
@@ -203,47 +202,94 @@ public class GameController implements Initializable {
 	private void handlePhaseSwitchPressed(MouseEvent event) {
 		/* DA SISTEMARE */
 		event.consume();
-		if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
-			game.nextPhase();
-			phaseText.setText(""+game.getGamePhase());
-			switchPhaseGraphic();
-			return;
+		nextPhase();
+	}
+	
+	/**
+	 * Switches the game turn to the next one
+	 */
+	public void nextTurn() {
+	
+		game.nextTurn();
+		if(game.getGamePhase() == GAME_PHASE.FIRSTTURN) {
+			int i = 0;
+			while(game.getCurrentTurn().getBonusTanks() == 0) {
+				if(i == game.getPlayers().length) {
+					break;
+				}
+				game.nextTurn();
+				i++;
+			}
 		}
-		if(game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
-			game.nextTurn();
-			switchPlayerGraphic();
-		} 
-
-		phaseText.setText(""+game.getGamePhase());
-		
+//		if(!(game.getGamePhase() == GAME_PHASE.FIRSTTURN))
+//			nextPhase();
+//		
+//		territory1 = null;
+//		territory2 = null;
+//		if(game.getGamePhase() != GAME_PHASE.FIRSTTURN && game.getCurrentTurn().isAI()) {
+//			game.getCurrentTurn().playTurn();
+//		}
+	}
+	
+	/**
+	 * Switches the game phase to the next one
+	 */
+	public void nextPhase() {
+//		switch(game.getGamePhase()) {
+//			case FORTIFY:
+//				nextPhase.setText("POSIZIONAMENTO");
+//				endTurn.setDisable(true);
+//				nextPhase.setDisable(true);
+//				break;
+//			case DRAFT:
+//				nextPhase.setText("SPOSTAMENTO");
+//				nextPhase.setDisable(false);
+//				endTurn.setDisable(true);
+//				break;
+//			case ATTACK:
+//				nextPhase.setDisable(true);
+//				endTurn.setDisable(false);
+//				break;
+//		}
+		game.nextPhase();
+		phaseText.setText(game.getGamePhase().toString());
+		if(game.getGamePhase().equals(GAME_PHASE.DRAFT))
+			nextTurn();
 		switchPhaseGraphic();
+		switchPlayerGraphic();
 	}
 	
 	private void switchPhaseGraphic() {
+		ArrayList<Rectangle> rectangles =	getRectangles(phaseGraphic);
 		switch(game.getGamePhase()) {
 			case DRAFT:
-				phaseGraphic0.setVisible(false);
-				phaseGraphic1.setVisible(true);
-				phaseGraphic2.setVisible(false);
-				phaseGraphic3.setVisible(false);
+				for(int i = 0; i < rectangles.size(); i++) {
+					if(i == 0)
+						rectangles.get(i).setFill(Color.web(game.getCurrentTurn().getColorName().toLowerCase()));
+					else
+						rectangles.get(i).setFill(Color.TRANSPARENT);
+				}
 				break;
 			case ATTACK:
-				phaseGraphic0.setVisible(false);
-				phaseGraphic1.setVisible(false);
-				phaseGraphic2.setVisible(true);
-				phaseGraphic3.setVisible(false);
+				for(int i = 0; i < rectangles.size(); i++) {
+					if(i == 1)
+						rectangles.get(i).setFill(Color.web(game.getCurrentTurn().getColorName().toLowerCase()));
+					else
+						rectangles.get(i).setFill(Color.TRANSPARENT);
+				}
 				break;
 			case FORTIFY:
-				phaseGraphic0.setVisible(false);
-				phaseGraphic1.setVisible(false);
-				phaseGraphic2.setVisible(false);
-				phaseGraphic3.setVisible(true);
+				for(int i = 0; i < rectangles.size(); i++) {
+					if(i == 2)
+						rectangles.get(i).setFill(Color.web(game.getCurrentTurn().getColorName().toLowerCase()));
+					else
+						rectangles.get(i).setFill(Color.TRANSPARENT);
+				}
 				break;
 			default:
-				phaseGraphic0.setVisible(true);
-				phaseGraphic1.setVisible(false);
-				phaseGraphic2.setVisible(false);
-				phaseGraphic3.setVisible(false);
+				for(int i = 0; i < rectangles.size(); i++) {
+					rectangles.get(i).setFill(Color.TRANSPARENT);
+				}
 				break;
 		}
 	}
@@ -254,6 +300,17 @@ public class GameController implements Initializable {
         File file = new File(path);
         Image image = new Image(file.toURI().toString());
 		actualPlayerGraphic.setImage(image);
+		phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-text-fill:white;-fx-background-color:" + color);
+	}
+	
+	private ArrayList<Rectangle> getRectangles(HBox hb) {
+		ArrayList<Rectangle> rectangles = new ArrayList<>();
+		for (Node currentNode : hb.getChildren()){
+		    if (currentNode instanceof Rectangle){
+		    	rectangles.add((Rectangle)currentNode);
+		    }
+		}
+		return rectangles;
 	}
 	
 	/**

@@ -127,38 +127,13 @@
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
                   <Text fx:id="phaseText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Arial Black&quot;;" text="TURN PHASE" />
-                  <StackPane>
+                  <HBox fx:id="phaseGraphic" alignment="CENTER" spacing="5.0">
                      <children>
-                        <HBox fx:id="phaseGraphic0" alignment="CENTER" spacing="5.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                           </children>
-                        </HBox>
-                        <HBox fx:id="phaseGraphic1" alignment="CENTER" spacing="5.0" visible="false">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                           </children>
-                        </HBox>
-                        <HBox fx:id="phaseGraphic2" alignment="CENTER" spacing="5.0" visible="false">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                           </children>
-                        </HBox>
-                        <HBox fx:id="phaseGraphic3" alignment="CENTER" spacing="5.0" visible="false">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                           </children>
-                        </HBox>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
                      </children>
-                  </StackPane>
+                  </HBox>
                </children>
             </VBox>
             <Button fx:id="phaseSwitch" mnemonicParsing="false" onMousePressed="#handlePhaseSwitchPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100; -fx-font-family: &quot;Arial Black&quot;; -fx-font-size: 18; -fx-text-fill: white; -fx-background-color: red;" text="&gt;&gt;" />
