@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
@@ -118,71 +119,54 @@
          </children></VBox>
       <HBox alignment="CENTER" layoutX="515.0" layoutY="680.0" prefHeight="80.0" prefWidth="250.0" spacing="10.0" style="-fx-background-color: #00000050; -fx-background-radius: 50;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="actualPlayerGraphic" fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/users/red.png" />
                </image>
             </ImageView>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Text fx:id="TurnText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Arial Black&quot;;" text="TURN PHASE" />
-                  <HBox alignment="CENTER" spacing="5.0">
+                  <Text fx:id="phaseText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Arial Black&quot;;" text="TURN PHASE" />
+                  <StackPane>
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                        <HBox fx:id="phaseGraphic0" alignment="CENTER" spacing="5.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="phaseGraphic1" alignment="CENTER" spacing="5.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="phaseGraphic2" alignment="CENTER" spacing="5.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="phaseGraphic3" alignment="CENTER" spacing="5.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="5.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </StackPane>
                </children>
             </VBox>
-            <Button fx:id="PhaseSwitch" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100; -fx-font-family: &quot;Arial Black&quot;; -fx-font-size: 18; -fx-text-fill: white; -fx-background-color: red;" onMousePressed="#handlePhaseSwitchPressed" text="&gt;&gt;" />
+            <Button fx:id="phaseSwitch" mnemonicParsing="false" onMousePressed="#handlePhaseSwitchPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100; -fx-font-family: &quot;Arial Black&quot;; -fx-font-size: 18; -fx-text-fill: white; -fx-background-color: red;" text="&gt;&gt;" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </HBox>
-      <Label id="Alberta" fx:id="Alberta" layoutX="289.0" layoutY="174.0" text="1" />
-      <Label id="Brazile" layoutX="424.0" layoutY="430.0" text="1" />
-      <Label id="SouthernEurope" layoutX="641.0" layoutY="260.0" text="1" />
-      <Label id="Siberia" layoutX="846.0" layoutY="120.0" text="1" />
-      <Label id="Afghanistan" layoutX="787.0" layoutY="267.0" prefHeight="17.0" prefWidth="6.0" text="1" />
-      <Label id="EastAfrica" layoutX="677.0" layoutY="419.0" text="1" />
-      <Label id="WesternAustrailia" layoutX="942.0" layoutY="541.0" text="1" />
-      <Label id="Greenland" layoutX="520.0" layoutY="68.0" text="1" />
-      <Label id="Argentina" layoutX="376.0" layoutY="528.0" text="1" />
-      <Label id="Scandinavia" layoutX="614.0" layoutY="139.0" text="1" />
-      <Label id="Kamchatka" layoutX="1073.0" layoutY="120.0" text="1" />
-      <Label id="EasternUnited States" layoutX="371.0" layoutY="247.0" text="1" />
-      <Label id="Siam" layoutX="907.0" layoutY="365.0" text="1" />
-      <Label id="Mongolia" layoutX="966.0" layoutY="230.0" text="1" />
-      <Label id="WesternUnited States" layoutX="292.0" layoutY="230.0" text="1" />
-      <Label id="Peru" layoutX="360.0" layoutY="467.0" text="1" />
-      <Label id="Congo" layoutX="637.0" layoutY="470.0" text="1" />
-      <Label id="WesternEurope" layoutX="572.0" layoutY="248.0" prefWidth="14.0" text="1" />
-      <Label id="NorthAfrica" layoutX="581.0" layoutY="384.0" text="1" />
-      <Label id="Egypt" layoutX="642.0" layoutY="350.0" text="1" />
-      <Label id="SouthAfrica" layoutX="628.0" layoutY="558.0" text="1" />
-      <Label id="NorthwestTerritory" layoutX="310.0" layoutY="127.0" text="1" />
-      <Label id="Alaska" layoutX="192.0" layoutY="114.0" text="1" />
-      <Label id="Venezuela" layoutX="347.0" layoutY="380.0" text="1" />
-      <Label id="Ukraine" layoutX="700.0" layoutY="187.0" text="1" />
-      <Label id="CentralAmerica" layoutX="307.0" layoutY="296.0" prefHeight="17.0" prefWidth="4.0" text="1" />
-      <Label id="GreatBritain" layoutX="568.0" layoutY="212.0" text="1" />
-      <Label id="Quebec" layoutX="430.0" layoutY="182.0" prefHeight="3.0" prefWidth="4.0" text="1" />
-      <Label id="Ontario" layoutX="358.0" layoutY="180.0" text="1" />
-      <Label id="MiddleEast" layoutX="711.0" layoutY="320.0" text="1" />
-      <Label id="Ural" layoutX="810.0" layoutY="163.0" text="1" />
-      <Label id="China" layoutX="904.0" layoutY="284.0" text="1" />
-      <Label id="India" layoutX="836.0" layoutY="354.0" text="1" />
-      <Label id="Irkutsk" layoutX="955.0" layoutY="175.0" text="1" />
-      <Label id="Yakutsk" layoutX="968.0" layoutY="119.0" text="1" />
-      <Label id="Iceland" layoutX="559.0" layoutY="140.0" text="1" />
-      <Label id="EasternAustrailia" layoutX="1021.0" layoutY="541.0" text="1" />
-      <Label id="Madagascar" layoutX="715.0" layoutY="557.0" text="1" />
-      <Label id="Indonesia" layoutX="938.0" layoutY="440.0" text="1" />
-      <Label id="Japan" layoutX="1033.0" layoutY="253.0" text="1" />
-      <Label id="NewGuniea" layoutX="1037.0" layoutY="459.0" text="1" />
-      <Label id="NorthernEurope" layoutX="612.0" layoutY="217.0" text="1" />
       <VBox layoutY="644.0" onMousePressed="#missionIconPressed" scaleX="0.6" scaleY="0.6" styleClass="missionBox">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
@@ -262,5 +246,83 @@
       <Circle fill="DODGERBLUE" layoutX="922.0" layoutY="396.0" radius="3.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: darkred;" />
       <Circle fill="DODGERBLUE" layoutX="160.0" layoutY="103.0" radius="3.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: darkred;" />
       <Circle fill="DODGERBLUE" layoutX="1141.0" layoutY="125.0" radius="3.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: darkred;" />
+      <StackPane layoutX="183.0" layoutY="113.0">
+         <children>
+            <Circle fx:id="circleAlaska" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelAlaska" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="296.0" layoutY="117.0">
+         <children>
+            <Circle fx:id="circleNorthWestTerritory" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelNorthWestTerritory" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="283.0" layoutY="166.0">
+         <children>
+            <Circle fx:id="circleAlberta" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelAlberta" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="294.0" layoutY="226.0">
+         <children>
+            <Circle fx:id="circleWesternUnitedStates" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelWesternUnitedStates" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="311.0" layoutY="306.0">
+         <children>
+            <Circle fx:id="circleCentralAmerica" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelCentralAmerica" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="365.0" layoutY="253.0">
+         <children>
+            <Circle fx:id="circleEasternUnitedStates" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelEasternUnitedStates" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="355.0" layoutY="181.0">
+         <children>
+            <Circle fx:id="circleOntario" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelOntario" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="424.0" layoutY="179.0">
+         <children>
+            <Circle fx:id="circleQuebec" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelQuebec" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="513.0" layoutY="67.0">
+         <children>
+            <Circle fx:id="circleGreenland" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelGreenland" text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="337.0" layoutY="379.0">
+         <children>
+            <Circle fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="416.0" layoutY="435.0">
+         <children>
+            <Circle fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="352.0" layoutY="462.0">
+         <children>
+            <Circle fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label text="34" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="365.0" layoutY="531.0">
+         <children>
+            <Circle fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label text="34" />
+         </children>
+      </StackPane>
    </children>
 </Pane>

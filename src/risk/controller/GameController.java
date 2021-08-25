@@ -1,5 +1,6 @@
 package risk.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,10 +9,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.sun.javafx.geom.Rectangle;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,8 +23,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -29,6 +36,7 @@ import javafx.stage.WindowEvent;
 import risk.model.Player;
 import risk.model.PlayersList;
 import risk.model.RisikoGame;
+import risk.model.Territory;
 import risk.model.util.GAME_PHASE;
 
 public class GameController implements Initializable {
@@ -37,19 +45,25 @@ public class GameController implements Initializable {
 	private Pane rootPane;
 	
 	@FXML
-	private Label Alberta;
-	
-	@FXML
-	private Text territoryText, TurnText, userName1, userName2, userName3, userName4, userName5, userName6;
+	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6;
 	
 	@FXML
 	private VBox usersBox;
 	
 	@FXML
-	private Button PhaseSwitch;
+	private HBox phaseGraphic0, phaseGraphic1, phaseGraphic2, phaseGraphic3;
 	
 	@FXML
-	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6;
+	private Button phaseSwitch;
+	
+	@FXML
+	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6, actualPlayerGraphic;
+	
+	@FXML
+	private Circle circleAlaska, circleNorthWestTerritory, circleGreenland, circleAlberta, circleOntario, circleQuebec, circleWesternUnitedStates, circleEasternUnitedStates, circleCentralAmerica;
+	
+	@FXML
+	private Label labelAlaska, labelNorthWestTerritory, labelGreenland, labelAlberta, labelOntario, labelQuebec, labelWesternUnitedStates, labelEasternUnitedStates, labelCentralAmerica;
 	
 	static RisikoGame game;
 	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
@@ -62,8 +76,7 @@ public class GameController implements Initializable {
 		
 		try {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
-			System.out.println("Tocca al player "+game.getCurrentTurn());
-			TurnText.setText(""+game.getGamePhase());
+			phaseText.setText(""+game.getGamePhase());
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
@@ -71,6 +84,9 @@ public class GameController implements Initializable {
 		}
 		
 		initializeUserBar();
+		updateTerritoriesGraphic();
+		switchPlayerGraphic();
+
 	}
 
 
@@ -114,23 +130,29 @@ public class GameController implements Initializable {
 			e.printStackTrace();
 		}	
 	}
+	
+	private void updateTerritoriesGraphic() {
+		Circle[] circles = {circleAlaska, circleNorthWestTerritory, circleGreenland, circleAlberta, circleOntario, circleQuebec, circleWesternUnitedStates, circleEasternUnitedStates, circleCentralAmerica};
+		Label[] labels = {labelAlaska, labelNorthWestTerritory, labelGreenland, labelAlberta, labelOntario, labelQuebec, labelWesternUnitedStates, labelEasternUnitedStates, labelCentralAmerica};
+		
+		ArrayList<Territory> territories = game.getTerritories();
+		for(int i = 0; i < 9/*territories.size()*/; i++) {
+			String color = territories.get(i).getOwner().getColorName();
+			int tanks = territories.get(i).getTanks();
+			
+			circles[i].setFill(Color.web(color));
+			labels[i].setText(String.valueOf(tanks));
+			
+			if(color.toLowerCase().equals("black"))
+				labels[i].setTextFill(Color.WHITE);
+		}
+	}
 
 	@FXML
 	private void handleSVGPathPressed(MouseEvent event) {
 		event.consume();
-		Integer n = Integer.parseInt(Alberta.getText());
-		
-		if(((SVGPath)event.getSource()).getId().equals(Alberta.getId())) {
-			n += 1;
-			Alberta.setText(""+n);
-		}
-		
 		System.out.println(((SVGPath)event.getSource()).getId());
 	}
-	
-	
-	
-	
 	
 	@FXML
 	private void handleSVGPathHover(MouseEvent event) {
@@ -140,15 +162,60 @@ public class GameController implements Initializable {
 	
 	@FXML
 	private void handlePhaseSwitchPressed(MouseEvent event) {
+		/* DA SISTEMARE */
 		event.consume();
-		if(game.getGamePhase().equals(GAME_PHASE.FORTIFY)) {
-			game.nextTurn(); 
-			System.out.println(""+game.getCurrentTurn());
+		if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
+			game.nextPhase();
+			phaseText.setText(""+game.getGamePhase());
+			switchPhaseGraphic();
+			return;
+		}
+		if(game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
+			game.nextTurn();
+			switchPlayerGraphic();
 		} 
-		game.nextPhase();
-		TurnText.setText(""+game.getGamePhase());
+
+		phaseText.setText(""+game.getGamePhase());
+		
+		switchPhaseGraphic();
 	}
 	
+	private void switchPhaseGraphic() {
+		switch(game.getGamePhase()) {
+			case DRAFT:
+				phaseGraphic0.setVisible(false);
+				phaseGraphic1.setVisible(true);
+				phaseGraphic2.setVisible(false);
+				phaseGraphic3.setVisible(false);
+				break;
+			case ATTACK:
+				phaseGraphic0.setVisible(false);
+				phaseGraphic1.setVisible(false);
+				phaseGraphic2.setVisible(true);
+				phaseGraphic3.setVisible(false);
+				break;
+			case FORTIFY:
+				phaseGraphic0.setVisible(false);
+				phaseGraphic1.setVisible(false);
+				phaseGraphic2.setVisible(false);
+				phaseGraphic3.setVisible(true);
+				break;
+			default:
+				phaseGraphic0.setVisible(true);
+				phaseGraphic1.setVisible(false);
+				phaseGraphic2.setVisible(false);
+				phaseGraphic3.setVisible(false);
+				break;
+		}
+	}
+	
+	private void switchPlayerGraphic() {
+		String color = game.getCurrentTurn().getColorName().toLowerCase();
+		String path = "src/risk/view/images/users/" + color + ".png";
+        File file = new File(path);
+        Image image = new Image(file.toURI().toString());
+		actualPlayerGraphic.setImage(image);
+	}
 	
 	/**
 	 * Method that allows to load a scene in a new window

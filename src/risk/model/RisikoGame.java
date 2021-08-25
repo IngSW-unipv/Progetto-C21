@@ -58,7 +58,7 @@ public class RisikoGame {
 		if(currentTurn.isAI()) {
 			nextTurn();
 		} // conquerMade = false;
-			
+		
 	}
 	
 	
