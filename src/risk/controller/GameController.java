@@ -143,7 +143,7 @@ public class GameController implements Initializable {
 			circles[i].setFill(Color.web(color));
 			labels[i].setText(String.valueOf(tanks));
 			
-			if(color.toLowerCase().equals("black"))
+			if(color.toLowerCase().equals("black") || color.toLowerCase().equals("blue"))
 				labels[i].setTextFill(Color.WHITE);
 		}
 	}
