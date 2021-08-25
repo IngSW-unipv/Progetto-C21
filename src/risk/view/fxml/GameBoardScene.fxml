@@ -302,26 +302,26 @@
       </StackPane>
       <StackPane layoutX="337.0" layoutY="379.0">
          <children>
-            <Circle fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label text="34" />
+            <Circle fx:id="circleVenezuela" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelVenezuela" text="34" />
          </children>
       </StackPane>
       <StackPane layoutX="416.0" layoutY="435.0">
          <children>
-            <Circle fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label text="34" />
+            <Circle fx:id="circleBrazil" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelBrazil" text="34" />
          </children>
       </StackPane>
       <StackPane layoutX="352.0" layoutY="462.0">
          <children>
-            <Circle fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label text="34" />
+            <Circle fx:id="circlePeru" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelPeru" text="34" />
          </children>
       </StackPane>
       <StackPane layoutX="365.0" layoutY="531.0">
          <children>
-            <Circle fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label text="34" />
+            <Circle fx:id="circleArgentina" fill="DODGERBLUE" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelArgentina" text="34" />
          </children>
       </StackPane>
    </children>
