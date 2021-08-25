@@ -99,6 +99,9 @@ public class GameController implements Initializable {
 		updateTerritoriesGraphic();
 		switchPlayerGraphic();
 		
+		
+		
+		// lambda su ogni territorio -> studiare un metodo migliore perchè tutte le espressioni eseguono lo stesso codice, cambia solo il nome dello stato
 		alaska.setOnMousePressed((event) -> {
 			Territory t = game.getTerritory("alaska");
 			if(game.getCurrentTurn().equals(t.getOwner()))
@@ -124,7 +127,7 @@ public class GameController implements Initializable {
 	/* Method that draw on the game scene the right number of colored users*/
 	private void initializeUserBar() {
 		// removing useless imageview and text
-		for(int i = PlayersList.getPlayers().size()*2; i < 12; i++) {
+		for(int i = game.getPlayers().length*2; i < 12; i++) {
 			usersBox.getChildren().remove(usersBox.getChildren().size()-1);
 		}
 
@@ -145,8 +148,8 @@ public class GameController implements Initializable {
 			
 			// for every player get color and name to set gui elements
 			for(int i = 0; i < 6; i++) {
-				String name = PlayersList.getPlayers().get(i).getName();
-				String color = PlayersList.getPlayers().get(i).getColor().toString().toLowerCase();
+				String name = game.getPlayers()[i].getName();
+				String color = game.getPlayers()[i].getColor().toString().toLowerCase();
 
 				userNames[i].setText(name);
 

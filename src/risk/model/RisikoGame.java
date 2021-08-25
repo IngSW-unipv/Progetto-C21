@@ -55,9 +55,11 @@ public class RisikoGame {
 		
 		turnCounter = 0;
 		currentTurn = this.players[turnCounter];
-		if(currentTurn.isAI()) {
-			nextTurn();
-		} // conquerMade = false;
+
+//		if(currentTurn.isAI()) {
+//			nextTurn();
+//		} 
+		// conquerMade = false;
 		
 	}
 	
@@ -719,6 +721,14 @@ public class RisikoGame {
 	 */
 	private void playerEliminated(Player p) {
 		p.setEliminated(true);
+	}
+	
+	/**
+	 * Returns array of players
+	 * @return Player[], array of players
+	 */
+	public Player[] getPlayers() {
+		return players;
 	}
 
 }
