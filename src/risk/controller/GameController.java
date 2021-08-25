@@ -70,6 +70,11 @@ public class GameController implements Initializable {
 					labelIceland, labelScandinavia, labelGreatBritain, labelNorthernEurope, labelWesternEurope, labelSouthernEurope, labelUkraine, labelUral, labelAfghanistan, labelSiberia, labelYakutsk, labelIrkutsk, labelKamchatka, 
 					labelMongolia, labelJapan, labelChina, labelSiam, labelIndia, labelMiddleEast, labelEgypt, labelNorthAfrica, labelEastAfrica, labelCongo, labelSouthAfrica, labelMadagascar, labelIndonesia, labelNewGuinea, labelWesternAustralia, labelEasternAustralia;
 	
+	@FXML
+	private SVGPath alaska, northWestTerritory, greenland, alberta, ontario, quebec, westernUnitedStates, easternUnitedStates, centralAmerica, venezuela, brazil, peru, argentina,
+					iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, ukraine, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
+					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
+	
 	static RisikoGame game;
 	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
 
@@ -91,7 +96,25 @@ public class GameController implements Initializable {
 		initializeUserBar();
 		updateTerritoriesGraphic();
 		switchPlayerGraphic();
-
+		
+		alaska.setOnMousePressed((event) -> {
+			Territory t = game.getTerritory("alaska");
+			if(game.getCurrentTurn().equals(t.getOwner()))
+			t.addTanks(1);
+			updateTerritoriesGraphic();
+		});
+		northWestTerritory.setOnMousePressed((event) -> {
+			Territory t = game.getTerritory("northWestTerritory");
+			if(game.getCurrentTurn().equals(t.getOwner()))
+			t.addTanks(1);
+			updateTerritoriesGraphic();
+		});
+		greenland.setOnMousePressed((event) -> {
+			Territory t = game.getTerritory("greenland");
+			if(game.getCurrentTurn().equals(t.getOwner()))
+			t.addTanks(1);
+			updateTerritoriesGraphic();
+		});
 	}
 
 
@@ -160,39 +183,7 @@ public class GameController implements Initializable {
 	@FXML
 	private void handleSVGPathPressed(MouseEvent event) {
 		event.consume();
-
-		Integer n = Integer.parseInt(labelAlberta.getText());
-
-		if (((SVGPath)event.getSource()).getId().equals(labelAlberta.getId())) {
-			n += 1;
-			labelAlberta.setText("" + n);
-		}
-
 		System.out.println(((SVGPath) event.getSource()).getId());
-
-		Territory temp;
-
-		for (Iterator<Territory> it = game.getTerritories().iterator(); it.hasNext();) {
-			temp = it.next();
-			if (temp.getName().equals(territoryText.getText())) { // se il territorio ha lo stesso nome della label
-				if (temp.getOwner().equals(game.getCurrentTurn())) { // se il territorio è del player del turno corrente
-					// place tank
-					temp.getOwner().placeTank(1);
-					// add territory tanks
-					game.addTerritoryTanks(temp);
-					break;
-				} else {
-					System.out.println(territoryText.getText() + " is not owned by Current Player");
-					System.out.println(temp.getOwner().getName() + " is the owner");
-					break;
-				}
-			}
-		}
-		if (game.getCurrentTurn().getBonusTanks() == 0)
-			System.out.println("success");
-
-		System.out.println(((SVGPath)event.getSource()).getId());
-//####
 	}
 
 

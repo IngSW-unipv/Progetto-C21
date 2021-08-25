@@ -652,6 +652,20 @@ public class RisikoGame {
 	}
 	
 	/**
+	 * Returns a territory
+	 * @param name is the territory's name
+	 * @return Territory
+	 */
+	public Territory getTerritory(String name) {
+		for(Territory t : territories) {
+			if(t.getName().toLowerCase().equals(name.toLowerCase())) {
+				return t;
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Returns the player
 	 * @param p is the player
 	 * @return Player
