@@ -194,15 +194,24 @@ public class GameController implements Initializable {
 
 		if (game.getCurrentTurn().equals(t.getOwner())) {
 			if (t.getOwner().getBonusTanks() > 0) {
-			t.getOwner().placeTank(1);
-			t.addTanks(1);
-			System.out.println(t.getOwner().getBonusTanks());
+				t.getOwner().placeTank(1);
+				t.addTanks(1);
+				
+				if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
+					phaseSwitch.setTextFill(Color.BLACK);
+				else
+					phaseSwitch.setTextFill(Color.WHITE);
+				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+				
+				// creare un metodo da qui in poi
+				if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
+					if(game.getCurrentTurn().getBonusTanks() == 0)
+						nextPhase();
+				}
 
+
+			}
 		}
-	}
-
-		if (game.getCurrentTurn().getBonusTanks() == 0)
-			System.out.println("success");
 
 		updateTerritoriesGraphic();
 
@@ -213,7 +222,7 @@ public class GameController implements Initializable {
 //		for (Iterator<Territory> it = game.getTerritories().iterator(); it.hasNext();) {
 //			temp = it.next();
 //			if (temp.getName().equals(territoryText.getText())) { // se il territorio ha lo stesso nome della label
-//				if (temp.getOwner().equals(game.getCurrentTurn())) { // se il territorio è del player del turno corrente
+//				if (temp.getOwner().equals(game.getCurrentTurn())) { // se il territorio ï¿½ del player del turno corrente
 //					// place tank
 //					temp.getOwner().placeTank(1);
 //					// add territory tanks
@@ -255,16 +264,18 @@ public class GameController implements Initializable {
 	
 		// passa il turno al giocatore successivo
 		game.nextTurn();
-		if(game.getGamePhase() == GAME_PHASE.FIRSTTURN) {	// circlo per il first turn
-			int i = 0;
-			while(game.getCurrentTurn().getBonusTanks() == 0) {
-				if(i == game.getPlayers().length) {
-					break;
-				}
-				game.nextTurn();
-				i++;
-			}
-		}
+		switchPhaseGraphic();
+		switchPlayerGraphic();
+//		if(game.getGamePhase() == GAME_PHASE.FIRSTTURN) {	// circlo per il first turn
+//			int i = 0;
+//			while(game.getCurrentTurn().getBonusTanks() == 0) {
+//				if(i == game.getPlayers().length) {
+//					break;
+//				}
+//				game.nextTurn();
+//				i++;
+//			}
+//		}
 		
 		// Ogni volta che il turno passa ad un altro giocatore, il suo nome viene sottolineato
 		Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
@@ -303,12 +314,29 @@ public class GameController implements Initializable {
 //				endTurn.setDisable(false);
 //				break;
 //		}
-		game.nextPhase();
-		phaseText.setText(game.getGamePhase().toString());
-		if(game.getGamePhase().equals(GAME_PHASE.DRAFT))
-			nextTurn();
-		switchPhaseGraphic();
-		switchPlayerGraphic();
+		
+		if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN) && !game.firstPhaseEnded()) {
+			game.nextTurn();
+			
+			if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
+				phaseSwitch.setTextFill(Color.BLACK);
+			else
+				phaseSwitch.setTextFill(Color.WHITE);
+			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+			
+			switchPhaseGraphic();
+			switchPlayerGraphic();
+			System.out.println(game.firstPhaseEnded());
+			return;
+		} else {
+			System.out.println("CAMBIO FASE");
+			game.nextPhase();
+			phaseText.setText(game.getGamePhase().toString());
+			if(game.getGamePhase().equals(GAME_PHASE.DRAFT))
+				nextTurn();
+			switchPhaseGraphic();
+			switchPlayerGraphic();
+		}
 	}
 	
 	private void switchPhaseGraphic() {
