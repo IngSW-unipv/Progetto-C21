@@ -142,7 +142,7 @@ public class RisikoGame {
 
 		if (getBonusTanksSum() == 0) {
 			for (Player p : players) {
-				if (p.getBonusTanks() != 0) {
+				if (p.getBonusTanks() != 0) { // perchè il controllo viene fatto due volte???
 					return false;
 				}
 			}

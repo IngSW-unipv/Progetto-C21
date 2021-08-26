@@ -189,7 +189,7 @@ public class GameController implements Initializable {
 	@FXML
 	private void handleSVGPathPressed(MouseEvent event) {
 		event.consume();
-
+		boolean enter = true;
 		Territory t = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
 
 		if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
@@ -206,18 +206,22 @@ public class GameController implements Initializable {
 				
 				// creare un metodo da qui in poi
 				if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
-					if(game.getCurrentTurn().getBonusTanks() == 0)
-						nextPhase();
+					if (game.getCurrentTurn().getBonusTanks() == 0) {
+						nextPhase(); // problema che il primo va nella prossima fase e fa cambiare turno e quindi non devo farlo cambiare sotto
+					enter = false;
 				}
+			}
 
 
 			}
 		}
 		if (counterConsecutiveClicks >= 3 && game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
 			counterConsecutiveClicks = 0;
-			nextTurn();
+			if (enter) {
+				nextTurn();
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 		}
+	}
 
 		updateTerritoriesGraphic();
 
@@ -259,8 +263,11 @@ public class GameController implements Initializable {
 	@FXML
 	private void handlePhaseSwitchPressed(MouseEvent event) {
 		/* DA SISTEMARE */
-		if (game.firstPhaseEnded()) {
+		System.out.println(game.firstPhaseEnded());
 		event.consume();
+		if (game.firstPhaseEnded()) {
+			// non entra mai qua pur cambiando fase sotto e non so perchè???
+			System.out.println("success");
 		nextPhase();
 	}
 }
