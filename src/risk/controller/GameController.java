@@ -77,7 +77,7 @@ public class GameController implements Initializable {
 	
 	static RisikoGame game;
 	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
-
+	private static int counterConsecutiveClicks = 0;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ArrayList<Player> playersList = PlayersList.getPlayers();
@@ -192,10 +192,11 @@ public class GameController implements Initializable {
 
 		Territory t = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
 
-		if (game.getCurrentTurn().equals(t.getOwner())) {
+		if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
 			if (t.getOwner().getBonusTanks() > 0) {
 				t.getOwner().placeTank(1);
 				t.addTanks(1);
+				counterConsecutiveClicks++;
 				
 				if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
 					phaseSwitch.setTextFill(Color.BLACK);
@@ -211,6 +212,10 @@ public class GameController implements Initializable {
 
 
 			}
+		}
+		if (counterConsecutiveClicks >= 3) {
+			counterConsecutiveClicks = 0;
+			nextTurn();
 		}
 
 		updateTerritoriesGraphic();
@@ -328,7 +333,7 @@ public class GameController implements Initializable {
 			switchPlayerGraphic();
 			System.out.println(game.firstPhaseEnded());
 			return;
-		} else {
+		} else if (game.firstPhaseEnded()) {
 			System.out.println("CAMBIO FASE");
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
