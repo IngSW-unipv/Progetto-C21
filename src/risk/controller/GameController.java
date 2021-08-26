@@ -98,22 +98,9 @@ public class GameController implements Initializable {
 		switchPlayerGraphic();
 		
 		
-		
 //		// lambda su ogni territorio -> studiare un metodo migliore perchÃ¨ tutte le espressioni eseguono lo stesso codice, cambia solo il nome dello stato
 //		alaska.setOnMousePressed((event) -> {
 //			Territory t = game.getTerritory("alaska");
-//			if(game.getCurrentTurn().equals(t.getOwner()))
-//			t.addTanks(1);
-//			updateTerritoriesGraphic();
-//		});
-//		northWestTerritory.setOnMousePressed((event) -> {
-//			Territory t = game.getTerritory("northWestTerritory");
-//			if(game.getCurrentTurn().equals(t.getOwner()))
-//			t.addTanks(1);
-//			updateTerritoriesGraphic();
-//		});
-//		greenland.setOnMousePressed((event) -> {
-//			Territory t = game.getTerritory("greenland");
 //			if(game.getCurrentTurn().equals(t.getOwner()))
 //			t.addTanks(1);
 //			updateTerritoriesGraphic();
@@ -197,20 +184,20 @@ public class GameController implements Initializable {
 				t.getOwner().placeTank(1);
 				t.addTanks(1);
 				counterConsecutiveClicks++;
-				
+
 				if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
 					phaseSwitch.setTextFill(Color.BLACK);
 				else
 					phaseSwitch.setTextFill(Color.WHITE);
 				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-				
+
 				// creare un metodo da qui in poi
 				if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
 						nextPhase(); // problema che il primo va nella prossima fase e fa cambiare turno e quindi non devo farlo cambiare sotto
-					enter = false;
+						enter = false;
+					}
 				}
-			}
 
 
 			}
@@ -219,9 +206,9 @@ public class GameController implements Initializable {
 			counterConsecutiveClicks = 0;
 			if (enter) {
 				nextTurn();
-			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+			}
 		}
-	}
 
 		updateTerritoriesGraphic();
 
@@ -263,14 +250,13 @@ public class GameController implements Initializable {
 	@FXML
 	private void handlePhaseSwitchPressed(MouseEvent event) {
 		/* DA SISTEMARE */
-		System.out.println(game.firstPhaseEnded());
 		event.consume();
-		if (game.firstPhaseEnded()) {
-			// non entra mai qua pur cambiando fase sotto e non so perchè???
-			System.out.println("success");
-		nextPhase();
+		if (!game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
+			// non entra mai qua pur cambiando fase sotto e non so perche'???
+			System.out.println("premuto");
+			nextPhase();
+		}
 	}
-}
 	
 	/**
 	 * Switches the game turn to the next one
@@ -341,14 +327,10 @@ public class GameController implements Initializable {
 			
 			switchPhaseGraphic();
 			switchPlayerGraphic();
-			System.out.println(game.firstPhaseEnded());
 			return;
-		} else if (game.firstPhaseEnded()) {
-			System.out.println("CAMBIO FASE");
+		} else {
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
-			if(game.getGamePhase().equals(GAME_PHASE.DRAFT))
-				System.out.println("bella");
 			switchPhaseGraphic();
 			switchPlayerGraphic();
 		}

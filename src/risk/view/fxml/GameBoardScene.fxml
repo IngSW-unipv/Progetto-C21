@@ -136,7 +136,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="phaseSwitch" mnemonicParsing="false" onMousePressed="#handlePhaseSwitchPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100; -fx-font-family: &quot;Arial Black&quot;; -fx-font-size: 18; -fx-text-fill: white; -fx-background-color: red;" text="&gt;&gt;" />
+            <Button fx:id="phaseSwitch" focusTraversable="false" mnemonicParsing="false" onMousePressed="#handlePhaseSwitchPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100; -fx-font-family: &quot;Arial Black&quot;; -fx-font-size: 18; -fx-text-fill: white; -fx-base: red;" text="&gt;&gt;" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" />
