@@ -10,7 +10,7 @@
 09 4 FDC10A 0150 0260 3 07 08 10 CentralAmerica NorthAmerica
 10 3 7BB19F 0205 0310 3 09 11 12 Venezuela SouthAmerica
 11 3 EFF2C5 0260 0375 4 10 12 13 34 Brazil SouthAmerica
-12 4 B4C7A1 0169 0402 3 10 11 13 Peru' SouthAmerica
+12 4 B4C7A1 0169 0402 3 10 11 13 Peru SouthAmerica
 13 2 24C5BE 0185 0470 2 11 12 Argentina SouthAmerica
 14 2 EA979D 0470 0090 3 03 15 16 Iceland Europe
 15 3 D09E96 0525 0142 4 14 16 17 20 Scandinavia Europe
