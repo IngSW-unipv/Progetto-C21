@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -100,25 +99,25 @@ public class GameController implements Initializable {
 		
 		
 		
-		// lambda su ogni territorio -> studiare un metodo migliore perchè tutte le espressioni eseguono lo stesso codice, cambia solo il nome dello stato
-		alaska.setOnMousePressed((event) -> {
-			Territory t = game.getTerritory("alaska");
-			if(game.getCurrentTurn().equals(t.getOwner()))
-			t.addTanks(1);
-			updateTerritoriesGraphic();
-		});
-		northWestTerritory.setOnMousePressed((event) -> {
-			Territory t = game.getTerritory("northWestTerritory");
-			if(game.getCurrentTurn().equals(t.getOwner()))
-			t.addTanks(1);
-			updateTerritoriesGraphic();
-		});
-		greenland.setOnMousePressed((event) -> {
-			Territory t = game.getTerritory("greenland");
-			if(game.getCurrentTurn().equals(t.getOwner()))
-			t.addTanks(1);
-			updateTerritoriesGraphic();
-		});
+//		// lambda su ogni territorio -> studiare un metodo migliore perchè tutte le espressioni eseguono lo stesso codice, cambia solo il nome dello stato
+//		alaska.setOnMousePressed((event) -> {
+//			Territory t = game.getTerritory("alaska");
+//			if(game.getCurrentTurn().equals(t.getOwner()))
+//			t.addTanks(1);
+//			updateTerritoriesGraphic();
+//		});
+//		northWestTerritory.setOnMousePressed((event) -> {
+//			Territory t = game.getTerritory("northWestTerritory");
+//			if(game.getCurrentTurn().equals(t.getOwner()))
+//			t.addTanks(1);
+//			updateTerritoriesGraphic();
+//		});
+//		greenland.setOnMousePressed((event) -> {
+//			Territory t = game.getTerritory("greenland");
+//			if(game.getCurrentTurn().equals(t.getOwner()))
+//			t.addTanks(1);
+//			updateTerritoriesGraphic();
+//		});
 	}
 
 
@@ -190,7 +189,48 @@ public class GameController implements Initializable {
 	@FXML
 	private void handleSVGPathPressed(MouseEvent event) {
 		event.consume();
-		System.out.println(((SVGPath) event.getSource()).getId());
+
+		Territory t = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
+
+		if (game.getCurrentTurn().equals(t.getOwner())) {
+			if (t.getOwner().getBonusTanks() > 0) {
+			t.getOwner().placeTank(1);
+			t.addTanks(1);
+			System.out.println(t.getOwner().getBonusTanks());
+
+		}
+	}
+
+		if (game.getCurrentTurn().getBonusTanks() == 0)
+			System.out.println("success");
+
+		updateTerritoriesGraphic();
+
+//		System.out.println(((SVGPath) event.getSource()).getId());
+//
+//		Territory temp;
+//
+//		for (Iterator<Territory> it = game.getTerritories().iterator(); it.hasNext();) {
+//			temp = it.next();
+//			if (temp.getName().equals(territoryText.getText())) { // se il territorio ha lo stesso nome della label
+//				if (temp.getOwner().equals(game.getCurrentTurn())) { // se il territorio � del player del turno corrente
+//					// place tank
+//					temp.getOwner().placeTank(1);
+//					// add territory tanks
+//					game.addTerritoryTanks(temp);
+//					break;
+//				} else {
+//					System.out.println(territoryText.getText() + " is not owned by Current Player");
+//					System.out.println(temp.getOwner().getName() + " is the owner");
+//					break;
+//				}
+//			}
+//		}
+//		if (game.getCurrentTurn().getBonusTanks() == 0)
+//			System.out.println("success");
+//
+//		System.out.println(((SVGPath) event.getSource()).getId());
+
 	}
 
 
@@ -272,7 +312,7 @@ public class GameController implements Initializable {
 	}
 	
 	private void switchPhaseGraphic() {
-		ArrayList<Rectangle> rectangles =	getRectangles(phaseGraphic);
+		ArrayList<Rectangle> rectangles = getRectangles(phaseGraphic);
 		switch(game.getGamePhase()) {
 			case DRAFT:
 				for(int i = 0; i < rectangles.size(); i++) {

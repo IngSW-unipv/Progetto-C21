@@ -42,7 +42,9 @@ public class RisikoGame {
 		//setto territori, continenti, missioni e carte leggendole da file
 		territories = fileHandler.addConfinanti(fileHandler.genTerritories(terrFile), terrFile);
 		continents = fileHandler.genContinents(continentsFile);
-		for (Continent c : continents) { setContinent(c); }
+		for (Continent c : continents) {
+			setContinent(c);
+		}
 		missions = fileHandler.genMissions(missionsFile, continents);
 		giveMissions();
 		cards = fileHandler.genCards(territories, terrFile);
@@ -118,35 +120,36 @@ public class RisikoGame {
 		}
 	}
 	
-//	/**
-//	 * Returns the total amount of bonus tanks
-//	 * @return s
-//	 */
-//	public int getBonusTanksSum() {
-//		int s = 0;
-//		for(Player p : players) {
-//			s += p.getBonusTanks();
-//		}
-//		return s;
-//	}
-//	
-//	/**
-//	 * Determines if the first phase ended
-//	 * @return boolean
-//	 */
-//	public boolean firstPhaseEnded() {
-//		
-//		if(getBonusTanksSum() == 0) {
-//			for(Player p : players) {
-//				if(p.getBonusTanks() != 0) {
-//					return false;
-//				}
-//			}
-//			return true;
-//		}
-//		return false;
-//	}
-//	
+	/**
+	 * Returns the total amount of bonus tanks
+	 * 
+	 * @return s
+	 */
+	public int getBonusTanksSum() {
+		int s = 0;
+		for (Player p : players) {
+			s += p.getBonusTanks();
+		}
+		return s;
+	}
+
+	/**
+	 * Determines if the first phase ended
+	 * 
+	 * @return boolean
+	 */
+	public boolean firstPhaseEnded() {
+
+		if (getBonusTanksSum() == 0) {
+			for (Player p : players) {
+				if (p.getBonusTanks() != 0) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 
 	
 	/**
