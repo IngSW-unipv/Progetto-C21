@@ -77,7 +77,7 @@ public class GameController implements Initializable {
 	
 	static RisikoGame game;
 	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
-	private static int counterConsecutiveClicks = 0;
+	private int counterConsecutiveClicks = 0;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ArrayList<Player> playersList = PlayersList.getPlayers();
@@ -213,9 +213,10 @@ public class GameController implements Initializable {
 
 			}
 		}
-		if (counterConsecutiveClicks >= 3) {
+		if (counterConsecutiveClicks >= 3 && game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
 			counterConsecutiveClicks = 0;
 			nextTurn();
+			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 		}
 
 		updateTerritoriesGraphic();
@@ -258,9 +259,11 @@ public class GameController implements Initializable {
 	@FXML
 	private void handlePhaseSwitchPressed(MouseEvent event) {
 		/* DA SISTEMARE */
+		if (game.firstPhaseEnded()) {
 		event.consume();
 		nextPhase();
 	}
+}
 	
 	/**
 	 * Switches the game turn to the next one
@@ -338,7 +341,7 @@ public class GameController implements Initializable {
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
 			if(game.getGamePhase().equals(GAME_PHASE.DRAFT))
-				nextTurn();
+				System.out.println("bella");
 			switchPhaseGraphic();
 			switchPlayerGraphic();
 		}
