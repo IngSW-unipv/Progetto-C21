@@ -112,7 +112,7 @@ public class RisikoGame {
 			
 			break;
 		case FORTIFY:
-			nextTurn();
+
 			giveBonus(currentTurn);
 			gamePhase = GAME_PHASE.DRAFT;
 			

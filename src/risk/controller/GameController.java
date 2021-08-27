@@ -337,6 +337,7 @@ public class GameController implements Initializable {
 			break;
 		case FORTIFY:
 			System.out.println("fortify");
+			nextTurn();
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
@@ -404,6 +405,7 @@ public class GameController implements Initializable {
 					else
 						rectangles.get(i).setFill(Color.TRANSPARENT);
 				}
+				phaseSwitch.setText(">>");
 				break;
 			case FORTIFY:
 				for(int i = 0; i < rectangles.size(); i++) {
@@ -412,6 +414,7 @@ public class GameController implements Initializable {
 					else
 						rectangles.get(i).setFill(Color.TRANSPARENT);
 				}
+				phaseSwitch.setText(">>");
 				break;
 			default:
 				for(int i = 0; i < rectangles.size(); i++) {
