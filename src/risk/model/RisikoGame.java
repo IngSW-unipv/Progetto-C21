@@ -141,11 +141,11 @@ public class RisikoGame {
 	public boolean firstPhaseEnded() {
 
 		if (getBonusTanksSum() == 0) {
-			for (Player p : players) {
-				if (p.getBonusTanks() != 0) { // perchè il controllo viene fatto due volte???
-					return false;
-				}
-			}
+//			for (Player p : players) {
+//				if (p.getBonusTanks() != 0) { // perchè il controllo viene fatto due volte???
+//					return false;
+//				}
+//			}
 			return true;
 		}
 		return false;

@@ -185,20 +185,16 @@ public class GameController implements Initializable {
 					phaseSwitch.setTextFill(Color.WHITE);
 				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 
-
-				// if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
 						counterConsecutiveClicks = 0;
 						nextPhase();
 						enter = false;
 					}
-					// }
-
 
 			}
 		}
 		
-		if (counterConsecutiveClicks >= 3) { // && game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
+		if (counterConsecutiveClicks >= 3) {
 				counterConsecutiveClicks = 0;
 				if (enter) {
 					nextTurn();
@@ -206,7 +202,6 @@ public class GameController implements Initializable {
 				}
 			}
 		
-			// }
 
 			break;
 		case DRAFT:
@@ -251,7 +246,6 @@ public class GameController implements Initializable {
 		/* DA SISTEMARE */
 		event.consume();
 		if (!game.getGamePhase().equals(GAME_PHASE.FIRSTTURN) && game.getCurrentTurn().getBonusTanks() == 0) {
-			System.out.println("premuto");
 			nextPhase();
 		}
 	}
@@ -265,16 +259,6 @@ public class GameController implements Initializable {
 		game.nextTurn();
 		switchPhaseGraphic();
 		switchPlayerGraphic();
-//		if(game.getGamePhase() == GAME_PHASE.FIRSTTURN) {	// circlo per il first turn
-//			int i = 0;
-//			while(game.getCurrentTurn().getBonusTanks() == 0) {
-//				if(i == game.getPlayers().length) {
-//					break;
-//				}
-//				game.nextTurn();
-//				i++;
-//			}
-//		}
 		
 		// Ogni volta che il turno passa ad un altro giocatore, il suo nome viene sottolineato
 		Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
@@ -321,7 +305,6 @@ public class GameController implements Initializable {
 			}
 			break;
 		case DRAFT:
-			System.out.println("draft");
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
@@ -329,14 +312,12 @@ public class GameController implements Initializable {
 			switchPlayerGraphic();
 			break;
 		case ATTACK:
-			System.out.println("attack");
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
 			switchPhaseGraphic();
 			switchPlayerGraphic();
 			break;
 		case FORTIFY:
-			System.out.println("fortify");
 			nextTurn();
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
@@ -345,44 +326,6 @@ public class GameController implements Initializable {
 			switchPlayerGraphic();
 			break;
 		}
-
-//		if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
-//			if(!game.firstPhaseEnded()) {
-//				game.nextTurn();
-//
-//				if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
-//					phaseSwitch.setTextFill(Color.BLACK);
-//				else
-//					phaseSwitch.setTextFill(Color.WHITE);
-//				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-//
-//				switchPhaseGraphic();
-//				switchPlayerGraphic();
-//				return;
-//			} else {
-//				game.nextPhase();			
-//				phaseText.setText(game.getGamePhase().toString());
-//				switchPhaseGraphic();
-//				switchPlayerGraphic();
-//			}
-//		}else {
-//			switch(game.getGamePhase()) {
-//			case FORTIFY:
-//				nextPhase.setText("POSIZIONAMENTO");
-//				endTurn.setDisable(true);
-//				nextPhase.setDisable(true);
-//				break;
-//			case DRAFT:
-//				nextPhase.setText("SPOSTAMENTO");
-//				nextPhase.setDisable(false);
-//				endTurn.setDisable(true);
-//				break;
-//			case ATTACK:
-//				nextPhase.setDisable(true);
-//				endTurn.setDisable(false);
-//				break;
-//		}
-//		}
 		
 
 	}
