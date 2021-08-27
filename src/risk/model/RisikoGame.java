@@ -112,7 +112,7 @@ public class RisikoGame {
 			
 			break;
 		case FORTIFY:
-			
+			nextTurn();
 			giveBonus(currentTurn);
 			gamePhase = GAME_PHASE.DRAFT;
 			
@@ -555,7 +555,8 @@ public class RisikoGame {
     
 	public void giveBonus(Player pl) {
 
-		pl.giveBonusTanks((int)Math.floor(pl.getTerritories()/3));	
+		pl.giveBonusTanks((int) Math.floor(pl.getTerritories() / 3));
+//		pl.giveBonusTanks((int)pl.getTerritories()/3);	
 		
 		for(Continent c : continents) {
 			if(isOwned(c)) {

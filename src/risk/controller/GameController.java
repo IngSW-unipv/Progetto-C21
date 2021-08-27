@@ -98,13 +98,6 @@ public class GameController implements Initializable {
 		switchPlayerGraphic();
 		
 		
-//		// lambda su ogni territorio -> studiare un metodo migliore perchè tutte le espressioni eseguono lo stesso codice, cambia solo il nome dello stato
-//		alaska.setOnMousePressed((event) -> {
-//			Territory t = game.getTerritory("alaska");
-//			if(game.getCurrentTurn().equals(t.getOwner()))
-//			t.addTanks(1);
-//			updateTerritoriesGraphic();
-//		});
 	}
 
 
@@ -178,7 +171,8 @@ public class GameController implements Initializable {
 		event.consume();
 		boolean enter = true;
 		Territory t = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
-
+		switch (game.getGamePhase()) {
+		case FIRSTTURN:
 		if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
 			if (t.getOwner().getBonusTanks() > 0) {
 				t.getOwner().placeTank(1);
@@ -191,51 +185,56 @@ public class GameController implements Initializable {
 					phaseSwitch.setTextFill(Color.WHITE);
 				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 
-				// creare un metodo da qui in poi
-				if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
+
+				// if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
-						nextPhase(); // problema che il primo va nella prossima fase e fa cambiare turno e quindi non devo farlo cambiare sotto
+						counterConsecutiveClicks = 0;
+						nextPhase();
 						enter = false;
 					}
+					// }
+
+
+			}
+		}
+		
+		if (counterConsecutiveClicks >= 3) { // && game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
+				counterConsecutiveClicks = 0;
+				if (enter) {
+					nextTurn();
+					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 				}
-
-
 			}
-		}
-		if (counterConsecutiveClicks >= 3 && game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
-			counterConsecutiveClicks = 0;
-			if (enter) {
-				nextTurn();
-				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-			}
-		}
+		
+			// }
 
+			break;
+		case DRAFT:
+			if (game.getCurrentTurn().equals(t.getOwner())) {
+				if (t.getOwner().getBonusTanks() > 0) {
+					t.getOwner().placeTank(1);
+					t.addTanks(1);
+
+					if (game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
+						phaseSwitch.setTextFill(Color.BLACK);
+					else
+						phaseSwitch.setTextFill(Color.WHITE);
+					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+
+					if (game.getCurrentTurn().getBonusTanks() == 0) {
+						nextPhase();
+						enter = false;
+					}
+
+				}
+			}
+
+			break;
+
+		}
 		updateTerritoriesGraphic();
 
-//		System.out.println(((SVGPath) event.getSource()).getId());
-//
-//		Territory temp;
-//
-//		for (Iterator<Territory> it = game.getTerritories().iterator(); it.hasNext();) {
-//			temp = it.next();
-//			if (temp.getName().equals(territoryText.getText())) { // se il territorio ha lo stesso nome della label
-//				if (temp.getOwner().equals(game.getCurrentTurn())) { // se il territorio � del player del turno corrente
-//					// place tank
-//					temp.getOwner().placeTank(1);
-//					// add territory tanks
-//					game.addTerritoryTanks(temp);
-//					break;
-//				} else {
-//					System.out.println(territoryText.getText() + " is not owned by Current Player");
-//					System.out.println(temp.getOwner().getName() + " is the owner");
-//					break;
-//				}
-//			}
-//		}
-//		if (game.getCurrentTurn().getBonusTanks() == 0)
-//			System.out.println("success");
-//
-//		System.out.println(((SVGPath) event.getSource()).getId());
+
 
 	}
 
@@ -251,8 +250,7 @@ public class GameController implements Initializable {
 	private void handlePhaseSwitchPressed(MouseEvent event) {
 		/* DA SISTEMARE */
 		event.consume();
-		if (!game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
-			// non entra mai qua pur cambiando fase sotto e non so perche'???
+		if (!game.getGamePhase().equals(GAME_PHASE.FIRSTTURN) && game.getCurrentTurn().getBonusTanks() == 0) {
 			System.out.println("premuto");
 			nextPhase();
 		}
@@ -299,7 +297,75 @@ public class GameController implements Initializable {
 	 * Switches the game phase to the next one
 	 */
 	public void nextPhase() {
-//		switch(game.getGamePhase()) {
+
+		switch (game.getGamePhase()) {
+		case FIRSTTURN:
+			if (!game.firstPhaseEnded()) {
+				game.nextTurn();
+
+				if (game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
+					phaseSwitch.setTextFill(Color.BLACK);
+				else
+					phaseSwitch.setTextFill(Color.WHITE);
+				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+
+				switchPhaseGraphic();
+				switchPlayerGraphic();
+				return;
+			} else {
+				game.nextPhase();
+				phaseText.setText(game.getGamePhase().toString());
+				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+				switchPhaseGraphic();
+				switchPlayerGraphic();
+			}
+			break;
+		case DRAFT:
+			System.out.println("draft");
+			game.nextPhase();
+			phaseText.setText(game.getGamePhase().toString());
+			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+			switchPhaseGraphic();
+			switchPlayerGraphic();
+			break;
+		case ATTACK:
+			System.out.println("attack");
+			game.nextPhase();
+			phaseText.setText(game.getGamePhase().toString());
+			switchPhaseGraphic();
+			switchPlayerGraphic();
+			break;
+		case FORTIFY:
+			System.out.println("fortify");
+			game.nextPhase();
+			phaseText.setText(game.getGamePhase().toString());
+			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+			switchPhaseGraphic();
+			switchPlayerGraphic();
+			break;
+		}
+
+//		if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN)) {
+//			if(!game.firstPhaseEnded()) {
+//				game.nextTurn();
+//
+//				if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
+//					phaseSwitch.setTextFill(Color.BLACK);
+//				else
+//					phaseSwitch.setTextFill(Color.WHITE);
+//				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+//
+//				switchPhaseGraphic();
+//				switchPlayerGraphic();
+//				return;
+//			} else {
+//				game.nextPhase();			
+//				phaseText.setText(game.getGamePhase().toString());
+//				switchPhaseGraphic();
+//				switchPlayerGraphic();
+//			}
+//		}else {
+//			switch(game.getGamePhase()) {
 //			case FORTIFY:
 //				nextPhase.setText("POSIZIONAMENTO");
 //				endTurn.setDisable(true);
@@ -315,25 +381,9 @@ public class GameController implements Initializable {
 //				endTurn.setDisable(false);
 //				break;
 //		}
+//		}
 		
-		if(game.getGamePhase().equals(GAME_PHASE.FIRSTTURN) && !game.firstPhaseEnded()) {
-			game.nextTurn();
-			
-			if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
-				phaseSwitch.setTextFill(Color.BLACK);
-			else
-				phaseSwitch.setTextFill(Color.WHITE);
-			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-			
-			switchPhaseGraphic();
-			switchPlayerGraphic();
-			return;
-		} else {
-			game.nextPhase();
-			phaseText.setText(game.getGamePhase().toString());
-			switchPhaseGraphic();
-			switchPlayerGraphic();
-		}
+
 	}
 	
 	private void switchPhaseGraphic() {
