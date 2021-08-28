@@ -75,6 +75,10 @@ public class GameController implements Initializable {
 					iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, ukraine, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
 					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
 	
+	@FXML
+	private Label TerritoryAttackerLabel;
+	private Label TerritoryDefenderLabel;
+	
 	static RisikoGame game;
 	private static Territory attacker;
 	private static Territory defender;
@@ -252,8 +256,10 @@ public class GameController implements Initializable {
 				
 				attacker = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
 				System.out.println("atck :"+attacker.getName());
+				
 				try {
 					windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", false);
+					TerritoryAttackerLabel.setText(attacker.getName());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
