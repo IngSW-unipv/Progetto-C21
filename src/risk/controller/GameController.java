@@ -87,6 +87,7 @@ public class GameController implements Initializable {
 		try {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
 			phaseText.setText(""+game.getGamePhase());
+			phaseText.setText("FIRST TURN");
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
