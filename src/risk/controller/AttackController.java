@@ -1,12 +1,14 @@
 package risk.controller;
 
 import risk.model.DiceShaker;
+import java.net.URL;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
-import javax.print.DocFlavor.URL;
+
 
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
@@ -14,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,10 +33,28 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import risk.model.Territory;
 
-public class AttackController {
+public class AttackController implements Initializable {
 	DiceShaker attack;
 	DiceShaker defende;
+	
+	@FXML
+	private Label TerritoryAttackerLabel;
+	private Label TerritoryDefenderLabel;
+	
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
 		
+		
+		String attackername = GameController.getAttacker().getName();
+		String defendername = GameController.getDefender().getName();
+		
+		TerritoryAttackerLabel.setText(attackername);
+		TerritoryAttackerLabel.setText(defendername);
+		
+		
+	}
 //	@FXML
 //	private Button attackButton;
 //	@FXML
@@ -387,6 +408,8 @@ public class AttackController {
 //	 }
 //
 //
+
+	
 }
 
 //prova2

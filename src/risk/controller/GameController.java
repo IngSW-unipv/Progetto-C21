@@ -76,6 +76,25 @@ public class GameController implements Initializable {
 					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
 	
 	static RisikoGame game;
+	private static Territory attacker;
+	private static Territory defender;
+	
+	private static GameController instance;
+		
+		/**
+	     * Sets the instance to this instance of GameSceneController
+	     */
+		public GameController() {
+			instance = this;
+		}
+		
+		/**
+		 * Instance getter
+		 * @return instance
+		 */
+		public static GameController getInstance() {
+			return instance;
+		}
 	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
 	private int counterConsecutiveClicks = 0;
 	@Override
@@ -176,8 +195,8 @@ public class GameController implements Initializable {
 		case FIRSTTURN:
 		if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
 			if (t.getOwner().getBonusTanks() > 0) {
-				t.getOwner().placeTank(1);
-				t.addTanks(1);
+				t.getOwner().placeTank(21); //cambia metti 1 al posto di 21
+				t.addTanks(21); //cambia metti 1 al posto di 21
 				counterConsecutiveClicks++;
 
 				if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
@@ -226,7 +245,26 @@ public class GameController implements Initializable {
 			}
 
 			break;
-
+			
+		case ATTACK:
+			
+			if ( game.getCurrentTurn().equals(t.getOwner())) {
+				
+				attacker = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
+				System.out.println("atck :"+attacker.getName());
+				try {
+					windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", false);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+			
+			if (! game.getCurrentTurn().equals(t.getOwner())) {
+				defender = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
+				System.out.println("def: "+defender.getName());
+				
+			}
 		}
 		updateTerritoriesGraphic();
 
@@ -439,6 +477,14 @@ public class GameController implements Initializable {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
+	}
+	
+	public static Territory getAttacker() {
+		return attacker;
+	}
+	
+	public static Territory getDefender() {
+		return defender;
 	}
 	
 	/* Method called when exit button is pressed */

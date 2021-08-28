@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="550.0" stylesheets="@../css/AttackStyleSheet.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<AnchorPane prefHeight="400.0" prefWidth="550.0" stylesheets="@../css/AttackStyleSheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="-98.0" layoutY="-105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,7 +21,7 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" style="-fx-font-family: &quot;Arial Black&quot;;" text="ATTACKER" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <Label text="Greenland" />
+                              <Label fx:id="TerritoryAttackerLabel" text="Greenland" />
                            </graphic>
                            <font>
                               <Font size="16.0" />
@@ -53,7 +52,7 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" text="YOUR TANKS ON THIS TERRITORY ARE:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <Label style="-fx-font-family: &quot;Arial BLack&quot;;" text="23">
+                              <Label fx:id="TerritoryAttackerTanksNumber" style="-fx-font-family: &quot;Arial BLack&quot;;" text="23">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -88,7 +87,7 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" style="-fx-font-family: &quot;Arial Black&quot;;" text="DEFENDER" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <Label text="Greenland" />
+                              <Label fx:id="TerritoryDefenderLabel" text="Greenland" />
                            </graphic>
                            <font>
                               <Font size="16.0" />
@@ -119,7 +118,7 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" text="OPPONENT'S TANKS ON THIS TERRITORY ARE:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <Label style="-fx-font-family: &quot;Arial BLack&quot;;" text="23">
+                              <Label fx:id="TerritoryDefenderTanksNumber" style="-fx-font-family: &quot;Arial BLack&quot;;" text="23">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
