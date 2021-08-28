@@ -75,32 +75,30 @@ public class GameController implements Initializable {
 					iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, ukraine, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
 					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
 	
-	@FXML
-	private Label TerritoryAttackerLabel;
-	private Label TerritoryDefenderLabel;
+	
+	private Territory territoryAtk = null, territoryDef = null;
 	
 	static RisikoGame game;
-	private static Territory attacker;
-	private static Territory defender;
-	
 	private static GameController instance;
-		
-		/**
-	     * Sets the instance to this instance of GameSceneController
-	     */
-		public GameController() {
-			instance = this;
-		}
-		
-		/**
-		 * Instance getter
-		 * @return instance
-		 */
-		public static GameController getInstance() {
-			return instance;
-		}
+
+	/**
+	 * Sets the instance to this instance of GameSceneController
+	 */
+	public GameController() {
+		instance = this;
+	}
+
+	/**
+	 * Instance getter
+	 * @return instance
+	 */
+	public static GameController getInstance() {
+		return instance;
+	}
+	
 	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
 	private int counterConsecutiveClicks = 0;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ArrayList<Player> playersList = PlayersList.getPlayers();
@@ -194,20 +192,23 @@ public class GameController implements Initializable {
 	private void handleSVGPathPressed(MouseEvent event) {
 		event.consume();
 		boolean enter = true;
+		
 		Territory t = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
+
+		
 		switch (game.getGamePhase()) {
 		case FIRSTTURN:
-		if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
-			if (t.getOwner().getBonusTanks() > 0) {
-				t.getOwner().placeTank(21); //cambia metti 1 al posto di 21
-				t.addTanks(21); //cambia metti 1 al posto di 21
-				counterConsecutiveClicks++;
+			if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
+				if (t.getOwner().getBonusTanks() > 0) {
+					t.getOwner().placeTank(21); //cambia metti 1 al posto di 21
+					t.addTanks(21); //cambia metti 1 al posto di 21
+					counterConsecutiveClicks++;
 
-				if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
-					phaseSwitch.setTextFill(Color.BLACK);
-				else
-					phaseSwitch.setTextFill(Color.WHITE);
-				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+					if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
+						phaseSwitch.setTextFill(Color.BLACK);
+					else
+						phaseSwitch.setTextFill(Color.WHITE);
+					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
 						counterConsecutiveClicks = 0;
@@ -215,17 +216,17 @@ public class GameController implements Initializable {
 						enter = false;
 					}
 
+				}
 			}
-		}
-		
-		if (counterConsecutiveClicks >= 3) {
+
+			if (counterConsecutiveClicks >= 3) {
 				counterConsecutiveClicks = 0;
 				if (enter) {
 					nextTurn();
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 				}
 			}
-		
+
 
 			break;
 		case DRAFT:
@@ -249,34 +250,131 @@ public class GameController implements Initializable {
 			}
 
 			break;
-			
+
 		case ATTACK:
-			
-			if ( game.getCurrentTurn().equals(t.getOwner())) {
-				
-				attacker = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
-				System.out.println("atck :"+attacker.getName());
-				
-				try {
-					windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", false);
-					TerritoryAttackerLabel.setText(attacker.getName());
-				} catch (IOException e) {
-					e.printStackTrace();
+
+			/*
+			 * 1) scegliere un proprio territorio che abbia >1 tank
+			 * 2) scegliere un territorio da attaccare che sia di un avversario e che sia confinante con il nostro territorio 
+			 */
+			SVGPath svg = ((SVGPath) event.getSource());
+
+			if(territoryAtk == null) {
+				/* 
+				 * una volta scelto il territorio attaccante:
+				 * 		1) settare il territorio selezionato graficamente (+10% darker)
+				 * 		2) permettere la scelta del territorio da attaccare
+				 */
+				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
+					territoryAtk = t;
+
+					// colora il territorio seleszionato
+					switch(svg.getStyleClass().get(0)) {
+					case "northAmerica":
+						svg.setStyle("-fx-fill: #CC6D47");
+						break;
+					case "southAmerica":
+						svg.setStyle("-fx-fill: #7AA5B3");
+						break;
+					case "europa":
+						svg.setStyle("-fx-fill: #A58CA5");
+						break;
+					case "oceania":
+						svg.setStyle("-fx-fill: #CCA786");
+						break;
+					case "africa":
+						svg.setStyle("-fx-fill: #AB8554");
+						break;
+					case "asia":
+						svg.setStyle("-fx-fill: #5DBB5D");
+						break;
+					}
+					
 				}
-				
+
+			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territoryAtk.getName().toLowerCase())) {
+				territoryAtk = null;
+
+				switch(svg.getStyleClass().get(0)) {
+				case "northAmerica":
+					svg.setStyle("");
+					svg.getStyleClass().clear();
+					svg.getStyleClass().add("northAmerica");
+					break;
+				case "southAmerica":
+					svg.setStyle("");
+					svg.getStyleClass().clear();
+					svg.getStyleClass().add("southAmerica");
+					break;
+				case "europa":
+					svg.setStyle("");
+					svg.getStyleClass().clear();
+					svg.getStyleClass().add("europa");
+					break;
+				case "oceania":
+					svg.setStyle("");
+					svg.getStyleClass().clear();
+					svg.getStyleClass().add("oceania");
+					break;
+				case "africa":
+					svg.setStyle("");
+					svg.getStyleClass().clear();
+					svg.getStyleClass().add("africa");
+					break;
+				case "asia":
+					svg.setStyle("");
+					svg.getStyleClass().clear();
+					svg.getStyleClass().add("asia");
+					break;
+				}
+			}
+
+			if(territoryAtk != null && territoryDef == null) {
+
+				if(!game.getCurrentTurn().equals(t.getOwner()) && territoryAtk.isConfinante(t)) {
+					territoryDef = t;
+					
+					// colora il territorio seleszionato
+					switch(svg.getStyleClass().get(0)) {
+					case "northAmerica":
+						svg.setStyle("-fx-fill: #CC6D47");
+						break;
+					case "southAmerica":
+						svg.setStyle("-fx-fill: #7AA5B3");
+						break;
+					case "europa":
+						svg.setStyle("-fx-fill: #A58CA5");
+						break;
+					case "oceania":
+						svg.setStyle("-fx-fill: #CCA786");
+						break;
+					case "africa":
+						svg.setStyle("-fx-fill: #AB8554");
+						break;
+					case "asia":
+						svg.setStyle("-fx-fill: #5DBB5D");
+						break;
+					}
+					
+					// apri schemata attacco
+					try {
+						windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
 			}
 			
-			if (! game.getCurrentTurn().equals(t.getOwner())) {
-				defender = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
-				System.out.println("def: "+defender.getName());
-				
-			}
 		}
+
 		updateTerritoriesGraphic();
-
-
-
 	}
+	
+	private void setSelectedTerritoryGraphic(SVGPath svg) {
+		
+	}
+		
 
 
 	
@@ -485,12 +583,20 @@ public class GameController implements Initializable {
 //		}
 	}
 	
-	public static Territory getAttacker() {
-		return attacker;
+	public Territory getAttacker() {
+		return territoryAtk;
 	}
 	
-	public static Territory getDefender() {
-		return defender;
+	public Territory getDefender() {
+		return territoryDef;
+	}
+	
+	public void setAttacker(Territory t) {
+		territoryAtk = t;
+	}
+	
+	public void setDefender(Territory t) {
+		territoryDef = t;
 	}
 	
 	/* Method called when exit button is pressed */

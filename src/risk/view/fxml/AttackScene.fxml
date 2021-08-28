@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="550.0" stylesheets="@../css/AttackStyleSheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="550.0" stylesheets="@../css/AttackStyleSheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="risk.controller.AttackController">
    <children>
       <HBox layoutX="-98.0" layoutY="-105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,7 +21,7 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" style="-fx-font-family: &quot;Arial Black&quot;;" text="ATTACKER" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <Label fx:id="TerritoryAttackerLabel" text="Greenland" />
+                              <Label fx:id="territoryAtkLabel" text="Greenland" />
                            </graphic>
                            <font>
                               <Font size="16.0" />
@@ -52,7 +52,7 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" text="YOUR TANKS ON THIS TERRITORY ARE:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <Label fx:id="TerritoryAttackerTanksNumber" style="-fx-font-family: &quot;Arial BLack&quot;;" text="23">
+                              <Label fx:id="attackerTanksLabel" style="-fx-font-family: &quot;Arial BLack&quot;;" text="23">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -68,13 +68,13 @@
                      <children>
                         <HBox alignment="CENTER" spacing="40.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ToggleButton focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-base: rgb(195,0,1); -fx-text-fill: white;" text="1" textAlignment="CENTER">
+                              <ToggleButton fx:id="oneButton" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-base: rgb(195,0,1); -fx-text-fill: white;" text="1" textAlignment="CENTER">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="attacker" />
                                  </toggleGroup>
                               </ToggleButton>
-                              <ToggleButton focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-base: rgb(195,0,1); -fx-text-fill: white;" text="2" textAlignment="CENTER" toggleGroup="$attacker" />
-                              <ToggleButton focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-base: rgb(195,0,1); -fx-text-fill: white;" text="3" textAlignment="CENTER" toggleGroup="$attacker" />
+                              <ToggleButton fx:id="twoButton" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-base: rgb(195,0,1); -fx-text-fill: white;" text="2" textAlignment="CENTER" toggleGroup="$attacker" />
+                              <ToggleButton fx:id="threeButton" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-base: rgb(195,0,1); -fx-text-fill: white;" text="3" textAlignment="CENTER" toggleGroup="$attacker" />
                            </children>
                         </HBox>
                      </children>
@@ -87,7 +87,7 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" style="-fx-font-family: &quot;Arial Black&quot;;" text="DEFENDER" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <Label fx:id="TerritoryDefenderLabel" text="Greenland" />
+                              <Label fx:id="territoryDefLabel" text="Greenland" />
                            </graphic>
                            <font>
                               <Font size="16.0" />
@@ -118,7 +118,7 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" text="OPPONENT'S TANKS ON THIS TERRITORY ARE:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <Label fx:id="TerritoryDefenderTanksNumber" style="-fx-font-family: &quot;Arial BLack&quot;;" text="23">
+                              <Label fx:id="defenderTanksLabel" style="-fx-font-family: &quot;Arial BLack&quot;;" text="23">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -134,8 +134,8 @@
                      <children>
                         <HBox alignment="CENTER" spacing="40.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-base: orange; -fx-text-fill: white;" text="ATTACK" />
-                              <Button focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-base: orange; -fx-text-fill: white;" text="CANCEL" />
+                              <Button fx:id="attackButton" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-base: orange; -fx-text-fill: white;" text="ATTACK" />
+                              <Button fx:id="cancelButton" focusTraversable="false" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="30.0" prefWidth="80.0" style="-fx-base: orange; -fx-text-fill: white;" text="CANCEL" />
                            </children>
                         </HBox>
                      </children>
