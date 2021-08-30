@@ -195,6 +195,32 @@ public class RisikoGame {
 	} 
 	
 	/**
+	 * Makes a battle between 2 players
+	 * 
+	 * @param atkResults are the dice of the attacker
+	 * @param defResults are the dice of the defender
+	 * @param atk        is the number of attacking dice
+	 * @param def        is the number of defending dice
+	 */
+//	public void battle(int[] atkResults, int[] defResults, int atk, int def) {
+//		
+//		int n = Math.min(atk, def);
+//		
+//		for(int i=0; i < n; i++) {
+//			if(atkResults[i] > defResults[i]) {
+//				getTerritory(GameSceneController.territory2).removeTanks(1);
+//				getPlayer(GameSceneController.territory2.getOwner()).removeTanks(1);
+//			} else {
+//				getTerritory(GameSceneController.territory1).removeTanks(1);
+//				currentTurn.removeTanks(1);
+//			}
+//		}
+//		if(getPlayer(GameSceneController.territory2.getOwner()).getTanks()==0) {
+//			getPlayer(GameSceneController.territory2.getOwner()).setEliminated(true);
+//		}
+//	}
+//	
+	/**
 	 * A player conquers a territory
 	 * @param t1 is the attacking territory
 	 * @param t2 is the defending territory
