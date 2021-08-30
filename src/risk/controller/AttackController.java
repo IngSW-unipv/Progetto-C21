@@ -122,7 +122,6 @@ public class AttackController implements Initializable {
 		GameController.getInstance().setAttacker(null);
 		GameController.getInstance().setDefender(null);
 		// update grafico
-
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
     }

@@ -267,66 +267,12 @@ public class GameController implements Initializable {
 				 */
 				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
 					territoryAtk = t;
-
-					// colora il territorio seleszionato
-					switch(svg.getStyleClass().get(0)) {
-					case "northAmerica":
-						svg.setStyle("-fx-fill: #CC6D47");
-						break;
-					case "southAmerica":
-						svg.setStyle("-fx-fill: #7AA5B3");
-						break;
-					case "europa":
-						svg.setStyle("-fx-fill: #A58CA5");
-						break;
-					case "oceania":
-						svg.setStyle("-fx-fill: #CCA786");
-						break;
-					case "africa":
-						svg.setStyle("-fx-fill: #AB8554");
-						break;
-					case "asia":
-						svg.setStyle("-fx-fill: #5DBB5D");
-						break;
-					}
-					
+					setSelectedTerritoryGraphic(svg, true);	
 				}
 
 			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territoryAtk.getName().toLowerCase())) {
 				territoryAtk = null;
-
-				switch(svg.getStyleClass().get(0)) {
-				case "northAmerica":
-					svg.setStyle("");
-					svg.getStyleClass().clear();
-					svg.getStyleClass().add("northAmerica");
-					break;
-				case "southAmerica":
-					svg.setStyle("");
-					svg.getStyleClass().clear();
-					svg.getStyleClass().add("southAmerica");
-					break;
-				case "europa":
-					svg.setStyle("");
-					svg.getStyleClass().clear();
-					svg.getStyleClass().add("europa");
-					break;
-				case "oceania":
-					svg.setStyle("");
-					svg.getStyleClass().clear();
-					svg.getStyleClass().add("oceania");
-					break;
-				case "africa":
-					svg.setStyle("");
-					svg.getStyleClass().clear();
-					svg.getStyleClass().add("africa");
-					break;
-				case "asia":
-					svg.setStyle("");
-					svg.getStyleClass().clear();
-					svg.getStyleClass().add("asia");
-					break;
-				}
+				setSelectedTerritoryGraphic(svg, false);	
 			}
 
 			if(territoryAtk != null && territoryDef == null) {
@@ -334,27 +280,7 @@ public class GameController implements Initializable {
 				if(!game.getCurrentTurn().equals(t.getOwner()) && territoryAtk.isConfinante(t)) {
 					territoryDef = t;
 					
-					// colora il territorio seleszionato
-					switch(svg.getStyleClass().get(0)) {
-					case "northAmerica":
-						svg.setStyle("-fx-fill: #CC6D47");
-						break;
-					case "southAmerica":
-						svg.setStyle("-fx-fill: #7AA5B3");
-						break;
-					case "europa":
-						svg.setStyle("-fx-fill: #A58CA5");
-						break;
-					case "oceania":
-						svg.setStyle("-fx-fill: #CCA786");
-						break;
-					case "africa":
-						svg.setStyle("-fx-fill: #AB8554");
-						break;
-					case "asia":
-						svg.setStyle("-fx-fill: #5DBB5D");
-						break;
-					}
+					setSelectedTerritoryGraphic(svg, true);	
 					
 					// apri schemata attacco
 					try {
@@ -371,8 +297,64 @@ public class GameController implements Initializable {
 		updateTerritoriesGraphic();
 	}
 	
-	private void setSelectedTerritoryGraphic(SVGPath svg) {
-		
+	private void setSelectedTerritoryGraphic(SVGPath svg, boolean col) {
+		if(col){
+			// colora il territorio selezionato
+			switch(svg.getStyleClass().get(0)) {
+			case "northAmerica":
+				svg.setStyle("-fx-fill: #CC6D47");
+				break;
+			case "southAmerica":
+				svg.setStyle("-fx-fill: #7AA5B3");
+				break;
+			case "europa":
+				svg.setStyle("-fx-fill: #A58CA5");
+				break;
+			case "oceania":
+				svg.setStyle("-fx-fill: #CCA786");
+				break;
+			case "africa":
+				svg.setStyle("-fx-fill: #AB8554");
+				break;
+			case "asia":
+				svg.setStyle("-fx-fill: #5DBB5D");
+				break;
+			}
+		} else {
+			//decolora il territorio selezionato
+			switch(svg.getStyleClass().get(0)) {
+			case "northAmerica":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("northAmerica");
+				break;
+			case "southAmerica":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("southAmerica");
+				break;
+			case "europa":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("europa");
+				break;
+			case "oceania":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("oceania");
+				break;
+			case "africa":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("africa");
+				break;
+			case "asia":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("asia");
+				break;
+			}
+		}
 	}
 		
 
