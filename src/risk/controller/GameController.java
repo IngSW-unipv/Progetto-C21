@@ -297,7 +297,7 @@ public class GameController implements Initializable {
 		updateTerritoriesGraphic();
 	}
 	
-	private void setSelectedTerritoryGraphic(SVGPath svg, boolean col) {
+	protected void setSelectedTerritoryGraphic(SVGPath svg, boolean col) {
 		if(col){
 			// colora il territorio selezionato
 			switch(svg.getStyleClass().get(0)) {
