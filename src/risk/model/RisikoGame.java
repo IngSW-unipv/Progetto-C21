@@ -11,7 +11,6 @@ import risk.model.util.GAME_PHASE;
 
 public class RisikoGame {
 	
-	
 	private Player[] players;
 	private ArrayList<Territory> territories;	//leggo da file
 	private ArrayList<Continent> continents;	//leggo da file
@@ -167,11 +166,12 @@ public class RisikoGame {
 	 * Makes a ATTACK between 2 players
 	
 	 */
-	public void battle(int[] atkResults, int[] defResults,ArrayList<Player> player  ,ArrayList<Territory> list,Territory attac ,Territory defender) {
+	public void battle(int[] atkResults, int[] defResults, ArrayList<Player> player, ArrayList<Territory> list,
+			Territory attacker, Territory defender) {
 
 		int n = Math.min(atkResults.length, defResults.length);
 //		
-		for(int i=0; i < n; i++) {
+		for (int i = 0; i < n; i++) {
 			if(atkResults[i] > defResults[i]) {
 				
 			//bisogna passare il territorio ed aggiungere un metodo che trova il territorio del player dato il territorio
@@ -180,13 +180,13 @@ public class RisikoGame {
 			
 		} else {
 				
-			list.get(list.indexOf(attac)).removeTanks(1);
+			list.get(list.indexOf(attacker)).removeTanks(1);
 			}
 	}
 		if(	list.get(list.indexOf(defender)).getTanks()==0) {
-			player.get(player.indexOf(attac)).addTerritory();
+			player.get(player.indexOf(attacker)).addTerritory();
 			player.get(player.indexOf(defender)).removeTerritory();
-			list.get(list.indexOf(defender)).setOwner(player.get(player.indexOf(attac)));
+			list.get(list.indexOf(defender)).setOwner(player.get(player.indexOf(attacker)));
 			
 			
 			
@@ -540,8 +540,8 @@ public class RisikoGame {
             	if(t.getId() == shuffledTerritories[i].getId()) {
             		t.setOwner(players[playerID]);
             		players[playerID].addTerritory();
-            		t.addTanks(1);
-            		t.getOwner().placeTank(1);
+					t.addTanks(1);
+					t.getOwner().placeTank(1);
             	}
             }
             playerID = (playerID + 1) % players.length;
