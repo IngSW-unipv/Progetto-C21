@@ -1,42 +1,22 @@
 package risk.controller;
 
-import risk.model.DiceShaker;
-import java.net.URL;
-
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
-
-
-import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import risk.model.Territory;
+import risk.model.DiceShaker;
 
 public class AttackController implements Initializable {
-	DiceShaker attack;
-	DiceShaker defende;
+	DiceShaker attackDices;
+	DiceShaker defenderDices;
 	
 	@FXML
 	private Label territoryAtkLabel, territoryDefLabel, attackerTanksLabel, defenderTanksLabel;
@@ -48,6 +28,8 @@ public class AttackController implements Initializable {
 	private ToggleButton oneButton, twoButton,  threeButton;
 	
 	private int atkTank, defTank;	// numero di tank usati per l'attacco e per la difesa
+	private int[] atkResults;
+	private int[] defResults;
 	
 	
 	@Override
@@ -60,9 +42,11 @@ public class AttackController implements Initializable {
     	defenderTanksLabel.setText(String.valueOf(GameController.getInstance().getDefender().getTanks()));
     	
     	setDefTank();
-    	
-//    	atkResults = new int[3];
-//    	defResults = new int[3];
+		attackDices = new DiceShaker();
+		defenderDices = new DiceShaker();
+
+		atkResults = new int[3];
+		defResults = new int[3];
     	
     	if(GameController.getInstance().getAttacker().getTanks() == 2) {
     		twoButton.setDisable(true);
@@ -121,9 +105,17 @@ public class AttackController implements Initializable {
 		// deseleziono i territori attacker e defender
 		GameController.getInstance().setAttacker(null);
 		GameController.getInstance().setDefender(null);
-		// update grafico
+
+
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
     }
 	
+	@FXML
+	public void attackButtonPressed(ActionEvent e) throws IOException {
+		atkResults = attackDices.rollDices(atkTank);
+		defResults = defenderDices.rollDices(atkTank);
+		// sistemo battle
+	}
+
 }
