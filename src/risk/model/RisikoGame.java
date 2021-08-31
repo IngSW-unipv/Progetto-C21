@@ -3,7 +3,6 @@ package risk.model;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import risk.controller.GameController;
 import risk.model.util.FIGURE;
 import risk.model.util.FileHandler;
 import risk.model.util.GAME_PHASE;
@@ -170,6 +169,7 @@ public class RisikoGame {
 	public void battle(int[] atkResults, int[] defResults, ArrayList<Player> player, ArrayList<Territory> list,
 			Territory attacker, Territory defender) {
 
+
 		int n = Math.min(atkResults.length, defResults.length);
 //		
 		for (int i = 0; i < n; i++) {
@@ -203,40 +203,46 @@ public class RisikoGame {
 	 * @param atk        is the number of attacking dice
 	 * @param def        is the number of defending dice
 	 */
-//	public void battle(int[] atkResults, int[] defResults, int atk, int def) {
-//		
-//		int n = Math.min(atk, def);
-//		
-//		for(int i=0; i < n; i++) {
-//			if(atkResults[i] > defResults[i]) {
-//				getTerritory(GameController.getInstance().getDefender()).removeTanks(1);
-//				getPlayer(GameController.getInstance().getDefender().getOwner()).removeTanks(1);
-//			} else {
-//				getTerritory(GameController.getInstance().getAttacker()).removeTanks(1);
-//				GameController.getInstance().getAttacker().removeTanks(1);
-//			}
-//		}
-//		if(getPlayer(GameController.getInstance().getDefender().getOwner()).getTanks()==0) {
-//			getPlayer(GameController.getInstance().getDefender().getOwner()).setEliminated(true);
-//		}
-//	}
+	public void battle(int[] atkResults, int[] defResults, int atk, int def, Territory attacker, Territory defender){
+
+		int n = Math.min(atk, def);
+		int atkWin = atk;
+		for (int i = 0; i < n; i++) {
+			if(atkResults[i] > defResults[i]) {
+				getTerritory(defender).removeTanks(1);
+				getPlayer(defender.getOwner()).removeTanks(1);
+			} else {
+				getTerritory(attacker).removeTanks(1);
+				getPlayer(attacker.getOwner()).removeTanks(1);
+				atkWin--;
+			}
+		}
+		if (getTerritory(defender).getTanks() == 0)
+			conquer(getTerritory(attacker), getTerritory(defender), atkWin);
+
+		if (getPlayer(defender.getOwner()).getTanks() == 0) {
+			getPlayer(defender.getOwner()).setEliminated(true);
+		}
+	}
 	
+
 	/**
 	 * A player conquers a territory
 	 * @param t1 is the attacking territory
 	 * @param t2 is the defending territory
 	 */
-	public void conquer(Territory t1, Territory t2) {
-		boolean t2ContConquered = false;
-		if(isOwned(getTerrContinent(t2))) {
-			t2ContConquered = true;
+	public void conquer(Territory attacker, Territory defender, int counter) {
+		boolean defenderHasEntireContinent = false;
+		if (isOwned(getTerrContinent(defender))) {
+			defenderHasEntireContinent = true;
 		}
-		getPlayer(t1.getOwner()).addTerritory();
-		getPlayer(t2.getOwner()).removeTerritory();
-		getTerritory(t2).setOwner(getTerritory(t1).getOwner());
-//		conquerMade = true;
-		if(t2ContConquered) {
-			getPlayer(t2.getOwner()).removeContinent();
+		getPlayer(attacker.getOwner()).addTerritory();
+		getPlayer(defender.getOwner()).removeTerritory();
+		getTerritory(defender).setOwner(getTerritory(attacker).getOwner());
+		moveTanks(getTerritory(attacker), getTerritory(defender), counter);
+		
+		if (defenderHasEntireContinent) {
+			getPlayer(defender.getOwner()).removeContinent();
 		}
 //		checkOwn(getTerrContinent(t2));
 
@@ -264,18 +270,7 @@ public class RisikoGame {
 		}
 	}
 
-//	/**
-//	 * Adds territories to a continent
-//	 * @param c is the continent
-//	 */
-//	public void setContinent(Continent c) {
-//		for(Territory t: territories) {
-//			if (t.getContinent().contentEquals(c)) {
-//				c.addTerritory(t);
-//			}
-//		}
-//	}
-//	
+
 
 	/**
 	 * Returns the continent of a territory

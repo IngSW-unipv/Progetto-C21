@@ -2,11 +2,7 @@ package risk.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.ResourceBundle;
-
-import com.sun.tools.javac.code.Attribute.Array;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,8 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 import risk.model.DiceShaker;
-import risk.model.Player;
-import risk.model.PlayersList;
 import risk.model.RisikoGame;
 
 public class AttackController implements Initializable {
@@ -35,7 +29,7 @@ public class AttackController implements Initializable {
 	private ToggleButton oneButton, twoButton,  threeButton;
 	
 	private int atkTank, defTank;	// numero di tank usati per l'attacco e per la difesa
-	private int[] atkResults;
+	private int[] atkResults;		// risultati del lancio dei dadi dell'attaccante
 	private int[] defResults;
 	private RisikoGame game;
 	
@@ -122,7 +116,11 @@ public class AttackController implements Initializable {
 	@FXML
 	public void attackButtonPressed(ActionEvent e) throws IOException {
 		atkResults = attackDices.rollDices(atkTank);
-		defResults = defenderDices.rollDices(atkTank);
+		defResults = defenderDices.rollDices(defTank);
+		GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
+				GameController.getInstance().getDefender());
+		for (int i = 0; i < atkTank; i++)
+			System.out.println(atkResults[i] + "-------" + defResults[i]);
 	}
 
 }
