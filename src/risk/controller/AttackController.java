@@ -115,12 +115,30 @@ public class AttackController implements Initializable {
 	
 	@FXML
 	public void attackButtonPressed(ActionEvent e) throws IOException {
+		if (GameController.getInstance().getAttacker().getTanks() > 1) {
 		atkResults = attackDices.rollDices(atkTank);
 		defResults = defenderDices.rollDices(defTank);
 		GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
 				GameController.getInstance().getDefender());
 		for (int i = 0; i < atkTank; i++)
 			System.out.println(atkResults[i] + "-------" + defResults[i]);
+
+		attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getAttacker().getTanks()));
+		defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getDefender().getTanks()));
+
+
+		if(GameController.getInstance().getDefender().getOwner().equals(GameController.getInstance().getAttacker().getOwner())) {
+			defenderTanksLabel.setText("0");
+			oneButton.setDisable(true);
+			twoButton.setDisable(true);
+			threeButton.setDisable(true);
+			attackButton.setDisable(true);
+			}
+
 	}
+	}
+
+	// update grafica dadi (cambiare amche i nomi delle immagini dei dadi per fare prima) 
+	// update textFill colore della label del difensore quando perde il territorio
 
 }
