@@ -107,7 +107,6 @@ public class AttackController implements Initializable {
 		InputStream defStream;
 		Image image2; 
 		
-			
 			atkResults = attackDices.rollDices(atkTank);
 			defResults = defenderDices.rollDices(defTank);
 			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
@@ -125,7 +124,19 @@ public class AttackController implements Initializable {
 				attackerDiceImages[1].setImage(image1);	
 				attackerDiceImages[2].setImage(image1);	
 			}
-			for (int i = 0; i < atkTank; i++) {
+			if(defTank == 2) {
+				defStream = new FileInputStream("src/risk/view/images/dice/" +0+"_blue.png");
+				image2 = new Image(defStream);
+				defenderDiceImages[2].setImage(image2);	
+			}
+			
+			if(defTank == 1) {
+				defStream = new FileInputStream("src/risk/view/images/dice/" +0+"_blue.png");
+				image2 = new Image(defStream);
+				defenderDiceImages[1].setImage(image2);	
+				defenderDiceImages[2].setImage(image2);	
+			}
+			for (int i = 0; i < Math.max(atkTank, defTank); i++) {
 				
 				System.out.println(atkResults[i] + "-------" + defResults[i]);
 				
@@ -144,6 +155,7 @@ public class AttackController implements Initializable {
 			attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getAttacker().getTanks()));
 			defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getDefender().getTanks()));
 			updateNumberButtons();
+			setDefTank();
 
 
 			if(GameController.getInstance().getDefender().getOwner().equals(GameController.getInstance().getAttacker().getOwner())) {

@@ -38,10 +38,13 @@ public class DiceShaker {
 		switch(n) {								//switch per tirare 1,2 o 3 dadi dell'attaccante
 		case 1:
 			results[0] = die1.roll();
+			results[1]= 0;
+			results[2]= 0;
 			break;
 		case 2:
 			results[0] = die1.roll();
 			results[1] = die2.roll();
+			results[2]= 0;
 			break;
 		case 3:
 			results[0] = die1.roll();
