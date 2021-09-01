@@ -51,10 +51,7 @@ public class AttackController implements Initializable {
 		defResults = new int[3];
     	
     
-		updateNumberButtons();
-    	
-//		menuHandler();
-		
+		updateNumberButtons();		
 		
 	}
 	
@@ -87,7 +84,6 @@ public class AttackController implements Initializable {
 	
 	@FXML
 	private void attackButtonPressed(ActionEvent e) throws IOException {
-		if (GameController.getInstance().getAttacker().getTanks() > 1) {
 			atkResults = attackDices.rollDices(atkTank);
 			defResults = defenderDices.rollDices(defTank);
 			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
@@ -97,21 +93,31 @@ public class AttackController implements Initializable {
 	
 			attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getAttacker().getTanks()));
 			defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getDefender().getTanks()));
+			updateNumberButtons();
 
 
 			if(GameController.getInstance().getDefender().getOwner().equals(GameController.getInstance().getAttacker().getOwner())) {
-				defenderTanksLabel.setText("0");
+				defenderTanksLabel.setText("CONQUERED");
 				oneButton.setDisable(true);
 				twoButton.setDisable(true);
 				threeButton.setDisable(true);
 				attackButton.setDisable(true);
 				}
 
-		}
 	}
 	
 	@FXML
 	private void updateNumberButtons() {
+		
+		attackButton.setDisable(true);
+		oneButton.setSelected(false);
+		twoButton.setSelected(false);
+		threeButton.setSelected(false);
+		if(GameController.getInstance().getAttacker().getTanks() == 1) {
+			oneButton.setDisable(true);
+    		twoButton.setDisable(true);
+    		threeButton.setDisable(true);
+		}
 		if(GameController.getInstance().getAttacker().getTanks() == 2) {
     		twoButton.setDisable(true);
     		threeButton.setDisable(true);
