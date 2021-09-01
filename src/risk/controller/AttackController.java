@@ -1,6 +1,8 @@
 package risk.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
@@ -28,6 +32,9 @@ public class AttackController implements Initializable {
 	@FXML
 	private ToggleButton oneButton, twoButton,  threeButton;
 	
+	@FXML
+	private ImageView RedDice1,RedDice2,RedDice3,BlueDice1,BlueDice2,BlueDice3;
+	
 	private int atkTank, defTank;	// numero di tank usati per l'attacco e per la difesa
 	private int[] atkResults;		// risultati del lancio dei dadi dell'attaccante
 	private int[] defResults;
@@ -42,7 +49,7 @@ public class AttackController implements Initializable {
     	territoryDefLabel.setText(GameController.getInstance().getDefender().getName());
     	attackerTanksLabel.setText(String.valueOf(GameController.getInstance().getAttacker().getTanks()));
     	defenderTanksLabel.setText(String.valueOf(GameController.getInstance().getDefender().getTanks()));
-    	
+
     	setDefTank();
 		attackDices = new DiceShaker();
 		defenderDices = new DiceShaker();
@@ -115,13 +122,24 @@ public class AttackController implements Initializable {
 	
 	@FXML
 	public void attackButtonPressed(ActionEvent e) throws IOException {
+		ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
+		ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
 		if (GameController.getInstance().getAttacker().getTanks() > 1) {
 		atkResults = attackDices.rollDices(atkTank);
 		defResults = defenderDices.rollDices(defTank);
 		GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
 				GameController.getInstance().getDefender());
-		for (int i = 0; i < atkTank; i++)
+		for (int i = 0; i < atkTank; i++) {
 			System.out.println(atkResults[i] + "-------" + defResults[i]);
+			InputStream atkStream = new FileInputStream("src/risk/view/images/dice/" + atkResults[i] +"_red.png");
+			Image image1 = new Image(atkStream);
+			attackerDiceImages[i].setImage(image1);	
+			InputStream defStream = new FileInputStream("src/risk/view/images/dice/" + defResults[i] +"_blue.png");
+			Image image2 = new Image(defStream);
+			defenderDiceImages[i].setImage(image2);	
+		}
+		
+		
 
 		attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getAttacker().getTanks()));
 		defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getDefender().getTanks()));

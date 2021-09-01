@@ -36,19 +36,19 @@
                   </AnchorPane>
                   <VBox alignment="CENTER" layoutY="60.0" prefHeight="220.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="RedDice1" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/dice/one_red.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="RedDice2" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/dice/two_red.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="RedDice3" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/dice/three_red.png" />
+                              <Image  url="@../images/dice/three_red.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -102,17 +102,17 @@
                   </AnchorPane>
                   <VBox alignment="CENTER" layoutY="60.0" prefHeight="220.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="BlueDice1" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/dice/one_blue.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="BlueDice2" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/dice/two_blue.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="BlueDice3" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/dice/three_blue.png" />
                            </image>
