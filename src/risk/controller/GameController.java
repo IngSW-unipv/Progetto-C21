@@ -209,10 +209,6 @@ public class GameController implements Initializable {
 					t.addTanks(21); //cambia metti 1 al posto di 21
 					counterConsecutiveClicks++;
 
-					if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
-						phaseSwitch.setTextFill(Color.BLACK);
-					else
-						phaseSwitch.setTextFill(Color.WHITE);
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
@@ -240,10 +236,7 @@ public class GameController implements Initializable {
 					t.getOwner().placeTank(1);
 					t.addTanks(1);
 
-					if (game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
-						phaseSwitch.setTextFill(Color.BLACK);
-					else
-						phaseSwitch.setTextFill(Color.WHITE);
+					switchPlayerGraphic();
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
@@ -505,7 +498,14 @@ public class GameController implements Initializable {
         File file = new File(path);
         Image image = new Image(file.toURI().toString());
 		actualPlayerGraphic.setImage(image);
-		phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-text-fill:white;-fx-background-color:" + color);
+		if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow")||game.getCurrentTurn().getColorName().toLowerCase().equals("pink")) {
+			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-background-color:" + color);
+			phaseSwitch.setTextFill(Color.BLACK);
+		}
+		else {
+			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-background-color:" + color);
+			phaseSwitch.setTextFill(Color.WHITE);
+		}
 	}
 	
 	private ArrayList<Rectangle> getRectangles(HBox hb) {
