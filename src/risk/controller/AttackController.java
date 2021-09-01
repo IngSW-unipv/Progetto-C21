@@ -100,20 +100,36 @@ public class AttackController implements Initializable {
 	
 	@FXML	
 	private void attackButtonPressed(ActionEvent e) throws IOException {
-
+		ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
+		ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
+		InputStream atkStream;
+		Image image1; 
+		InputStream defStream;
+		Image image2; 
+		
+			
 			atkResults = attackDices.rollDices(atkTank);
 			defResults = defenderDices.rollDices(defTank);
 			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
 					GameController.getInstance().getDefender());
+			
+			if(atkTank == 2) {
+				atkStream = new FileInputStream("src/risk/view/images/dice/" +0+"_red.png");
+				image1 = new Image(atkStream);
+				attackerDiceImages[2].setImage(image1);	
+			}
+			
+			if(atkTank == 1) {
+				atkStream = new FileInputStream("src/risk/view/images/dice/" +0+"_red.png");
+				image1 = new Image(atkStream);
+				attackerDiceImages[1].setImage(image1);	
+				attackerDiceImages[2].setImage(image1);	
+			}
 			for (int i = 0; i < atkTank; i++) {
 				
 				System.out.println(atkResults[i] + "-------" + defResults[i]);
-				ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
-				ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
-				InputStream atkStream;
-				Image image1; 
-				InputStream defStream;
-				Image image2; 
+				
+				
 				
 				atkStream = new FileInputStream("src/risk/view/images/dice/" + atkResults[i] +"_red.png");
 				image1 = new Image(atkStream);
