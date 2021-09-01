@@ -38,17 +38,17 @@
                      <children>
                         <ImageView fx:id="RedDice1" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/dice/one_red.png" />
+                              <Image url="@../images/dice/0_red.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="RedDice2" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/dice/two_red.png" />
+                              <Image url="@../images/dice/0_red.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="RedDice3" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image  url="@../images/dice/three_red.png" />
+                              <Image  url="@../images/dice/0_red.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -104,17 +104,17 @@
                      <children>
                         <ImageView fx:id="BlueDice1" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/dice/one_blue.png" />
+                              <Image url="@../images/dice/0_blue.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="BlueDice2" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/dice/two_blue.png" />
+                              <Image url="@../images/dice/0_blue.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="BlueDice3" fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/dice/three_blue.png" />
+                              <Image url="@../images/dice/0_blue.png" />
                            </image>
                         </ImageView>
                      </children>

@@ -57,36 +57,10 @@ public class AttackController implements Initializable {
 		atkResults = new int[3];
 		defResults = new int[3];
     	
-    	if(GameController.getInstance().getAttacker().getTanks() == 2) {
-    		twoButton.setDisable(true);
-    		threeButton.setDisable(true);
-    	} else if(GameController.getInstance().getAttacker().getTanks() == 3)
-    		threeButton.setDisable(true);
-    	
-    	oneButton.setOnAction(e -> {
-    		if(oneButton.isSelected()) {
-        		atkTank = 1;
-        		attackButton.setDisable(false);
-    		} else
-    			attackButton.setDisable(true);
-		});
-    	
-    	twoButton.setOnAction(e -> {
-    		if(twoButton.isSelected()) {
-        		atkTank = 2;
-        		attackButton.setDisable(false);
-    		} else
-    			attackButton.setDisable(true);
-		});
-    	
-    	threeButton.setOnAction(e -> {
-    		if(threeButton.isSelected()) {
-        		atkTank = 3;
-        		attackButton.setDisable(false);
-    		} else
-    			attackButton.setDisable(true);
-		});
-    	
+    
+		updateNumberButtons();
+		
+		
     	
 //		menuHandler();
 		
@@ -121,39 +95,84 @@ public class AttackController implements Initializable {
     }
 	
 	@FXML
-	public void attackButtonPressed(ActionEvent e) throws IOException {
-		ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
-		ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
-		if (GameController.getInstance().getAttacker().getTanks() > 1) {
+
+	
+		
+	private void attackButtonPressed(ActionEvent e) throws IOException {
+		
 		atkResults = attackDices.rollDices(atkTank);
 		defResults = defenderDices.rollDices(defTank);
 		GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
 				GameController.getInstance().getDefender());
 		for (int i = 0; i < atkTank; i++) {
+			
+			ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
+			ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
+			InputStream atkStream;
+			Image image1; 
+			InputStream defStream;
+			Image image2; 
+			
 			System.out.println(atkResults[i] + "-------" + defResults[i]);
-			InputStream atkStream = new FileInputStream("src/risk/view/images/dice/" + atkResults[i] +"_red.png");
-			Image image1 = new Image(atkStream);
+			atkStream = new FileInputStream("src/risk/view/images/dice/" + atkResults[i] +"_red.png");
+			image1 = new Image(atkStream);
 			attackerDiceImages[i].setImage(image1);	
-			InputStream defStream = new FileInputStream("src/risk/view/images/dice/" + defResults[i] +"_blue.png");
-			Image image2 = new Image(defStream);
+			defStream = new FileInputStream("src/risk/view/images/dice/" + defResults[i] +"_blue.png");
+			image2 = new Image(defStream);
 			defenderDiceImages[i].setImage(image2);	
 		}
 		
 		
 
-		attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getAttacker().getTanks()));
-		defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getDefender().getTanks()));
+		
+	
+			attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getAttacker().getTanks()));
+			defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getDefender().getTanks()));
 
 
-		if(GameController.getInstance().getDefender().getOwner().equals(GameController.getInstance().getAttacker().getOwner())) {
-			defenderTanksLabel.setText("0");
-			oneButton.setDisable(true);
-			twoButton.setDisable(true);
-			threeButton.setDisable(true);
-			attackButton.setDisable(true);
-			}
+			if(GameController.getInstance().getDefender().getOwner().equals(GameController.getInstance().getAttacker().getOwner())) {
+				defenderTanksLabel.setText("0");
+				oneButton.setDisable(true);
+				twoButton.setDisable(true);
+				threeButton.setDisable(true);
+				attackButton.setDisable(true);
+				}
 
-	}
+		}
+	
+	
+	@FXML
+	private void updateNumberButtons() {
+		if(GameController.getInstance().getAttacker().getTanks() == 2) {
+    		twoButton.setDisable(true);
+    		threeButton.setDisable(true);
+    	} else if(GameController.getInstance().getAttacker().getTanks() == 3)
+    		threeButton.setDisable(true);
+    	
+    	oneButton.setOnAction(e -> {
+    		if(oneButton.isSelected()) {
+        		atkTank = 1;
+        		attackButton.setDisable(false);
+    		} else
+    			attackButton.setDisable(true);
+		});
+    	
+    	twoButton.setOnAction(e -> {
+    		if(twoButton.isSelected()) {
+        		atkTank = 2;
+        		attackButton.setDisable(false);
+    		} else
+    			attackButton.setDisable(true);
+		});
+    	
+    	threeButton.setOnAction(e -> {
+    		if(threeButton.isSelected()) {
+        		atkTank = 3;
+        		attackButton.setDisable(false);
+    		} else
+    			attackButton.setDisable(true);
+		});
+		
 	}
 
 	// update grafica dadi (cambiare amche i nomi delle immagini dei dadi per fare prima) 
