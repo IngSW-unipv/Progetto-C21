@@ -58,12 +58,16 @@ public class AttackController implements Initializable {
 		defResults = new int[3];
     	
     
+
 		updateNumberButtons();
 		
 		
     	
 //		menuHandler();
 		
+
+			
+
 		
 	}
 	
@@ -94,55 +98,65 @@ public class AttackController implements Initializable {
 		window.close();
     }
 	
-	@FXML
-
-	
-		
+	@FXML	
 	private void attackButtonPressed(ActionEvent e) throws IOException {
-		
-		atkResults = attackDices.rollDices(atkTank);
-		defResults = defenderDices.rollDices(defTank);
-		GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
-				GameController.getInstance().getDefender());
-		for (int i = 0; i < atkTank; i++) {
-			
-			ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
-			ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
-			InputStream atkStream;
-			Image image1; 
-			InputStream defStream;
-			Image image2; 
-			
-			System.out.println(atkResults[i] + "-------" + defResults[i]);
-			atkStream = new FileInputStream("src/risk/view/images/dice/" + atkResults[i] +"_red.png");
-			image1 = new Image(atkStream);
-			attackerDiceImages[i].setImage(image1);	
-			defStream = new FileInputStream("src/risk/view/images/dice/" + defResults[i] +"_blue.png");
-			image2 = new Image(defStream);
-			defenderDiceImages[i].setImage(image2);	
-		}
-		
-		
 
-		
+			atkResults = attackDices.rollDices(atkTank);
+			defResults = defenderDices.rollDices(defTank);
+			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
+					GameController.getInstance().getDefender());
+			for (int i = 0; i < atkTank; i++) {
+				
+				System.out.println(atkResults[i] + "-------" + defResults[i]);
+				ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
+				ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
+				InputStream atkStream;
+				Image image1; 
+				InputStream defStream;
+				Image image2; 
+				
+				atkStream = new FileInputStream("src/risk/view/images/dice/" + atkResults[i] +"_red.png");
+				image1 = new Image(atkStream);
+				attackerDiceImages[i].setImage(image1);	
+				defStream = new FileInputStream("src/risk/view/images/dice/" + defResults[i] +"_blue.png");
+				image2 = new Image(defStream);
+				defenderDiceImages[i].setImage(image2);	
+
+			}
+				
 	
 			attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getAttacker().getTanks()));
 			defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getDefender().getTanks()));
+			updateNumberButtons();
 
 
 			if(GameController.getInstance().getDefender().getOwner().equals(GameController.getInstance().getAttacker().getOwner())) {
-				defenderTanksLabel.setText("0");
+				defenderTanksLabel.setText("CONQUERED");
 				oneButton.setDisable(true);
 				twoButton.setDisable(true);
 				threeButton.setDisable(true);
 				attackButton.setDisable(true);
 				}
 
+
 		}
 	
+
+	
+
 	
 	@FXML
 	private void updateNumberButtons() {
+		
+		attackButton.setDisable(true);
+		oneButton.setSelected(false);
+		twoButton.setSelected(false);
+		threeButton.setSelected(false);
+		if(GameController.getInstance().getAttacker().getTanks() == 1) {
+			oneButton.setDisable(true);
+    		twoButton.setDisable(true);
+    		threeButton.setDisable(true);
+		}
 		if(GameController.getInstance().getAttacker().getTanks() == 2) {
     		twoButton.setDisable(true);
     		threeButton.setDisable(true);
