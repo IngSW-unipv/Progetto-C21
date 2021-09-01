@@ -135,7 +135,7 @@ public class AttackController implements Initializable {
 			attackButton.setDisable(true);
 			}
 
-	}
+		}
 	}
 
 	// update grafica dadi (cambiare amche i nomi delle immagini dei dadi per fare prima) 
