@@ -93,7 +93,6 @@ public class AttackController implements Initializable {
 		GameController.getInstance().setAttacker(null);
 		GameController.getInstance().setDefender(null);
 
-
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
     }
@@ -106,7 +105,7 @@ public class AttackController implements Initializable {
 		Image image1; 
 		InputStream defStream;
 		Image image2; 
-		
+			
 			atkResults = attackDices.rollDices(atkTank);
 			defResults = defenderDices.rollDices(defTank);
 			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
@@ -164,6 +163,7 @@ public class AttackController implements Initializable {
 				twoButton.setDisable(true);
 				threeButton.setDisable(true);
 				attackButton.setDisable(true);
+				GameController.getInstance().updateTerritoriesGraphic();
 				}
 
 

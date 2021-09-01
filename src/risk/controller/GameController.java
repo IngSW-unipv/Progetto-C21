@@ -109,6 +109,7 @@ public class GameController implements Initializable {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
 			phaseText.setText(""+game.getGamePhase());
 			phaseText.setText("FIRST TURN");
+			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
@@ -167,7 +168,7 @@ public class GameController implements Initializable {
 		}	
 	}
 	
-	private void updateTerritoriesGraphic() {
+	protected void updateTerritoriesGraphic() {
 		Circle[] circles = {circleAlaska, circleNorthWestTerritory, circleGreenland, circleAlberta, circleOntario, circleQuebec, circleWesternUnitedStates, circleEasternUnitedStates, circleCentralAmerica, circleVenezuela, circleBrazil, circlePeru, circleArgentina,
 				circleIceland, circleScandinavia, circleGreatBritain, circleNorthernEurope, circleWesternEurope, circleSouthernEurope, circleRussia, circleUral, circleAfghanistan, circleSiberia, circleYakutsk, circleIrkutsk, circleKamchatka, 
 				circleMongolia, circleJapan, circleChina, circleSiam, circleIndia, circleMiddleEast, circleEgypt, circleNorthAfrica, circleEastAfrica, circleCongo, circleSouthAfrica, circleMadagascar, circleIndonesia, circleNewGuinea, circleWesternAustralia, circleEasternAustralia};
@@ -183,8 +184,11 @@ public class GameController implements Initializable {
 			circles[i].setFill(Color.web(color));
 			labels[i].setText(String.valueOf(tanks));
 			
-			if(color.toLowerCase().equals("black") || color.toLowerCase().equals("blue"))
+			if(color.toLowerCase().equals("black") || color.toLowerCase().equals("blue")) {
 				labels[i].setTextFill(Color.WHITE);
+			} else {
+				labels[i].setTextFill(Color.BLACK);
+			}
 		}
 	}
 	
@@ -268,12 +272,14 @@ public class GameController implements Initializable {
 				 */
 				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
 					territoryAtk = t;
-					setSelectedTerritoryGraphic(svg, true);	
+					setSelectedTerritoryGraphic(svg, true);
+					phaseSwitch.setDisable(true);
 				}
 
 			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territoryAtk.getName().toLowerCase())) {
 				territoryAtk = null;
-				setSelectedTerritoryGraphic(svg, false);	
+				setSelectedTerritoryGraphic(svg, false);
+				phaseSwitch.setDisable(false);
 			}
 
 			if(territoryAtk != null && territoryDef == null) {
@@ -281,7 +287,8 @@ public class GameController implements Initializable {
 				if(!game.getCurrentTurn().equals(t.getOwner()) && territoryAtk.isConfinante(t)) {
 					territoryDef = t;
 					
-					setSelectedTerritoryGraphic(svg, true);	
+					setSelectedTerritoryGraphic(svg, true);
+					phaseSwitch.setDisable(false);
 					
 					// apri schemata attacco
 					try {
@@ -412,8 +419,7 @@ public class GameController implements Initializable {
 		case FIRSTTURN:
 			if (!game.firstPhaseEnded()) {
 				game.nextTurn();
-
-				if (game.getCurrentTurn().getColorName().toLowerCase().equals("yellow"))
+				if (game.getCurrentTurn().getColorName().toLowerCase().equals("yellow")||game.getCurrentTurn().getColorName().toLowerCase().equals("pink"))
 					phaseSwitch.setTextFill(Color.BLACK);
 				else
 					phaseSwitch.setTextFill(Color.WHITE);
