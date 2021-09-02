@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
+import risk.model.Territory;
 
 public class AttackController implements Initializable {
 	DiceShaker attackDices;
@@ -89,10 +90,13 @@ public class AttackController implements Initializable {
      */
 	@FXML
     public void cancelButtonPressed(ActionEvent e) throws IOException {
+		
+		GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
+		GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
 		// deseleziono i territori attacker e defender
 		GameController.getInstance().setAttacker(null);
 		GameController.getInstance().setDefender(null);
-
+		//GameController.getInstance().clearAllTerritories();
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
     }
@@ -166,7 +170,7 @@ public class AttackController implements Initializable {
 				GameController.getInstance().updateTerritoriesGraphic();
 				}
 
-
+			
 		}
 	
 
