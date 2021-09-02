@@ -293,9 +293,20 @@ public class GameController implements Initializable {
 
 			}
 			
+			break;
+
+		case FORTIFY:
+
+			break;
 		}
 
 		updateTerritoriesGraphic();
+
+		if (game.verifyMission()) {
+			System.out.println("hai vinto, fare grafica");
+			Platform.exit();
+		}
+
 	}
 	
 	protected void setSelectedTerritoryGraphic(SVGPath svg, boolean col) {

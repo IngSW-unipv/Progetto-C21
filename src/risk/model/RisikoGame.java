@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import risk.model.util.FIGURE;
 import risk.model.util.FileHandler;
 import risk.model.util.GAME_PHASE;
+import risk.model.util.MISSION_TYPE;
 
 
 
@@ -342,20 +343,20 @@ public class RisikoGame {
 //			}
 //		}
 //		else {
-//			if(missionType==MISSION_TYPE.TYPE2) {
+//			if(missionType == MISSION_TYPE.TYPE2) {
 //				Continent c1 = currentTurn.getMission().getContinent1();
 //				Continent c2 = currentTurn.getMission().getContinent2();
-//				if(isOwned(c1)){
+//				if (isOwned(c1)) {
 //					Territory t1 = getTerritory(c1.getRandomTerritory());
-//					if(t1.getOwner().equals(currentTurn)) {
-//						if(isOwned(c2)){
+//					if (t1.getOwner().equals(currentTurn)) {
+//						if (isOwned(c2)) {
 //							Territory t2 = getTerritory(c2.getRandomTerritory());
-//							if(t2.getOwner().equals(currentTurn)) {
+//							if (t2.getOwner().equals(currentTurn)) {
 //								if(!currentTurn.getMission().hasContinent3()) {
 //									return true;
 //								}
 //								else
-//									if(currentTurn.getContinents()>2)
+//								if (currentTurn.getContinents() > 2)
 //									return true;
 //							}
 //						}
@@ -368,7 +369,41 @@ public class RisikoGame {
 //		
 //		return false;
 //	}
-	
+
+	public boolean verifyMission () {
+		MISSION_TYPE missionType = currentTurn.getMission().getType();
+		int i = 0;
+		switch (missionType) {
+		case TYPE1:
+			if(currentTurn.getTerritories() >= currentTurn.getMission().getNumberOfTerritories()) {
+				for(Territory t : territories) {
+					if(t.getOwner().equals(currentTurn) && t.getTanks() >= currentTurn.getMission().getNumberOfTanks()) {
+						i++;
+					}
+				}
+				if(i == currentTurn.getMission().getNumberOfTerritories()) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		case TYPE2:
+			Continent c1 = currentTurn.getMission().getContinent1();
+			Continent c2 = currentTurn.getMission().getContinent2();
+			if (isOwned(c1) && isOwned(c2)) {
+				if (!currentTurn.getMission().hasContinent3()) {
+					return true;
+				}
+				else if (currentTurn.getContinents() > 2)
+					return true;
+			}
+
+		}
+		return false;
+
+	}
 
 	
 	/**

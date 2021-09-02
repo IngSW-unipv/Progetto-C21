@@ -217,7 +217,6 @@ public class AttackController implements Initializable {
 		
 	}
 
-	// update grafica dadi (cambiare amche i nomi delle immagini dei dadi per fare prima) 
-	// update textFill colore della label del difensore quando perde il territorio
+
 
 }
