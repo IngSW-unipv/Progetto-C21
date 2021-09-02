@@ -75,6 +75,7 @@ public class GameController implements Initializable {
 					iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, russia, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
 					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
 	
+	private SVGPath[] paths;
 	
 	private Territory territoryAtk = null, territoryDef = null;
 	
@@ -86,6 +87,7 @@ public class GameController implements Initializable {
 	 */
 	public GameController() {
 		instance = this;
+		
 	}
 
 	/**
@@ -104,6 +106,10 @@ public class GameController implements Initializable {
 		ArrayList<Player> playersList = PlayersList.getPlayers();
 		Player[] playersArr = new Player[playersList.size()];
 		playersArr = playersList.toArray(playersArr);
+		paths = new SVGPath[] {alaska, northWestTerritory, greenland, alberta, ontario, quebec, westernUnitedStates, easternUnitedStates, centralAmerica, venezuela, brazil, peru, argentina,
+				iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, russia, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
+				mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia};
+		
 		
 		try {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
@@ -190,6 +196,7 @@ public class GameController implements Initializable {
 				labels[i].setTextFill(Color.BLACK);
 			}
 		}
+		
 	}
 	
 
@@ -197,7 +204,6 @@ public class GameController implements Initializable {
 	private void handleSVGPathPressed(MouseEvent event) {
 		event.consume();
 		boolean enter = true;
-		
 		Territory t = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
 
 		
@@ -280,7 +286,7 @@ public class GameController implements Initializable {
 				if(!game.getCurrentTurn().equals(t.getOwner()) && territoryAtk.isConfinante(t)) {
 					territoryDef = t;
 					
-					setSelectedTerritoryGraphic(svg, true);
+					
 					phaseSwitch.setDisable(false);
 					
 					// apri schemata attacco
@@ -574,6 +580,57 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	public void clearAllTerritories() {
+		
+		for(int i =0; i < paths.length;i++) {
+			
+			switch(paths[i].getStyleClass().get(0)) {
+			case "northAmerica":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("northAmerica");
+				break;
+			case "southAmerica":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("southAmerica");
+				break;
+			case "europa":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("europa");
+				break;
+			case "oceania":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("oceania");
+				break;
+			case "africa":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("africa");
+				break;
+			case "asia":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("asia");
+				break;
+			}
+		}
+		
+		
+	}
+	public void clearSelectedTerritory(Territory t) {
+		for(int i =0; i < paths.length;i++) {
+			
+			if(t.getName().toLowerCase().equals(paths[i].getId().toLowerCase())) {
+				System.out.println("si");
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("northAmerica");
+			}
+		}
+	}
 	@FXML
 	public void cardsIconPressed(MouseEvent event){
 //		try {
