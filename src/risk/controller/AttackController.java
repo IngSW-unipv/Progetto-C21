@@ -18,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
-import risk.model.Territory;
 
 public class AttackController implements Initializable {
 	DiceShaker attackDices;
@@ -62,14 +61,7 @@ public class AttackController implements Initializable {
 
 		updateNumberButtons();
 		
-		
-    	
-//		menuHandler();
-		
 
-			
-
-		
 	}
 	
     /**

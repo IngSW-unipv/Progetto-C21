@@ -75,11 +75,10 @@ public class Continent {
 	 * @return territory
 	 */
 
-	/*
-	 * //per i player AI ???? 
-	 * public Territory getRandomTerritory() { 
-	 * return territories.get(2); }
-	 */
+	// per la Mission 2 quando devi conquistare un Continente a tua scelta, da sistemare il random
+	public Territory getRandomTerritory() {
+		return territories.get(2);
+	}
 
 
 	/**

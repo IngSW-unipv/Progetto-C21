@@ -245,19 +245,20 @@ public class RisikoGame {
 		if (defenderHasEntireContinent) {
 			getPlayer(defender.getOwner()).removeContinent();
 		}
-//		checkOwn(getTerrContinent(t2));
+		checkOwn(getTerrContinent(attacker));
 
 	}
 	
-//	/**
-//	 * Checks if a continent is owned
-//	 * @param c is the continent
-//	 */
-//	private void checkOwn(Continent c) {
-//		if(isOwned(c)) {
-//			getPlayer(getTerritory(c.getRandomTerritory()).getOwner()).addContinents();
-//		}
-//	}
+	/**
+	 * Checks if a continent is owned
+	 * 
+	 * @param c is the continent
+	 */
+	private void checkOwn(Continent c) {
+		if (isOwned(c)) {
+			getPlayer(getTerritory(c.getRandomTerritory()).getOwner()).addContinents();
+		}
+	}
 
 	/**
 	 * Adds territories to a continent
@@ -303,18 +304,19 @@ public class RisikoGame {
 	
 
 	
-//	/**
-//	 * Returns a random territory of a continent
-//	 * @return t
-//	 */
-//	public Territory getRandomTerritory(Continent c) {		
-//		for(Territory t: territories) {
-//			if(t.getContinent().equals(c.getName())) {
-//				return t;
-//			}
-//		}
-//		return null;
-//	}
+	/**
+	 * Returns a random territory of a continent
+	 * 
+	 * @return t
+	 */
+	public Territory getRandomTerritory(Continent c) {
+		for (Territory t : territories) {
+			if (t.getContinentName().equals(c.getName())) {
+				return t;
+			}
+		}
+		return null;
+	}
 
 
 
@@ -369,12 +371,16 @@ public class RisikoGame {
 //		
 //		return false;
 //	}
-
+	
+	
+	
+	
+	
 	public boolean verifyMission () {
 		MISSION_TYPE missionType = currentTurn.getMission().getType();
 		int i = 0;
-		switch (missionType) {
-		case TYPE1:
+		switch(missionType) {
+		case TYPE1: 
 			if(currentTurn.getTerritories() >= currentTurn.getMission().getNumberOfTerritories()) {
 				for(Territory t : territories) {
 					if(t.getOwner().equals(currentTurn) && t.getTanks() >= currentTurn.getMission().getNumberOfTanks()) {
@@ -393,15 +399,16 @@ public class RisikoGame {
 			Continent c1 = currentTurn.getMission().getContinent1();
 			Continent c2 = currentTurn.getMission().getContinent2();
 			if (isOwned(c1) && isOwned(c2)) {
-				if (!currentTurn.getMission().hasContinent3()) {
+				if(!currentTurn.getMission().hasContinent3()) {
 					return true;
 				}
-				else if (currentTurn.getContinents() > 2)
-					return true;
+				else
+					if (currentTurn.getContinents() > 2)
+						return true;
 			}
 
 		}
-		return false;
+		return false;			
 
 	}
 
