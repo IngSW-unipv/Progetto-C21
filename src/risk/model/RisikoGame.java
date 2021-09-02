@@ -141,7 +141,7 @@ public class RisikoGame {
 
 		if (getBonusTanksSum() == 0) {
 //			for (Player p : players) {
-//				if (p.getBonusTanks() != 0) { // perchè il controllo viene fatto due volte???
+//				if (p.getBonusTanks() != 0) { // perchï¿½ il controllo viene fatto due volte???
 //					return false;
 //				}
 //			}
@@ -291,16 +291,11 @@ public class RisikoGame {
 	 * @return owned
 	 */
 	public boolean isOwned(Continent c) {
-		int i = 0;
 		Player temp = currentTurn;
 		for(Territory t : c.getTerritories()) {
-			if(i == 0) {
-				temp = t.getOwner();
-			}
 			if(!getTerritory(t).getOwner().equals(temp)) {
 				return false;
 			}
-			i++;
 		}
 		return true;
 	}
