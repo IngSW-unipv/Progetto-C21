@@ -580,6 +580,15 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	@FXML
+	public void cardIconPressed(MouseEvent event){
+		try {
+			windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void clearAllTerritories() {
 		
 		for(int i =0; i < paths.length;i++) {
@@ -617,9 +626,9 @@ public class GameController implements Initializable {
 				break;
 			}
 		}
-		
-		
+			
 	}
+	
 	public void clearSelectedTerritory(Territory t) {
 		for(int i =0; i < paths.length;i++) {
 			
@@ -630,14 +639,6 @@ public class GameController implements Initializable {
 				paths[i].getStyleClass().add("northAmerica");
 			}
 		}
-	}
-	@FXML
-	public void cardsIconPressed(MouseEvent event){
-//		try {
-//			windowLoader("/risk/view/fxml/PlayerInfoWindow.fxml", "Player info", false);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	public Territory getAttacker() {
