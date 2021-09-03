@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class CardSceneController implements Initializable{
 	
@@ -23,10 +24,28 @@ public class CardSceneController implements Initializable{
 	@FXML
 	private Button addArtilleryButton, addInfantryButton, addCavalryButton, addJollyButton;
 	
+	@FXML
+	private Button tradeButton, cancelButton;
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		
+	}
+	
+	@FXML
+	public void remove1ButtonPressed(MouseEvent event){
+		
+	}
+	
+	@FXML
+	public void tradeButtonPressed(MouseEvent event){
+		
+	}
+	
+	@FXML
+	public void cancelButtonPressed(MouseEvent event){
 		
 	}
 

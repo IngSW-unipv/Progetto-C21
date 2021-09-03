@@ -116,7 +116,7 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="1">
                                  <children>
                                     <Label contentDisplay="RIGHT" styleClass="bold" text="Jolly:" />
-                                    <Label fx:id="artilleryLeftLabel12" text="5 left" />
+                                    <Label fx:id="jollyLeftLabel" text="5 left" />
                                  </children>
                               </HBox>
                            </children>
@@ -145,8 +145,8 @@
                <center>
                   <HBox alignment="CENTER" maxWidth="535.0" prefWidth="535.0" spacing="20.0" styleClass="bottomBoxBg" BorderPane.alignment="CENTER">
                      <children>
-                        <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" styleClass="bottomButtons" text="TRADE" textAlignment="CENTER" />
-                        <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" styleClass="bottomButtons" text="CANCEL" textAlignment="CENTER" />
+                        <Button fx:id="tradeButton" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" styleClass="bottomButtons" text="TRADE" textAlignment="CENTER" />
+                        <Button fx:id="cancelButton" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" styleClass="bottomButtons" text="CANCEL" textAlignment="CENTER" />
                      </children>
                   </HBox>
                </center>

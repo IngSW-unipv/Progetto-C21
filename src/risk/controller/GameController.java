@@ -582,10 +582,14 @@ public class GameController implements Initializable {
 	
 	@FXML
 	public void cardIconPressed(MouseEvent event){
-		try {
-			windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", false);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(game.getGamePhase().equals(GAME_PHASE.FORTIFY)) {
+			try {
+				windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", false);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			;
 		}
 	}
 	
