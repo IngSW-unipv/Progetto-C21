@@ -609,7 +609,7 @@ public class GameController implements Initializable {
 	public void cardIconPressed(MouseEvent event){
 		if(game.getGamePhase().equals(GAME_PHASE.FORTIFY)) {
 			try {
-				windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", false);
+				windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", true);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

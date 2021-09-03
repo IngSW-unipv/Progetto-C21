@@ -440,6 +440,7 @@ public class RisikoGame {
 		figures.add(ca1.getFigure());
 		figures.add(ca2.getFigure());
 		figures.add(ca3.getFigure());
+		/*
 		for (Territory t: territories) {
 			if(!(ca1.getFigure().equals(FIGURE.JOLLY))) {
 				if(ca1.getTerritory().equals(t)) {   //se la figura � diversa dal Jolly ma raffigura un territorio posseduto dal
@@ -461,6 +462,8 @@ public class RisikoGame {
 				}
 			}	
 		}
+		*/
+		
 		// tris di figure uguali
 		if(ca1.getFigure() == ca2.getFigure() && ca2.getFigure() == ca3.getFigure()) {
 			if(ca1.getFigure() == FIGURE.ARTILLERY) {
