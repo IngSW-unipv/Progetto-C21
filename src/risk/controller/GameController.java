@@ -18,6 +18,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
@@ -539,11 +541,11 @@ public class GameController implements Initializable {
         Image image = new Image(file.toURI().toString());
 		actualPlayerGraphic.setImage(image);
 		if(game.getCurrentTurn().getColorName().toLowerCase().equals("yellow")||game.getCurrentTurn().getColorName().toLowerCase().equals("pink")) {
-			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-background-color:" + color);
+			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-base:" + color);
 			phaseSwitch.setTextFill(Color.BLACK);
 		}
 		else {
-			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-background-color:" + color);
+			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-base:" + color);
 			phaseSwitch.setTextFill(Color.WHITE);
 		}
 	}
@@ -612,7 +614,11 @@ public class GameController implements Initializable {
 				e.printStackTrace();
 			}
 		} else {
-			;
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Warning");
+			alert.setHeaderText("You can trade in cards only during FORTIFY phase");
+			alert.setContentText(null);
+			alert.showAndWait();
 		}
 	}
 	
