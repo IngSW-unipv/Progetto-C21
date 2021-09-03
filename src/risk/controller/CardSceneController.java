@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import risk.model.Card;
 import risk.model.util.FIGURE;
+import risk.model.util.GAME_PHASE;
 
 public class CardSceneController implements Initializable{
 	
@@ -162,13 +163,12 @@ public class CardSceneController implements Initializable{
 		}
 
 		GameController.game.getCurrentTurn().giveBonusTanks(bonus);
-		
+		GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.getInstance().game.getCurrentTurn().getBonusTanks()));
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Bonus");
 		alert.setHeaderText(null);
 		alert.setContentText("You recived " + bonus + " bonus armies!");
 		alert.showAndWait();
-		
 		GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " recived " + bonus + " bonus armies");
     	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.close();

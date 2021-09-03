@@ -324,7 +324,22 @@ public class GameController implements Initializable {
 			break;
 
 		case FORTIFY:
+			if (game.getCurrentTurn().equals(t.getOwner())) {
+				if (t.getOwner().getBonusTanks() > 0) {
+					t.getOwner().placeTank(1);
+					t.addTanks(1);
+					
+					this.setPhaseTextArea(game.getCurrentTurn().getName()+
+							" has placed 1 "+"tank"+" in "+ t.getName());
+					
+					if(game.getCurrentTurn().getBonusTanks() > 0) {
+						phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+					}else phaseSwitch.setText(">>");
+						
+					
 
+				} 
+			}
 			break;
 		}
 
@@ -693,7 +708,9 @@ public class GameController implements Initializable {
 		phasesDescriptionArea.setText(phasesDescriptionArea.getText()+text+"\n");
 		phasesDescriptionArea.setScrollTop(Double.MAX_VALUE);
 	}
-	
+	public void setPhaseSwitchText(String text) {
+		phaseSwitch.setText(text);
+	}
 	public Territory getAttacker() {
 		return territoryAtk;
 	}
