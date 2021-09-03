@@ -20,6 +20,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -74,8 +76,15 @@ public class GameController implements Initializable {
 	private SVGPath alaska, northWestTerritory, greenland, alberta, ontario, quebec, westernUnitedStates, easternUnitedStates, centralAmerica, venezuela, brazil, peru, argentina,
 					iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, russia, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
 					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
+	@FXML
+	private TextArea phasesDescriptionArea;
+	
+	@FXML
+	private ScrollBar scrollBar;
 	
 	private SVGPath[] paths;
+	
+	
 	
 	private Territory territoryAtk = null, territoryDef = null;
 	
@@ -111,11 +120,14 @@ public class GameController implements Initializable {
 				mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia};
 		
 		
+
+		
 		try {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
 			phaseText.setText(""+game.getGamePhase());
 			phaseText.setText("FIRST TURN");
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+			phasesDescriptionArea.setText("PHASES:\n");
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
@@ -211,8 +223,13 @@ public class GameController implements Initializable {
 		case FIRSTTURN:
 			if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
 				if (t.getOwner().getBonusTanks() > 0) {
-					t.getOwner().placeTank(21); //cambia metti 1 al posto di 21
-					t.addTanks(21); //cambia metti 1 al posto di 21
+					int ntanks = 21; //cambiare solo valore alla variabile e non piu ai due parametri (serve per il print)
+					t.getOwner().placeTank(ntanks); //cambia metti 1 al posto di 21
+					t.addTanks(ntanks); //cambia metti 1 al posto di 21
+					
+					this.setPhaseTextArea(game.getCurrentTurn().getName()+
+							" has placed "+ntanks+" tanks"+" in "+ t.getName());
+
 					counterConsecutiveClicks++;
 
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
@@ -241,7 +258,10 @@ public class GameController implements Initializable {
 				if (t.getOwner().getBonusTanks() > 0) {
 					t.getOwner().placeTank(1);
 					t.addTanks(1);
-
+					
+					this.setPhaseTextArea(game.getCurrentTurn().getName()+
+							" has placed 1 "+"tank"+" in "+ t.getName());
+					
 					switchPlayerGraphic();
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 
@@ -393,6 +413,8 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	
+	
 	/**
 	 * Switches the game turn to the next one
 	 */
@@ -400,6 +422,7 @@ public class GameController implements Initializable {
 	
 		// passa il turno al giocatore successivo
 		game.nextTurn();
+		setPhaseTextArea(game.getCurrentTurn().getName()+" turn");
 		switchPhaseGraphic();
 		switchPlayerGraphic();
 		
@@ -645,6 +668,11 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	public void setPhaseTextArea(String text) {
+		phasesDescriptionArea.setText(phasesDescriptionArea.getText()+text+"\n");
+		phasesDescriptionArea.setScrollTop(Double.MAX_VALUE);
+	}
+	
 	public Territory getAttacker() {
 		return territoryAtk;
 	}
@@ -661,11 +689,15 @@ public class GameController implements Initializable {
 		territoryDef = t;
 	}
 	
+	public Player getCurrentPlayer() {
+		return game.getCurrentTurn();
+	}
+	
 	/* Method called when exit button is pressed */
 	@FXML
 	private void exit(final ActionEvent event) {
 		event.consume();
 		Platform.exit();
 	}
-
+  
 }

@@ -83,12 +83,12 @@ public class AttackController implements Initializable {
 	@FXML
     public void cancelButtonPressed(ActionEvent e) throws IOException {
 		
-		GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
-		GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
+		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
+		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
 		// deseleziono i territori attacker e defender
 		GameController.getInstance().setAttacker(null);
 		GameController.getInstance().setDefender(null);
-		//GameController.getInstance().clearAllTerritories();
+		GameController.getInstance().clearAllTerritories();
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
     }
@@ -106,6 +106,9 @@ public class AttackController implements Initializable {
 			defResults = defenderDices.rollDices(defTank);
 			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
 					GameController.getInstance().getDefender());
+			
+			GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+					+" attacked "+GameController.getInstance().getDefender().getName()+" from "+GameController.getInstance().getAttacker().getName());
 			
 			if(atkTank == 2) {
 				atkStream = new FileInputStream("src/risk/view/images/dice/" +0+"_red.png");
@@ -213,6 +216,6 @@ public class AttackController implements Initializable {
 		
 	}
 
-
+ 
 
 }
