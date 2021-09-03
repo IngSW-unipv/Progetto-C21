@@ -1,3 +1,7 @@
+.root {
+  -fx-background-color: radial-gradient(center 50% 50% , radius 65% , rgb(120,162,210), rgb(15,47,90)); /* rgb(120,162,210), rgb(15,47,90) */
+}
+
 Label {
 	-fx-font-family: "Arial";
 	-fx-text-fill: white;
