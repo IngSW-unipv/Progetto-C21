@@ -16,6 +16,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
 
@@ -42,8 +43,7 @@ public class AttackController implements Initializable {
 	
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-    	
+	public void initialize(URL arg0, ResourceBundle arg1) {		
     	attackButton.setDisable(true);
     	territoryAtkLabel.setText(GameController.getInstance().getAttacker().getName());
     	territoryDefLabel.setText(GameController.getInstance().getDefender().getName());
@@ -60,8 +60,6 @@ public class AttackController implements Initializable {
     
 
 		updateNumberButtons();
-		
-
 	}
 	
     /**

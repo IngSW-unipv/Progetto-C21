@@ -37,6 +37,7 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import risk.model.Player;
 import risk.model.PlayersList;
@@ -50,7 +51,7 @@ public class GameController implements Initializable {
 	private Pane rootPane;
 	
 	@FXML
-	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6;
+	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6, cardNumberText;
 	
 	@FXML
 	private VBox usersBox;
@@ -122,8 +123,6 @@ public class GameController implements Initializable {
 				mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia};
 		
 		
-
-		
 		try {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
 			phaseText.setText(""+game.getGamePhase());
@@ -139,8 +138,6 @@ public class GameController implements Initializable {
 		initializeUserBar();
 		updateTerritoriesGraphic();
 		switchPlayerGraphic();
-		
-		
 	}
 
 
@@ -316,7 +313,8 @@ public class GameController implements Initializable {
 						windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true);
 					} catch (IOException e) {
 						e.printStackTrace();
-					}	
+					}
+					updateCardNumberText();
 				}
 
 			}
@@ -485,6 +483,7 @@ public class GameController implements Initializable {
 				switchPhaseGraphic();
 				switchPlayerGraphic();
 				
+			
 				/* PROVA */
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("New turn");
@@ -578,6 +577,11 @@ public class GameController implements Initializable {
 			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-base:" + color);
 			phaseSwitch.setTextFill(Color.WHITE);
 		}
+		updateCardNumberText();		
+	}
+	
+	private void updateCardNumberText() {
+		cardNumberText.setText(String.valueOf(game.getCurrentTurn().getCards().size()));
 	}
 	
 	private ArrayList<Rectangle> getRectangles(HBox hb) {
@@ -604,6 +608,7 @@ public class GameController implements Initializable {
 		window.setResizable(false);
 		window.setTitle(title);
 		window.setScene(mScene);
+		//window.initStyle(StageStyle.UNDECORATED);
 		
 		if (cantclose) {
 			window.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -730,7 +735,7 @@ public class GameController implements Initializable {
 	public Player getCurrentPlayer() {
 		return game.getCurrentTurn();
 	}
-	
+
 	/* Method called when exit button is pressed */
 	@FXML
 	private void exit(final ActionEvent event) {

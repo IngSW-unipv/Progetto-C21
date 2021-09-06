@@ -1,0 +1,8 @@
+.root {
+  -fx-background-color: transparent;
+}
+
+.background {
+  -fx-background-color: #00000080;
+  -fx-background-radius: 50px;
+}

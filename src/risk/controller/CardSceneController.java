@@ -44,11 +44,6 @@ public class CardSceneController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		/* TEST */
-		/* per i test, aggiungo carte al player */
-		for(int i = 0; i < 6; i++)
-			GameController.game.giveCard();
-		
 		/* Inizializzazione variabili */
 		cardSet = new Card[3];
 		cardSet[0] = null;
