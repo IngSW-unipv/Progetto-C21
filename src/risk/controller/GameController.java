@@ -793,6 +793,9 @@ public class GameController implements Initializable {
 	public void setAttackButtonDisable(boolean t) {
 		attackButtonIcon.setDisable(t);
 	}
+	public void setPhaseSwitchButtonDisable(boolean t) {
+		phaseSwitch.setDisable(t);
+	}
 	
 	/* Method called when exit button is pressed */
 	@FXML
