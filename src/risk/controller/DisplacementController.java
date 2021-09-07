@@ -8,9 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import risk.model.RisikoGame;
 
 public class DisplacementController implements Initializable {
-
+	private RisikoGame game;
 	/* queste due label mostrano i nomi dei due territori scelti */
 	@FXML
 	private Label territory1Label, territory2Label;
@@ -45,7 +46,8 @@ public class DisplacementController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		territory1Label.setText(GameController.getInstance().getTerritory1().getName());
+		territory2Label.setText(GameController.getInstance().getTerritory2().getName());
 	}
 
 }

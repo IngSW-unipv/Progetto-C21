@@ -37,7 +37,6 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import risk.model.Player;
 import risk.model.PlayersList;
@@ -51,7 +50,7 @@ public class GameController implements Initializable {
 	private Pane rootPane;
 	
 	@FXML
-	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6, cardNumberText;
+	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6;
 	
 	@FXML
 	private VBox usersBox;
@@ -89,7 +88,7 @@ public class GameController implements Initializable {
 	
 	
 	
-	private Territory territoryAtk = null, territoryDef = null;
+	private Territory territory1 = null, territory2 = null;
 	
 	static RisikoGame game;
 	private static GameController instance;
@@ -123,6 +122,8 @@ public class GameController implements Initializable {
 				mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia};
 		
 		
+
+		
 		try {
 			game = new RisikoGame(playersArr, terrFile, continentsFile, missionsFile);
 			phaseText.setText(""+game.getGamePhase());
@@ -138,6 +139,8 @@ public class GameController implements Initializable {
 		initializeUserBar();
 		updateTerritoriesGraphic();
 		switchPlayerGraphic();
+		
+		
 	}
 
 
@@ -216,7 +219,7 @@ public class GameController implements Initializable {
 		event.consume();
 		boolean enter = true;
 		Territory t = game.getTerritory(((SVGPath) event.getSource()).getId().replace(" ", ""));
-
+		
 		
 		switch (game.getGamePhase()) {
 		case FIRSTTURN:
@@ -282,28 +285,28 @@ public class GameController implements Initializable {
 			 */
 			SVGPath svg = ((SVGPath) event.getSource());
 
-			if(territoryAtk == null) {
+			if(territory1 == null) {
 				/* 
 				 * una volta scelto il territorio attaccante:
 				 * 		1) settare il territorio selezionato graficamente (+10% darker)
 				 * 		2) permettere la scelta del territorio da attaccare
 				 */
 				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
-					territoryAtk = t;
+					territory1 = t;
 					setSelectedTerritoryGraphic(svg, true);
 					phaseSwitch.setDisable(true);
 				}
 
-			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territoryAtk.getName().toLowerCase())) {
-				territoryAtk = null;
+			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
+				territory1 = null;
 				setSelectedTerritoryGraphic(svg, false);
 				phaseSwitch.setDisable(false);
 			}
 
-			if(territoryAtk != null && territoryDef == null) {
+			if(territory1 != null && territory2 == null) {
 
-				if(!game.getCurrentTurn().equals(t.getOwner()) && territoryAtk.isConfinante(t)) {
-					territoryDef = t;
+				if(!game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
+					territory2 = t;
 					
 					
 					phaseSwitch.setDisable(false);
@@ -313,8 +316,7 @@ public class GameController implements Initializable {
 						windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true);
 					} catch (IOException e) {
 						e.printStackTrace();
-					}
-					updateCardNumberText();
+					}	
 				}
 
 			}
@@ -322,7 +324,11 @@ public class GameController implements Initializable {
 			break;
 
 		case FORTIFY:
+			
+			SVGPath svg1 = ((SVGPath) event.getSource());
+			
 			if (game.getCurrentTurn().equals(t.getOwner())) {
+				
 				if (t.getOwner().getBonusTanks() > 0) {
 					t.getOwner().placeTank(1);
 					t.addTanks(1);
@@ -330,13 +336,45 @@ public class GameController implements Initializable {
 					this.setPhaseTextArea(game.getCurrentTurn().getName()+
 							" has placed 1 "+"tank"+" in "+ t.getName());
 					
-					if(game.getCurrentTurn().getBonusTanks() > 0) {
-						phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-					}else phaseSwitch.setText(">>");
+					
+					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+				}
+					else {
+						phaseSwitch.setText(">>");
+						
+						if(game.getCurrentTurn().equals(t.getOwner())) {
+							territory1 = t;
+							setSelectedTerritoryGraphic(svg1, true);
+							phaseSwitch.setDisable(true);
+						} 
+						else if(svg1.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
+							territory1 = null;
+							setSelectedTerritoryGraphic(svg1, false);
+							phaseSwitch.setDisable(false);
+						}
+						
+						if(territory1 != null && territory2 == null) {
+
+							if(!game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
+								territory2 = t;
+								
+								
+								phaseSwitch.setDisable(false);
+								
+								
+								try {
+									windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true);
+								} catch (IOException e) {
+									e.printStackTrace();
+								}	
+							}
+
+						}
+					} 
 						
 					
 
-				} 
+				 
 			}
 			break;
 		}
@@ -483,7 +521,6 @@ public class GameController implements Initializable {
 				switchPhaseGraphic();
 				switchPlayerGraphic();
 				
-			
 				/* PROVA */
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("New turn");
@@ -577,11 +614,6 @@ public class GameController implements Initializable {
 			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-base:" + color);
 			phaseSwitch.setTextFill(Color.WHITE);
 		}
-		updateCardNumberText();		
-	}
-	
-	private void updateCardNumberText() {
-		cardNumberText.setText(String.valueOf(game.getCurrentTurn().getCards().size()));
 	}
 	
 	private ArrayList<Rectangle> getRectangles(HBox hb) {
@@ -608,7 +640,6 @@ public class GameController implements Initializable {
 		window.setResizable(false);
 		window.setTitle(title);
 		window.setScene(mScene);
-		//window.initStyle(StageStyle.UNDECORATED);
 		
 		if (cantclose) {
 			window.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -704,7 +735,7 @@ public class GameController implements Initializable {
 				System.out.println("si");
 				paths[i].setStyle("");
 				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("northAmerica");
+				paths[i].getStyleClass().add("europa");
 			}
 		}
 	}
@@ -716,26 +747,26 @@ public class GameController implements Initializable {
 	public void setPhaseSwitchText(String text) {
 		phaseSwitch.setText(text);
 	}
-	public Territory getAttacker() {
-		return territoryAtk;
+	public Territory getTerritory1() {
+		return territory1;
 	}
 	
-	public Territory getDefender() {
-		return territoryDef;
+	public Territory getTerritory2() {
+		return territory2;
 	}
 	
-	public void setAttacker(Territory t) {
-		territoryAtk = t;
+	public void setTerritory1(Territory t) {
+		territory1 = t;
 	}
 	
-	public void setDefender(Territory t) {
-		territoryDef = t;
+	public void setTerritory2(Territory t) {
+		territory2 = t;
 	}
 	
 	public Player getCurrentPlayer() {
 		return game.getCurrentTurn();
 	}
-
+	
 	/* Method called when exit button is pressed */
 	@FXML
 	private void exit(final ActionEvent event) {

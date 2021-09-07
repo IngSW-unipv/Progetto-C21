@@ -45,10 +45,10 @@ public class AttackController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
     	attackButton.setDisable(true);
-    	territoryAtkLabel.setText(GameController.getInstance().getAttacker().getName());
-    	territoryDefLabel.setText(GameController.getInstance().getDefender().getName());
-    	attackerTanksLabel.setText(String.valueOf(GameController.getInstance().getAttacker().getTanks()));
-    	defenderTanksLabel.setText(String.valueOf(GameController.getInstance().getDefender().getTanks()));
+    	territoryAtkLabel.setText(GameController.getInstance().getTerritory1().getName());
+    	territoryDefLabel.setText(GameController.getInstance().getTerritory2().getName());
+    	attackerTanksLabel.setText(String.valueOf(GameController.getInstance().getTerritory1().getTanks()));
+    	defenderTanksLabel.setText(String.valueOf(GameController.getInstance().getTerritory2().getTanks()));
 
     	setDefTank();
 		attackDices = new DiceShaker();
@@ -66,11 +66,11 @@ public class AttackController implements Initializable {
      * sets the number of defending tanks
      */
     private void setDefTank() {
-    	if(GameController.getInstance().getDefender().getTanks() > 2) {
+    	if(GameController.getInstance().getTerritory2().getTanks() > 2) {
     		defTank = 3;
     	}
     	else
-    		defTank = GameController.getInstance().getDefender().getTanks();
+    		defTank = GameController.getInstance().getTerritory2().getTanks();
     }
 
     /**
@@ -84,8 +84,8 @@ public class AttackController implements Initializable {
 		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
 		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
 		// deseleziono i territori attacker e defender
-		GameController.getInstance().setAttacker(null);
-		GameController.getInstance().setDefender(null);
+		GameController.getInstance().setTerritory1(null);
+		GameController.getInstance().setTerritory2(null);
 		GameController.getInstance().clearAllTerritories();
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
@@ -102,11 +102,11 @@ public class AttackController implements Initializable {
 			
 			atkResults = attackDices.rollDices(atkTank);
 			defResults = defenderDices.rollDices(defTank);
-			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getAttacker(),
-					GameController.getInstance().getDefender());
+			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getTerritory1(),
+					GameController.getInstance().getTerritory2());
 			
 			GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
-					+" attacked "+GameController.getInstance().getDefender().getName()+" from "+GameController.getInstance().getAttacker().getName());
+					+" attacked "+GameController.getInstance().getTerritory2().getName()+" from "+GameController.getInstance().getTerritory1().getName());
 			
 			if(atkTank == 2) {
 				atkStream = new FileInputStream("src/risk/view/images/dice/" +0+"_red.png");
@@ -148,13 +148,13 @@ public class AttackController implements Initializable {
 			}
 				
 	
-			attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getAttacker().getTanks()));
-			defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getDefender().getTanks()));
+			attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getTerritory1().getTanks()));
+			defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getTerritory2().getTanks()));
 			updateNumberButtons();
 			setDefTank();
 
 
-			if(GameController.getInstance().getDefender().getOwner().equals(GameController.getInstance().getAttacker().getOwner())) {
+			if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
 				defenderTanksLabel.setText("CONQUERED");
 				oneButton.setDisable(true);
 				twoButton.setDisable(true);
@@ -177,15 +177,15 @@ public class AttackController implements Initializable {
 		oneButton.setSelected(false);
 		twoButton.setSelected(false);
 		threeButton.setSelected(false);
-		if(GameController.getInstance().getAttacker().getTanks() == 1) {
+		if(GameController.getInstance().getTerritory1().getTanks() == 1) {
 			oneButton.setDisable(true);
     		twoButton.setDisable(true);
     		threeButton.setDisable(true);
 		}
-		if(GameController.getInstance().getAttacker().getTanks() == 2) {
+		if(GameController.getInstance().getTerritory1().getTanks() == 2) {
     		twoButton.setDisable(true);
     		threeButton.setDisable(true);
-    	} else if(GameController.getInstance().getAttacker().getTanks() == 3)
+    	} else if(GameController.getInstance().getTerritory1().getTanks() == 3)
     		threeButton.setDisable(true);
     	
     	oneButton.setOnAction(e -> {
