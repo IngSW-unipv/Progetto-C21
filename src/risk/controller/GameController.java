@@ -410,7 +410,7 @@ public class GameController implements Initializable {
 			case "asia":
 				svg.setStyle("-fx-fill: #5DBB5D");
 				break;
-			}
+			}//aaa
 		} else {
 			//decolora il territorio selezionato
 			switch(svg.getStyleClass().get(0)) {
