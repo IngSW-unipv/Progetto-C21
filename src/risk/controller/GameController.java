@@ -89,8 +89,18 @@ public class GameController implements Initializable {
 	
 	private SVGPath[] paths;
 	
+	private boolean fortified;
 	
 	
+	
+	public boolean isFortified() {
+		return fortified;
+	}
+
+	public void setFortified(boolean fortified) {
+		this.fortified = fortified;
+	}
+
 	private Territory territory1 = null, territory2 = null;
 	private SVGPath svgTerr2;
 	
@@ -262,6 +272,7 @@ public class GameController implements Initializable {
 
 			break;
 		case DRAFT:
+			fortified=false;
 			if (game.getCurrentTurn().equals(t.getOwner())) {
 				if (t.getOwner().getBonusTanks() > 0) {
 					t.getOwner().placeTank(1);
@@ -341,41 +352,42 @@ public class GameController implements Initializable {
 			
 			
 			SVGPath svg1 = ((SVGPath) event.getSource());
-			
-			if(territory1 == null) {
-				/* 
-				 * una volta scelto il territorio attaccante:
-				 * 		1) settare il territorio selezionato graficamente (+10% darker)
-				 * 		2) permettere la scelta del territorio da attaccare
-				 */
-				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
-					territory1 = t;
-					setSelectedTerritoryGraphic(svg1, true);
-					phaseSwitch.setDisable(true);
-				}
-
-			} else if(svg1.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
-				territory1 = null;
-				setSelectedTerritoryGraphic(svg1, false);
-				phaseSwitch.setDisable(false);
-			}
-
-			if(territory1 != null && territory2 == null) {
-
-				if(game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
-					territory2 = t;
-					
-					
+			if(!fortified) {
+				if(territory1 == null) {
+					/* 
+					 * una volta scelto il territorio attaccante:
+					 * 		1) settare il territorio selezionato graficamente (+10% darker)
+					 * 		2) permettere la scelta del territorio da attaccare
+					 */
+					if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
+						territory1 = t;
+						setSelectedTerritoryGraphic(svg1, true);
+						phaseSwitch.setDisable(true);
+					}
+	
+				} else if(svg1.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
+					territory1 = null;
+					setSelectedTerritoryGraphic(svg1, false);
 					phaseSwitch.setDisable(false);
-					
-					
-					// apri schemata displacement
-					try {
+				}
+	
+				if(territory1 != null && territory2 == null) {
+	
+					if(game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
+						territory2 = t;
 						
-						windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}	
+						
+						phaseSwitch.setDisable(false);
+						
+						
+						// apri schemata displacement
+						try {
+							
+							windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}	
+					}
 				}
 
 			}

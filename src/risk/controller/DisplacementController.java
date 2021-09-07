@@ -124,6 +124,7 @@ public class DisplacementController implements Initializable {
 		
 		GameController.game.moveTanks(territory1, territory2, Integer.parseInt(depTankLabel.getText()));
 		GameController.getInstance().updateTerritoriesGraphic();
+		GameController.getInstance().setFortified(true);
 		resetAll();
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
