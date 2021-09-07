@@ -92,6 +92,7 @@ public class AttackController implements Initializable {
 		GameController.getInstance().clearAllTerritories();
 		GameController.getInstance().setAttackButtonDisable(true);
 		GameController.getInstance().setPhaseSwitchButtonDisable(false);
+		GameController.getInstance().updateTerritoriesGraphic();
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
     }
