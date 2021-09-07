@@ -82,6 +82,9 @@ public class GameController implements Initializable {
 	private TextArea phasesDescriptionArea;
 	
 	@FXML
+	private VBox attackButtonIcon;
+	
+	@FXML
 	private ScrollBar scrollBar;
 	
 	private SVGPath[] paths;
@@ -89,6 +92,7 @@ public class GameController implements Initializable {
 	
 	
 	private Territory territory1 = null, territory2 = null;
+	private SVGPath svgTerr2;
 	
 	
 	static RisikoGame game;
@@ -131,6 +135,7 @@ public class GameController implements Initializable {
 			phaseText.setText("FIRST TURN");
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 			phasesDescriptionArea.setText("PHASES:\n");
+			attackButtonIcon.setDisable(true);
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
@@ -287,42 +292,48 @@ public class GameController implements Initializable {
 			SVGPath svg = ((SVGPath) event.getSource());
 
 			if(territory1 == null) {
-				/* 
-				 * una volta scelto il territorio attaccante:
-				 * 		1) settare il territorio selezionato graficamente (+10% darker)
-				 * 		2) permettere la scelta del territorio da attaccare
-				 */
+				// se e' il tuo e ha >1 tank lo selezioni
 				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
 					territory1 = t;
 					setSelectedTerritoryGraphic(svg, true);
 					phaseSwitch.setDisable(true);
+					attackButtonIcon.setDisable(true);
 				}
-
+			// se invece premo lo stesso territorio gia' selezionato, allora lo deseleziono e deseleziono anche il secondo
 			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
 				territory1 = null;
 				setSelectedTerritoryGraphic(svg, false);
+				territory2 = null;
+				if(svgTerr2 != null)
+					setSelectedTerritoryGraphic(svgTerr2, false);
 				phaseSwitch.setDisable(false);
+				attackButtonIcon.setDisable(true);
 			}
 
-			if(territory1 != null && territory2 == null) {
 
+			// se terr1 e' selezionato e terr2 invece no
+			if(territory1 != null && territory2 == null) {
+				// se il terr premuto e' confinante con il primo lo seleziono
 				if(!game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
 					territory2 = t;
-					
-					
-					phaseSwitch.setDisable(false);
-					
-					// apri schemata attacco
-					try {
-						windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}	
+					svgTerr2 = svg;
+					setSelectedTerritoryGraphic(svg, true);
+					attackButtonIcon.setDisable(false);
+					phaseSwitch.setDisable(true);
 				}
-
+			// se invece premo lo stesso territorio gia' selezionato, allora lo deseleziono
+			} else if(territory2 != null) {
+				if(svg.getId().replace(" ", "").toLowerCase().equals(territory2.getName().toLowerCase())) {
+					territory2 = null;
+					setSelectedTerritoryGraphic(svg, false);
+					if(territory1 == null)
+						phaseSwitch.setDisable(false);
+					else
+						phaseSwitch.setDisable(true);
+					attackButtonIcon.setDisable(true);
+				}
 			}
-			
-			
+
 			break;
 
 		case FORTIFY:
@@ -682,6 +693,17 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	@FXML
+	public void attackButtonIconPressed(MouseEvent event){
+		if(game.getGamePhase().equals(GAME_PHASE.ATTACK)) {
+			try {
+				windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void clearAllTerritories() {
 		
 		for(int i =0; i < paths.length;i++) {
@@ -759,6 +781,13 @@ public class GameController implements Initializable {
 	
 	public Player getCurrentPlayer() {
 		return game.getCurrentTurn();
+	}
+	
+	public void setAttackButtonDisable(boolean t) {
+		attackButtonIcon.setDisable(t);
+	}
+	public void setPhaseSwitchButtonDisable(boolean t) {
+		phaseSwitch.setDisable(t);
 	}
 	
 	/* Method called when exit button is pressed */
