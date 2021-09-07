@@ -291,6 +291,7 @@ public class GameController implements Initializable {
 			SVGPath svg = ((SVGPath) event.getSource());
 
 			if(territory1 == null) {
+				updateTerritoriesGraphic();
 				// se e' il tuo e ha >1 tank lo selezioni
 				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
 					territory1 = t;
