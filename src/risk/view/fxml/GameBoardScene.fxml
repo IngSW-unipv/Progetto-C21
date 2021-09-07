@@ -314,9 +314,21 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </VBox>
-            <Text fx:id="cardNumberText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardNumber" text="12" translateY="2.0" />
+            <Text fx:id="cardNumberText" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardNumber" text="12" translateY="2.0" />
          </children>
       </StackPane>
+      <VBox layoutX="230.0" layoutY="644.0" onMousePressed="#attackIconPressed" scaleX="0.6" scaleY="0.6" styleClass="missionBox">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../images/attack-icon.png" />
+               </image>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </VBox>
       <Line endX="43.87725830078125" endY="57.679534912109375" layoutX="500.0" layoutY="167.0" startX="49.44866943359375" startY="99.46542358398438" />
       <Line endX="104.0" endY="100.0" layoutX="510.0" layoutY="177.0" startX="84.9488525390625" startY="129.39413452148438" />
       <Line endX="101.0" endY="-2.0" layoutX="460.0" layoutY="127.0" startX="99.8951416015625" startY="13.64349365234375" />
