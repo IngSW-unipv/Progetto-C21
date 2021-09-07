@@ -90,6 +90,7 @@ public class GameController implements Initializable {
 	
 	private Territory territory1 = null, territory2 = null;
 	
+	
 	static RisikoGame game;
 	private static GameController instance;
 
@@ -321,61 +322,54 @@ public class GameController implements Initializable {
 
 			}
 			
+			
 			break;
 
 		case FORTIFY:
 			
+			
+			
 			SVGPath svg1 = ((SVGPath) event.getSource());
 			
-			if (game.getCurrentTurn().equals(t.getOwner())) {
-				
-				if (t.getOwner().getBonusTanks() > 0) {
-					t.getOwner().placeTank(1);
-					t.addTanks(1);
-					
-					this.setPhaseTextArea(game.getCurrentTurn().getName()+
-							" has placed 1 "+"tank"+" in "+ t.getName());
-					
-					
-					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+			if(territory1 == null) {
+				/* 
+				 * una volta scelto il territorio attaccante:
+				 * 		1) settare il territorio selezionato graficamente (+10% darker)
+				 * 		2) permettere la scelta del territorio da attaccare
+				 */
+				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
+					territory1 = t;
+					setSelectedTerritoryGraphic(svg1, true);
+					phaseSwitch.setDisable(true);
 				}
-					else {
-						phaseSwitch.setText(">>");
-						
-						if(game.getCurrentTurn().equals(t.getOwner())) {
-							territory1 = t;
-							setSelectedTerritoryGraphic(svg1, true);
-							phaseSwitch.setDisable(true);
-						} 
-						else if(svg1.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
-							territory1 = null;
-							setSelectedTerritoryGraphic(svg1, false);
-							phaseSwitch.setDisable(false);
-						}
-						
-						if(territory1 != null && territory2 == null) {
 
-							if(!game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
-								territory2 = t;
-								
-								
-								phaseSwitch.setDisable(false);
-								
-								
-								try {
-									windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true);
-								} catch (IOException e) {
-									e.printStackTrace();
-								}	
-							}
-
-						}
-					} 
-						
-					
-
-				 
+			} else if(svg1.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
+				territory1 = null;
+				setSelectedTerritoryGraphic(svg1, false);
+				phaseSwitch.setDisable(false);
 			}
+
+			if(territory1 != null && territory2 == null) {
+
+				if(game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
+					territory2 = t;
+					
+					
+					phaseSwitch.setDisable(false);
+					
+					
+					// apri schemata displacement
+					try {
+						
+						windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}	
+				}
+
+			}
+						
+						
 			break;
 		}
 

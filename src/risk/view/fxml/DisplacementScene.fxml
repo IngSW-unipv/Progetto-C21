@@ -49,13 +49,13 @@
                <children>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Button fx:id="minButton" mnemonicParsing="false" prefWidth="70.0" text="MIN" textAlignment="CENTER">
+                        <Button fx:id="minButton" mnemonicParsing="false" onMousePressed="#minButtonPressed" prefWidth="70.0" text="MIN" textAlignment="CENTER">
                            <styleClass>
                               <String fx:value="numberButton" />
                               <String fx:value="resize" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="minusButton" mnemonicParsing="false" prefWidth="43.0" text="-" textAlignment="CENTER">
+                        <Button fx:id="minusButton" mnemonicParsing="false" onMousePressed="#minusButtonPressed" prefWidth="43.0" text="-" textAlignment="CENTER">
                            <styleClass>
                               <String fx:value="numberButton" />
                               <String fx:value="resize" />
@@ -71,13 +71,13 @@
                   </VBox>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Button fx:id="plusButton" mnemonicParsing="false" prefWidth="43.0" text="+" textAlignment="CENTER">
+                        <Button fx:id="plusButton" mnemonicParsing="false" onMousePressed="#plusButtonPressed" prefWidth="43.0" text="+" textAlignment="CENTER">
                            <styleClass>
                               <String fx:value="numberButton" />
                               <String fx:value="resize" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="maxButton" mnemonicParsing="false" prefWidth="70.0" text="MAX" textAlignment="CENTER">
+                        <Button fx:id="maxButton" mnemonicParsing="false" onMousePressed="#maxButtonPressed" prefWidth="70.0" text="MAX" textAlignment="CENTER">
                            <styleClass>
                               <String fx:value="numberButton" />
                               <String fx:value="resize" />
@@ -98,7 +98,7 @@
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <Button fx:id="depButton" alignment="CENTER" mnemonicParsing="false" text="DEPLACEMENT" textAlignment="CENTER">
+                        <Button fx:id="depButton" alignment="CENTER" mnemonicParsing="false" onMousePressed="#displacementButtonPressed" text="DISPLACEMENT" textAlignment="CENTER">
                            <styleClass>
                               <String fx:value="resize" />
                               <String fx:value="bottomButtons" />
@@ -108,7 +108,7 @@
                   </VBox>
                   <VBox alignment="CENTER" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" prefWidth="155.0" text="CANCEL" textAlignment="CENTER">
+                        <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" onMousePressed="#cancelButtonPressed" prefWidth="155.0" text="CANCEL" textAlignment="CENTER">
                            <styleClass>
                               <String fx:value="resize" />
                               <String fx:value="bottomButtons" />

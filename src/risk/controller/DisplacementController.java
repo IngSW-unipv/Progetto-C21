@@ -1,14 +1,23 @@
 package risk.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import risk.model.RisikoGame;
+import risk.model.Territory;
 
 public class DisplacementController implements Initializable {
 	private RisikoGame game;
@@ -43,11 +52,88 @@ public class DisplacementController implements Initializable {
 	Il pulsante cancel deve azzerare la selezione dei due territori e chiudere la schermata */
 	@FXML
 	private Button depButton, cancelButton;
-	
+	private Territory territory1;
+	private Territory territory2;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		territory1Label.setText(GameController.getInstance().getTerritory1().getName());
-		territory2Label.setText(GameController.getInstance().getTerritory2().getName());
+		territory1 = GameController.getInstance().getTerritory1();
+		territory2 = GameController.getInstance().getTerritory2();
+		DoubleProperty d1 =new SimpleDoubleProperty(territory1.getTanks());
+		DoubleProperty d2 =new SimpleDoubleProperty(territory2.getTanks());
+		
+		territory1Label.setText(territory1.getName());
+		territory2Label.setText(territory2.getName());
+		newTank1Label.setText(""+territory1.getTanks());
+		newTank2Label.setText(""+territory2.getTanks());
+		slider.setValue(1);
+		slider.setMax(((int)territory1.getTanks()-1));
+		slider.setMin(((int)1));
+		depTankLabel.textProperty().bind(Bindings.format("%.0f",slider.valueProperty()));
+		newTank1Label.textProperty().bind(Bindings.format("%.0f",d1.subtract(slider.valueProperty())));
+		newTank2Label.textProperty().bind(Bindings.format("%.0f",d2.add(slider.valueProperty())));
+	}
+	
+	@FXML
+    public void cancelButtonPressed(MouseEvent e){
+		
+		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
+		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
+		// deseleziono i territori attacker e defender
+		resetAll();
+    	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		window.close();
+    }
+	
+	@FXML
+    public void minButtonPressed(MouseEvent e){
+		
+		slider.setValue(1);
+		
+    }
+	
+	@FXML
+    public void maxButtonPressed(MouseEvent e){
+		
+		slider.setValue(slider.getMax());
+		
+    }
+	
+	@FXML
+    public void minusButtonPressed(MouseEvent e){
+		
+		
+			slider.setValue(slider.getValue()-1);
+		
+		
+		
+    }
+	
+	@FXML
+    public void plusButtonPressed(MouseEvent e){
+		
+		
+		slider.setValue(slider.getValue()+1);
+		
+		
+		
+    }
+	
+	@FXML
+    public void displacementButtonPressed(MouseEvent e){
+		
+		
+		GameController.game.moveTanks(territory1, territory2, Integer.parseInt(depTankLabel.getText()));
+		GameController.getInstance().updateTerritoriesGraphic();
+		resetAll();
+		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		window.close();
+    }
+	
+	public void resetAll() {
+		
+		GameController.getInstance().setTerritory1(null);
+		GameController.getInstance().setTerritory2(null);
+		GameController.getInstance().clearAllTerritories();
 	}
 
 }
