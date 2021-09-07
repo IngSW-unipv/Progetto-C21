@@ -92,6 +92,7 @@ public class GameController implements Initializable {
 	
 	
 	private Territory territory1 = null, territory2 = null;
+	private SVGPath svgTerr2;
 	
 	static RisikoGame game;
 	private static GameController instance;
@@ -290,42 +291,48 @@ public class GameController implements Initializable {
 			SVGPath svg = ((SVGPath) event.getSource());
 
 			if(territory1 == null) {
-				/* 
-				 * una volta scelto il territorio attaccante:
-				 * 		1) settare il territorio selezionato graficamente (+10% darker)
-				 * 		2) permettere la scelta del territorio da attaccare
-				 */
+				// se e' il tuo e ha >1 tank lo selezioni
 				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
 					territory1 = t;
 					setSelectedTerritoryGraphic(svg, true);
 					phaseSwitch.setDisable(true);
 					attackButtonIcon.setDisable(true);
 				}
-
+			// se invece premo lo stesso territorio gia' selezionato, allora lo deseleziono e deseleziono anche il secondo
 			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
 				territory1 = null;
 				setSelectedTerritoryGraphic(svg, false);
+				territory2 = null;
+				if(svgTerr2 != null)
+					setSelectedTerritoryGraphic(svgTerr2, false);
 				phaseSwitch.setDisable(false);
 				attackButtonIcon.setDisable(true);
 			}
-			
 
+
+			// se terr1 e' selezionato e terr2 invece no
 			if(territory1 != null && territory2 == null) {
-
+				// se il terr premuto e' confinante con il primo lo seleziono
 				if(!game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
 					territory2 = t;
+					svgTerr2 = svg;
 					setSelectedTerritoryGraphic(svg, true);
 					attackButtonIcon.setDisable(false);
-					phaseSwitch.setDisable(false);
+					phaseSwitch.setDisable(true);
 				}
-
-			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territory2.getName().toLowerCase())) {
-				territory2 = null;
-				setSelectedTerritoryGraphic(svg, false);
-				phaseSwitch.setDisable(false);
-				attackButtonIcon.setDisable(true);
+			// se invece premo lo stesso territorio gia' selezionato, allora lo deseleziono
+			} else if(territory2 != null) {
+				if(svg.getId().replace(" ", "").toLowerCase().equals(territory2.getName().toLowerCase())) {
+					territory2 = null;
+					setSelectedTerritoryGraphic(svg, false);
+					if(territory1 == null)
+						phaseSwitch.setDisable(false);
+					else
+						phaseSwitch.setDisable(true);
+					attackButtonIcon.setDisable(true);
+				}
 			}
-			
+
 			break;
 
 		case FORTIFY:
