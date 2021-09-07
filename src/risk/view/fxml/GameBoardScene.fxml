@@ -317,7 +317,7 @@
             <Text fx:id="cardNumberText" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="cardNumber" text="12" translateY="2.0" />
          </children>
       </StackPane>
-      <VBox layoutX="230.0" layoutY="644.0" scaleX="0.6" scaleY="0.6" styleClass="missionBox">
+      <VBox fx:id="attackButtonIcon" layoutX="230.0" layoutY="644.0" onMousePressed="#attackButtonIconPressed" scaleX="0.6" scaleY="0.6" styleClass="missionBox">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7">
                <image>

@@ -82,6 +82,9 @@ public class GameController implements Initializable {
 	private TextArea phasesDescriptionArea;
 	
 	@FXML
+	private VBox attackButtonIcon;
+	
+	@FXML
 	private ScrollBar scrollBar;
 	
 	private SVGPath[] paths;
@@ -130,6 +133,7 @@ public class GameController implements Initializable {
 			phaseText.setText("FIRST TURN");
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 			phasesDescriptionArea.setText("PHASES:\n");
+			attackButtonIcon.setDisable(true);
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
@@ -295,30 +299,31 @@ public class GameController implements Initializable {
 					territory1 = t;
 					setSelectedTerritoryGraphic(svg, true);
 					phaseSwitch.setDisable(true);
+					attackButtonIcon.setDisable(true);
 				}
 
 			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
 				territory1 = null;
 				setSelectedTerritoryGraphic(svg, false);
 				phaseSwitch.setDisable(false);
+				attackButtonIcon.setDisable(true);
 			}
+			
 
 			if(territory1 != null && territory2 == null) {
 
 				if(!game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
 					territory2 = t;
-					
-					
+					setSelectedTerritoryGraphic(svg, true);
+					attackButtonIcon.setDisable(false);
 					phaseSwitch.setDisable(false);
-					
-					// apri schemata attacco
-					try {
-						windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}	
 				}
 
+			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territory2.getName().toLowerCase())) {
+				territory2 = null;
+				setSelectedTerritoryGraphic(svg, false);
+				phaseSwitch.setDisable(false);
+				attackButtonIcon.setDisable(true);
 			}
 			
 			break;
@@ -688,6 +693,17 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	@FXML
+	public void attackButtonIconPressed(MouseEvent event){
+		if(game.getGamePhase().equals(GAME_PHASE.ATTACK)) {
+			try {
+				windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void clearAllTerritories() {
 		
 		for(int i =0; i < paths.length;i++) {
@@ -765,6 +781,10 @@ public class GameController implements Initializable {
 	
 	public Player getCurrentPlayer() {
 		return game.getCurrentTurn();
+	}
+	
+	public void setAttackButtonDisable(boolean t) {
+		attackButtonIcon.setDisable(t);
 	}
 	
 	/* Method called when exit button is pressed */
