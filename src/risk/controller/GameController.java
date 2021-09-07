@@ -333,7 +333,7 @@ public class GameController implements Initializable {
 					phaseSwitch.setDisable(true);
 				}
 			// se invece premo lo stesso territorio gia' selezionato, allora lo deseleziono
-			} else if(territory2 != null) {
+			} else if(territory1 != null && territory2 != null) {
 				if(svg.getId().replace(" ", "").toLowerCase().equals(territory2.getName().toLowerCase())) {
 					territory2 = null;
 					setSelectedTerritoryGraphic(svg, false);
@@ -342,6 +342,13 @@ public class GameController implements Initializable {
 					else
 						phaseSwitch.setDisable(true);
 					attackButtonIcon.setDisable(true);
+				} else if(!game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
+					setSelectedTerritoryGraphic(svgTerr2, false);
+					territory2 = t;
+					svgTerr2 = svg;
+					setSelectedTerritoryGraphic(svg, true);
+					attackButtonIcon.setDisable(false);
+					phaseSwitch.setDisable(true);
 				}
 			}
 
