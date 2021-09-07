@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
-public class DeplacementController implements Initializable {
+public class DisplacementController implements Initializable {
 
 	/* queste due label mostrano i nomi dei due territori scelti */
 	@FXML
