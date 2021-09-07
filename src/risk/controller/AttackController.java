@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
+import risk.model.Territory;
 
 public class AttackController implements Initializable {
 	DiceShaker attackDices;
@@ -40,15 +41,17 @@ public class AttackController implements Initializable {
 	private int[] atkResults;		// risultati del lancio dei dadi dell'attaccante
 	private int[] defResults;
 	private RisikoGame game;
+	private Territory territory1= GameController.getInstance().getTerritory1();
+	private	Territory territory2= GameController.getInstance().getTerritory2();
 	
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {		
+	public void initialize(URL arg0, ResourceBundle arg1) {
     	attackButton.setDisable(true);
-    	territoryAtkLabel.setText(GameController.getInstance().getTerritory1().getName());
-    	territoryDefLabel.setText(GameController.getInstance().getTerritory2().getName());
-    	attackerTanksLabel.setText(String.valueOf(GameController.getInstance().getTerritory1().getTanks()));
-    	defenderTanksLabel.setText(String.valueOf(GameController.getInstance().getTerritory2().getTanks()));
+    	territoryAtkLabel.setText(territory1.getName());
+    	territoryDefLabel.setText(territory2.getName());
+    	attackerTanksLabel.setText(String.valueOf(territory1.getTanks()));
+    	defenderTanksLabel.setText(String.valueOf(territory2.getTanks()));
 
     	setDefTank();
 		attackDices = new DiceShaker();
@@ -66,11 +69,11 @@ public class AttackController implements Initializable {
      * sets the number of defending tanks
      */
     private void setDefTank() {
-    	if(GameController.getInstance().getTerritory2().getTanks() > 2) {
+    	if(territory2.getTanks() > 2) {
     		defTank = 3;
     	}
     	else
-    		defTank = GameController.getInstance().getTerritory2().getTanks();
+    		defTank = territory2.getTanks();
     }
 
     /**
@@ -103,11 +106,11 @@ public class AttackController implements Initializable {
 			
 			atkResults = attackDices.rollDices(atkTank);
 			defResults = defenderDices.rollDices(defTank);
-			GameController.game.battle(atkResults, defResults, atkTank, defTank, GameController.getInstance().getTerritory1(),
-					GameController.getInstance().getTerritory2());
+			GameController.game.battle(atkResults, defResults, atkTank, defTank, territory1,
+					territory2);
 			
 			GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
-					+" attacked "+GameController.getInstance().getTerritory2().getName()+" from "+GameController.getInstance().getTerritory1().getName());
+					+" attacked "+territory2.getName()+" from "+territory1.getName());
 			
 			if(atkTank == 2) {
 				atkStream = new FileInputStream("src/risk/view/images/dice/" +0+"_red.png");
@@ -149,8 +152,8 @@ public class AttackController implements Initializable {
 			}
 				
 	
-			attackerTanksLabel.setText(Integer.toString(GameController.getInstance().getTerritory1().getTanks()));
-			defenderTanksLabel.setText(Integer.toString(GameController.getInstance().getTerritory2().getTanks()));
+			attackerTanksLabel.setText(Integer.toString(territory1.getTanks()));
+			defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
 			updateNumberButtons();
 			setDefTank();
 
@@ -178,15 +181,15 @@ public class AttackController implements Initializable {
 		oneButton.setSelected(false);
 		twoButton.setSelected(false);
 		threeButton.setSelected(false);
-		if(GameController.getInstance().getTerritory1().getTanks() == 1) {
+		if(territory1.getTanks() == 1) {
 			oneButton.setDisable(true);
     		twoButton.setDisable(true);
     		threeButton.setDisable(true);
 		}
-		if(GameController.getInstance().getTerritory1().getTanks() == 2) {
+		if(territory1.getTanks() == 2) {
     		twoButton.setDisable(true);
     		threeButton.setDisable(true);
-    	} else if(GameController.getInstance().getTerritory1().getTanks() == 3)
+    	} else if(territory1.getTanks() == 3)
     		threeButton.setDisable(true);
     	
     	oneButton.setOnAction(e -> {
