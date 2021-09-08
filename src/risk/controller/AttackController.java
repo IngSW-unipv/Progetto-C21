@@ -30,7 +30,7 @@ public class AttackController implements Initializable {
 	
 	@FXML
 	private Button attackButton, cancelButton;
-	
+	 
 	@FXML
 	private ToggleButton oneButton, twoButton,  threeButton;
 	
