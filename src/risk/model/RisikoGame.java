@@ -227,9 +227,10 @@ public class RisikoGame {
 		}
 			
 
-		if (getPlayer(defender.getOwner()).getTanks() == 0) {
+		/*if (getPlayer(defender.getOwner()).getTanks() == 0) {
 			getPlayer(defender.getOwner()).setEliminated(true);
-		}
+			System.out.println("godo");
+		}*/
 	}
 	
 
@@ -245,6 +246,11 @@ public class RisikoGame {
 		}
 		getPlayer(attacker.getOwner()).addTerritory();
 		getPlayer(defender.getOwner()).removeTerritory();
+		
+		if (getPlayer(defender.getOwner()).getTanks() == 0) {
+			getPlayer(defender.getOwner()).setEliminated(true);
+			
+		}
 		getTerritory(defender).setOwner(getTerritory(attacker).getOwner());
 		moveTanks(getTerritory(attacker), getTerritory(defender), counter);
 		

@@ -653,5 +653,38 @@
             <Pane mouseTransparent="true" styleClass="statusBar_overlay" />
          </children>
       </StackPane>
+      <VBox alignment="CENTER" layoutX="1206.0" layoutY="208.0" prefHeight="74.0" prefWidth="57.0">
+         <children>
+            <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/eliminated.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="1089.0" layoutY="286.0" prefHeight="74.0" prefWidth="57.0" />
+      <VBox alignment="CENTER" layoutX="1099.0" layoutY="296.0" prefHeight="74.0" prefWidth="57.0">
+         <children>
+            <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/eliminated.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="1099.0" layoutY="296.0" prefHeight="74.0" prefWidth="57.0">
+         <children>
+            <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/eliminated.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="1113.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/eliminated.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
