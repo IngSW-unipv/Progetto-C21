@@ -162,9 +162,10 @@ public class CardSceneController implements Initializable{
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Bonus");
 		alert.setHeaderText(null);
-		alert.setContentText("You recived " + bonus + " bonus armies!");
+		alert.setContentText("You received " + bonus + " bonus armies!");
 		alert.showAndWait();
-		GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " recived " + bonus + " bonus armies");
+		GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
+		GameController.getInstance().updateCardsNumber();
     	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.close();
 	}

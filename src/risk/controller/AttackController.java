@@ -162,6 +162,8 @@ public class AttackController implements Initializable {
 
 			if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
 				defenderTanksLabel.setText("CONQUERED");
+				GameController.game.giveCard();
+				GameController.getInstance().updateCardsNumber();
 				oneButton.setDisable(true);
 				twoButton.setDisable(true);
 				threeButton.setDisable(true);

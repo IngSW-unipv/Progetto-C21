@@ -50,7 +50,7 @@ public class GameController implements Initializable {
 	private Pane rootPane;
 	
 	@FXML
-	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6;
+	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6,cardNumberText;
 	
 	@FXML
 	private VBox usersBox;
@@ -86,6 +86,7 @@ public class GameController implements Initializable {
 	
 	@FXML
 	private ScrollBar scrollBar;
+
 	
 	private SVGPath[] paths;
 	
@@ -571,15 +572,15 @@ public class GameController implements Initializable {
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-			setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You recived" + game.getCurrentTurn().getBonusTanks() + " bonus armies");
+			setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
 			switchPhaseGraphic();
 			switchPlayerGraphic();
-			
+			updateCardsNumber();
 			/* PROVA */
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("New turn");
 			alert.setHeaderText(null);
-			alert.setContentText(game.getCurrentTurn().getName() + " turn! You recived" + game.getCurrentTurn().getBonusTanks() + " bonus armies");
+			alert.setContentText(game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
 			alert.showAndWait();
 			break;
 		}
@@ -778,6 +779,10 @@ public class GameController implements Initializable {
 	public void setPhaseTextArea(String text) {
 		phasesDescriptionArea.setText(phasesDescriptionArea.getText()+text+"\n");
 		phasesDescriptionArea.setScrollTop(Double.MAX_VALUE);
+	}
+	
+	protected void updateCardsNumber() {
+		cardNumberText.setText(""+game.getCurrentTurn().getCards().size());
 	}
 	public void setPhaseSwitchText(String text) {
 		phaseSwitch.setText(text);

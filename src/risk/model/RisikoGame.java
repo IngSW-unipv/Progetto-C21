@@ -21,7 +21,8 @@ public class RisikoGame {
 	private GAME_PHASE gamePhase;
 	private Player currentTurn;
 	private int turnCounter;
-//	private boolean conquerMade;
+	private int conqueredTerritories;
+	
 	
 	/**
 	 * Creates and initializes a RisikoGame
@@ -61,7 +62,7 @@ public class RisikoGame {
 //		if(currentTurn.isAI()) {
 //			nextTurn();
 //		} 
-		// conquerMade = false;
+		 
 		
 	}
 	
@@ -103,16 +104,17 @@ public class RisikoGame {
 		case DRAFT:
 			gamePhase = GAME_PHASE.ATTACK;
 			
+			
 			break;
 		case ATTACK:
-			/*
-			 * if(conquerMade) { giveCard(); }
-			 */
+			
+			 
 			gamePhase = GAME_PHASE.FORTIFY;
 			
 			break;
 		case FORTIFY:
-
+			
+			conqueredTerritories = 0;
 			giveBonus(currentTurn);
 			gamePhase = GAME_PHASE.DRAFT;
 			
@@ -218,8 +220,12 @@ public class RisikoGame {
 				atkWin--;
 			}
 		}
-		if (getTerritory(defender).getTanks() == 0)
+		if (getTerritory(defender).getTanks() == 0) {
+			
 			conquer(getTerritory(attacker), getTerritory(defender), atkWin);
+			conqueredTerritories++;
+		}
+			
 
 		if (getPlayer(defender.getOwner()).getTanks() == 0) {
 			getPlayer(defender.getOwner()).setEliminated(true);
@@ -751,9 +757,17 @@ public class RisikoGame {
 	 * Gives a card to a Player then shuffles them
 	 */
 	public void giveCard() {
-		getPlayer(currentTurn).giveCard(cards.get(0));
-		cards.remove(0);
-		shuffleCards();
+		
+		if(conqueredTerritories == 1) {
+			getPlayer(currentTurn).giveCard(cards.get(0));
+			cards.remove(0);
+			shuffleCards();
+		}
+			
+		
+			
+		
+		
 	}
 	
 //	/**
