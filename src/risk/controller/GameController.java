@@ -285,7 +285,7 @@ public class GameController implements Initializable {
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
-						nextPhase();
+						phaseSwitch.setText(">>");
 						enter = false;
 					}
 
@@ -541,7 +541,7 @@ public class GameController implements Initializable {
 				game.nextPhase();
 				phaseText.setText(game.getGamePhase().toString());
 				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-				setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You recived" + game.getCurrentTurn().getBonusTanks() + " bonus armies");
+				setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
 				switchPhaseGraphic();
 				switchPlayerGraphic();
 				
@@ -549,7 +549,7 @@ public class GameController implements Initializable {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("New turn");
 				alert.setHeaderText(null);
-				alert.setContentText(game.getCurrentTurn().getName() + " turn! You recived" + game.getCurrentTurn().getBonusTanks() + " bonus armies");
+				alert.setContentText(game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
 				alert.showAndWait();
 			}
 			break;
@@ -697,7 +697,7 @@ public class GameController implements Initializable {
 	
 	@FXML
 	public void cardIconPressed(MouseEvent event){
-		if(game.getGamePhase().equals(GAME_PHASE.FORTIFY)) {
+		if(game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
 			try {
 				windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", true);
 			} catch (IOException e) {
@@ -706,7 +706,7 @@ public class GameController implements Initializable {
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Warning");
-			alert.setHeaderText("You can trade in cards only during FORTIFY phase");
+			alert.setHeaderText("You can trade in cards only during DRAFT phase");
 			alert.setContentText(null);
 			alert.showAndWait();
 		}

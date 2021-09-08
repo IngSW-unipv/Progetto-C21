@@ -3,9 +3,9 @@
 }
 
 Label {
-	-fx-font-family: "Arial";
-	-fx-text-fill: white;
-  -fx-font-size: 15px;
+ -fx-font-family: "Arial";
+ -fx-text-fill: white;
+ -fx-font-size: 15px;
 }
 
 Button {
