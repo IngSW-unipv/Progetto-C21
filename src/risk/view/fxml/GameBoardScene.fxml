@@ -653,14 +653,5 @@
             <Pane mouseTransparent="true" styleClass="statusBar_overlay" />
          </children>
       </StackPane>
-      <VBox alignment="CENTER" layoutX="1206.0" layoutY="208.0" prefHeight="74.0" prefWidth="57.0">
-         <children>
-            <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/eliminated.png" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
    </children>
 </Pane>
