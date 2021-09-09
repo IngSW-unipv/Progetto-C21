@@ -22,6 +22,7 @@ import risk.model.RisikoGame;
 import risk.model.Territory;
 
 public class AttackController implements Initializable {
+	
 	DiceShaker attackDices;
 	DiceShaker defenderDices;
 	
@@ -42,7 +43,7 @@ public class AttackController implements Initializable {
 	private int[] defResults;
 	private RisikoGame game;
 	private Territory territory1= GameController.getInstance().getTerritory1();
-	private	Territory territory2= GameController.getInstance().getTerritory2();
+	private Territory territory2= GameController.getInstance().getTerritory2();
 	
 	
 	@Override
@@ -75,6 +76,24 @@ public class AttackController implements Initializable {
     	else
     		defTank = territory2.getTanks();
     }
+    
+//    public void aiAttack() {
+//    	
+//    	int atNumber;
+//    	int deNumber;
+//    	
+//    	atNumber = territory1.getTanks() - 1;
+//    	if(territory2.getTanks() > 2) {
+//    		deNumber = 3;
+//    	} else {
+//    		deNumber = territory2.getTanks();
+//    	}
+//    	
+//    	GameController.game.battle(territory1.getOwner().rollDices(atNumber), territory2.getOwner().rollDices(deNumber), atNumber, deNumber,territory1,territory2);
+//    	
+//    	
+//    	
+//    }
 
     /**
      * Manages the attack when the annulla button is pressed
@@ -174,7 +193,7 @@ public class AttackController implements Initializable {
 			
 		}
 	
-
+	
 	
 
 	
@@ -221,6 +240,8 @@ public class AttackController implements Initializable {
 		});
 		
 	}
+	
+	
 
  
 

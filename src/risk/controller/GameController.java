@@ -147,6 +147,9 @@ public class GameController implements Initializable {
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 			phasesDescriptionArea.setText("PHASES:\n");
 			attackButtonIcon.setDisable(true);
+			if(game.getCurrentTurn().isAI()) {
+				game.getCurrentTurn().playTurn();
+				}
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
@@ -240,6 +243,7 @@ public class GameController implements Initializable {
 		
 		switch (game.getGamePhase()) {
 		case FIRSTTURN:
+				
 			if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
 				if (t.getOwner().getBonusTanks() > 0) {
 					int ntanks = 21; //cambiare solo valore alla variabile e non piu ai due parametri (serve per il print)
@@ -515,9 +519,11 @@ public class GameController implements Initializable {
 //		
 //		territory1 = null;
 //		territory2 = null;
-//		if(game.getGamePhase() != GAME_PHASE.FIRSTTURN && game.getCurrentTurn().isAI()) {
+		
+//		if(game.getCurrentTurn().isAI()) {
 //			game.getCurrentTurn().playTurn();
-//		}
+//			nextTurn();
+//			}
 	}
 	
 	/**
@@ -558,12 +564,14 @@ public class GameController implements Initializable {
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+			updateTerritoriesGraphic();
 			switchPhaseGraphic();
 			switchPlayerGraphic();
 			break;
 		case ATTACK:
 			game.nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
+			updateTerritoriesGraphic();
 			switchPhaseGraphic();
 			switchPlayerGraphic();
 			break;
@@ -813,7 +821,10 @@ public class GameController implements Initializable {
 	public void setPhaseSwitchButtonDisable(boolean t) {
 		phaseSwitch.setDisable(t);
 	}
-	
+	public static RisikoGame getGame() {
+		return game;
+	}
+
 	/* Method called when exit button is pressed */
 	@FXML
 	private void exit(final ActionEvent event) {

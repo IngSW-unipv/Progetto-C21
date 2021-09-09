@@ -2,6 +2,7 @@ package risk.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import risk.model.util.FIGURE;
 import risk.model.util.FileHandler;
@@ -77,10 +78,13 @@ public class RisikoGame {
 		}
 		
 		currentTurn = this.players[turnCounter];
-		/*
-		 * if(currentTurn.isAI() && gamePhase == GAME_PHASE.FIRSTTURN) {
-		 * currentTurn.playTurn(); }
-		 */
+		
+		 if(currentTurn.isAI()) {
+		  
+			 currentTurn.playTurn(); 
+			 System.out.println("dentro");
+		  }
+		 
 		if(currentTurn.isEliminated()) {
 			nextTurn();
 		}
@@ -97,26 +101,27 @@ public class RisikoGame {
 			currentTurn = this.players[0];
 			turnCounter = 0;
 			giveBonus(currentTurn);
-			/*
-			 * if(currentTurn.isAI()) { currentTurn.playTurn(); }
-			 */
+			
+			  if(currentTurn.isAI()) { currentTurn.playTurn(); }
+			 
 			break;
 		case DRAFT:
 			gamePhase = GAME_PHASE.ATTACK;
-			
+			if(currentTurn.isAI()) { currentTurn.playTurn(); }
 			
 			break;
 		case ATTACK:
 			
 			 
 			gamePhase = GAME_PHASE.FORTIFY;
-			
+			if(currentTurn.isAI()) { currentTurn.playTurn(); }
 			break;
 		case FORTIFY:
 			
 			conqueredTerritories = 0;
 			giveBonus(currentTurn);
 			gamePhase = GAME_PHASE.DRAFT;
+			if(currentTurn.isAI()) { currentTurn.playTurn(); }
 			
 			break;
 		}
@@ -776,22 +781,22 @@ public class RisikoGame {
 		
 	}
 	
-//	/**
-//	 * Returns a random territory from owned territories of the current player
-//	 * @return Territory
-//	 */
-//	public Territory getRandomCurrentPlayerTerritory() {
-//		
-//		ArrayList<Territory> temp = new ArrayList<Territory>();
-//		
-//		for(Territory t : territories) {
-//			if(t.getOwner().equals(currentTurn)) {
-//				temp.add(t);
-//			}
-//		}
-//		Random rand = new Random();
-//		return temp.get(rand.nextInt(temp.size()));
-//	}
+	/**
+	 * Returns a random territory from owned territories of the current player
+	 * @return Territory
+	 */
+	public Territory getRandomCurrentPlayerTerritory() {
+		
+		ArrayList<Territory> temp = new ArrayList<Territory>();
+		
+		for(Territory t : territories) {
+			if(t.getOwner().equals(currentTurn)) {
+				temp.add(t);
+			}
+		}
+		Random rand = new Random();
+		return temp.get(rand.nextInt(temp.size()));
+	}
 	
 	/**
 	 * Returns the number of bonus tank of the currentTurn player
