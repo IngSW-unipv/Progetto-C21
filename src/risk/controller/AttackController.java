@@ -230,7 +230,14 @@ public class AttackController implements Initializable {
 				threeButton.setDisable(true);
 				attackButton.setDisable(true);
 				GameController.getInstance().updateTerritoriesGraphic();
+				
+				try {
+					GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
+				} catch (IOException ex) {
+					ex.printStackTrace();
 				}
+				
+			}
 
 			
 		}

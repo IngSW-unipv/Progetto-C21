@@ -1,0 +1,42 @@
+.root {
+    -fx-background-color: radial-gradient(center 50% 50% , radius 65% , rgb(120,162,210), rgb(15,47,90)); /* rgb(120,162,210), rgb(15,47,90) */
+}
+  
+Label {
+   -fx-font-family: "Arial";
+   -fx-text-fill: white;
+   -fx-font-size: 15px;
+}
+  
+Button {
+    -fx-text-fill: white;
+    -fx-focus-traversable: false;
+}
+
+.bg {
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-background-color: #00000050;
+}
+
+.titleBg {
+    -fx-background-color: orange;
+}
+
+.title {
+    -fx-font-family: "Arial Black", "Arial";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+.exitButton {
+    -fx-base: orange;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 25px;
+}

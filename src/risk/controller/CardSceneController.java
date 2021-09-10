@@ -2,6 +2,7 @@ package risk.controller;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -152,22 +153,31 @@ public class CardSceneController implements Initializable{
 	
 	@FXML
 	public void tradeButtonPressed(ActionEvent event){
-		int bonus = 0;
-		if(cardSet[0] != null && cardSet[1] != null && cardSet[2] != null) {
-			bonus = GameController.game.checkTris(cardSet[0], cardSet[1], cardSet[2]);
+		if(GameController.getInstance().game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
+			int bonus = 0;
+			if(cardSet[0] != null && cardSet[1] != null && cardSet[2] != null) {
+				bonus = GameController.game.checkTris(cardSet[0], cardSet[1], cardSet[2]);
+			}
+
+			GameController.game.getCurrentTurn().giveBonusTanks(bonus);
+			GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.getInstance().game.getCurrentTurn().getBonusTanks()));
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Bonus");
+			alert.setHeaderText(null);
+			alert.setContentText("You received " + bonus + " bonus armies!");
+			alert.showAndWait();
+			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
+			GameController.getInstance().updateCardsNumber();
+	    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.close();
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Warning");
+			alert.setHeaderText("You can trade in cards only during DRAFT phase");
+			alert.setContentText(null);
+			alert.showAndWait();
 		}
 
-		GameController.game.getCurrentTurn().giveBonusTanks(bonus);
-		GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.getInstance().game.getCurrentTurn().getBonusTanks()));
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Bonus");
-		alert.setHeaderText(null);
-		alert.setContentText("You received " + bonus + " bonus armies!");
-		alert.showAndWait();
-		GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
-		GameController.getInstance().updateCardsNumber();
-    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-		window.close();
 	}
 	
 	@FXML

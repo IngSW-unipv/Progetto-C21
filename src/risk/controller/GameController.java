@@ -37,6 +37,7 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import risk.model.Player;
 import risk.model.PlayersList;
@@ -395,7 +396,7 @@ public class GameController implements Initializable {
 						// apri schemata displacement
 						try {
 							
-							windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true);
+							windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, false);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}	
@@ -667,10 +668,14 @@ public class GameController implements Initializable {
 	 * @param cantclose specifies if the window can be closed until an event occurs (if TRUE, new window can't be closed)
 	 * @throws IOException
 	 */
-	private void windowLoader(String scene, String title, boolean cantclose) throws IOException{
+	public void windowLoader(String scene, String title, boolean cantclose, boolean undecorated) throws IOException{
 		Parent sceneParent = FXMLLoader.load(getClass().getResource(scene));
 		Scene mScene = new Scene(sceneParent);
 		Stage window = new Stage();
+		/*** ***/
+		if(undecorated)
+			window.initStyle(StageStyle.UNDECORATED);
+		/*** ***/
 		window.setResizable(false);
 		window.setTitle(title);
 		window.setScene(mScene);
@@ -690,7 +695,7 @@ public class GameController implements Initializable {
 	@FXML
 	public void playerIconPressed(MouseEvent event){
 		try {
-			windowLoader("/risk/view/fxml/PlayerInfoWindow.fxml", "Player info", false);
+			windowLoader("/risk/view/fxml/PlayerInfoWindow.fxml", "Player info", false, false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -699,7 +704,7 @@ public class GameController implements Initializable {
 	@FXML
 	public void missionIconPressed(MouseEvent event){
 		try {
-			windowLoader("/risk/view/fxml/MissionImageWindow.fxml", "Mission", false);
+			windowLoader("/risk/view/fxml/MissionImageWindow.fxml", "Mission", false, false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -707,18 +712,10 @@ public class GameController implements Initializable {
 	
 	@FXML
 	public void cardIconPressed(MouseEvent event){
-		if(game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
-			try {
-				windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Warning");
-			alert.setHeaderText("You can trade in cards only during DRAFT phase");
-			alert.setContentText(null);
-			alert.showAndWait();
+		try {
+			windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", true, false);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -726,7 +723,7 @@ public class GameController implements Initializable {
 	public void attackButtonIconPressed(MouseEvent event){
 		if(game.getGamePhase().equals(GAME_PHASE.ATTACK)) {
 			try {
-				windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true);
+				windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true, false);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
