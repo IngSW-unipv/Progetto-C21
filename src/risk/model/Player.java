@@ -273,7 +273,8 @@ public class Player {
 	  public void playTurn() {
 	  
 	  switch (GameController.getGame().getGamePhase()) 
-	  { case FIRSTTURN: 
+	  { 
+	  case FIRSTTURN: 
 		  Territory temp = GameController.getGame().getRandomCurrentPlayerTerritory();
 		  if (bonusTanks > 0) {
 			  	temp.addTanks(bonusTanks);
@@ -290,7 +291,7 @@ public class Player {
 		  
 	  
 	    case DRAFT:
-	    	System.out.println("proviamo");
+	    	
 	    	while (bonusTanks > 0) { 
 	    	temp = GameController.getGame().getRandomCurrentPlayerTerritory();
 	    	temp.addTanks(1);
@@ -301,32 +302,70 @@ public class Player {
 	    		
 	    	  GameController.getInstance().nextPhase();
 	    	  break;
-	    default:
-	    	System.out.println(GameController.getGame().getGamePhase());
+	    
+	    	
+	    case ATTACK:
+	    	
+	    	AttackController at = new AttackController();
+	    	
+	    	for (Territory t : GameController.getGame().getTerritories()) { 
+			  if (t.getTanks() > 2 && t.getOwner().equals(this)) {
+			  GameController.getInstance().setTerritory1(t);
+		  } 
+	  }
+	    if( GameController.getInstance().getTerritory1() != null) {
+	    	for (Territory t : GameController.getInstance().getTerritory1().getConfinanti()) { 
+				  if (! t.getOwner().equals(this)) {
+				  GameController.getInstance().setTerritory2(t);
+			  } 
+	    	}
+	    }
+	    	
+	    	System.out.println("t1 "+GameController.getInstance().getTerritory1().getName()+"t2 "+GameController.getInstance().getTerritory2().getName());
+	    	at.aiAttack(GameController.getInstance().getTerritory1(),GameController.getInstance().getTerritory2());
+	    	GameController.getInstance().nextPhase();
+	    			
+	    	
 	    	break;
 	    	
-//	    case ATTACK:
-//	    	System.out.println("attacco");
-//	    	
-//	    	for(Territory t : GameController.getGame().getTerritories()) {
-//	    		
-//	    		if((t.getId() == GameController.getGame().getRandomCurrentPlayerTerritory().getId()) && t.getTanks() > 1){
-//	    			
-//	    			GameController.getInstance().setTerritory1(t);
-//	    			
-//	    			for(Territory t2 : t.getConfinanti()) {
-//	    				
-//	    				GameController.getInstance().setTerritory2(t2);
-//	    			}
-//	    			
-//	    		}
-//	    	}
-//	    	
-//	    	AttackController.getInstance().aiAttack();
-//	    	GameController.getInstance().nextPhase();
-//	    			
-//	    	
-//	    	break;
+	    case FORTIFY:
+	    	
+	    	Territory t1 = GameController.getInstance().getTerritory1();
+	    	Territory t2 = GameController.getInstance().getTerritory2();
+	    	boolean fortified = false;
+	    	
+	    	
+	    	for (Territory t : GameController.getGame().getTerritories()) { 
+				  if (t.getTanks() > 2 && t.getOwner().equals(this)) {
+				  t1 = t;
+			  } 
+		  }
+		    if( t1 != null) {
+		    	for (Territory t : t1.getConfinanti()) { 
+					  if ( t.getOwner().equals(this) && t != null) {
+						 
+					 t2 = t;
+					  
+					  GameController.getGame().moveTanks(t1,t2,1);
+					  
+					  GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+			    				+" moved "+1+ "tanks from "+t1.getName()+" to "+t2.getName());
+					  
+					  
+					  break;
+				  }else if (t == null) {
+					  
+					  GameController.getInstance().setTerritory1(null);
+					  
+				  } 
+		    	}
+		    }
+		    System.out.println("Territorio 1 "+ t1+ "territorio 2 "+t2);
+
+	    	GameController.getInstance().setTerritory1(null);
+	    	GameController.getInstance().setTerritory2(null);
+	    	
+	    	break;
 	  }
 
 

@@ -46,6 +46,13 @@ public class AttackController implements Initializable {
 	private Territory territory2= GameController.getInstance().getTerritory2();
 	
 	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	attackButton.setDisable(true);
@@ -77,23 +84,58 @@ public class AttackController implements Initializable {
     		defTank = territory2.getTanks();
     }
     
-//    public void aiAttack() {
-//    	
-//    	int atNumber;
-//    	int deNumber;
-//    	
-//    	atNumber = territory1.getTanks() - 1;
-//    	if(territory2.getTanks() > 2) {
-//    		deNumber = 3;
-//    	} else {
-//    		deNumber = territory2.getTanks();
-//    	}
-//    	
-//    	GameController.game.battle(territory1.getOwner().rollDices(atNumber), territory2.getOwner().rollDices(deNumber), atNumber, deNumber,territory1,territory2);
-//    	
-//    	
-//    	
-//    }
+    public void aiAttack(Territory t1,Territory t2) {
+    	
+    	int atNumber;
+    	int deNumber;
+    	
+    	if(t1.getTanks() > 3) {
+    		atNumber = 3;
+    	}
+    	else atNumber = t1.getTanks() -1;
+    	
+    	if(t2.getTanks() > 2) {
+    		deNumber = 3;
+    	} else {
+    		deNumber = t2.getTanks();
+    	}
+    	System.out.println("atnumber "+atNumber);
+    	System.out.println("denumber "+deNumber);
+    	System.out.println("t1 "+t1.getName());
+    	System.out.println("t2 "+t2.getName());
+    	
+    	DiceShaker attackDices2 = new DiceShaker();
+		DiceShaker defenderDices2 = new DiceShaker();
+
+		int[] atkResults2 = new int[3];
+		int[] defResults2 = new int[3];
+		
+		atkResults2 = attackDices2.rollDices(atNumber);
+		defResults2 = defenderDices2.rollDices(deNumber);
+    	
+    	GameController.game.battle(atkResults2,defResults2, atNumber, deNumber,t1,t2);
+    	for(int i = 0 ; i < Math.max(atNumber, deNumber); i++) {
+    		System.out.println(""+atkResults2[i]);
+        	System.out.println(""+defResults2[i]);
+    	}
+    	
+    	GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+				+" attacked "+t2.getName()+" from "+t1.getName());
+    	
+    	
+    	if(t2.getOwner().equals(t1.getOwner())) {
+    		GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+    				+" conquered "+t2.getName());
+			GameController.game.giveCard();
+			GameController.getInstance().setTerritory1(null);
+	    	GameController.getInstance().setTerritory2(null);
+			GameController.getInstance().updateCardsNumber();
+			
+			
+    	}
+    	GameController.getInstance().setTerritory1(null);
+    	GameController.getInstance().setTerritory2(null);
+    }
 
     /**
      * Manages the attack when the annulla button is pressed

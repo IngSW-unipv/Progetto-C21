@@ -581,6 +581,7 @@ public class GameController implements Initializable {
 			phaseText.setText(game.getGamePhase().toString());
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 			setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
+			updateTerritoriesGraphic();
 			switchPhaseGraphic();
 			switchPlayerGraphic();
 			updateCardsNumber();

@@ -82,7 +82,7 @@ public class RisikoGame {
 		 if(currentTurn.isAI()) {
 		  
 			 currentTurn.playTurn(); 
-			 System.out.println("dentro");
+			
 		  }
 		 
 		if(currentTurn.isEliminated()) {
