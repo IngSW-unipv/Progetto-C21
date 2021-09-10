@@ -330,40 +330,40 @@ public class Player {
 	    	
 	    case FORTIFY:
 	    	
-	    	Territory t1 = GameController.getInstance().getTerritory1();
-	    	Territory t2 = GameController.getInstance().getTerritory2();
-	    	boolean fortified = false;
-	    	
-	    	
-	    	for (Territory t : GameController.getGame().getTerritories()) { 
-				  if (t.getTanks() > 2 && t.getOwner().equals(this)) {
-				  t1 = t;
-			  } 
-		  }
-		    if( t1 != null) {
-		    	for (Territory t : t1.getConfinanti()) { 
-					  if ( t.getOwner().equals(this) && t != null) {
-						 
-					 t2 = t;
-					  
-					  GameController.getGame().moveTanks(t1,t2,1);
-					  
-					  GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
-			    				+" moved "+1+ "tanks from "+t1.getName()+" to "+t2.getName());
-					  
-					  
-					  break;
-				  }else if (t == null) {
-					  
-					  GameController.getInstance().setTerritory1(null);
-					  
-				  } 
-		    	}
-		    }
-		    System.out.println("Territorio 1 "+ t1+ "territorio 2 "+t2);
-
-	    	GameController.getInstance().setTerritory1(null);
-	    	GameController.getInstance().setTerritory2(null);
+//	    	Territory t1 = GameController.getInstance().getTerritory1();
+//	    	Territory t2 = GameController.getInstance().getTerritory2();
+//	    	boolean fortified = false;
+//	    	
+//	    	
+//	    	for (Territory t : GameController.getGame().getTerritories()) { 
+//				  if (t.getTanks() > 2 && t.getOwner().equals(this)) {
+//				  t1 = t;
+//			  } 
+//		  }
+//		    if( t1 != null) {
+//		    	for (Territory t : t1.getConfinanti()) { 
+//					  if ( t.getOwner().equals(this) && t != null) {
+//						 
+//					 t2 = t;
+//					  
+//					  GameController.getGame().moveTanks(t1,t2,1);
+//					  
+//					  GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+//			    				+" moved "+1+ "tanks from "+t1.getName()+" to "+t2.getName());
+//					  
+//					  
+//					  break;
+//				  }else if (t == null) {
+//					  
+//					  GameController.getInstance().setTerritory1(null);
+//					  
+//				  } 
+//		    	}
+//		    }
+//		    System.out.println("Territorio 1 "+ t1+ "territorio 2 "+t2);
+//
+//	    	GameController.getInstance().setTerritory1(null);
+//	    	GameController.getInstance().setTerritory2(null);
 	    	
 	    	break;
 	  }
