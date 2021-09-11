@@ -16,7 +16,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
 import risk.model.Territory;
@@ -41,7 +40,7 @@ public class AttackController implements Initializable {
 	private int atkTank, defTank;	// numero di tank usati per l'attacco e per la difesa
 	private int[] atkResults;		// risultati del lancio dei dadi dell'attaccante
 	private int[] defResults;
-	private RisikoGame game;
+	static RisikoGame game;
 	private Territory territory1= GameController.getInstance().getTerritory1();
 	private Territory territory2= GameController.getInstance().getTerritory2();
 	
@@ -50,9 +49,7 @@ public class AttackController implements Initializable {
 	
 	
 	
-	
-	
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	attackButton.setDisable(true);
@@ -95,7 +92,7 @@ public class AttackController implements Initializable {
     	else atNumber = t1.getTanks() -1;
     	
     	if(t2.getTanks() > 2) {
-    		deNumber = 3;
+			deNumber = 3;
     	} else {
     		deNumber = t2.getTanks();
     	}
@@ -126,15 +123,16 @@ public class AttackController implements Initializable {
     	if(t2.getOwner().equals(t1.getOwner())) {
     		GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
     				+" conquered "+t2.getName());
+
 			GameController.game.giveCard();
-			GameController.getInstance().setTerritory1(null);
-	    	GameController.getInstance().setTerritory2(null);
+//			GameController.getInstance().setTerritory1(null);
+//	    	GameController.getInstance().setTerritory2(null);
 			GameController.getInstance().updateCardsNumber();
 			
 			
     	}
-    	GameController.getInstance().setTerritory1(null);
-    	GameController.getInstance().setTerritory2(null);
+//    	GameController.getInstance().setTerritory1(null);
+//    	GameController.getInstance().setTerritory2(null);
     }
 
     /**

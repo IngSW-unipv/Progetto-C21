@@ -148,9 +148,9 @@ public class GameController implements Initializable {
 			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 			phasesDescriptionArea.setText("PHASES:\n");
 			attackButtonIcon.setDisable(true);
-			if(game.getCurrentTurn().isAI()) {
+			if (game.getCurrentTurn().isAI()) {
 				game.getCurrentTurn().playTurn();
-				}
+			}
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
 			System.out.println(e.getMessage());
@@ -554,11 +554,13 @@ public class GameController implements Initializable {
 				switchPlayerGraphic();
 				
 				/* PROVA */
+				if (game.getCurrentTurn().isAI()) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("New turn");
 				alert.setHeaderText(null);
 				alert.setContentText(game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
 				alert.showAndWait();
+			}
 			}
 			break;
 		case DRAFT:
@@ -586,6 +588,7 @@ public class GameController implements Initializable {
 			switchPhaseGraphic();
 			switchPlayerGraphic();
 			updateCardsNumber();
+			if (game.getCurrentTurn().isAI()) {
 			/* PROVA */
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("New turn");
@@ -593,6 +596,7 @@ public class GameController implements Initializable {
 			alert.setContentText(game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
 			alert.showAndWait();
 			break;
+		}
 		}
 		
 

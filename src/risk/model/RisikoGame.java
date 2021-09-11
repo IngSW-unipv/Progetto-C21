@@ -79,7 +79,7 @@ public class RisikoGame {
 		
 		currentTurn = this.players[turnCounter];
 		
-		 if(currentTurn.isAI()) {
+		if (currentTurn.isAI() && gamePhase == GAME_PHASE.FIRSTTURN) {
 		  
 			 currentTurn.playTurn(); 
 			
@@ -102,7 +102,9 @@ public class RisikoGame {
 			turnCounter = 0;
 			giveBonus(currentTurn);
 			
-			  if(currentTurn.isAI()) { currentTurn.playTurn(); }
+			if (currentTurn.isAI()) {
+				currentTurn.playTurn();
+			}
 			 
 			break;
 		case DRAFT:
@@ -111,17 +113,18 @@ public class RisikoGame {
 			
 			break;
 		case ATTACK:
-			
-			 
 			gamePhase = GAME_PHASE.FORTIFY;
 			if(currentTurn.isAI()) { currentTurn.playTurn(); }
 			break;
+
 		case FORTIFY:
-			
 			conqueredTerritories = 0;
 			giveBonus(currentTurn);
 			gamePhase = GAME_PHASE.DRAFT;
-			if(currentTurn.isAI()) { currentTurn.playTurn(); }
+			if (currentTurn.isAI()) {
+				currentTurn.playTurn();
+			}
+			
 			
 			break;
 		}
