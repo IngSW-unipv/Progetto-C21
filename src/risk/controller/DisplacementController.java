@@ -54,13 +54,14 @@ public class DisplacementController implements Initializable {
 	private Button depButton, cancelButton;
 	private Territory territory1;
 	private Territory territory2;
+	private SoundController soundController;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		territory1 = GameController.getInstance().getTerritory1();
 		territory2 = GameController.getInstance().getTerritory2();
 		DoubleProperty d1 =new SimpleDoubleProperty(territory1.getTanks());
 		DoubleProperty d2 =new SimpleDoubleProperty(territory2.getTanks());
-		
+		soundController = new SoundController();
 		territory1Label.setText(territory1.getName());
 		territory2Label.setText(territory2.getName());
 		newTank1Label.setText(""+territory1.getTanks());
@@ -121,13 +122,15 @@ public class DisplacementController implements Initializable {
 	@FXML
     public void displacementButtonPressed(MouseEvent e){
 		
-		
+		GameController.getInstance().stopMusic();
 		GameController.game.moveTanks(territory1, territory2, Integer.parseInt(depTankLabel.getText()));
 		GameController.getInstance().updateTerritoriesGraphic();
 		GameController.getInstance().setFortified(true);
+		soundController.displacementSound();
 		resetAll();
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();
+		GameController.getInstance().playMusic();
     }
 	
 	public void resetAll() {

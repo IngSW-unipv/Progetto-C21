@@ -44,7 +44,7 @@ public class AttackController implements Initializable {
 	static RisikoGame game;
 	private Territory territory1= GameController.getInstance().getTerritory1();
 	private Territory territory2= GameController.getInstance().getTerritory2();
-	
+	private SoundController soundController;
 	
 	
 	
@@ -58,7 +58,8 @@ public class AttackController implements Initializable {
     	territoryDefLabel.setText(territory2.getName());
     	attackerTanksLabel.setText(String.valueOf(territory1.getTanks()));
     	defenderTanksLabel.setText(String.valueOf(territory2.getTanks()));
-
+    	soundController = new SoundController();
+    	soundController.battleMusic(); 
     	setDefTank();
 		attackDices = new DiceShaker();
 		defenderDices = new DiceShaker();
@@ -153,7 +154,9 @@ public class AttackController implements Initializable {
 		GameController.getInstance().setAttackButtonDisable(true);
 		GameController.getInstance().setPhaseSwitchButtonDisable(false);
 		GameController.getInstance().updateTerritoriesGraphic();
+		GameController.getInstance().playMusic();
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	soundController.stopMusic();
 		window.close();
     }
 	
@@ -222,6 +225,8 @@ public class AttackController implements Initializable {
 
 			if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
 				defenderTanksLabel.setText("CONQUERED");
+				soundController.stopMusic();
+				soundController.conqueredSound();
 				GameController.game.giveCard();
 				GameController.getInstance().updateCardsNumber();
 				oneButton.setDisable(true);

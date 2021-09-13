@@ -42,6 +42,7 @@ public class CardSceneController implements Initializable{
 
 	private Card[] cardSet;	
 	private int artilleryNum, infantryNum, cavalryNum, jollyNum;
+	private SoundController soundController = new SoundController();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -158,7 +159,7 @@ public class CardSceneController implements Initializable{
 			if(cardSet[0] != null && cardSet[1] != null && cardSet[2] != null) {
 				bonus = GameController.game.checkTris(cardSet[0], cardSet[1], cardSet[2]);
 			}
-
+			soundController.tradeSound();
 			GameController.game.getCurrentTurn().giveBonusTanks(bonus);
 			GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.getInstance().game.getCurrentTurn().getBonusTanks()));
 			Alert alert = new Alert(AlertType.INFORMATION);

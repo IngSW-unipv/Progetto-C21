@@ -39,6 +39,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javafx.scene.media.Media;
 import risk.model.Player;
 import risk.model.PlayersList;
 import risk.model.RisikoGame;
@@ -93,7 +94,7 @@ public class GameController implements Initializable {
 	
 	private boolean fortified;
 	
-	
+	private SoundController soundController;
 	
 	public boolean isFortified() {
 		return fortified;
@@ -134,6 +135,7 @@ public class GameController implements Initializable {
 		ArrayList<Player> playersList = PlayersList.getPlayers();
 		Player[] playersArr = new Player[playersList.size()];
 		playersArr = playersList.toArray(playersArr);
+		soundController = new SoundController();
 		paths = new SVGPath[] {alaska, northWestTerritory, greenland, alberta, ontario, quebec, westernUnitedStates, easternUnitedStates, centralAmerica, venezuela, brazil, peru, argentina,
 				iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, russia, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
 				mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia};
@@ -160,7 +162,7 @@ public class GameController implements Initializable {
 		initializeUserBar();
 		updateTerritoriesGraphic();
 		switchPlayerGraphic();
-		
+		playMusic();
 		
 	}
 
@@ -187,7 +189,6 @@ public class GameController implements Initializable {
 		try {
 			Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
 			ImageView[] userImages = {userImage1, userImage2, userImage3, userImage4, userImage5, userImage6};
-			
 			// for every player get color and name to set gui elements
 			for(int i = 0; i < 6; i++) {
 				String name = game.getPlayers()[i].getName();
@@ -717,6 +718,7 @@ public class GameController implements Initializable {
 	public void attackButtonIconPressed(MouseEvent event){
 		if(game.getGamePhase().equals(GAME_PHASE.ATTACK)) {
 			try {
+				soundController.stopMusic();
 				windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true, true);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -821,6 +823,13 @@ public class GameController implements Initializable {
 		initializeUserColorsAndNames();
 	}
 	
+	public void playMusic() {
+		soundController.gameMusic();
+	}
+	
+	public void stopMusic() {
+		soundController.stopMusic();;
+	}
 	private void callInfoWindows() {
 		try {
 			GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
