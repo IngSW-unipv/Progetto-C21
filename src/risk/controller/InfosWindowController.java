@@ -4,10 +4,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import risk.model.Player;
 
 
 public class InfosWindowController implements Initializable{
@@ -27,15 +33,29 @@ public class InfosWindowController implements Initializable{
     @FXML
     private Button exitButton;	// pulsante per chiudere il pop-up
     
+    private String color;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		
+		
 		/*** Parte generale da fare sempre ***/
-		String color = GameController.getInstance().game.getCurrentTurn().getColorName();
-		titleBg.setStyle("-fx-background-color:" + color + ";");
-		exitButton.setStyle(exitButton.getStyle() + "-fx-base:" + color + ";");
+		setColor(GameController.game.getCurrentTurn());
+		titleLabel.setText(GameController.game.getCurrentTurn().getName()+"'s turn");
 		
-		
+		switch(GameController.game.getGamePhase()) {
+		case DRAFT:
+			
+			
+			subtitleLabel.setText("You received "+GameController.game.getCurrTurnBonusTanks()+" tanks for the possesion of  "+GameController.game.getCurrentTurn().getTerritories()+" territories");
+			break;
+		case ATTACK:
+			
+			subtitleLabel.setText("You conquered "+GameController.getInstance().getTerritory2()+" attacking from "+GameController.getInstance().getTerritory1());
+			break;
+			
+		}
 		/*** Parti specializzate ***/
 		
 		/*	nuovo turno:
@@ -61,5 +81,15 @@ public class InfosWindowController implements Initializable{
 		*/
 		
 	}
-
+	
+	@FXML
+	public void okButtonClicked(MouseEvent e){
+		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		window.close();
+	}
+	public void setColor(Player p) {
+		color = p.getColorName();
+		titleBg.setStyle("-fx-background-color:" + color + ";");
+		exitButton.setStyle(exitButton.getStyle() + "-fx-base:" + color + ";");
+	}
 }

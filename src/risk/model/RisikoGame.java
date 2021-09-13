@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import risk.controller.GameController;
 import risk.model.util.FIGURE;
 import risk.model.util.FileHandler;
 import risk.model.util.GAME_PHASE;
@@ -86,6 +87,7 @@ public class RisikoGame {
 		  }
 		 
 		if(currentTurn.isEliminated()) {
+			GameController.getInstance().updateUsersBar();
 			nextTurn();
 		}
 	}

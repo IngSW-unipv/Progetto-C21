@@ -34,7 +34,7 @@
                <children>
                   <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <center>
-                        <Button fx:id="exitButton" focusTraversable="false" mnemonicParsing="false" styleClass="exitButton" text="OK" BorderPane.alignment="CENTER" />
+                        <Button fx:id="exitButton" focusTraversable="false" mnemonicParsing="false" onMousePressed="#okButtonClicked" styleClass="exitButton" text="OK" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </children>

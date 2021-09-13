@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
@@ -29,7 +30,7 @@ public class AttackController implements Initializable {
 	private Label territoryAtkLabel, territoryDefLabel, attackerTanksLabel, defenderTanksLabel;
 	
 	@FXML
-	private Button attackButton, cancelButton;
+	private Button attackButton, cancelButton, exitButton;
 	 
 	@FXML
 	private ToggleButton oneButton, twoButton,  threeButton;
@@ -231,6 +232,7 @@ public class AttackController implements Initializable {
 				
 				try {
 					GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
+					
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
@@ -242,7 +244,7 @@ public class AttackController implements Initializable {
 	
 	
 	
-
+	
 	
 	@FXML
 	private void updateNumberButtons() {

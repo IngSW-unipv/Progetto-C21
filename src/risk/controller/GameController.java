@@ -194,10 +194,16 @@ public class GameController implements Initializable {
 				String color = game.getPlayers()[i].getColor().toString().toLowerCase();
 
 				userNames[i].setText(name);
-
-				InputStream stream = new FileInputStream("src/risk/view/images/users/" + color + ".png");
-				Image image = new Image(stream);
-				userImages[i].setImage(image);
+				if(game.getPlayers()[i].isEliminated()) {
+					InputStream stream = new FileInputStream("src/risk/view/images/users/eliminated.png");
+					Image image = new Image(stream);
+					userImages[i].setImage(image);
+				}else {
+					InputStream stream = new FileInputStream("src/risk/view/images/users/" + color + ".png");
+					Image image = new Image(stream);
+					userImages[i].setImage(image);
+				}
+				
 				
 				if(i == 0)
 					userNames[i].setUnderline(true);
@@ -396,7 +402,7 @@ public class GameController implements Initializable {
 						// apri schemata displacement
 						try {
 							
-							windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, false);
+							windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, true);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}	
@@ -552,15 +558,7 @@ public class GameController implements Initializable {
 				setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
 				switchPhaseGraphic();
 				switchPlayerGraphic();
-				
-				/* PROVA */
-				if (game.getCurrentTurn().isAI()) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("New turn");
-				alert.setHeaderText(null);
-				alert.setContentText(game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
-				alert.showAndWait();
-			}
+				callInfoWindows();
 			}
 			break;
 		case DRAFT:
@@ -588,15 +586,7 @@ public class GameController implements Initializable {
 			switchPhaseGraphic();
 			switchPlayerGraphic();
 			updateCardsNumber();
-			if (game.getCurrentTurn().isAI()) {
-			/* PROVA */
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("New turn");
-			alert.setHeaderText(null);
-			alert.setContentText(game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
-			alert.showAndWait();
-			break;
-		}
+			callInfoWindows();
 		}
 		
 
@@ -717,7 +707,7 @@ public class GameController implements Initializable {
 	@FXML
 	public void cardIconPressed(MouseEvent event){
 		try {
-			windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", true, false);
+			windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", true, true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -727,7 +717,7 @@ public class GameController implements Initializable {
 	public void attackButtonIconPressed(MouseEvent event){
 		if(game.getGamePhase().equals(GAME_PHASE.ATTACK)) {
 			try {
-				windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true, false);
+				windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true, true);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -826,12 +816,26 @@ public class GameController implements Initializable {
 	public static RisikoGame getGame() {
 		return game;
 	}
-
+	
+	public void updateUsersBar() {
+		initializeUserColorsAndNames();
+	}
+	
+	private void callInfoWindows() {
+		try {
+			GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/* Method called when exit button is pressed */
 	@FXML
 	private void exit(final ActionEvent event) {
 		event.consume();
 		Platform.exit();
 	}
+
+	
   
 }
