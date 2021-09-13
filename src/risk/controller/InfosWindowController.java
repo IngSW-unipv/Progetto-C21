@@ -42,19 +42,34 @@ public class InfosWindowController implements Initializable{
 		
 		/*** Parte generale da fare sempre ***/
 		setColor(GameController.game.getCurrentTurn());
-		titleLabel.setText(GameController.game.getCurrentTurn().getName()+"'s turn");
+		
 		
 		switch(GameController.game.getGamePhase()) {
 		case DRAFT:
-			
-			
-			subtitleLabel.setText("You received "+GameController.game.getCurrTurnBonusTanks()+" tanks for the possesion of  "+GameController.game.getCurrentTurn().getTerritories()+" territories");
+			if(GameController.getInstance().isCardSceneOpen()) {
+				titleLabel.setText("Cards traded");
+				subtitleLabel.setText("You received " + GameController.game.getCurrTurnBonusTanks() + " bonus armies!");
+			} else {
+				titleLabel.setText(GameController.game.getCurrentTurn().getName()+"'s turn");			
+				subtitleLabel.setText("You received "+GameController.game.getCurrTurnBonusTanks()+" for the possesion of  "
+						+GameController.game.getCurrentTurn().getTerritories()+" territories and " + GameController.game.getCurrentTurn().getContinents() + " continents");
+			}
 			break;
 		case ATTACK:
-			
+			if(GameController.getInstance().isCardSceneOpen()) {
+				titleLabel.setText("Warning");
+				subtitleLabel.setText("You can trade in cards only during DRAFT phase");
+			} else {
+			titleLabel.setText(GameController.getInstance().getTerritory2().getName() +" conquered");
 			subtitleLabel.setText("You conquered "+GameController.getInstance().getTerritory2()+" attacking from "+GameController.getInstance().getTerritory1());
+			}
 			break;
-			
+		case FORTIFY:
+			if(GameController.getInstance().isCardSceneOpen()) {
+				titleLabel.setText("Warning");
+				subtitleLabel.setText("You can trade in cards only during DRAFT phase");
+			}
+			break;
 		}
 		/*** Parti specializzate ***/
 		
@@ -91,5 +106,10 @@ public class InfosWindowController implements Initializable{
 		color = p.getColorName();
 		titleBg.setStyle("-fx-background-color:" + color + ";");
 		exitButton.setStyle(exitButton.getStyle() + "-fx-base:" + color + ";");
+		
+		if(color.toLowerCase().equals("pink") || (color.toLowerCase().equals("yellow"))) {
+			titleLabel.setStyle(titleLabel.getStyle() + "-fx-text-fill: black;");
+			exitButton.setStyle(exitButton.getStyle() + "-fx-text-fill: black;");
+		}
 	}
 }

@@ -92,7 +92,7 @@ public class GameController implements Initializable {
 	
 	private SVGPath[] paths;
 	
-	private boolean fortified;
+	private boolean fortified, cardSceneOpen;
 	
 	private SoundController soundController;
 	
@@ -102,6 +102,10 @@ public class GameController implements Initializable {
 
 	public void setFortified(boolean fortified) {
 		this.fortified = fortified;
+	}
+	
+	public boolean isCardSceneOpen() {
+		return cardSceneOpen;
 	}
 
 	private Territory territory1 = null, territory2 = null;
@@ -707,11 +711,13 @@ public class GameController implements Initializable {
 	
 	@FXML
 	public void cardIconPressed(MouseEvent event){
+		cardSceneOpen = true;
 		try {
 			windowLoader("/risk/view/fxml/CardScene.fxml", "Cards", true, true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		cardSceneOpen = false;
 	}
 	
 	@FXML

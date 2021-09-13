@@ -162,21 +162,38 @@ public class CardSceneController implements Initializable{
 			soundController.tradeSound();
 			GameController.game.getCurrentTurn().giveBonusTanks(bonus);
 			GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.getInstance().game.getCurrentTurn().getBonusTanks()));
+			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
+			GameController.getInstance().updateCardsNumber();
+			/*
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Bonus");
 			alert.setHeaderText(null);
 			alert.setContentText("You received " + bonus + " bonus armies!");
 			alert.showAndWait();
-			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
-			GameController.getInstance().updateCardsNumber();
+			*/
+			try {
+				GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
+				
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+
 	    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.close();
 		} else {
+			/*
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Warning");
 			alert.setHeaderText("You can trade in cards only during DRAFT phase");
 			alert.setContentText(null);
 			alert.showAndWait();
+			*/
+			try {
+				GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
+				
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 
 	}

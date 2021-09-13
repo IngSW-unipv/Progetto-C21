@@ -137,6 +137,17 @@ public class AttackController implements Initializable {
 //    	GameController.getInstance().setTerritory2(null);
     }
 
+    
+    private void onClosing() {
+		GameController.getInstance().setTerritory1(null);
+		GameController.getInstance().setTerritory2(null);
+		GameController.getInstance().clearAllTerritories();
+		GameController.getInstance().setAttackButtonDisable(true);
+		GameController.getInstance().setPhaseSwitchButtonDisable(false);
+		GameController.getInstance().updateTerritoriesGraphic();
+		GameController.getInstance().playMusic();
+		soundController.stopMusic();
+    }
     /**
      * Manages the attack when the annulla button is pressed
      * @param e is the event
@@ -148,15 +159,8 @@ public class AttackController implements Initializable {
 		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
 		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
 		// deseleziono i territori attacker e defender
-		GameController.getInstance().setTerritory1(null);
-		GameController.getInstance().setTerritory2(null);
-		GameController.getInstance().clearAllTerritories();
-		GameController.getInstance().setAttackButtonDisable(true);
-		GameController.getInstance().setPhaseSwitchButtonDisable(false);
-		GameController.getInstance().updateTerritoriesGraphic();
-		GameController.getInstance().playMusic();
+		onClosing();
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-    	soundController.stopMusic();
 		window.close();
     }
 	
@@ -241,7 +245,16 @@ public class AttackController implements Initializable {
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
-				
+
+				try {
+					
+					GameController.getInstance().windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, true);
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+				onClosing();
+		    	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+				window.close();
 			}
 
 			
