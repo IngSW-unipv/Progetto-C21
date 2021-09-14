@@ -44,7 +44,12 @@
                <bottom>
                   <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button id="playButton" fx:id="preRulesButton" alignment="CENTER" mnemonicParsing="false" onAction="#rules" prefHeight="50.0" prefWidth="400.0" text="R U L E S" textAlignment="CENTER">
+                        <Button id="playButton" fx:id="preRulesButton" alignment="CENTER" mnemonicParsing="false" onAction="#rulesIt" prefHeight="50.0" prefWidth="400.0" text="R U L E S " textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="26.0" />
+                           </font>
+                        </Button>
+                        <Button id="playButton" fx:id="preRulesButton1" alignment="CENTER" mnemonicParsing="false" onAction="#rulesEn" prefHeight="50.0" prefWidth="400.0" text="R U L E S " textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
@@ -74,6 +79,26 @@
                <rotationAxis>
                   <Point3D y="1.0" />
                </rotationAxis>
+            </ImageView>
+            <ImageView disable="true" fitHeight="25.0" fitWidth="50.0" layoutX="50.0" layoutY="375.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/it_flag.png" />
+               </image>
+            </ImageView>
+            <ImageView disable="true" fitHeight="25.0" fitWidth="50.0" layoutX="350.0" layoutY="375.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/it_flag.png" />
+               </image>
+            </ImageView>
+            <ImageView disable="true" fitHeight="150.0" fitWidth="50.0" layoutX="50.0" layoutY="455.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/en_flag.png" />
+               </image>
+            </ImageView>
+            <ImageView disable="true" fitHeight="150.0" fitWidth="50.0" layoutX="350.0" layoutY="455.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/en_flag.png" />
+               </image>
             </ImageView>
          </children>
       </AnchorPane>

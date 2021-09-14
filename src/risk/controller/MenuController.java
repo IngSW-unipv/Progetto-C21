@@ -80,6 +80,8 @@ public class MenuController implements Initializable {
 	
 	/* Player's name list */
 	private ArrayList<String> players;
+	
+	public static String rulesLeng = null;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -303,9 +305,21 @@ public class MenuController implements Initializable {
 		timeline.play();
 	}
 	
-	/* Method called when rules button is pressed */
+	/* Method called when rulesIt button is pressed */
 	@FXML
-	private void rules(final ActionEvent event) {
+	private void rulesIt(final ActionEvent event) {
+		rulesLeng = "it";
+		openRulesWindow();
+	}
+	
+	/* Method called when rulesEn button is pressed */
+	@FXML
+	private void rulesEn(final ActionEvent event) {
+		rulesLeng = "en";
+		openRulesWindow();
+	}
+	
+	private void openRulesWindow() {
 		try {
 			Parent sceneParent = FXMLLoader.load(getClass().getResource("/risk/view/fxml/RulesWindow.fxml"));
 			Scene mScene = new Scene(sceneParent);
