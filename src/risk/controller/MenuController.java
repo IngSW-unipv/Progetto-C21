@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,8 +24,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import risk.model.Player;
 import risk.model.PlayersList;
 import risk.model.util.Color;
@@ -56,11 +63,15 @@ public class MenuController implements Initializable {
 	
 	/* Exit button to close the app */
 	@FXML
-	private Button exitButton;
+	private Button exitButton, backButton;
 	
 	/* Play button to start the game */
 	@FXML
-	private Button playButton;
+	private Button playButton, prePlayButton, preRulesButton;
+	
+	@FXML
+	private AnchorPane anchorPane, preAnchorPane;
+	
 	
 	/* Player's name list */
 	private ArrayList<String> players;
@@ -261,6 +272,30 @@ public class MenuController implements Initializable {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/* Method called when pre-play button is pressed */
+	@FXML
+	private void prePlay(final ActionEvent event) {
+		event.consume();
+		
+		Timeline timeline = new Timeline();
+		KeyValue kv = new KeyValue(anchorPane.translateXProperty(), -450, Interpolator.EASE_IN);
+		KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+		timeline.getKeyFrames().add(kf);
+		timeline.play();
+	}
+	
+	/* Method called when back button is pressed */
+	@FXML
+	private void back(final ActionEvent event) {
+		event.consume();
+		
+		Timeline timeline = new Timeline();
+		KeyValue kv = new KeyValue(anchorPane.translateXProperty(), 450, Interpolator.EASE_IN);
+		KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+		timeline.getKeyFrames().add(kf);
+		timeline.play();
 	}
 	
 	/* 
