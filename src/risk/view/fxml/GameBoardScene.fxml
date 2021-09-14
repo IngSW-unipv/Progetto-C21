@@ -653,5 +653,14 @@
             <Pane mouseTransparent="true" styleClass="statusBar_overlay" />
          </children>
       </StackPane>
+      <VBox fx:id="volumeButton" layoutX="1166.0" layoutY="2.0" onMousePressed="#speakerButtonPressed" prefHeight="49.0" prefWidth="72.0" styleClass="statusBar">
+         <children>
+            <ImageView fx:id="speakerImage" fitHeight="51.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" styleClass="statusBar">
+               <image>
+                  <Image url="@../images/speaker.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
    </children>
 </Pane>

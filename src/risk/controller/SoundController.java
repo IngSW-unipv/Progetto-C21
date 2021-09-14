@@ -36,6 +36,10 @@ public class SoundController {
 		playOneTime("src/risk/view/songs/displacementSound.mp3");
 	}
 	
+	public void cardSound() {
+		playOneTime("src/risk/view/songs/cardSound.mp3");
+	}
+	
 	public void stopMusic() {
 		mediaPlayer.stop();
 	}

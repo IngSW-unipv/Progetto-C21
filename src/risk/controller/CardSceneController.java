@@ -216,19 +216,23 @@ public class CardSceneController implements Initializable{
 	 * 		4) se ci sono 3 carte attivo il button Trade altrimenti lo lascio disabilitato */
 	@FXML
 	public void addArtilleryButtonPressed(ActionEvent event){
+		soundController.cardSound();
 		addCardToSet(FIGURE.ARTILLERY);
 	}
 	
 	@FXML
 	public void addInfantryButtonPressed(ActionEvent event){
+		soundController.cardSound();
 		addCardToSet(FIGURE.INFANTRY);
 	}
 	@FXML
 	public void addCavalryButtonPressed(ActionEvent event){
+		soundController.cardSound();
 		addCardToSet(FIGURE.CAVALRY);
 	}
 	@FXML
 	public void addJollyButtonPressed(ActionEvent event){
+		soundController.cardSound();
 		addCardToSet(FIGURE.JOLLY);
 	}
 	

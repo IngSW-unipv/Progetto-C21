@@ -64,7 +64,7 @@ public class GameController implements Initializable {
 	private Button phaseSwitch;
 	
 	@FXML
-	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6, actualPlayerGraphic;
+	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6, actualPlayerGraphic,speakerImage;
 	
 	@FXML
 	private Circle circleAlaska, circleNorthWestTerritory, circleGreenland, circleAlberta, circleOntario, circleQuebec, circleWesternUnitedStates, circleEasternUnitedStates, circleCentralAmerica, circleVenezuela, circleBrazil, circlePeru, circleArgentina,
@@ -84,7 +84,7 @@ public class GameController implements Initializable {
 	private TextArea phasesDescriptionArea;
 	
 	@FXML
-	private VBox attackButtonIcon;
+	private VBox attackButtonIcon,volumeButton;
 	
 	@FXML
 	private ScrollBar scrollBar;
@@ -92,7 +92,7 @@ public class GameController implements Initializable {
 	
 	private SVGPath[] paths;
 	
-	private boolean fortified, cardSceneOpen;
+	private boolean fortified, cardSceneOpen, music = true;
 	
 	private SoundController soundController;
 	
@@ -507,6 +507,25 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	@FXML
+	private void speakerButtonPressed(MouseEvent event) throws FileNotFoundException {
+		event.consume();
+		
+		if(music) {
+			soundController.stopMusic();
+			InputStream stream = new FileInputStream("src/risk/view/images/speakerOff.png");
+			Image image = new Image(stream);
+			speakerImage.setImage(image);
+			music = false;
+		}else {
+			soundController.gameMusic();
+			InputStream stream = new FileInputStream("src/risk/view/images/speaker.png");
+			Image image = new Image(stream);
+			speakerImage.setImage(image);
+			music = true;
+		}
+		
+	}
 	
 	
 	/**
@@ -580,6 +599,7 @@ public class GameController implements Initializable {
 			updateTerritoriesGraphic();
 			switchPhaseGraphic();
 			switchPlayerGraphic();
+			fortified = false;
 			break;
 		case FORTIFY:
 			nextTurn();
@@ -830,7 +850,8 @@ public class GameController implements Initializable {
 	}
 	
 	public void playMusic() {
-		soundController.gameMusic();
+		if(music) soundController.gameMusic();
+		
 	}
 	
 	public void stopMusic() {
