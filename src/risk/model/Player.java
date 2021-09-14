@@ -20,6 +20,7 @@ public class Player {
 	private DiceShaker shaker;
 	private ArrayList<Card> cards;
 	private Mission mission;
+	private int counter=0;
 
 	/*
 	 * ? private int continents; //numero di continenti ? private int territories;
@@ -276,6 +277,7 @@ public class Player {
 	  public void playTurn() {
 	  
 			Territory temp = null;
+
 			int counter = 0;
 			switch (GameController.getGame().getGamePhase()) {
 			case FIRSTTURN:
@@ -291,6 +293,9 @@ public class Player {
 				}
 				counter = 0;
 //				GameController.getInstance().nextPhase();
+	  
+		  		//GameController.getInstance().nextPhase();
+
 		  //AIRecapSceneController.getInstance() .setText(this.name +
 			 //": armata posizionata sul territorio " + temp.getName() + "\n");
 			  //GameController.getInstance().firstTurn(); } 
