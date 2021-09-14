@@ -662,5 +662,75 @@
             </ImageView>
          </children>
       </VBox>
+      <VBox alignment="CENTER" layoutX="31.0" layoutY="400.0" spacing="10.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <StackPane>
+                     <children>
+                        <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="bonusCircle1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bonusText" text="5" />
+                     </children>
+                  </StackPane>
+                  <Label styleClass="bonusLabel" text="North America" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <StackPane>
+                     <children>
+                        <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="bonusCircle2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bonusText" text="2" />
+                     </children>
+                  </StackPane>
+                  <Label styleClass="bonusLabel" text="South America" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <StackPane>
+                     <children>
+                        <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="bonusCircle3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bonusText" text="3" />
+                     </children>
+                  </StackPane>
+                  <Label styleClass="bonusLabel" text="Africa" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <StackPane>
+                     <children>
+                        <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="bonusCircle4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bonusText" text="7" />
+                     </children>
+                  </StackPane>
+                  <Label styleClass="bonusLabel" text="Asia" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <StackPane>
+                     <children>
+                        <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="bonusCircle5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bonusText" text="5" />
+                     </children>
+                  </StackPane>
+                  <Label styleClass="bonusLabel" text="Europe" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <StackPane>
+                     <children>
+                        <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="bonusCircle6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bonusText" text="2" />
+                     </children>
+                  </StackPane>
+                  <Label styleClass="bonusLabel" text="Oceania" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </Pane>

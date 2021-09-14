@@ -160,3 +160,35 @@ SVGPath {
 .asia:pressed {
 	-fx-fill: #5DBB5D;
 }
+
+
+.bonusText {
+	-fx-fill: black;
+	-fx-font-family: "Arial Black", Arial;
+	-fx-font-size: 18px;
+}
+
+.bonusLabel {
+	-fx-text-fill: white;
+	-fx-font-family: "Arial Black", Arial;
+	-fx-font-size: 14px;
+}
+
+.bonusCircle1 {
+	-fx-fill: SANDYBROWN;
+}
+.bonusCircle2 {
+	-fx-fill: LIGHTBLUE;
+}
+.bonusCircle3 {
+	-fx-fill: BURLYWOOD;
+}
+.bonusCircle4 {
+	-fx-fill: LIGHTGREEN;
+}
+.bonusCircle5 {
+	-fx-fill: THISTLE;
+}
+.bonusCircle6 {
+	-fx-fill: PEACHPUFF;
+}
