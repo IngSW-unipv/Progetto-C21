@@ -20,6 +20,7 @@ public class Player {
 	private DiceShaker shaker;
 	private ArrayList<Card> cards;
 	private Mission mission;
+	private int counter=0;
 
 	/*
 	 * ? private int continents; //numero di continenti ? private int territories;
@@ -281,14 +282,24 @@ public class Player {
 	  { 
 	  case FIRSTTURN: 
 			temp = GameController.getGame().getRandomCurrentPlayerTerritory();
-		  if (bonusTanks > 0) {
-			  	temp.addTanks(1);
-			  	GameController.getInstance().setPhaseTextArea(this.name+
+		  while(counter < 3) {
+			  if(bonusTanks>0) {
+			  		temp.addTanks(1);
+			  		GameController.getInstance().setPhaseTextArea(this.name+
 						" has placed "+1+" tanks"+" in "+ temp.getName());
-			  	temp.getOwner().placeTank(1); //cambia metti 1 al posto di 21
-				}	
+			  		temp.getOwner().placeTank(1); //cambia metti 1 al posto di 21
+			  		counter++;
+			  } else if (bonusTanks==0){
+			  			GameController.getGame().nextPhase();
+			  		}
+				} 
+					
+		  		if(counter>=3) {
+					counter=0;
+					GameController.getGame().nextTurn();
+				}
 		  
-				GameController.getInstance().nextPhase();
+		  		//GameController.getInstance().nextPhase();
 		  //AIRecapSceneController.getInstance() .setText(this.name +
 			 //": armata posizionata sul territorio " + temp.getName() + "\n");
 			  //GameController.getInstance().firstTurn(); } 

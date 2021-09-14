@@ -581,7 +581,6 @@ public class GameController implements Initializable {
 			}
 				if (game.getCurrentTurn().isAI())
 					nextPhase();
-
 			}
 			break;
 		case DRAFT:
