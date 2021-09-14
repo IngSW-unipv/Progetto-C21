@@ -255,7 +255,7 @@ public class GameController implements Initializable {
 				
 			if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
 				if (t.getOwner().getBonusTanks() > 0) {
-					int ntanks = 21; //cambiare solo valore alla variabile e non piu ai due parametri (serve per il print)
+					int ntanks = 1; //cambiare solo valore alla variabile e non piu ai due parametri (serve per il print)
 					t.getOwner().placeTank(ntanks); //cambia metti 1 al posto di 21
 					t.addTanks(ntanks); //cambia metti 1 al posto di 21
 					

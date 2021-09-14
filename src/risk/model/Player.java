@@ -282,10 +282,10 @@ public class Player {
 	  case FIRSTTURN: 
 			temp = GameController.getGame().getRandomCurrentPlayerTerritory();
 		  if (bonusTanks > 0) {
-			  	temp.addTanks(bonusTanks);
+			  	temp.addTanks(1);
 			  	GameController.getInstance().setPhaseTextArea(this.name+
-						" has placed "+bonusTanks+" tanks"+" in "+ temp.getName());
-			  	temp.getOwner().placeTank(bonusTanks); //cambia metti 1 al posto di 21
+						" has placed "+1+" tanks"+" in "+ temp.getName());
+			  	temp.getOwner().placeTank(1); //cambia metti 1 al posto di 21
 				}	
 		  
 				GameController.getInstance().nextPhase();
