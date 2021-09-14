@@ -3,15 +3,13 @@ package risk.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.fxml.Initializable;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import risk.model.Player;
 
@@ -44,7 +42,7 @@ public class InfosWindowController implements Initializable{
 		setColor(GameController.game.getCurrentTurn());
 		
 		
-		switch(GameController.game.getGamePhase()) {
+		switch (GameController.game.getGamePhase()) {
 		case DRAFT:
 			if(GameController.getInstance().isCardSceneOpen()) {
 				titleLabel.setText("Cards traded");

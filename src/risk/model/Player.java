@@ -304,7 +304,7 @@ public class Player {
 		  	temp.getOwner().placeTank(1); 
 	    	}
 	    		
-			GameController.getInstance().nextPhase();
+//			GameController.getInstance().nextPhase();
 	    	  break;
 	    
 	    	
@@ -340,7 +340,7 @@ public class Player {
 		GameController.getInstance().setTerritory2(null);
 		 
 
-	    GameController.getInstance().nextPhase();
+//	    GameController.getInstance().nextPhase();
 	    			
 	    	
 	    	break;
@@ -378,7 +378,7 @@ public class Player {
 			GameController.getInstance().setTerritory1(null);
 			GameController.getInstance().setTerritory2(null);
 
-			GameController.getInstance().nextPhase();
+//			GameController.getInstance().nextPhase();
 	    	break;
 	  }
 

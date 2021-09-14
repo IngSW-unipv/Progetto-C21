@@ -18,8 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
@@ -39,7 +37,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import javafx.scene.media.Media;
 import risk.model.Player;
 import risk.model.PlayersList;
 import risk.model.RisikoGame;
@@ -577,12 +574,18 @@ public class GameController implements Initializable {
 				return;
 			} else {
 				game.nextPhase();
+				if (!game.getCurrentTurn().isAI()) {
 				phaseText.setText(game.getGamePhase().toString());
 				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 				setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
+
 				switchPhaseGraphic();
 				switchPlayerGraphic();
 				callInfoWindows();
+			}
+				if (game.getCurrentTurn().isAI())
+					nextPhase();
+
 			}
 			break;
 		case DRAFT:
@@ -592,9 +595,13 @@ public class GameController implements Initializable {
 			updateTerritoriesGraphic();
 			switchPhaseGraphic();
 			switchPlayerGraphic();
+			if (game.getCurrentTurn().isAI())
+				nextPhase();
 			break;
 		case ATTACK:
 			game.nextPhase();
+			if (game.getCurrentTurn().isAI())
+				nextPhase();
 			phaseText.setText(game.getGamePhase().toString());
 			updateTerritoriesGraphic();
 			switchPhaseGraphic();
@@ -604,14 +611,20 @@ public class GameController implements Initializable {
 		case FORTIFY:
 			nextTurn();
 			game.nextPhase();
-			phaseText.setText(game.getGamePhase().toString());
-			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-			setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
-			updateTerritoriesGraphic();
-			switchPhaseGraphic();
-			switchPlayerGraphic();
-			updateCardsNumber();
-			callInfoWindows();
+			if (!game.getCurrentTurn().isAI()) {
+			System.out.println("bella");
+			phaseText.setText(game.getGamePhase().toString());				//label in basso al centro
+			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));		//label con il numero di tank in basso al centro	
+			setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");	//label in basso a destra
+			updateTerritoriesGraphic(); // update dei cerchiolini sui territori
+			switchPhaseGraphic(); // update del colore della label in basso al centro
+			switchPlayerGraphic(); // update dei colori del player per la label con il numero di carri in basso al
+									// centro
+			updateCardsNumber(); // update del numero di carte sulla label
+			callInfoWindows(); // apre il pop up con il numero di carri armati
+		}
+		if (game.getCurrentTurn().isAI())
+			nextPhase();
 		}
 		
 

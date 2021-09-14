@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
@@ -246,11 +245,13 @@ public class AttackController implements Initializable {
 					ex.printStackTrace();
 				}
 
-				try {
-					
-					GameController.getInstance().windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, true);
-				} catch (IOException ex) {
-					ex.printStackTrace();
+				if (GameController.getInstance().getTerritory1().getTanks() > 1) {
+					try {
+						GameController.getInstance().windowLoader("/risk/view/fxml/DisplacementScene.fxml",
+								"Displacement", true, true);
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
 				}
 				onClosing();
 		    	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
