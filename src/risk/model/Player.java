@@ -276,19 +276,21 @@ public class Player {
 	  public void playTurn() {
 	  
 			Territory temp = null;
-
-	  switch (GameController.getGame().getGamePhase()) 
-	  { 
-	  case FIRSTTURN: 
-			temp = GameController.getGame().getRandomCurrentPlayerTerritory();
-		  if (bonusTanks > 0) {
-			  	temp.addTanks(bonusTanks);
-			  	GameController.getInstance().setPhaseTextArea(this.name+
-						" has placed "+bonusTanks+" tanks"+" in "+ temp.getName());
-			  	temp.getOwner().placeTank(bonusTanks); //cambia metti 1 al posto di 21
-				}	
-		  
-				GameController.getInstance().nextPhase();
+			int counter = 0;
+			switch (GameController.getGame().getGamePhase()) {
+			case FIRSTTURN:
+				temp = GameController.getGame().getRandomCurrentPlayerTerritory();
+				if (bonusTanks > 0) {
+					while (counter < 3 && bonusTanks > 0) {
+						temp.addTanks(1);
+						GameController.getInstance()
+								.setPhaseTextArea(this.name + " has placed " + 1 + " tanks" + " in " + temp.getName());
+						temp.getOwner().placeTank(1); // cambia metti 1 al posto di 21
+						counter++;
+					}
+				}
+				counter = 0;
+//				GameController.getInstance().nextPhase();
 		  //AIRecapSceneController.getInstance() .setText(this.name +
 			 //": armata posizionata sul territorio " + temp.getName() + "\n");
 			  //GameController.getInstance().firstTurn(); } 

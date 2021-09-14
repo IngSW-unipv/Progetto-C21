@@ -153,6 +153,7 @@ public class GameController implements Initializable {
 			attackButtonIcon.setDisable(true);
 			if (game.getCurrentTurn().isAI()) {
 				game.getCurrentTurn().playTurn();
+				nextPhase();
 			}
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Impossible to load assets. Aborting...");
@@ -253,9 +254,11 @@ public class GameController implements Initializable {
 		switch (game.getGamePhase()) {
 		case FIRSTTURN:
 				
+			if (!game.getCurrentTurn().isAI()) {
 			if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
 				if (t.getOwner().getBonusTanks() > 0) {
-					int ntanks = 21; //cambiare solo valore alla variabile e non piu ai due parametri (serve per il print)
+					int ntanks = 1; // cambiare solo valore alla variabile e non piu ai due parametri (serve per il
+									// print)
 					t.getOwner().placeTank(ntanks); //cambia metti 1 al posto di 21
 					t.addTanks(ntanks); //cambia metti 1 al posto di 21
 					
@@ -282,7 +285,31 @@ public class GameController implements Initializable {
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 				}
 			}
+		}
 
+//		else { // se è AI non deve fare sta roba, i tank li mette il playTurn di player e devo
+//				// farglieli mettere a 3 alla volta
+//
+//			if (game.getCurrentTurn().equals(t.getOwner())) {
+//				if (t.getOwner().getBonusTanks() > 0) {
+//					int ntanks = 1; // cambiare solo valore alla variabile e non piu ai due parametri (serve per il
+//									// print)
+//					t.getOwner().placeTank(ntanks); // cambia metti 1 al posto di 21
+//					t.addTanks(ntanks); // cambia metti 1 al posto di 21
+//
+//					this.setPhaseTextArea(game.getCurrentTurn().getName() + " has placed " + ntanks + " tanks" + " in "
+//							+ t.getName());
+//
+//					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+//
+//					if (game.getCurrentTurn().getBonusTanks() == 0) {
+//						nextPhase();
+//					}
+//
+//				}
+//			}
+//
+//		}
 
 			break;
 		case DRAFT:
@@ -300,7 +327,7 @@ public class GameController implements Initializable {
 
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
 						phaseSwitch.setText(">>");
-						enter = false;
+//						enter = false;
 					}
 
 				}
@@ -534,6 +561,8 @@ public class GameController implements Initializable {
 		game.nextTurn();
 		switchPhaseGraphic();
 		switchPlayerGraphic();
+		if (game.getCurrentTurn().isAI() && game.getGamePhase() == GAME_PHASE.FIRSTTURN)
+			nextPhase();
 		
 		// Ogni volta che il turno passa ad un altro giocatore, il suo nome viene sottolineato
 		
@@ -567,18 +596,22 @@ public class GameController implements Initializable {
 
 				switchPhaseGraphic();
 				switchPlayerGraphic();
+
+				if (game.getCurrentTurn().isAI())
+					nextPhase();
+
 				return;
 			} else {
 				game.nextPhase();
 				if (!game.getCurrentTurn().isAI()) {
-				phaseText.setText(game.getGamePhase().toString());
-				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-				setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
+					phaseText.setText(game.getGamePhase().toString());
+					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
+					setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");
 
-				switchPhaseGraphic();
-				switchPlayerGraphic();
-				callInfoWindows();
-			}
+					switchPhaseGraphic();
+					switchPlayerGraphic();
+					callInfoWindows();
+				}
 				if (game.getCurrentTurn().isAI())
 					nextPhase();
 
