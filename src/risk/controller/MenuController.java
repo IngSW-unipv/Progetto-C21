@@ -1,5 +1,6 @@
 package risk.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,10 +15,12 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -25,9 +28,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import risk.model.Player;
 import risk.model.PlayersList;
@@ -296,6 +301,24 @@ public class MenuController implements Initializable {
 		KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
 		timeline.getKeyFrames().add(kf);
 		timeline.play();
+	}
+	
+	/* Method called when rules button is pressed */
+	@FXML
+	private void rules(final ActionEvent event) {
+		try {
+			Parent sceneParent = FXMLLoader.load(getClass().getResource("/risk/view/fxml/RulesWindow.fxml"));
+			Scene mScene = new Scene(sceneParent);
+			Stage window = new Stage();
+			//window.setResizable(false);
+			window.setTitle("Rules");
+			window.setScene(mScene);
+			window.initModality(Modality.APPLICATION_MODAL);
+			window.showAndWait();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/* 
