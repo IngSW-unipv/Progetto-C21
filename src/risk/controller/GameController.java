@@ -536,11 +536,7 @@ public class GameController implements Initializable {
 		switchPlayerGraphic();
 		
 		// Ogni volta che il turno passa ad un altro giocatore, il suo nome viene sottolineato
-		Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
-		for(Text t : userNames) {
-			t.setUnderline(false);
-		}
-		userNames[game.getTurnCounter()].setUnderline(true);
+		
 		
 //		if(!(game.getGamePhase() == GAME_PHASE.FIRSTTURN))
 //			nextPhase();
@@ -681,6 +677,11 @@ public class GameController implements Initializable {
 			phaseSwitch.setStyle("-fx-background-radius: 100;-fx-font-family:\"Arial Black\";-fx-font-size:18;-fx-base:" + color);
 			phaseSwitch.setTextFill(Color.WHITE);
 		}
+		Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
+		for(Text t : userNames) {
+			t.setUnderline(false);
+		}
+		userNames[game.getTurnCounter()].setUnderline(true);
 	}
 	
 	private ArrayList<Rectangle> getRectangles(HBox hb) {
