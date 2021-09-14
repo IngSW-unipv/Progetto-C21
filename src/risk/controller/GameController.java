@@ -680,7 +680,7 @@ public class GameController implements Initializable {
 		Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
 		for(Text t : userNames) {
 			t.setUnderline(false);
-		}
+		} //°
 		userNames[game.getTurnCounter()].setUnderline(true);
 	}
 	
