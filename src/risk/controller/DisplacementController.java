@@ -14,13 +14,20 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import risk.model.RisikoGame;
 import risk.model.Territory;
 
 public class DisplacementController implements Initializable {
 	private RisikoGame game;
+	
+	/* root pane */
+	@FXML
+	private AnchorPane rootPane;
+	
 	/* queste due label mostrano i nomi dei due territori scelti */
 	@FXML
 	private Label territory1Label, territory2Label;
@@ -72,6 +79,20 @@ public class DisplacementController implements Initializable {
 		depTankLabel.textProperty().bind(Bindings.format("%.0f",slider.valueProperty()));
 		newTank1Label.textProperty().bind(Bindings.format("%.0f",d1.subtract(slider.valueProperty())));
 		newTank2Label.textProperty().bind(Bindings.format("%.0f",d2.add(slider.valueProperty())));
+		
+		// hide window on H hold pressed
+		rootPane.setOnKeyPressed((event) -> {
+		    if (event.getCode() == KeyCode.H) {
+		        //rootPane.getScene().getWindow().hide();
+		        rootPane.getScene().getWindow().setOpacity(0);
+		    }
+		});
+		rootPane.setOnKeyReleased((event) -> {
+		    if (event.getCode() == KeyCode.H) {
+		        //rootPane.getScene().getWindow().show();
+		        rootPane.getScene().getWindow().setOpacity(1);
+		    }
+		});
 	}
 	
 	@FXML

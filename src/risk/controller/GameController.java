@@ -743,6 +743,7 @@ public void clearAllTerritories() {
 	public void windowLoader(String scene, String title, boolean cantclose, boolean undecorated) throws IOException{
 		Parent sceneParent = FXMLLoader.load(getClass().getResource(scene));
 		Scene mScene = new Scene(sceneParent);
+		mScene.getRoot().requestFocus();
 		Stage window = new Stage();
 		/*** ***/
 		if(undecorated)

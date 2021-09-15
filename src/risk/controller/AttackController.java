@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import risk.model.DiceShaker;
 import risk.model.RisikoGame;
@@ -24,6 +26,9 @@ public class AttackController implements Initializable {
 	
 	DiceShaker attackDices;
 	DiceShaker defenderDices;
+	
+	@FXML
+	private AnchorPane rootPane;
 	
 	@FXML
 	private Label territoryAtkLabel, territoryDefLabel, attackerTanksLabel, defenderTanksLabel;
@@ -66,9 +71,21 @@ public class AttackController implements Initializable {
 		atkResults = new int[3];
 		defResults = new int[3];
     	
-    
-
 		updateNumberButtons();
+		
+		// hide window on H hold pressed
+		rootPane.setOnKeyPressed((event) -> {
+		    if (event.getCode() == KeyCode.H) {
+		        //rootPane.getScene().getWindow().hide();
+		        rootPane.getScene().getWindow().setOpacity(0);
+		    }
+		});
+		rootPane.setOnKeyReleased((event) -> {
+		    if (event.getCode() == KeyCode.H) {
+		        //rootPane.getScene().getWindow().show();
+		        rootPane.getScene().getWindow().setOpacity(1);
+		    }
+		});
 	}
 	
     /**
@@ -245,10 +262,11 @@ public class AttackController implements Initializable {
 					ex.printStackTrace();
 				}
 
+
+				rootPane.getScene().getWindow().setOpacity(0);
 				if (GameController.getInstance().getTerritory1().getTanks() > 1) {
 					try {
-						GameController.getInstance().windowLoader("/risk/view/fxml/DisplacementScene.fxml",
-								"Displacement", true, true);
+						GameController.getInstance().windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, true);
 					} catch (IOException ex) {
 						ex.printStackTrace();
 					}
