@@ -41,18 +41,13 @@ public class CardSceneController implements Initializable{
 	
 
 	private Card[] cardSet;	
-	private int artilleryNum, infantryNum, cavalryNum, jollyNum,bonus=0;
+	private int artilleryNum, infantryNum, cavalryNum, jollyNum;
+	public static int bonus = 0;
 	private SoundController soundController = new SoundController();
-	private static CardSceneController instance;
+
 	
-	public CardSceneController() {
-		instance = this;
-		
-	}
 	
-	public static CardSceneController getInstance() {
-		return instance;
-	}
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -244,9 +239,6 @@ public class CardSceneController implements Initializable{
 	public void addJollyButtonPressed(ActionEvent event){
 		if(GameController.getInstance().getMusic())soundController.cardSound();
 		addCardToSet(FIGURE.JOLLY);
-	}
-	public int getBonus() {
-		return bonus;
 	}
 	private void addCardToSet(FIGURE figure) {
 		ImageView[] cardImgArr = {cardImg1, cardImg2, cardImg3};
