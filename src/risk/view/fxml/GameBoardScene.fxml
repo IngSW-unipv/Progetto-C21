@@ -246,7 +246,7 @@
             </Text>
             <VBox id="usersBox" fx:id="usersBox" alignment="CENTER" layoutX="1210.0" layoutY="219.0" maxWidth="50.0" minWidth="50.0" prefWidth="50.0">
                <children>
-                  <ImageView id="userImage1" fx:id="userImage1" fitHeight="50.0" fitWidth="50.0" onMousePressed="#playerIconPressed" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5" styleClass="userImage">
+                  <ImageView id="userImage1" fx:id="userImage1" fitHeight="150.0" fitWidth="50.0" onMousePressed="#playerIconPressed" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5" styleClass="userImage">
                      <image>
                         <Image url="@../images/users/yellow.png" />
                      </image>
