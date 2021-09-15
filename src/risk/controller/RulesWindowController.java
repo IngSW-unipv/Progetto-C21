@@ -25,7 +25,15 @@ public class RulesWindowController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		page = 1;
-		leng = MenuController.rulesLeng;
+		
+		try {
+			leng = GameController.getInstance().getRulesLeng();
+			if(leng == null)
+				leng = MenuController.rulesLeng;
+		} catch (NullPointerException e) {
+			leng = MenuController.rulesLeng;
+		}
+		
 		setImageView(page);
 		
 		previousButton.setOnAction((event) -> {

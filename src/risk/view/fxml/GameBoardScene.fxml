@@ -722,32 +722,29 @@
             </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER" layoutX="1060.0" layoutY="1.0" spacing="15.0">
+      <HBox alignment="CENTER" layoutX="1090.0" layoutY="10.0" spacing="15.0">
          <children>
-            <VBox fx:id="volumeButton" alignment="CENTER" onMousePressed="#speakerButtonPressed" styleClass="statusBar">
-               <children>
-                  <ImageView fx:id="speakerImage" fitHeight="51.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" styleClass="statusBar">
-                     <image>
-                        <Image url="@../images/speaker.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speakerImage" fitHeight="30.0" fitWidth="30.0" onMousePressed="#speakerButtonPressed" pickOnBounds="true" preserveRatio="true" styleClass="toolbarIcon">
+               <image>
+                  <Image url="@../images/speaker.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" onMousePressed="#itRulesPressed" pickOnBounds="true" preserveRatio="true" styleClass="toolbarIcon">
                <image>
                   <Image url="@../images/it-rules-icon.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" onMousePressed="#enRulesPressed" pickOnBounds="true" preserveRatio="true" styleClass="toolbarIcon">
                <image>
                   <Image url="@../images/en-rules-icon.png" />
                </image>
             </ImageView>
-            <Button id="exitButton" fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="25.0" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" onMousePressed="#exit" pickOnBounds="true" preserveRatio="true" styleClass="toolbarIcon">
+               <image>
+                  <Image url="@../images/exit-icon.png" />
+               </image>
+            </ImageView>
          </children>
-         <padding>
-            <Insets right="25.0" />
-         </padding>
       </HBox>
    </children>
 </Pane>

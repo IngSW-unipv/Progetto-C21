@@ -58,7 +58,7 @@ public class GameController implements Initializable {
 	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6,cardNumberText;
 	
 	@FXML
-	private VBox usersBox;
+	private VBox usersBox, attackButtonIcon;
 	
 	@FXML
 	private HBox phaseGraphic;
@@ -67,7 +67,7 @@ public class GameController implements Initializable {
 	private Button phaseSwitch;
 	
 	@FXML
-	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6, actualPlayerGraphic,speakerImage;
+	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6, actualPlayerGraphic, speakerImage;
 	
 	@FXML
 	private Circle circleAlaska, circleNorthWestTerritory, circleGreenland, circleAlberta, circleOntario, circleQuebec, circleWesternUnitedStates, circleEasternUnitedStates, circleCentralAmerica, circleVenezuela, circleBrazil, circlePeru, circleArgentina,
@@ -85,10 +85,7 @@ public class GameController implements Initializable {
 					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
 	@FXML
 	private TextArea phasesDescriptionArea;
-	
-	@FXML
-	private VBox attackButtonIcon,volumeButton;
-	
+		
 	@FXML
 	private ScrollBar scrollBar;
 
@@ -98,6 +95,8 @@ public class GameController implements Initializable {
 	private boolean fortified, cardSceneOpen, music = true;
 	
 	private SoundController soundController;
+	
+	private String rulesLeng = null;
 	
 	public boolean isFortified() {
 		return fortified;
@@ -940,13 +939,39 @@ public class GameController implements Initializable {
 		try {
 			GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	private void itRulesPressed(MouseEvent event) {
+		rulesLeng = "it";
+		try {
+			GameController.getInstance().windowLoader("/risk/view/fxml/RulesWindow.fxml", "Rules", false, false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		rulesLeng = null;
+	}
+	
+	@FXML
+	private void enRulesPressed(MouseEvent event) {
+		rulesLeng = "en";
+		try {
+			GameController.getInstance().windowLoader("/risk/view/fxml/RulesWindow.fxml", "Rules", false, false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		rulesLeng = null;
+	}
+	
+	public String getRulesLeng() {
+		return rulesLeng;
+	}
+	
 	/* Method called when exit button is pressed */
 	@FXML
-	private void exit(final ActionEvent event) {
+	private void exit(MouseEvent event) {
 		event.consume();
 		Platform.exit();
 	}
