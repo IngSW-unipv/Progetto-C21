@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -30,6 +31,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -53,6 +55,8 @@ public class GameController implements Initializable {
 	
 	@FXML
 	private Pane rootPane;
+	@FXML
+	private BorderPane pauseMenuPane;
 	@FXML
 	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6,cardNumberText;
 	@FXML
@@ -139,12 +143,11 @@ public class GameController implements Initializable {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		}
-		
+				
 		initializeUserBar();
 		updateTerritoriesGraphic();
 		switchPlayerGraphic();
 		playMusic();
-		
 	}
 
 
@@ -882,6 +885,36 @@ public void clearAllTerritories() {
 		}
 	}
 	
+	@FXML
+	private void pauseButtonPressed(MouseEvent event) {
+	     FadeTransition ft = new FadeTransition(Duration.millis(800), pauseMenuPane);
+	     ft.setFromValue(0);
+	     ft.setToValue(1);
+	     ft.play();
+	     
+	     pauseMenuPane.setMouseTransparent(false);
+	}
+	
+	@FXML
+	private void pauseMenuResumePressed(MouseEvent event) {
+	     FadeTransition ft = new FadeTransition(Duration.millis(800), pauseMenuPane);
+	     ft.setFromValue(1);
+	     ft.setToValue(0);
+	     ft.play();
+	     
+	     pauseMenuPane.setMouseTransparent(true);
+	}
+
+	@FXML
+	private void pauseMenuRestartPressed(MouseEvent event) {
+		// DA FARE
+	}
+	
+	@FXML
+	private void pauseMenuExitPressed(MouseEvent event) {
+		event.consume();
+		Platform.exit();
+	}
 	
 	
 	public void setPhaseTextArea(String text) {
@@ -968,7 +1001,7 @@ public void clearAllTerritories() {
 	
 	/* Method called when exit button is pressed */
 	@FXML
-	private void exit(MouseEvent event) {
+	private void exit(ActionEvent event) {
 		event.consume();
 		Platform.exit();
 	}
