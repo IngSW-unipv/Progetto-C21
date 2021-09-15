@@ -41,8 +41,18 @@ public class CardSceneController implements Initializable{
 	
 
 	private Card[] cardSet;	
-	private int artilleryNum, infantryNum, cavalryNum, jollyNum;
+	private int artilleryNum, infantryNum, cavalryNum, jollyNum,bonus=0;
 	private SoundController soundController = new SoundController();
+	private static CardSceneController instance;
+	
+	public CardSceneController() {
+		instance = this;
+		
+	}
+	
+	public static CardSceneController getInstance() {
+		return instance;
+	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -155,11 +165,11 @@ public class CardSceneController implements Initializable{
 	@FXML
 	public void tradeButtonPressed(ActionEvent event){
 		if(GameController.getInstance().game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
-			int bonus = 0;
+			
 			if(cardSet[0] != null && cardSet[1] != null && cardSet[2] != null) {
 				bonus = GameController.game.checkTris(cardSet[0], cardSet[1], cardSet[2]);
 			}
-			soundController.tradeSound();
+			if(GameController.getInstance().getMusic())soundController.tradeSound();
 			GameController.game.getCurrentTurn().giveBonusTanks(bonus);
 			GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.getInstance().game.getCurrentTurn().getBonusTanks()));
 			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
@@ -216,26 +226,28 @@ public class CardSceneController implements Initializable{
 	 * 		4) se ci sono 3 carte attivo il button Trade altrimenti lo lascio disabilitato */
 	@FXML
 	public void addArtilleryButtonPressed(ActionEvent event){
-		soundController.cardSound();
+		if(GameController.getInstance().getMusic())soundController.cardSound();
 		addCardToSet(FIGURE.ARTILLERY);
 	}
 	
 	@FXML
 	public void addInfantryButtonPressed(ActionEvent event){
-		soundController.cardSound();
+		if(GameController.getInstance().getMusic())soundController.cardSound();
 		addCardToSet(FIGURE.INFANTRY);
 	}
 	@FXML
 	public void addCavalryButtonPressed(ActionEvent event){
-		soundController.cardSound();
+		if(GameController.getInstance().getMusic())soundController.cardSound();
 		addCardToSet(FIGURE.CAVALRY);
 	}
 	@FXML
 	public void addJollyButtonPressed(ActionEvent event){
-		soundController.cardSound();
+		if(GameController.getInstance().getMusic())soundController.cardSound();
 		addCardToSet(FIGURE.JOLLY);
 	}
-	
+	public int getBonus() {
+		return bonus;
+	}
 	private void addCardToSet(FIGURE figure) {
 		ImageView[] cardImgArr = {cardImg1, cardImg2, cardImg3};
 		/* cerco la prima carta di tipo ARTILLERY tra le carte del player

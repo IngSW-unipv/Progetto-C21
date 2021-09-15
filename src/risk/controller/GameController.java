@@ -53,68 +53,42 @@ public class GameController implements Initializable {
 	
 	@FXML
 	private Pane rootPane;
-	
 	@FXML
 	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6,cardNumberText;
-	
 	@FXML
 	private VBox usersBox, attackButtonIcon;
-	
 	@FXML
 	private HBox phaseGraphic;
-	
 	@FXML
 	private Button phaseSwitch;
-	
 	@FXML
 	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6, actualPlayerGraphic, speakerImage;
-	
 	@FXML
 	private Circle circleAlaska, circleNorthWestTerritory, circleGreenland, circleAlberta, circleOntario, circleQuebec, circleWesternUnitedStates, circleEasternUnitedStates, circleCentralAmerica, circleVenezuela, circleBrazil, circlePeru, circleArgentina,
 					circleIceland, circleScandinavia, circleGreatBritain, circleNorthernEurope, circleWesternEurope, circleSouthernEurope, circleRussia, circleUral, circleAfghanistan, circleSiberia, circleYakutsk, circleIrkutsk, circleKamchatka, 
 					circleMongolia, circleJapan, circleChina, circleSiam, circleIndia, circleMiddleEast, circleEgypt, circleNorthAfrica, circleEastAfrica, circleCongo, circleSouthAfrica, circleMadagascar, circleIndonesia, circleNewGuinea, circleWesternAustralia, circleEasternAustralia;
-	
 	@FXML
 	private Label labelAlaska, labelNorthWestTerritory, labelGreenland, labelAlberta, labelOntario, labelQuebec, labelWesternUnitedStates, labelEasternUnitedStates, labelCentralAmerica, labelVenezuela, labelBrazil, labelPeru, labelArgentina,
 					labelIceland, labelScandinavia, labelGreatBritain, labelNorthernEurope, labelWesternEurope, labelSouthernEurope, labelRussia, labelUral, labelAfghanistan, labelSiberia, labelYakutsk, labelIrkutsk, labelKamchatka, 
 					labelMongolia, labelJapan, labelChina, labelSiam, labelIndia, labelMiddleEast, labelEgypt, labelNorthAfrica, labelEastAfrica, labelCongo, labelSouthAfrica, labelMadagascar, labelIndonesia, labelNewGuinea, labelWesternAustralia, labelEasternAustralia;
-	
 	@FXML
 	private SVGPath alaska, northWestTerritory, greenland, alberta, ontario, quebec, westernUnitedStates, easternUnitedStates, centralAmerica, venezuela, brazil, peru, argentina,
 					iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, russia, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
 					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
 	@FXML
 	private TextArea phasesDescriptionArea;
-		
 	@FXML
 	private ScrollBar scrollBar;
 
 	
 	private SVGPath[] paths;
-	
 	private boolean fortified, cardSceneOpen, music = true;
-	
 	private SoundController soundController;
-	
 	private String rulesLeng = null;
-	
-	public boolean isFortified() {
-		return fortified;
-	}
-
-	public void setFortified(boolean fortified) {
-		this.fortified = fortified;
-	}
-	
-	public boolean isCardSceneOpen() {
-		return cardSceneOpen;
-	}
-
 	private Territory territory1 = null, territory2 = null;
 	private SVGPath svgTerr2;
-	
-	
 	static RisikoGame game;
+	
 	private static GameController instance;
 
 	/**
@@ -247,6 +221,7 @@ public class GameController implements Initializable {
 		}
 		
 	}
+	
 	
 
 	@FXML
@@ -475,110 +450,8 @@ public class GameController implements Initializable {
 
 	}
 	
-	protected void setSelectedTerritoryGraphic(SVGPath svg, boolean col) {
-		if(col){
-			// colora il territorio selezionato
-			switch(svg.getStyleClass().get(0)) {
-			case "northAmerica":
-				svg.setStyle("-fx-fill: #CC6D47");
-				break;
-			case "southAmerica":
-				svg.setStyle("-fx-fill: #7AA5B3");
-				break;
-			case "europa":
-				svg.setStyle("-fx-fill: #A58CA5");
-				break;
-			case "oceania":
-				svg.setStyle("-fx-fill: #CCA786");
-				break;
-			case "africa":
-				svg.setStyle("-fx-fill: #AB8554");
-				break;
-			case "asia":
-				svg.setStyle("-fx-fill: #5DBB5D");
-				break;
-			}//aaa
-		} else {
-			//decolora il territorio selezionato
-			switch(svg.getStyleClass().get(0)) {
-			case "northAmerica":
-				svg.setStyle("");
-				svg.getStyleClass().clear();
-				svg.getStyleClass().add("northAmerica");
-				break;
-			case "southAmerica":
-				svg.setStyle("");
-				svg.getStyleClass().clear();
-				svg.getStyleClass().add("southAmerica");
-				break;
-			case "europa":
-				svg.setStyle("");
-				svg.getStyleClass().clear();
-				svg.getStyleClass().add("europa");
-				break;
-			case "oceania":
-				svg.setStyle("");
-				svg.getStyleClass().clear();
-				svg.getStyleClass().add("oceania");
-				break;
-			case "africa":
-				svg.setStyle("");
-				svg.getStyleClass().clear();
-				svg.getStyleClass().add("africa");
-				break;
-			case "asia":
-				svg.setStyle("");
-				svg.getStyleClass().clear();
-				svg.getStyleClass().add("asia");
-				break;
-			}
-		}
-	}
-		
-
-
-	
-	@FXML
-	private void handleSVGPathHover(MouseEvent event) {
-		event.consume();
-		territoryText.setText(((SVGPath)event.getSource()).getId());
-	}
-	
-	@FXML
-	private void handlePhaseSwitchPressed(MouseEvent event) {
-		/* DA SISTEMARE */
-		event.consume();
-		if (!game.getGamePhase().equals(GAME_PHASE.FIRSTTURN) && game.getCurrentTurn().getBonusTanks() == 0) {
-			nextPhase();
-		}
-	}
-	
-	@FXML
-	private void speakerButtonPressed(MouseEvent event) throws FileNotFoundException {
-		event.consume();
-		
-		if(music) {
-			soundController.stopMusic();
-			InputStream stream = new FileInputStream("src/risk/view/images/speakerOff.png");
-			Image image = new Image(stream);
-			speakerImage.setImage(image);
-			music = false;
-		}else {
-			soundController.gameMusic();
-			InputStream stream = new FileInputStream("src/risk/view/images/speaker.png");
-			Image image = new Image(stream);
-			speakerImage.setImage(image);
-			music = true;
-		}
-		
-	}
-	
-	
-	/**
-	 * Switches the game turn to the next one
-	 */
 	public void nextTurn() {
-	
+		
 		// passa il turno al giocatore successivo
 		game.nextTurn();
 		switchPhaseGraphic();
@@ -601,9 +474,6 @@ public class GameController implements Initializable {
 //			}
 	}
 	
-	/**
-	 * Switches the game phase to the next one
-	 */
 	public void nextPhase() {
 
 		switch (game.getGamePhase()) {
@@ -680,6 +550,118 @@ public class GameController implements Initializable {
 
 	}
 	
+	protected void setSelectedTerritoryGraphic(SVGPath svg, boolean col) {
+		if(col){
+			// colora il territorio selezionato
+			switch(svg.getStyleClass().get(0)) {
+			case "northAmerica":
+				svg.setStyle("-fx-fill: #CC6D47");
+				break;
+			case "southAmerica":
+				svg.setStyle("-fx-fill: #7AA5B3");
+				break;
+			case "europa":
+				svg.setStyle("-fx-fill: #A58CA5");
+				break;
+			case "oceania":
+				svg.setStyle("-fx-fill: #CCA786");
+				break;
+			case "africa":
+				svg.setStyle("-fx-fill: #AB8554");
+				break;
+			case "asia":
+				svg.setStyle("-fx-fill: #5DBB5D");
+				break;
+			}//aaa
+		} else {
+			//decolora il territorio selezionato
+			switch(svg.getStyleClass().get(0)) {
+			case "northAmerica":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("northAmerica");
+				break;
+			case "southAmerica":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("southAmerica");
+				break;
+			case "europa":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("europa");
+				break;
+			case "oceania":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("oceania");
+				break;
+			case "africa":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("africa");
+				break;
+			case "asia":
+				svg.setStyle("");
+				svg.getStyleClass().clear();
+				svg.getStyleClass().add("asia");
+				break;
+			}
+		}
+	}
+	
+public void clearAllTerritories() {
+		
+		for(int i =0; i < paths.length;i++) {
+			
+			switch(paths[i].getStyleClass().get(0)) {
+			case "northAmerica":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("northAmerica");
+				break;
+			case "southAmerica":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("southAmerica");
+				break;
+			case "europa":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("europa");
+				break;
+			case "oceania":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("oceania");
+				break;
+			case "africa":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("africa");
+				break;
+			case "asia":
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("asia");
+				break;
+			}
+		}
+			
+	}
+	
+	public void clearSelectedTerritory(Territory t) {
+		for(int i =0; i < paths.length;i++) {
+			
+			if(t.getName().toLowerCase().equals(paths[i].getId().toLowerCase())) {
+				System.out.println("si");
+				paths[i].setStyle("");
+				paths[i].getStyleClass().clear();
+				paths[i].getStyleClass().add("europa");
+			}
+		}
+	}
+		
 	private void switchPhaseGraphic() {
 		ArrayList<Rectangle> rectangles = getRectangles(phaseGraphic);
 		switch(game.getGamePhase()) {
@@ -780,6 +762,76 @@ public class GameController implements Initializable {
 	}
 
 	@FXML
+	private void itRulesPressed(MouseEvent event) {
+		rulesLeng = "it";
+		try {
+			GameController.getInstance().windowLoader("/risk/view/fxml/RulesWindow.fxml", "Rules", false, false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		rulesLeng = null;
+	}
+	
+	@FXML
+	private void enRulesPressed(MouseEvent event) {
+		rulesLeng = "en";
+		try {
+			GameController.getInstance().windowLoader("/risk/view/fxml/RulesWindow.fxml", "Rules", false, false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		rulesLeng = null;
+	}
+	
+	@FXML
+	private void handleSVGPathHover(MouseEvent event) {
+		event.consume();
+		territoryText.setText(((SVGPath)event.getSource()).getId());
+	}
+	
+	@FXML
+	private void handlePhaseSwitchPressed(MouseEvent event) {
+		/* DA SISTEMARE */
+		event.consume();
+		if (!game.getGamePhase().equals(GAME_PHASE.FIRSTTURN) && game.getCurrentTurn().getBonusTanks() == 0) {
+			nextPhase();
+		}
+	}
+	
+	@FXML
+	private void speakerButtonPressed(MouseEvent event) throws FileNotFoundException {
+		event.consume();
+		
+		if(music) {
+			soundController.stopMusic();
+			InputStream stream = new FileInputStream("src/risk/view/images/speakerOff.png");
+			Image image = new Image(stream);
+			speakerImage.setImage(image);
+			music = false;
+		}else {
+			soundController.gameMusic();
+			InputStream stream = new FileInputStream("src/risk/view/images/speaker.png");
+			Image image = new Image(stream);
+			speakerImage.setImage(image);
+			music = true;
+		}
+		
+	}
+	
+	
+	/**
+	 * Switches the game turn to the next one
+	 */
+	
+	
+	/**
+	 * Switches the game phase to the next one
+	 */
+	
+	
+	
+
+	@FXML
 	public void playerIconPressed(MouseEvent event){
 		try {
 			windowLoader("/risk/view/fxml/PlayerInfoWindow.fxml", "Player info", false, false);
@@ -830,57 +882,7 @@ public class GameController implements Initializable {
 		}
 	}
 	
-	public void clearAllTerritories() {
-		
-		for(int i =0; i < paths.length;i++) {
-			
-			switch(paths[i].getStyleClass().get(0)) {
-			case "northAmerica":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("northAmerica");
-				break;
-			case "southAmerica":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("southAmerica");
-				break;
-			case "europa":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("europa");
-				break;
-			case "oceania":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("oceania");
-				break;
-			case "africa":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("africa");
-				break;
-			case "asia":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("asia");
-				break;
-			}
-		}
-			
-	}
 	
-	public void clearSelectedTerritory(Territory t) {
-		for(int i =0; i < paths.length;i++) {
-			
-			if(t.getName().toLowerCase().equals(paths[i].getId().toLowerCase())) {
-				System.out.println("si");
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("europa");
-			}
-		}
-	}
 	
 	public void setPhaseTextArea(String text) {
 		phasesDescriptionArea.setText(phasesDescriptionArea.getText()+text+"\n");
@@ -895,6 +897,10 @@ public class GameController implements Initializable {
 	}
 	public Territory getTerritory1() {
 		return territory1;
+	}
+	
+	public boolean getMusic() {
+		return music;
 	}
 	
 	public Territory getTerritory2() {
@@ -943,30 +949,21 @@ public class GameController implements Initializable {
 		}
 	}
 	
-	@FXML
-	private void itRulesPressed(MouseEvent event) {
-		rulesLeng = "it";
-		try {
-			GameController.getInstance().windowLoader("/risk/view/fxml/RulesWindow.fxml", "Rules", false, false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		rulesLeng = null;
-	}
 	
-	@FXML
-	private void enRulesPressed(MouseEvent event) {
-		rulesLeng = "en";
-		try {
-			GameController.getInstance().windowLoader("/risk/view/fxml/RulesWindow.fxml", "Rules", false, false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		rulesLeng = null;
-	}
 	
 	public String getRulesLeng() {
 		return rulesLeng;
+	}
+	public boolean isFortified() {
+		return fortified;
+	}
+
+	public void setFortified(boolean fortified) {
+		this.fortified = fortified;
+	}
+	
+	public boolean isCardSceneOpen() {
+		return cardSceneOpen;
 	}
 	
 	/* Method called when exit button is pressed */

@@ -44,9 +44,11 @@ public class InfosWindowController implements Initializable{
 		
 		switch (GameController.game.getGamePhase()) {
 		case DRAFT:
+			
+			
 			if(GameController.getInstance().isCardSceneOpen()) {
 				titleLabel.setText("Cards traded");
-				subtitleLabel.setText("You received " + GameController.game.getCurrTurnBonusTanks() + " bonus armies!");
+				subtitleLabel.setText("You received " + CardSceneController.getInstance().getBonus() + " bonus armies!");
 			} else {
 				titleLabel.setText(GameController.game.getCurrentTurn().getName()+"'s turn");			
 				subtitleLabel.setText("You received "+GameController.game.getCurrTurnBonusTanks()+" for the possesion of  "

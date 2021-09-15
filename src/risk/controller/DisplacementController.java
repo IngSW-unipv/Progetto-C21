@@ -126,7 +126,7 @@ public class DisplacementController implements Initializable {
 		GameController.game.moveTanks(territory1, territory2, Integer.parseInt(depTankLabel.getText()));
 		GameController.getInstance().updateTerritoriesGraphic();
 		GameController.getInstance().setFortified(true);
-		soundController.displacementSound();
+		if(GameController.getInstance().getMusic())soundController.displacementSound();
 		resetAll();
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();

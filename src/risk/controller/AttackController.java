@@ -58,7 +58,7 @@ public class AttackController implements Initializable {
     	attackerTanksLabel.setText(String.valueOf(territory1.getTanks()));
     	defenderTanksLabel.setText(String.valueOf(territory2.getTanks()));
     	soundController = new SoundController();
-    	soundController.battleMusic(); 
+    	if(GameController.getInstance().getMusic()) soundController.battleMusic(); 
     	setDefTank();
 		attackDices = new DiceShaker();
 		defenderDices = new DiceShaker();
@@ -145,7 +145,7 @@ public class AttackController implements Initializable {
 		GameController.getInstance().setPhaseSwitchButtonDisable(false);
 		GameController.getInstance().updateTerritoriesGraphic();
 		GameController.getInstance().playMusic();
-		soundController.stopMusic();
+		if(GameController.getInstance().getMusic())soundController.stopMusic();
     }
     /**
      * Manages the attack when the annulla button is pressed
@@ -228,8 +228,8 @@ public class AttackController implements Initializable {
 
 			if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
 				defenderTanksLabel.setText("CONQUERED");
-				soundController.stopMusic();
-				soundController.conqueredSound();
+				if(GameController.getInstance().getMusic())soundController.stopMusic();
+				if(GameController.getInstance().getMusic())soundController.conqueredSound();
 				GameController.game.giveCard();
 				GameController.getInstance().updateCardsNumber();
 				oneButton.setDisable(true);
