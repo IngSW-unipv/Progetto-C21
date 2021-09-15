@@ -642,7 +642,6 @@
             <Label fx:id="labelMadagascar" text="34" />
          </children>
       </StackPane>
-      <Button id="exitButton" fx:id="exitButton" layoutX="1240.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="25.0" />
       <StackPane layoutX="850.0" layoutY="644.0" prefHeight="154.0" prefWidth="500.0" styleClass="statusBar">
          <children>
             <TextArea fx:id="phasesDescriptionArea" editable="false" focusTraversable="false" maxWidth="430.0" prefWidth="430.0" scrollTop="200.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18;" styleClass="statusBar_textArea" text="Player1 is attacking from Ukraine to Ural&#10;Player1 has conquered Ural&#10;Player1 ends his turn&#10;Player2 is your turn. Player2 recives 5 bonus tanks&#10;Player2 has placed 1 tank in India&#10;Player2 has placed 2 tank in newGuinea&#10;Player2 has placed 1 tank in India" wrapText="true">
@@ -653,15 +652,6 @@
             <Pane mouseTransparent="true" styleClass="statusBar_overlay" />
          </children>
       </StackPane>
-      <VBox fx:id="volumeButton" layoutX="1166.0" layoutY="2.0" onMousePressed="#speakerButtonPressed" prefHeight="49.0" prefWidth="72.0" styleClass="statusBar">
-         <children>
-            <ImageView fx:id="speakerImage" fitHeight="51.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" styleClass="statusBar">
-               <image>
-                  <Image url="@../images/speaker.png" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
       <VBox alignment="CENTER" layoutX="31.0" layoutY="400.0" spacing="10.0">
          <children>
             <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -732,5 +722,32 @@
             </HBox>
          </children>
       </VBox>
+      <HBox alignment="CENTER" layoutX="1060.0" layoutY="1.0" spacing="15.0">
+         <children>
+            <VBox fx:id="volumeButton" alignment="CENTER" onMousePressed="#speakerButtonPressed" styleClass="statusBar">
+               <children>
+                  <ImageView fx:id="speakerImage" fitHeight="51.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" styleClass="statusBar">
+                     <image>
+                        <Image url="@../images/speaker.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/it-rules-icon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/en-rules-icon.png" />
+               </image>
+            </ImageView>
+            <Button id="exitButton" fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="25.0" />
+         </children>
+         <padding>
+            <Insets right="25.0" />
+         </padding>
+      </HBox>
    </children>
 </Pane>

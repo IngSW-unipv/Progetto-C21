@@ -29,7 +29,11 @@ Button {
     -fx-padding: 20px 10px 20px 10px;
     -fx-border-color: #fff;
     -fx-border-radius: 10px;
-  }
+}
+
+.infoBg__noleftpad {
+    -fx-padding: 20px 10px 20px -10px;
+}
 
 .title {
     -fx-font-family: "Arial Black", "Arial";
@@ -40,6 +44,11 @@ Button {
 .subtitle {
     -fx-font-family: "Arial";
     -fx-font-size: 18px;
+}
+
+.infoLabel {
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px;
 }
 
 .exitButton {

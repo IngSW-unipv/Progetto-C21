@@ -9,6 +9,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,6 +42,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import risk.model.Player;
 import risk.model.PlayersList;
 import risk.model.RisikoGame;
@@ -289,7 +295,7 @@ public class GameController implements Initializable {
 			}
 		}
 
-//		else { // se è AI non deve fare sta roba, i tank li mette il playTurn di player e devo
+//		else { // se ï¿½ AI non deve fare sta roba, i tank li mette il playTurn di player e devo
 //				// farglieli mettere a 3 alla volta
 //
 //			if (game.getCurrentTurn().equals(t.getOwner())) {
@@ -373,6 +379,16 @@ public class GameController implements Initializable {
 					svgTerr2 = svg;
 					setSelectedTerritoryGraphic(svg, true);
 					attackButtonIcon.setDisable(false);
+					
+					/*** ***/			
+				     ScaleTransition st = new ScaleTransition(Duration.millis(500), attackButtonIcon);
+				     st.setByX(.05);
+				     st.setByY(.05);
+				     st.setCycleCount(2);
+				     st.setAutoReverse(true);  
+				     st.play();
+					/*** ***/
+					
 					phaseSwitch.setDisable(true);
 				}
 			// se invece premo lo stesso territorio gia' selezionato, allora lo deseleziono
@@ -391,6 +407,16 @@ public class GameController implements Initializable {
 					svgTerr2 = svg;
 					setSelectedTerritoryGraphic(svg, true);
 					attackButtonIcon.setDisable(false);
+					
+					/*** ***/			
+				     ScaleTransition st = new ScaleTransition(Duration.millis(500), attackButtonIcon);
+				     st.setByX(.05);
+				     st.setByY(.05);
+				     st.setCycleCount(2);
+				     st.setAutoReverse(true);  
+				     st.play();
+					/*** ***/
+					
 					phaseSwitch.setDisable(true);
 				}
 			}
@@ -447,11 +473,6 @@ public class GameController implements Initializable {
 		}
 
 		updateTerritoriesGraphic();
-
-		if (game.verifyMission()) {
-			System.out.println("hai vinto, fare grafica");
-			Platform.exit();
-		}
 
 	}
 	
@@ -794,6 +815,16 @@ public class GameController implements Initializable {
 			try {
 				soundController.stopMusic();
 				windowLoader("/risk/view/fxml/AttackScene.fxml", "Attack", true, true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// after the attack check victory
+		if (game.verifyMission()) {
+			try {
+				soundController.stopMusic();
+				windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

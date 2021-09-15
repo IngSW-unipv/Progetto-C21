@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="450.0" prefHeight="450.0" prefWidth="650.0" stylesheets="@../css/WinSceneStyleSheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="450.0" prefHeight="450.0" prefWidth="650.0" stylesheets="@../css/WinSceneStyleSheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="risk.controller.WinSceneController">
    <children>
       <VBox alignment="TOP_CENTER" styleClass="bg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,31 +29,47 @@
                         <Image url="@../images/missions/mission05.png" />
                      </image>
                   </ImageView>
-                  <VBox alignment="CENTER" spacing="20.0">
+                  <VBox alignment="CENTER" maxHeight="300.0" spacing="20.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="20.0" styleClass="infoBg">
+                        <VBox alignment="CENTER" prefHeight="200.0" spacing="20.0">
                            <children>
-                              <Label fx:id="subtitleLabel" styleClass="subtitle" text="playerName has completed his mission" textAlignment="CENTER" wrapText="true" />
-                              <VBox alignment="CENTER" spacing="3.0">
+                              <HBox alignment="CENTER">
                                  <children>
-                                    <Label contentDisplay="RIGHT" styleClass="subtitle" text="Total tanks:" textAlignment="CENTER" wrapText="true">
-                                       <graphic>
-                                          <Label fx:id="tankNumLabel" styleClass="subtitle" text="45" />
-                                       </graphic>
-                                    </Label>
-                                    <Label contentDisplay="RIGHT" styleClass="subtitle" text="Total territories:" textAlignment="CENTER" wrapText="true">
-                                       <graphic>
-                                          <Label fx:id="terrNumLabel" styleClass="subtitle" text="24" />
-                                       </graphic>
-                                    </Label>
-                                    <Label contentDisplay="RIGHT" styleClass="subtitle" text="Total continents:" textAlignment="CENTER" wrapText="true">
-                                       <graphic>
-                                          <Label fx:id="contNumLabel" styleClass="subtitle" text="2" />
-                                       </graphic>
-                                    </Label>
+                                    <ImageView fitHeight="150.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/trophy.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <GridPane alignment="CENTER" hgap="5.0" vgap="3.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label contentDisplay="RIGHT" styleClass="subtitle" text="Total tanks:" textAlignment="JUSTIFY" wrapText="true" />
+                                          <Label contentDisplay="RIGHT" styleClass="subtitle" text="Total territories:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+                                          <Label contentDisplay="RIGHT" styleClass="subtitle" text="Total continents:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
+                                          <Label fx:id="tankNumLabel" styleClass="subtitle" text="45" GridPane.columnIndex="1" />
+                                          <Label fx:id="terrNumLabel" styleClass="subtitle" text="24" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label fx:id="contNumLabel" styleClass="subtitle" text="3" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
                                  </children>
-                              </VBox>
+                              </HBox>
+                              <Label alignment="CENTER" styleClass="infoLabel" text="Press 'new game' to play again or exit to quit" textAlignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin></Label>
                            </children>
+                           <styleClass>
+                              <String fx:value="infoBg" />
+                              <String fx:value="infoBg__noleftpad" />
+                           </styleClass>
                         </VBox>
                         <GridPane alignment="CENTER" prefHeight="80.0" prefWidth="300.0" styleClass="infoBg">
                           <columnConstraints>
@@ -62,7 +80,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="newGamebutton" focusTraversable="false" mnemonicParsing="false" prefWidth="125.0" styleClass="exitButton" text="New game" />
+                              <Button fx:id="newGameButton" focusTraversable="false" mnemonicParsing="false" prefWidth="125.0" styleClass="exitButton" text="New game" />
                               <Button fx:id="exitButton" focusTraversable="false" mnemonicParsing="false" prefWidth="125.0" styleClass="exitButton" text="Exit" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
