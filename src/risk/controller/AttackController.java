@@ -149,8 +149,7 @@ public class AttackController implements Initializable {
 			
 			
     	}
-//    	GameController.getInstance().setTerritory1(null);
-//    	GameController.getInstance().setTerritory2(null);
+
     }
 
     
