@@ -1,7 +1,6 @@
 package risk.controller;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -91,12 +90,12 @@ public class AttackController implements Initializable {
 	/**
 	 * Territory 1
 	 */
-	private Territory territory1= GameController.getInstance().getTerritory1();
+	private Territory territory1;
 	
 	/**
 	 * Territory 2
 	 */
-	private Territory territory2= GameController.getInstance().getTerritory2();
+	private Territory territory2;
 	
 	/**
 	 * SoundController
@@ -113,6 +112,8 @@ public class AttackController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		territory1 = GameController.getInstance().getTerritory1();
+		territory2 = GameController.getInstance().getTerritory2();
 		attackButton.setDisable(true);
 		territoryAtkLabel.setText(territory1.getName());
 		territoryDefLabel.setText(territory2.getName());
@@ -120,7 +121,7 @@ public class AttackController implements Initializable {
 		defenderTanksLabel.setText(String.valueOf(territory2.getTanks()));
 		soundController = new SoundController();
 		if(GameController.getInstance().getMusic()) soundController.battleMusic(); 
-		setDefTank();
+		setDefTanks();
 		attackDices = new DiceShaker();
 		defenderDices = new DiceShaker();
 
@@ -147,7 +148,7 @@ public class AttackController implements Initializable {
 	/**
 	 * sets the number of defending tanks
 	 */
-	private void setDefTank() {
+	private void setDefTanks() {
 		if(territory2.getTanks() > 2) {
 			defTank = 3;
 		}
@@ -158,7 +159,7 @@ public class AttackController implements Initializable {
 	/**
 	 * sets the number of attacking tanks
 	 */
-	private void setAtkTank() {
+	private void setAtkTanks() {
 		if(territory1.getTanks() > 3) {
 			atkTank = 3;
 		}
@@ -175,50 +176,39 @@ public class AttackController implements Initializable {
 	 */
 	public void aiAttack(Territory t1,Territory t2) {
 
-		int atNumber;
-		int deNumber;
+		territory1 = t1;
+		territory2 = t2;
 
-		if(t1.getTanks() > 3) {
-			atNumber = 3;
-		}
-		else atNumber = t1.getTanks() -1;
+		setAtkTanks();
+		setDefTanks();
 
-		if(t2.getTanks() > 2) {
-			deNumber = 3;
-		} else {
-			deNumber = t2.getTanks();
-		}
-		System.out.println("atnumber "+atNumber);
-		System.out.println("denumber "+deNumber);
 		System.out.println("t1 "+t1.getName());
 		System.out.println("t2 "+t2.getName());
 
-		DiceShaker attackDices2 = new DiceShaker();
-		DiceShaker defenderDices2 = new DiceShaker();
+		attackDices = new DiceShaker();
+		defenderDices = new DiceShaker();
 
-		int[] atkResults2 = new int[3];
-		int[] defResults2 = new int[3];
+		atkResults = new int[3];
+		defResults = new int[3];
 
-		atkResults2 = attackDices2.rollDices(atNumber);
-		defResults2 = defenderDices2.rollDices(deNumber);
+		atkResults = attackDices.rollDices(atkTank);
+		defResults = defenderDices.rollDices(defTank);
 
-		GameController.game.battle(atkResults2,defResults2, atNumber, deNumber,t1,t2);
-		for(int i = 0 ; i < Math.max(atNumber, deNumber); i++) {
-			System.out.println(""+atkResults2[i]);
-			System.out.println(""+defResults2[i]);
+		GameController.game.battle(atkResults, defResults, atkTank, defTank, territory1, territory2);
+		for (int i = 0; i < Math.max(atkTank, defTank); i++) {
+			System.out.println("" + atkResults[i] + "-----" + defResults[i]);
+
 		}
 
 		GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
-				+" attacked "+t2.getName()+" from "+t1.getName());
+				+ " attacked " + territory2.getName() + " from " + territory1.getName());
 
 
-		if(t2.getOwner().equals(t1.getOwner())) {
+		if (territory2.getOwner().equals(territory1.getOwner())) {
 			GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
-					+" conquered "+t2.getName());
+					+ " conquered " + territory2.getName());
 
 			GameController.game.giveCard();
-			//			GameController.getInstance().setTerritory1(null);
-			//	    	GameController.getInstance().setTerritory2(null);
 			GameController.getInstance().updateCardsNumber();
 
 
@@ -278,7 +268,7 @@ public class AttackController implements Initializable {
 		attackerTanksLabel.setText(Integer.toString(territory1.getTanks()));
 		defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
 		updateNumberButtons();
-		setDefTank();
+		setDefTanks();
 
 
 		if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
@@ -300,7 +290,7 @@ public class AttackController implements Initializable {
 	private void blitzButtonPressed(ActionEvent e) throws IOException {
 
 		while(territory1.getTanks()>1 && territory2.getTanks()>0) {
-			setAtkTank();
+			setAtkTanks();
 			atkResults = attackDices.rollDices(atkTank);
 			defResults = defenderDices.rollDices(defTank);
 			GameController.game.battle(atkResults, defResults, atkTank, defTank, territory1,
@@ -315,7 +305,7 @@ public class AttackController implements Initializable {
 			attackerTanksLabel.setText(Integer.toString(territory1.getTanks()));
 			defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
 			updateNumberButtons();
-			setDefTank();
+			setDefTanks();
 			
 			if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
 				conqueredUpdate();
