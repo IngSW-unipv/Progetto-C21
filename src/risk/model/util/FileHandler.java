@@ -18,7 +18,6 @@ public class FileHandler {
 	private ArrayList<Card> card;
 	private ArrayList<Mission> missions;
 	private ArrayList<Continent> continents;
-	private ArrayList<Pixel> pixels;
 	private int nLine = 0;
 	private int nLineC=0;
 	private int nLineM=0;
@@ -42,17 +41,14 @@ public class FileHandler {
 		String name;
 		String continent;
 		int code;
-		String color;
 			
 		for(int i = 0; i<n; i++) {
 			
 			line = in.readLine();
 			code = Integer.parseInt(line.substring(0,2));
-			StringTokenizer st = new StringTokenizer (line.substring(4));
-			color = st.nextToken();
-			int k=Integer.parseInt(line.substring(22, 23));
+			int k=Integer.parseInt(line.substring(5, 6));
 			int j=k*3;
-			StringTokenizer s = new StringTokenizer (line.substring(j+23));
+			StringTokenizer s = new StringTokenizer (line.substring(j+6));
 			name = s.nextToken();
 			continent = s.nextToken();
 			
@@ -102,8 +98,8 @@ public class FileHandler {
 			tempList = new ArrayList<Territory>();
 			line = in.readLine();
 			id = Integer.parseInt(line.substring(0,2));
-			n_confini = Integer.parseInt(line.substring(22, 23));
-			StringTokenizer st = new StringTokenizer (line.substring(23));
+			n_confini = Integer.parseInt(line.substring(5, 6));
+			StringTokenizer st = new StringTokenizer (line.substring(6));
 			
 			for(int k = 0; k<n_confini; k++) {
 				
@@ -308,43 +304,6 @@ public class FileHandler {
 		return false;
 	}
 
-	public ArrayList<Pixel> addPosizione(String path) throws NumberFormatException, IOException{
-		
-		BufferedReader in = new BufferedReader(new FileReader(path));
-		String line;
-		int n = Integer.parseInt(in.readLine());
-		
-		pixels=new ArrayList<Pixel>();
-		int id;
-		int x=0;
-		int y=0;
-		Color color=new Color(0);		
-		
-		for(int i = 0; i<n; i++) {
-			
-			line = in.readLine();
-			id = Integer.parseInt(line.substring(0,2));
-			StringTokenizer st = new StringTokenizer (line.substring(11));
-			x = Integer.parseInt(st.nextToken());
-			y = Integer.parseInt(st.nextToken());
-			
-			if(!addPixel(new Pixel(x, y, color))) {
-				break;
-			}
-		}
-		in.close();
-		return pixels;
-	}
-	
-	private boolean addPixel(Pixel p) {
-		int nLineP=0;
-		// TODO Auto-generated method stub
-		if(nLineP<=pixels.size()) {
-			pixels.add(p);
-			nLineP++;
-			return true;
-		}
-		return false;
-	}
+
 	
 }
