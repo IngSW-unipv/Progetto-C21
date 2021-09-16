@@ -1,6 +1,7 @@
 package risk.controller;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -54,7 +55,7 @@ public class AttackController implements Initializable {
 	 * AttackScene button
 	 */
 	@FXML
-	private Button attackButton, cancelButton, exitButton;
+	private Button attackButton, cancelButton, exitButton, blitzButton;
 
 	/**
 	 * number of tanks button
@@ -214,7 +215,7 @@ public class AttackController implements Initializable {
 
 	
 	/**
-	 * Method that close the window and resets all
+	 * Method that resets all
 	 */
 	private void onClosing() {
 		GameController.getInstance().setTerritory1(null);
@@ -249,12 +250,41 @@ public class AttackController implements Initializable {
 	 */
 	@FXML	
 	private void attackButtonPressed(ActionEvent e) throws IOException {
-		ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
-		ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
-		InputStream atkStream;
-		Image image1; 
-		InputStream defStream;
-		Image image2; 
+		atkResults = attackDices.rollDices(atkTank);
+		defResults = defenderDices.rollDices(defTank);
+		GameController.game.battle(atkResults, defResults, atkTank, defTank, territory1,
+				territory2);
+
+		GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+				+" attacked "+territory2.getName()+" from "+territory1.getName());
+		
+		updateDieImages();
+
+
+
+		attackerTanksLabel.setText(Integer.toString(territory1.getTanks()));
+		defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
+		updateNumberButtons();
+		setDefTank();
+
+
+		if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
+			conqueredUpdate();
+			onClosing();
+			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+			window.close();
+		}
+
+
+	}
+
+	/**
+	 * Method that permits to attack until the conquest or if there are not enough tanks
+	 * @param e ActionEvent blitz button pressed
+	 * @throws IOException 
+	 */
+	@FXML	
+	private void blitzButtonPressed(ActionEvent e) throws IOException {
 
 		atkResults = attackDices.rollDices(atkTank);
 		defResults = defenderDices.rollDices(defTank);
@@ -263,7 +293,40 @@ public class AttackController implements Initializable {
 
 		GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
 				+" attacked "+territory2.getName()+" from "+territory1.getName());
+		
+		updateDieImages();
 
+
+
+		attackerTanksLabel.setText(Integer.toString(territory1.getTanks()));
+		defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
+		updateNumberButtons();
+		setDefTank();
+
+
+		if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
+			conqueredUpdate();
+			onClosing();
+			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+			window.close();
+		}
+		
+	}
+
+
+	
+	/**
+	 * Method called to update die images
+	 * @throws IOException if there are no dice images
+	 */
+	private void updateDieImages() throws IOException {
+		ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
+		ImageView[] defenderDiceImages = {BlueDice1,BlueDice2,BlueDice3};
+		InputStream atkStream;
+		Image image1; 
+		InputStream defStream;
+		Image image2; 
+		
 		if(atkTank == 2) {
 			atkStream = new FileInputStream("src/risk/view/images/dice/" +0+"_red.png");
 			image1 = new Image(atkStream);
@@ -288,6 +351,7 @@ public class AttackController implements Initializable {
 			defenderDiceImages[1].setImage(image2);	
 			defenderDiceImages[2].setImage(image2);	
 		}
+		
 		for (int i = 0; i < Math.max(atkTank, defTank); i++) {
 
 			System.out.println(atkResults[i] + "-------" + defResults[i]);
@@ -302,60 +366,41 @@ public class AttackController implements Initializable {
 			defenderDiceImages[i].setImage(image2);	
 
 		}
+	}
+	
+	/**
+	 * Method called to update graphic and open windows after the Territory is conquered
+	 */
+	private void conqueredUpdate() {
+		defenderTanksLabel.setText("CONQUERED");
+		if(GameController.getInstance().getMusic())soundController.stopMusic();
+		if(GameController.getInstance().getMusic())soundController.conqueredSound();
+		GameController.game.giveCard();
+		GameController.getInstance().updateCardsNumber();
+		oneButton.setDisable(true);
+		twoButton.setDisable(true);
+		threeButton.setDisable(true);
+		attackButton.setDisable(true);
+		blitzButton.setDisable(true);
+		GameController.getInstance().updateTerritoriesGraphic();
 
+		try {
+			GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
 
-		attackerTanksLabel.setText(Integer.toString(territory1.getTanks()));
-		defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
-		updateNumberButtons();
-		setDefTank();
-
-
-		if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
-			defenderTanksLabel.setText("CONQUERED");
-			if(GameController.getInstance().getMusic())soundController.stopMusic();
-			if(GameController.getInstance().getMusic())soundController.conqueredSound();
-			GameController.game.giveCard();
-			GameController.getInstance().updateCardsNumber();
-			oneButton.setDisable(true);
-			twoButton.setDisable(true);
-			threeButton.setDisable(true);
-			attackButton.setDisable(true);
-			GameController.getInstance().updateTerritoriesGraphic();
-
-			try {
-				GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
-
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-
-
-			rootPane.getScene().getWindow().setOpacity(0);
-			if (GameController.getInstance().getTerritory1().getTanks() > 1) {
-				try {
-					GameController.getInstance().windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, true);
-				} catch (IOException ex) {
-					ex.printStackTrace();
-				}
-			}
-			onClosing();
-			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-			window.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
 
 
+		rootPane.getScene().getWindow().setOpacity(0);
+		if (GameController.getInstance().getTerritory1().getTanks() > 1) {
+			try {
+				GameController.getInstance().windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, true);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
-
-	/**
-	 * Method that permits to attack until the conquest or if there are not enough tanks
-	 * @param e ActionEvent blitz button pressed
-	 */
-	@FXML	
-	private void blitzButtonPressed(ActionEvent e) {
-		
-	}
-
-
 
 	/**
 	 * Method that updates the number buttons 
