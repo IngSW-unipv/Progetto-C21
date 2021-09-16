@@ -154,6 +154,19 @@ public class AttackController implements Initializable {
 		else
 			defTank = territory2.getTanks();
 	}
+	
+	/**
+	 * sets the number of attacking tanks
+	 */
+	private void setAtkTank() {
+		if(territory1.getTanks() > 3) {
+			atkTank = 3;
+		}
+		else {
+			atkTank = territory1.getTanks()-1;
+		}
+	}
+	
 
 	/**
 	 * Method that implements AI attack
@@ -286,30 +299,38 @@ public class AttackController implements Initializable {
 	@FXML	
 	private void blitzButtonPressed(ActionEvent e) throws IOException {
 
-		atkResults = attackDices.rollDices(atkTank);
-		defResults = defenderDices.rollDices(defTank);
-		GameController.game.battle(atkResults, defResults, atkTank, defTank, territory1,
-				territory2);
-
-		GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
-				+" attacked "+territory2.getName()+" from "+territory1.getName());
-		
-		updateDieImages();
-
-
-
-		attackerTanksLabel.setText(Integer.toString(territory1.getTanks()));
-		defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
-		updateNumberButtons();
-		setDefTank();
-
-
-		if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
-			conqueredUpdate();
-			onClosing();
-			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-			window.close();
+		while(territory1.getTanks()>1 && territory2.getTanks()>0) {
+			setAtkTank();
+			atkResults = attackDices.rollDices(atkTank);
+			defResults = defenderDices.rollDices(defTank);
+			GameController.game.battle(atkResults, defResults, atkTank, defTank, territory1,
+					territory2);
+	
+			GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+					+" attacked "+territory2.getName()+" from "+territory1.getName());
+			
+			updateDieImages();
+	
+	
+			attackerTanksLabel.setText(Integer.toString(territory1.getTanks()));
+			defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
+			updateNumberButtons();
+			setDefTank();
+			
+			if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
+				conqueredUpdate();
+				onClosing();
+				Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+				window.close();
+				break;
+			}
 		}
+		
+		if(territory1.getTanks()==1) {
+			blitzButton.setDisable(true);
+		}
+		
+		
 		
 	}
 
@@ -354,7 +375,7 @@ public class AttackController implements Initializable {
 		
 		for (int i = 0; i < Math.max(atkTank, defTank); i++) {
 
-			System.out.println(atkResults[i] + "-------" + defResults[i]);
+			System.out.println(atkResults[i] + "-------" + defResults[i]+"\n");
 
 
 
@@ -448,6 +469,8 @@ public class AttackController implements Initializable {
 		});
 
 	}
+	
+	
 
 
 

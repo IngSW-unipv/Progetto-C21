@@ -2,6 +2,7 @@ package risk.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import risk.controller.GameController;
@@ -153,11 +154,6 @@ public class RisikoGame {
 	public boolean firstPhaseEnded() {
 
 		if (getBonusTanksSum() == 0) {
-//			for (Player p : players) {
-//				if (p.getBonusTanks() != 0) { // perch� il controllo viene fatto due volte???
-//					return false;
-//				}
-//			}
 			return true;
 		}
 		return false;
@@ -175,38 +171,6 @@ public class RisikoGame {
 		t2.addTanks(n);
 	}
 	
-	/**
-	 * Makes a ATTACK between 2 players
-	
-	 */
-//	public void battle(int[] atkResults, int[] defResults, ArrayList<Player> player, ArrayList<Territory> list,
-//			Territory attacker, Territory defender) {
-//
-//
-//		int n = Math.min(atkResults.length, defResults.length);
-////		
-//		for (int i = 0; i < n; i++) {
-//			if(atkResults[i] > defResults[i]) {
-//				
-//			//bisogna passare il territorio ed aggiungere un metodo che trova il territorio del player dato il territorio
-//				list.get(list.indexOf(defender)).removeTanks(1);
-//				
-//			
-//		} else {
-//				
-//			list.get(list.indexOf(attacker)).removeTanks(1);
-//			}
-//	}
-//		if(	list.get(list.indexOf(defender)).getTanks()==0) {
-//			player.get(player.indexOf(attacker)).addTerritory();
-//			player.get(player.indexOf(defender)).removeTerritory();
-//			list.get(list.indexOf(defender)).setOwner(player.get(player.indexOf(attacker)));
-//			
-//			
-//			
-//			
-//		}
-//	} 
 	
 	/**
 	 * Makes a battle between 2 players
@@ -236,11 +200,6 @@ public class RisikoGame {
 			conqueredTerritories++;
 		}
 			
-
-		/*if (getPlayer(defender.getOwner()).getTanks() == 0) {
-			getPlayer(defender.getOwner()).setEliminated(true);
-			System.out.println("godo");
-		}*/
 	}
 	
 
@@ -329,7 +288,7 @@ public class RisikoGame {
 	/**
 	 * Returns a random territory of a continent
 	 * 
-	 * @return t
+	 * @return t Territory
 	 */
 	public Territory getRandomTerritory(Continent c) {
 		for (Territory t : territories) {
@@ -345,59 +304,7 @@ public class RisikoGame {
 	/**
 	 * Verifies if a mission is completed
 	 * @return boolean
-	 */
-//	public boolean verifyMission () {
-//		MISSION_TYPE missionType = currentTurn.getMission().getType();
-//		int i = 0;
-//		
-//		if(missionType == MISSION_TYPE.TYPE1) {
-//			if(currentTurn.getTerritories() >= currentTurn.getMission().getNumberOfTerritories()) {
-//				for(Territory t : territories) {
-//					if(t.getOwner().equals(currentTurn) && t.getTanks() >= currentTurn.getMission().getNumberOfTanks()) {
-//						i++;
-//					}
-//				}
-//				if(i == currentTurn.getMission().getNumberOfTerritories()) {
-//					return true;
-//				} else {
-//					return false;
-//				}
-//			} else {
-//				return false;
-//			}
-//		}
-//		else {
-//			if(missionType == MISSION_TYPE.TYPE2) {
-//				Continent c1 = currentTurn.getMission().getContinent1();
-//				Continent c2 = currentTurn.getMission().getContinent2();
-//				if (isOwned(c1)) {
-//					Territory t1 = getTerritory(c1.getRandomTerritory());
-//					if (t1.getOwner().equals(currentTurn)) {
-//						if (isOwned(c2)) {
-//							Territory t2 = getTerritory(c2.getRandomTerritory());
-//							if (t2.getOwner().equals(currentTurn)) {
-//								if(!currentTurn.getMission().hasContinent3()) {
-//									return true;
-//								}
-//								else
-//								if (currentTurn.getContinents() > 2)
-//									return true;
-//							}
-//						}
-//					}
-//				}
-//			}
-//			else
-//				return false;
-//		}
-//		
-//		return false;
-//	}
-	
-	
-	
-	
-	
+	 */	
 	public boolean verifyMission () {
 		MISSION_TYPE missionType = currentTurn.getMission().getType();
 		int i = 0;
@@ -431,7 +338,6 @@ public class RisikoGame {
 
 		}
 		return false;			
-
 	}
 
 	
@@ -538,25 +444,8 @@ public class RisikoGame {
 	 /**
      * Shuffles the cards of the cards list
      */
-    private void shuffleCards() {
-    	Card[] shuffledCards = new Card[cards.size()];
-    	int k = 0;
-    	for(Card c : cards) {
-    		shuffledCards[k] = c;
-    		k++;
-    	}
-        for (int i = 0; i < cards.size(); i++) {
-            int j = i + (int) ((cards.size() - i) * Math.random());
-            Card temp = shuffledCards[i];
-            shuffledCards[i] = shuffledCards[j];
-            shuffledCards[j] = temp;
-        }
-        ArrayList<Card> temp = new ArrayList<Card>();
-        for(Card c: shuffledCards) {
-        	temp.add(c);
-        }
-        cards = temp;		//assegno solo le cards all'ArrayList poich� non si fanno operazioni di init, a differenza di mission e territory
-        					//che vengono usate subito di metodi initTerritoryOwners() e giveMission()
+    private void shuffleCards() {    	
+    	Collections.shuffle(cards);
     }
 
 	/**
@@ -576,19 +465,10 @@ public class RisikoGame {
 	 * @return array of Missions
 	 */
     private Mission[] shuffleMissions() {
+    	Collections.shuffle(missions);
     	Mission[] shuffledMissions = new Mission[missions.size()];
-    	int k = 0;
-    	for(Mission m : missions) {
-    		shuffledMissions[k] = m;
-    		k++;
-    	}
-        for (int i = 0; i < missions.size(); i++) {
-            int j = i + (int) ((missions.size() - i) * Math.random());
-            Mission temp = shuffledMissions[i];
-            shuffledMissions[i] = shuffledMissions[j];
-            shuffledMissions[j] = temp;
-        }
-        return shuffledMissions;
+    	missions.toArray(shuffledMissions);
+    	return shuffledMissions;
     }
 	
     /**
@@ -603,12 +483,22 @@ public class RisikoGame {
     		k++;
     	}
         for (int i = 0; i < territories.size(); i++) {
-            int j = i + (int) ((territories.size() - i) * Math.random());
+            int j = i + (int) ((territories.size() - i) * Math.random());   
             Territory temp = shuffledTerritories[i];
             shuffledTerritories[i] = shuffledTerritories[j];
             shuffledTerritories[j] = temp;
         }
         return shuffledTerritories;
+//    	
+//    	Collections.shuffle(territories);
+//    	Territory[] shuffledTerritories = new Territory[territories.size()];		//NON CAPIAMO PERCHE' NON FUNZIONA
+//    	territories.toArray(shuffledTerritories);
+//    	Territory[] sh2 =new Territory[territories.size()];
+//    	sh2=shuffledTerritories.clone();
+//    	for(int i=0; i<sh2.length;i++) {
+//    		System.out.println(sh2[i]);
+//    	}
+//    	return sh2;
     }
     
    
