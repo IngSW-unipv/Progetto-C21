@@ -91,7 +91,7 @@ public class GameController implements Initializable {
 	private String rulesLeng = null;
 	private Territory territory1 = null, territory2 = null;
 	private SVGPath svgTerr2;
-	static RisikoGame game;
+	public static RisikoGame game;
 	
 	private static GameController instance;
 
@@ -959,22 +959,24 @@ public void clearAllTerritories() {
 	public void setPhaseSwitchButtonDisable(boolean t) {
 		phaseSwitch.setDisable(t);
 	}
-	public static RisikoGame getGame() {
-		return game;
-	}
-	
+
+	/*Method called to update Users Bar in GameScene on the right*/
 	public void updateUsersBar() {
 		initializeUserColorsAndNames();
 	}
 	
+	/*Method called to play every music in game*/
 	public void playMusic() {
 		if(music) soundController.gameMusic();
 		
 	}
 	
+	/*Method called to stop every music in game*/
 	public void stopMusic() {
 		soundController.stopMusic();;
 	}
+	
+	/* Method called to show how many tanks bonus are received in a new window*/
 	private void callInfoWindows() {
 		try {
 			GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);

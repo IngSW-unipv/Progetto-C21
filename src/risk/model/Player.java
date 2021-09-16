@@ -279,9 +279,9 @@ public class Player {
 			Territory temp = null;
 
 			int counter = 0;
-			switch (GameController.getGame().getGamePhase()) {
+			switch (GameController.game.getGamePhase()) {
 			case FIRSTTURN:
-				temp = GameController.getGame().getRandomCurrentPlayerTerritory();
+				temp = GameController.game.getRandomCurrentPlayerTerritory();
 				if (bonusTanks > 0) {
 					while (counter < 3 && bonusTanks > 0) {
 						temp.addTanks(1);
@@ -304,7 +304,7 @@ public class Player {
 	  
 		case DRAFT:
 	    	while (bonusTanks > 0) { 
-	    	temp = GameController.getGame().getRandomCurrentPlayerTerritory();
+	    	temp = GameController.game.getRandomCurrentPlayerTerritory();
 	    	temp.addTanks(1);
 		  	GameController.getInstance().setPhaseTextArea(this.name+
 					" has placed "+1+" tanks"+" in "+ temp.getName());
@@ -319,7 +319,7 @@ public class Player {
 	    	
 			AttackController at = new AttackController(); // static??
 			boolean enter = false;
-	    	for (Territory t : GameController.getGame().getTerritories()) { 		//fare metodo per restituire i territori in ordine casuale in 
+	    	for (Territory t : GameController.game.getTerritories()) { 		//fare metodo per restituire i territori in ordine casuale in 
 	    																			//quanto l'arrayList mantiene l'ordine??
 			  if (t.getTanks() > 2 && t.getOwner().equals(this)) {
 			  GameController.getInstance().setTerritory1(t);
@@ -358,7 +358,7 @@ public class Player {
 			Territory t2 = GameController.getInstance().getTerritory2();
 			boolean fortified = false;
 
-			for (Territory t : GameController.getGame().getTerritories()) {
+			for (Territory t : GameController.game.getTerritories()) {
 				if (t.getTanks() > 2 && t.getOwner().equals(this)) {
 					t1 = t;
 					break;
@@ -369,7 +369,7 @@ public class Player {
 
 					if (t.getOwner().equals(this)) {
 						t2 = t;
-						GameController.getGame().moveTanks(t1, t2, 1);
+						GameController.game.moveTanks(t1, t2, 1);
 
 						GameController.getInstance()
 								.setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName() + " moved "
