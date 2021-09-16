@@ -980,18 +980,11 @@ public class GameController implements Initializable {
 
 	}
 
-	/**
-	 * Switches the game turn to the next one
-	 */
-
-
+	
 	/**
 	 * Method called to open the PlayerInfoWindow
 	 * @param event MouseEvent player on infoBar on the right pressed in GameScene
 	 */
-
-
-
 	@FXML
 	public void playerIconPressed(MouseEvent event){
 		try {
