@@ -22,32 +22,84 @@ import risk.model.DiceShaker;
 import risk.model.RisikoGame;
 import risk.model.Territory;
 
+/**
+ * @author utente
+ *
+ */
 public class AttackController implements Initializable {
 
+	/**
+	 * Dices of attacker
+	 */
 	DiceShaker attackDices;
+	
+	/**
+	 * Dices of defender
+	 */
 	DiceShaker defenderDices;
 
+	/**
+	 * Pane
+	 */
 	@FXML
 	private AnchorPane rootPane;
 
+	/**
+	 * Label
+	 */
 	@FXML
 	private Label territoryAtkLabel, territoryDefLabel, attackerTanksLabel, defenderTanksLabel;
 
+	/**
+	 * AttackScene button
+	 */
 	@FXML
 	private Button attackButton, cancelButton, exitButton;
 
+	/**
+	 * number of tanks button
+	 */
 	@FXML
 	private ToggleButton oneButton, twoButton,  threeButton;
 
+	/**
+	 * ImageView of dice
+	 */
 	@FXML
 	private ImageView RedDice1,RedDice2,RedDice3,BlueDice1,BlueDice2,BlueDice3;
 
-	private int atkTank, defTank;	// numero di tank usati per l'attacco e per la difesa
-	private int[] atkResults;		// risultati del lancio dei dadi dell'attaccante
-	private int[] defResults;
+	/**
+	 * number of tanks
+	 */
+	private int atkTank, defTank;
+	
+	/**
+	 * attacker dices results 
+	 */
+	private int[] atkResults;
+	/**
+	 * defender dices results
+	 */
+	private int[] defResults;		
+	
+	/**
+	 * Risiko Game 
+	 */
 	static RisikoGame game;
+	
+	/**
+	 * Territory 1
+	 */
 	private Territory territory1= GameController.getInstance().getTerritory1();
+	
+	/**
+	 * Territory 2
+	 */
 	private Territory territory2= GameController.getInstance().getTerritory2();
+	
+	/**
+	 * SoundController
+	 */
 	private SoundController soundController;
 
 
@@ -55,6 +107,9 @@ public class AttackController implements Initializable {
 
 
 
+	/**
+	 * Method to initialize the window
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		attackButton.setDisable(true);
@@ -174,7 +229,7 @@ public class AttackController implements Initializable {
 	/**
 	 * Manages the attack when the cancel button is pressed
 	 * @param e ActionEvent ActionEvent cancel button pressed
-	 * @throws IOException
+	 * @throws IOException if there is no file
 	 */
 	@FXML
 	public void cancelButtonPressed(ActionEvent e) throws IOException {
