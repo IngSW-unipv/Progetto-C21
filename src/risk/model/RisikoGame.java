@@ -70,6 +70,11 @@ public class RisikoGame {
 	}
 	
 	
+	public RisikoGame() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	/**
 	 * The games goes to the next turn
 	 */
