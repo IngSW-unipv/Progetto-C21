@@ -99,6 +99,11 @@ public class AttackController implements Initializable {
 			defTank = territory2.getTanks();
 	}
 
+	/**
+	 * Method that implements AI attack
+	 * @param t1 Territory attacker 
+	 * @param t2 Territory defender 
+	 */
 	public void aiAttack(Territory t1,Territory t2) {
 
 		int atNumber;
@@ -152,7 +157,10 @@ public class AttackController implements Initializable {
 
 	}
 
-
+	
+	/**
+	 * Method that close the window and resets all
+	 */
 	private void onClosing() {
 		GameController.getInstance().setTerritory1(null);
 		GameController.getInstance().setTerritory2(null);
@@ -164,8 +172,8 @@ public class AttackController implements Initializable {
 		if(GameController.getInstance().getMusic())soundController.stopMusic();
 	}
 	/**
-	 * Manages the attack when the annulla button is pressed
-	 * @param e is the event
+	 * Manages the attack when the cancel button is pressed
+	 * @param e ActionEvent ActionEvent cancel button pressed
 	 * @throws IOException
 	 */
 	@FXML
@@ -179,6 +187,11 @@ public class AttackController implements Initializable {
 		window.close();
 	}
 
+	/**
+	 * Method called to attack Territory 2 from Territory 1
+	 * @param e ActionEvent attack button pressed
+	 * @throws IOException if there are no dice images
+	 */
 	@FXML	
 	private void attackButtonPressed(ActionEvent e) throws IOException {
 		ImageView[] attackerDiceImages = {RedDice1,RedDice2,RedDice3};
@@ -278,6 +291,10 @@ public class AttackController implements Initializable {
 
 	}
 
+	/**
+	 * Method that permits to attack until the conquest or if there are not enough tanks
+	 * @param e ActionEvent blitz button pressed
+	 */
 	@FXML	
 	private void blitzButtonPressed(ActionEvent e) {
 		
@@ -285,6 +302,9 @@ public class AttackController implements Initializable {
 
 
 
+	/**
+	 * Method that updates the number buttons 
+	 */
 	@FXML
 	private void updateNumberButtons() {
 

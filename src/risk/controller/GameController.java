@@ -51,49 +51,141 @@ import risk.model.RisikoGame;
 import risk.model.Territory;
 import risk.model.util.GAME_PHASE;
 
+/**
+ * @author utente
+ *
+ */
+/**
+ * @author utente
+ *
+ */
 public class GameController implements Initializable {
 	
+	/**
+	 *  root Pane
+	 */
 	@FXML
 	private Pane rootPane;
+	
+	/**
+	 * Pause menu pane
+	 */
 	@FXML
 	private BorderPane pauseMenuPane;
+	
+	/**
+	 * Text label
+	 */
 	@FXML
 	private Text territoryText, phaseText, userName1, userName2, userName3, userName4, userName5, userName6,cardNumberText;
+	
+	/**
+	 * VBox 
+	 */
 	@FXML
 	private VBox usersBox, attackButtonIcon;
+	
+	/**
+	 * HBox containing graphic of changing phase
+	 */
 	@FXML
 	private HBox phaseGraphic;
+	
+	/**
+	 * Button to switch phase 
+	 */
 	@FXML
 	private Button phaseSwitch;
+	
+	/**
+	 * Image view of GameScene
+	 */
 	@FXML
 	private ImageView userImage1, userImage2, userImage3, userImage4, userImage5, userImage6, actualPlayerGraphic, speakerImage;
+	
+	/**
+	 * Circles of Territory 
+	 */
 	@FXML
 	private Circle circleAlaska, circleNorthWestTerritory, circleGreenland, circleAlberta, circleOntario, circleQuebec, circleWesternUnitedStates, circleEasternUnitedStates, circleCentralAmerica, circleVenezuela, circleBrazil, circlePeru, circleArgentina,
 					circleIceland, circleScandinavia, circleGreatBritain, circleNorthernEurope, circleWesternEurope, circleSouthernEurope, circleRussia, circleUral, circleAfghanistan, circleSiberia, circleYakutsk, circleIrkutsk, circleKamchatka, 
 					circleMongolia, circleJapan, circleChina, circleSiam, circleIndia, circleMiddleEast, circleEgypt, circleNorthAfrica, circleEastAfrica, circleCongo, circleSouthAfrica, circleMadagascar, circleIndonesia, circleNewGuinea, circleWesternAustralia, circleEasternAustralia;
+	/**
+	 * Label of Territory
+	 */
 	@FXML
 	private Label labelAlaska, labelNorthWestTerritory, labelGreenland, labelAlberta, labelOntario, labelQuebec, labelWesternUnitedStates, labelEasternUnitedStates, labelCentralAmerica, labelVenezuela, labelBrazil, labelPeru, labelArgentina,
 					labelIceland, labelScandinavia, labelGreatBritain, labelNorthernEurope, labelWesternEurope, labelSouthernEurope, labelRussia, labelUral, labelAfghanistan, labelSiberia, labelYakutsk, labelIrkutsk, labelKamchatka, 
 					labelMongolia, labelJapan, labelChina, labelSiam, labelIndia, labelMiddleEast, labelEgypt, labelNorthAfrica, labelEastAfrica, labelCongo, labelSouthAfrica, labelMadagascar, labelIndonesia, labelNewGuinea, labelWesternAustralia, labelEasternAustralia;
+	/**
+	 * SVGPath of the Territory
+	 */
 	@FXML
 	private SVGPath alaska, northWestTerritory, greenland, alberta, ontario, quebec, westernUnitedStates, easternUnitedStates, centralAmerica, venezuela, brazil, peru, argentina,
 					iceland, scandinavia, greatBritain, northernEurope, westernEurope, southernEurope, russia, ural, afghanistan, siberia, yakutsk, irkutsk, kamchatka, 
 					mongolia, japan, china, siam, india, middleEast, egypt, northAfrica, eastAfrica, congo, southAfrica,madagascar, indonesia, newGuinea, westernAustralia, easternAustralia;
+	/**
+	 * TextArea describing what happens during phases
+	 */
 	@FXML
 	private TextArea phasesDescriptionArea;
+	
+	/**
+	 * Scroll bar fot TextArea
+	 */
 	@FXML
 	private ScrollBar scrollBar;
 
 	
+	/**
+	 * Array of SVGPath
+	 */
 	private SVGPath[] paths;
+	
+	/**
+	 * boolean to manage control
+	 */
 	private boolean fortified, cardSceneOpen, music = true;
+	
+	/**
+	 * SoundController that manages music
+	 */
 	private SoundController soundController;
+	
+	/**
+	 * Language of rules
+	 */
 	private String rulesLeng = null;
+	
+	/**
+	 * Territory to select 
+	 */
 	private Territory territory1 = null, territory2 = null;
+	
+	/**
+	 * SVGPath of second Territory
+	 */
 	private SVGPath svgTerr2;
+	
+	/**
+	 * Static variable of RisikoGame
+	 */
 	public static RisikoGame game;
 	
+	/**
+	 * Static instance of GameController
+	 */
 	private static GameController instance;
+	
+	/**
+	 * Path of file to read
+	 */
+	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
+	
+	/**
+	 * Counter of clicks
+	 */
+	private int counterConsecutiveClicks = 0;
 
 	/**
 	 * Sets the instance to this instance of GameSceneController
@@ -111,9 +203,11 @@ public class GameController implements Initializable {
 		return instance;
 	}
 	
-	static String terrFile = "src/risk/asset/territories.txt", continentsFile = "src/risk/asset/continents.txt", missionsFile = "src/risk/asset/missions.txt";
-	private int counterConsecutiveClicks = 0;
+	
 
+	/**
+	 * Method to start the game and load assets
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ArrayList<Player> playersList = PlayersList.getPlayers();
@@ -152,9 +246,11 @@ public class GameController implements Initializable {
 
 
 	
-	/* Method that draw on the game scene the right number of colored users*/
+	/**
+	 * Method that draws on the game scene the right number of colored users
+	 */
 	private void initializeUserBar() {
-		// removing useless imageview and text
+		// removing useless ImageView and text
 		for(int i = game.getPlayers().length*2; i < 12; i++) {
 			usersBox.getChildren().remove(usersBox.getChildren().size()-1);
 		}
@@ -168,7 +264,10 @@ public class GameController implements Initializable {
 		usersBox.setLayoutY(height);
 	}
 	
-	/* Method to set the right color and name to gui elements for each player */
+	
+	/**
+	 * Method to set the right color and name to gui elements for each player
+	 */
 	private void initializeUserColorsAndNames() {
 		try {
 			Text[] userNames = {userName1, userName2, userName3, userName4, userName5, userName6};
@@ -200,6 +299,9 @@ public class GameController implements Initializable {
 		}	
 	}
 	
+	/**
+	 *  Method called to update the graphic of Territory labels
+	 */
 	protected void updateTerritoriesGraphic() {
 		Circle[] circles = {circleAlaska, circleNorthWestTerritory, circleGreenland, circleAlberta, circleOntario, circleQuebec, circleWesternUnitedStates, circleEasternUnitedStates, circleCentralAmerica, circleVenezuela, circleBrazil, circlePeru, circleArgentina,
 				circleIceland, circleScandinavia, circleGreatBritain, circleNorthernEurope, circleWesternEurope, circleSouthernEurope, circleRussia, circleUral, circleAfghanistan, circleSiberia, circleYakutsk, circleIrkutsk, circleKamchatka, 
@@ -227,6 +329,10 @@ public class GameController implements Initializable {
 	
 	
 
+	/**
+	 * Method that permits to play game phases clicking on territory
+	 * @param event MouseEvent when a Territory is clicked
+	 */
 	@FXML
 	private void handleSVGPathPressed(MouseEvent event) {
 		event.consume();
@@ -241,11 +347,9 @@ public class GameController implements Initializable {
 			if (game.getCurrentTurn().equals(t.getOwner()) && counterConsecutiveClicks < 3) {
 				if (t.getOwner().getBonusTanks() > 0) {
 
-					int ntanks = 1; // cambiare solo valore alla variabile e non piu ai due parametri (serve per il
-									// print)
-
-					t.getOwner().placeTank(ntanks); //cambia metti 1 al posto di 21
-					t.addTanks(ntanks); //cambia metti 1 al posto di 21
+					int ntanks = 1; 
+					t.getOwner().placeTank(ntanks); 
+					t.addTanks(ntanks);
 					
 					this.setPhaseTextArea(game.getCurrentTurn().getName()+
 							" has placed "+ntanks+" tanks"+" in "+ t.getName());
@@ -323,20 +427,20 @@ public class GameController implements Initializable {
 		case ATTACK:
 
 			/*
-			 * 1) scegliere un proprio territorio che abbia >1 tank
-			 * 2) scegliere un territorio da attaccare che sia di un avversario e che sia confinante con il nostro territorio 
+			 * 1) choose a Territory with number of Tanks > 1
+			 * 2) choose a Territory belonging to an opponent and bordering the attacking one
 			 */
 			SVGPath svg = ((SVGPath) event.getSource());
 
 			if(territory1 == null) {
-				// se e' il tuo e ha >1 tank lo selezioni
+				// if the first Territory belongs to the current Player and owns more than 1 tank
 				if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
 					territory1 = t;
 					setSelectedTerritoryGraphic(svg, true);
 					phaseSwitch.setDisable(true);
 					attackButtonIcon.setDisable(true);
 				}
-			// se invece premo lo stesso territorio gia' selezionato, allora lo deseleziono e deseleziono anche il secondo
+			// if the first selected Territory is selected again, then deselect the first and the second Territory
 			} else if(svg.getId().replace(" ", "").toLowerCase().equals(territory1.getName().toLowerCase())) {
 				territory1 = null;
 				setSelectedTerritoryGraphic(svg, false);
@@ -348,9 +452,9 @@ public class GameController implements Initializable {
 			}
 
 
-			// se terr1 e' selezionato e terr2 invece no
+			// if Territory1 is selected and Territory2 is not selected
 			if(territory1 != null && territory2 == null) {
-				// se il terr premuto e' confinante con il primo lo seleziono
+				// if the second selected Territory is bordering the first one and it does not belong to the current player
 				if(!game.getCurrentTurn().equals(t.getOwner()) && territory1.isConfinante(t)) {
 					territory2 = t;
 					svgTerr2 = svg;
@@ -368,7 +472,7 @@ public class GameController implements Initializable {
 					
 					phaseSwitch.setDisable(true);
 				}
-			// se invece premo lo stesso territorio gia' selezionato, allora lo deseleziono
+			//if the second selected Territory is selected again, then deselect only the second Territory
 			} else if(territory1 != null && territory2 != null) {
 				if(svg.getId().replace(" ", "").toLowerCase().equals(territory2.getName().toLowerCase())) {
 					territory2 = null;
@@ -408,9 +512,9 @@ public class GameController implements Initializable {
 			if(!fortified) {
 				if(territory1 == null) {
 					/* 
-					 * una volta scelto il territorio attaccante:
-					 * 		1) settare il territorio selezionato graficamente (+10% darker)
-					 * 		2) permettere la scelta del territorio da attaccare
+					 * Chosen the attacker Territory:
+					 * 		1) set the selected Territory (+10% darker)
+					 * 		2) permit the choice of the defending Territory
 					 */
 					if(game.getCurrentTurn().equals(t.getOwner()) && t.getTanks() > 1) {
 						territory1 = t;
@@ -433,7 +537,7 @@ public class GameController implements Initializable {
 						phaseSwitch.setDisable(false);
 						
 						
-						// apri schemata displacement
+						// open DisplacementScene
 						try {
 							
 							windowLoader("/risk/view/fxml/DisplacementScene.fxml", "Displacement", true, true);
@@ -453,16 +557,17 @@ public class GameController implements Initializable {
 
 	}
 	
+	/**
+	 * Method called to switch turn
+	 */
 	public void nextTurn() {
 		
-		// passa il turno al giocatore successivo
 		game.nextTurn();
 		switchPhaseGraphic();
 		switchPlayerGraphic();
 		if (game.getCurrentTurn().isAI() && game.getGamePhase() == GAME_PHASE.FIRSTTURN)
 			nextPhase();
 		
-		// Ogni volta che il turno passa ad un altro giocatore, il suo nome viene sottolineato
 		
 		
 //		if(!(game.getGamePhase() == GAME_PHASE.FIRSTTURN))
@@ -477,6 +582,9 @@ public class GameController implements Initializable {
 //			}
 	}
 	
+	/**
+	 * Method called to switch phase
+	 */
 	public void nextPhase() {
 
 		switch (game.getGamePhase()) {
@@ -536,15 +644,14 @@ public class GameController implements Initializable {
 			game.nextPhase();
 			if (!game.getCurrentTurn().isAI()) {
 			System.out.println("bella");
-			phaseText.setText(game.getGamePhase().toString());				//label in basso al centro
-			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));		//label con il numero di tank in basso al centro	
+			phaseText.setText(game.getGamePhase().toString());				//down center label
+			phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));		//center down label with number of tanks	
 			setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");	//label in basso a destra
-			updateTerritoriesGraphic(); // update dei cerchiolini sui territori
-			switchPhaseGraphic(); // update del colore della label in basso al centro
-			switchPlayerGraphic(); // update dei colori del player per la label con il numero di carri in basso al
-									// centro
-			updateCardsNumber(); // update del numero di carte sulla label
-			callInfoWindows(); // apre il pop up con il numero di carri armati
+			updateTerritoriesGraphic(); // update text label of Territories
+			switchPhaseGraphic(); // update color label
+			switchPlayerGraphic(); // update player color for the label down center
+			updateCardsNumber(); // update number of cards on the label
+			callInfoWindows(); // open the infoWindow with the number of tanks
 		}
 		if (game.getCurrentTurn().isAI())
 			nextPhase();
@@ -553,9 +660,14 @@ public class GameController implements Initializable {
 
 	}
 	
+	/**
+	 * Method to color the Territory selected
+	 * @param svg SVGPath of the Territory to reset the color
+	 * @param col boolean to color the Territory (darker color if true)
+	 */
 	protected void setSelectedTerritoryGraphic(SVGPath svg, boolean col) {
 		if(col){
-			// colora il territorio selezionato
+			// color the selected Territory (10% darker)
 			switch(svg.getStyleClass().get(0)) {
 			case "northAmerica":
 				svg.setStyle("-fx-fill: #CC6D47");
@@ -575,9 +687,9 @@ public class GameController implements Initializable {
 			case "asia":
 				svg.setStyle("-fx-fill: #5DBB5D");
 				break;
-			}//aaa
+			}
 		} else {
-			//decolora il territorio selezionato
+			//reset the color of the selected Territory
 			switch(svg.getStyleClass().get(0)) {
 			case "northAmerica":
 				svg.setStyle("");
@@ -613,58 +725,53 @@ public class GameController implements Initializable {
 		}
 	}
 	
-public void clearAllTerritories() {
-		
-		for(int i =0; i < paths.length;i++) {
+	/**
+	 * Method the reset the color of every Territory
+	 */
+	public void clearAllTerritories() {
 			
-			switch(paths[i].getStyleClass().get(0)) {
-			case "northAmerica":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("northAmerica");
-				break;
-			case "southAmerica":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("southAmerica");
-				break;
-			case "europa":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("europa");
-				break;
-			case "oceania":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("oceania");
-				break;
-			case "africa":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("africa");
-				break;
-			case "asia":
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("asia");
-				break;
+			for(int i =0; i < paths.length;i++) {
+				
+				switch(paths[i].getStyleClass().get(0)) {
+				case "northAmerica":
+					paths[i].setStyle("");
+					paths[i].getStyleClass().clear();
+					paths[i].getStyleClass().add("northAmerica");
+					break;
+				case "southAmerica":
+					paths[i].setStyle("");
+					paths[i].getStyleClass().clear();
+					paths[i].getStyleClass().add("southAmerica");
+					break;
+				case "europa":
+					paths[i].setStyle("");
+					paths[i].getStyleClass().clear();
+					paths[i].getStyleClass().add("europa");
+					break;
+				case "oceania":
+					paths[i].setStyle("");
+					paths[i].getStyleClass().clear();
+					paths[i].getStyleClass().add("oceania");
+					break;
+				case "africa":
+					paths[i].setStyle("");
+					paths[i].getStyleClass().clear();
+					paths[i].getStyleClass().add("africa");
+					break;
+				case "asia":
+					paths[i].setStyle("");
+					paths[i].getStyleClass().clear();
+					paths[i].getStyleClass().add("asia");
+					break;
+				}
 			}
+				
 		}
-			
-	}
-	
-	public void clearSelectedTerritory(Territory t) {
-		for(int i =0; i < paths.length;i++) {
-			
-			if(t.getName().toLowerCase().equals(paths[i].getId().toLowerCase())) {
-				System.out.println("si");
-				paths[i].setStyle("");
-				paths[i].getStyleClass().clear();
-				paths[i].getStyleClass().add("europa");
-			}
-		}
-	}
 		
+		
+	/**
+	 * Method called to change the color of rectangles in phase switch box
+	 */
 	private void switchPhaseGraphic() {
 		ArrayList<Rectangle> rectangles = getRectangles(phaseGraphic);
 		switch(game.getGamePhase()) {
@@ -702,6 +809,9 @@ public void clearAllTerritories() {
 		}
 	}
 	
+	/**
+	 * Method called to update the image of the current player in the phase switch box
+	 */
 	private void switchPlayerGraphic() {
 		String color = game.getCurrentTurn().getColorName().toLowerCase();
 		String path = "src/risk/view/images/users/" + color + ".png";
@@ -723,6 +833,11 @@ public void clearAllTerritories() {
 		userNames[game.getTurnCounter()].setUnderline(true);
 	}
 	
+	/**
+	 * Method called to return the rectangles of the graphic phase switch
+	 * @param hb Hbox containing the graphic of phase switch
+	 * @return the list of Rectangles in the graphic of phase switch
+	 */
 	private ArrayList<Rectangle> getRectangles(HBox hb) {
 		ArrayList<Rectangle> rectangles = new ArrayList<>();
 		for (Node currentNode : hb.getChildren()){
@@ -733,22 +848,23 @@ public void clearAllTerritories() {
 		return rectangles;
 	}
 	
+	
 	/**
-	 * Method that allows to load a scene in a new window
 	 * @param scene is the path of the scene to load
 	 * @param title is the title of the window
-	 * @param cantclose specifies if the window can be closed until an event occurs (if TRUE, new window can't be closed)
-	 * @throws IOException
+	 * @param cantclose boolean to decide if the window can be closed
+	 * @param undecorated boolean to decide if the window has decoration
+	 * @throws IOException if file is not found or can not be read
 	 */
 	public void windowLoader(String scene, String title, boolean cantclose, boolean undecorated) throws IOException{
 		Parent sceneParent = FXMLLoader.load(getClass().getResource(scene));
 		Scene mScene = new Scene(sceneParent);
 		mScene.getRoot().requestFocus();
 		Stage window = new Stage();
-		/*** ***/
+		
 		if(undecorated)
 			window.initStyle(StageStyle.UNDECORATED);
-		/*** ***/
+		
 		window.setResizable(false);
 		window.setTitle(title);
 		window.setScene(mScene);
@@ -765,6 +881,10 @@ public void clearAllTerritories() {
 		window.showAndWait();
 	}
 
+	/**
+	 * Method called to open italian rules
+	 * @param event MouseEvent Italian Rules button pressed in the right top of GameScene
+	 */
 	@FXML
 	private void itRulesPressed(MouseEvent event) {
 		rulesLeng = "it";
@@ -776,6 +896,10 @@ public void clearAllTerritories() {
 		rulesLeng = null;
 	}
 	
+	/**
+	 * Method called to open english rules
+	 * @param event MouseEvent English Rules button pressed in the right top of GameScene
+	 */
 	@FXML
 	private void enRulesPressed(MouseEvent event) {
 		rulesLeng = "en";
@@ -787,21 +911,33 @@ public void clearAllTerritories() {
 		rulesLeng = null;
 	}
 	
+	/**
+	 * Method called to receive the SVGPath of the Territory hovered
+	 * @param event MouseEvent Territory hovered
+	 */
 	@FXML
 	private void handleSVGPathHover(MouseEvent event) {
 		event.consume();
 		territoryText.setText(((SVGPath)event.getSource()).getId());
 	}
 	
+	/**
+	 * Method called to switch phase using the button
+	 * @param event MouseEvent PhaseSwitch button pressed
+	 */
 	@FXML
 	private void handlePhaseSwitchPressed(MouseEvent event) {
-		/* DA SISTEMARE */
 		event.consume();
 		if (!game.getGamePhase().equals(GAME_PHASE.FIRSTTURN) && game.getCurrentTurn().getBonusTanks() == 0) {
 			nextPhase();
 		}
 	}
 	
+	/**
+	 * Method called to stop or play music pressing the relative button
+	 * @param event MouseEvent speaker button pressed
+	 * @throws FileNotFoundException if the music is not found throws an Exception
+	 */
 	@FXML
 	private void speakerButtonPressed(MouseEvent event) throws FileNotFoundException {
 		event.consume();
@@ -812,7 +948,7 @@ public void clearAllTerritories() {
 			Image image = new Image(stream);
 			speakerImage.setImage(image);
 			music = false;
-		}else {
+		} else {
 			soundController.gameMusic();
 			InputStream stream = new FileInputStream("src/risk/view/images/speaker.png");
 			Image image = new Image(stream);
@@ -822,19 +958,11 @@ public void clearAllTerritories() {
 		
 	}
 	
-	
-	/**
-	 * Switches the game turn to the next one
-	 */
-	
-	
-	/**
-	 * Switches the game phase to the next one
-	 */
-	
-	
-	
 
+	/**
+	 * Method called to open the PlayerInfoWindow
+	 * @param event MouseEvent player on infoBar on the right pressed in GameScene
+	 */
 	@FXML
 	public void playerIconPressed(MouseEvent event){
 		try {
@@ -844,6 +972,10 @@ public void clearAllTerritories() {
 		}
 	}
 	
+	/**
+	 * Method called to open the MissionImageWindow
+	 * @param event MouseEvent Mission button pressed in GameScene
+	 */
 	@FXML
 	public void missionIconPressed(MouseEvent event){
 		try {
@@ -853,6 +985,10 @@ public void clearAllTerritories() {
 		}
 	}
 	
+	/**
+	 * Method called to open the CardScene
+	 * @param event MouseEvent CardIcon button pressed in GameScene
+	 */
 	@FXML
 	public void cardIconPressed(MouseEvent event){
 		cardSceneOpen = true;
@@ -864,6 +1000,10 @@ public void clearAllTerritories() {
 		cardSceneOpen = false;
 	}
 	
+	/**
+	 * Method called to open the AttackScene
+	 * @param event MouseEvent attack button pressed in GameScene
+	 */
 	@FXML
 	public void attackButtonIconPressed(MouseEvent event){
 		if(game.getGamePhase().equals(GAME_PHASE.ATTACK)) {
@@ -886,6 +1026,10 @@ public void clearAllTerritories() {
 		}
 	}
 	
+	/**
+	 * Method called to open the pause menu
+	 * @param event MouseEvent pause button pressed in GameScene
+	 */
 	@FXML
 	private void pauseButtonPressed(MouseEvent event) {
 	     FadeTransition ft = new FadeTransition(Duration.millis(800), pauseMenuPane);
@@ -896,6 +1040,10 @@ public void clearAllTerritories() {
 	     pauseMenuPane.setMouseTransparent(false);
 	}
 	
+	/**
+	 * Method called to resume the game from the menu
+	 * @param event MouseEvent button resume pressed in menu
+	 */
 	@FXML
 	private void pauseMenuResumePressed(MouseEvent event) {
 	     FadeTransition ft = new FadeTransition(Duration.millis(800), pauseMenuPane);
@@ -906,11 +1054,19 @@ public void clearAllTerritories() {
 	     pauseMenuPane.setMouseTransparent(true);
 	}
 
+	/**
+	 * Method called to restart the game from the pause menu
+	 * @param event MouseEvent
+	 */
 	@FXML
 	private void pauseMenuRestartPressed(MouseEvent event) {
 		// DA FARE
 	}
 	
+	/**
+	 * Method called to exit from the pause menu
+	 * @param event MouseEvent
+	 */
 	@FXML
 	private void pauseMenuExitPressed(MouseEvent event) {
 		event.consume();
@@ -918,65 +1074,115 @@ public void clearAllTerritories() {
 	}
 	
 	
+	/**
+	 * Method to write what happens during phases in textArea (right section)
+	 * @param text String
+	 */
 	public void setPhaseTextArea(String text) {
 		phasesDescriptionArea.setText(phasesDescriptionArea.getText()+text+"\n");
 		phasesDescriptionArea.setScrollTop(Double.MAX_VALUE);
 	}
 	
+	/**
+	 * Method to update the visualization of the number of cards in the button
+	 */
 	protected void updateCardsNumber() {
 		cardNumberText.setText(""+game.getCurrentTurn().getCards().size());
 	}
+	
+	/**
+	 * Method called to write the number of tanks on phaseSwitch button in GameScene
+	 * @param text Number of tanks to place
+	 */
 	public void setPhaseSwitchText(String text) {
 		phaseSwitch.setText(text);
 	}
+	
+	/**
+	 * @return the first Territory chosen
+	 */
 	public Territory getTerritory1() {
 		return territory1;
 	}
 	
+	/**
+	 * @return boolean if the music is played
+	 */
 	public boolean getMusic() {
 		return music;
 	}
 	
+	/**
+	 * @return the second Territory chosen
+	 */
 	public Territory getTerritory2() {
 		return territory2;
 	}
 	
+	/**
+	 * Method called to set the first territory chosen
+	 * @param t Territory
+	 */
 	public void setTerritory1(Territory t) {
 		territory1 = t;
 	}
 	
+	/**
+	 * Method called to set the second territory chosen
+	 * @param t Territory
+	 */
 	public void setTerritory2(Territory t) {
 		territory2 = t;
 	}
 	
+	/**
+	 * @return the player that is playing
+	 */
 	public Player getCurrentPlayer() {
 		return game.getCurrentTurn();
 	}
 	
+	/**
+	 * Method called to disable attack button in GameScene
+	 * @param t boolean to disable the button
+	 */
 	public void setAttackButtonDisable(boolean t) {
 		attackButtonIcon.setDisable(t);
 	}
+	
+	/**
+	 * Method called to disable phaseSwitch button in GameScene
+	 * @param t boolean to disable the button
+	 */
 	public void setPhaseSwitchButtonDisable(boolean t) {
 		phaseSwitch.setDisable(t);
 	}
 
-	/*Method called to update Users Bar in GameScene on the right*/
+	/**
+	 * Method called to update Users Bar in GameScene on the right 
+	 */
 	public void updateUsersBar() {
 		initializeUserColorsAndNames();
 	}
 	
-	/*Method called to play every music in game*/
+	/**
+	 * Method called to play every music in game
+	 */
 	public void playMusic() {
 		if(music) soundController.gameMusic();
 		
 	}
 	
-	/*Method called to stop every music in game*/
+	/**
+	 * Method called to stop every music in game
+	 */
 	public void stopMusic() {
 		soundController.stopMusic();;
 	}
 	
-	/* Method called to show how many tanks bonus are received in a new window*/
+	/**
+	 * Method called to show how many tanks bonus are received in a new window
+	 **/
 	private void callInfoWindows() {
 		try {
 			GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
@@ -987,22 +1193,43 @@ public void clearAllTerritories() {
 	
 	
 	
+	/**
+	 * Method called to return what is the language chosen of the rules 
+	 * @return language of the rules
+	 */
 	public String getRulesLeng() {
 		return rulesLeng;
 	}
+	
+	/** 
+	 * Method to return fortified true if a user has moved during FORTIFY phase
+	 * @return boolean if a user has already moved during FORTIFY phase
+	 */
 	public boolean isFortified() {
 		return fortified;
 	}
 
+	/**
+	 * Method to set fortified true if a user has moved during FORTIFY phase
+	 * @param fortified boolean to set if a user has fortified
+	 */
 	public void setFortified(boolean fortified) {
 		this.fortified = fortified;
 	}
 	
+	
+	/**
+	 * Method to return true if the CardScene is open
+	 * @return boolean if the CardScene is open
+	 */
 	public boolean isCardSceneOpen() {
 		return cardSceneOpen;
 	}
 	
-	/* Method called when exit button is pressed */
+	/**
+	 * Method called to close the game
+	 * @param event ActionEvent exit button pressed
+	 */
 	@FXML
 	private void exit(ActionEvent event) {
 		event.consume();
