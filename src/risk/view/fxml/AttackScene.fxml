@@ -171,10 +171,11 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="60.0" GridPane.columnIndex="1">
                      <children>
-                        <HBox alignment="CENTER" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <HBox alignment="CENTER" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button fx:id="attackButton" focusTraversable="false" mnemonicParsing="false" onAction="#attackButtonPressed" prefHeight="30.0" prefWidth="80.0" style="-fx-base: orange; -fx-text-fill: white;" text="ATTACK" />
-                              <Button fx:id="cancelButton" focusTraversable="false" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="30.0" prefWidth="80.0" style="-fx-base: orange; -fx-text-fill: white;" text="CANCEL" />
+                              <Button fx:id="attackButton" focusTraversable="false" mnemonicParsing="false" onAction="#attackButtonPressed" prefHeight="30.0" prefWidth="70.0" style="-fx-base: orange; -fx-text-fill: white;" text="ATTACK" />
+                              <Button fx:id="blitzButton" focusTraversable="false" mnemonicParsing="false" onAction="#blitzButtonPressed" prefHeight="30.0" prefWidth="70.0" style="-fx-base: orange; -fx-text-fill: white;" text="BLITZ" />
+                              <Button fx:id="cancelButton" focusTraversable="false" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="30.0" prefWidth="70.0" style="-fx-base: orange; -fx-text-fill: white;" text="CANCEL" />
                            </children>
                         </HBox>
                      </children>
