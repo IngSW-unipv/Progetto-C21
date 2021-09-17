@@ -418,7 +418,7 @@ public class GameController implements Initializable {
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
 					if (game.verifyMission()) {
 						try {
-							soundController.stopMusic();
+							stopMusic();
 							windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -558,7 +558,7 @@ public class GameController implements Initializable {
 			}
 			if (game.verifyMission()) {
 				try {
-					soundController.stopMusic();
+					stopMusic();
 					windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
 				} catch (IOException e) {
 					e.printStackTrace();

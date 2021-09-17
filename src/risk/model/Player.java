@@ -2,10 +2,12 @@ package risk.model;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import risk.controller.AttackController;
 import risk.controller.GameController;
+import risk.controller.SoundController;
 /*import java.io.IOException;*/
 import risk.model.util.Color;
 
@@ -22,6 +24,7 @@ public class Player {
 	private DiceShaker shaker;
 	private ArrayList<Card> cards;
 	private Mission mission;
+
 	
 
 	
@@ -302,7 +305,16 @@ public class Player {
 	    	temp.addTanks(1);
 		  	GameController.getInstance().setPhaseTextArea(this.name+
 					" has placed "+1+" tanks"+" in "+ temp.getName());
-		  	temp.getOwner().placeTank(1); 
+		  	temp.getOwner().placeTank(1);
+			  	if (GameController.game.verifyMission()) {
+					try {
+						GameController.getInstance().stopMusic();
+						GameController.getInstance().windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
+						break;
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 	    	}
 	    	  break;
 	    
@@ -318,6 +330,15 @@ public class Player {
 			if (temp1[0] != null && temp1[1] != null) {
 					at.aiAttack(temp1[0],
 							temp1[1]);
+					if (GameController.game.verifyMission()) {
+						try {
+							GameController.getInstance().stopMusic();
+							GameController.getInstance().windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
+							break;
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 					attackCounter++;
 		    }
 			else break;
@@ -336,6 +357,15 @@ public class Player {
 				GameController.getInstance()
 						.setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName() + " moved "
 								+ 1 + " tanks from " + moving[0].getName() + " to " +moving[1].getName());
+					if (GameController.game.verifyMission()) {
+						try {
+							GameController.getInstance().stopMusic();
+							GameController.getInstance().windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
+							break;
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 	    		}
 	    	
 			
