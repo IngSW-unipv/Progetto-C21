@@ -8,6 +8,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+
+
+
+/**
+ * @author utente
+ *
+ */
+
 public class Main extends Application {
 	
 	@Override
@@ -21,10 +29,11 @@ public class Main extends Application {
 			primaryStage.setTitle("RISK MENU");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		} catch(Exception e) {
+			} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	
 	public static void main(String[] args) {
 		

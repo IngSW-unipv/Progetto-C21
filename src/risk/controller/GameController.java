@@ -46,6 +46,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import risk.main.Main;
 import risk.model.Player;
 import risk.model.PlayersList;
 import risk.model.RisikoGame;
@@ -415,7 +416,14 @@ public class GameController implements Initializable {
 
 					switchPlayerGraphic();
 					phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));
-
+					if (game.verifyMission()) {
+						try {
+							soundController.stopMusic();
+							windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 					if (game.getCurrentTurn().getBonusTanks() == 0) {
 						phaseSwitch.setText(">>");
 						//enter = false;
@@ -547,6 +555,14 @@ public class GameController implements Initializable {
 					}
 				}
 
+			}
+			if (game.verifyMission()) {
+				try {
+					soundController.stopMusic();
+					windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 
 
@@ -1083,6 +1099,10 @@ public class GameController implements Initializable {
 	@FXML
 	private void pauseMenuRestartPressed(MouseEvent event) {
 		// DA FARE
+//		event.consume();
+//		Platform.runLater(()-> new Main().start(new Stage()));
+		
+		
 	}
 	
 	/**
