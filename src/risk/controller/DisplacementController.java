@@ -1,13 +1,11 @@
 package risk.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -18,12 +16,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import risk.model.RisikoGame;
 import risk.model.Territory;
 
 public class DisplacementController implements Initializable {
-	private RisikoGame game;
 	
+
 	/* root pane */
 	@FXML
 	private AnchorPane rootPane;
@@ -62,6 +59,7 @@ public class DisplacementController implements Initializable {
 	private Territory territory1;
 	private Territory territory2;
 	private SoundController soundController;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		territory1 = GameController.getInstance().getTerritory1();
@@ -112,33 +110,27 @@ public class DisplacementController implements Initializable {
 		slider.setValue(1);
 		
     }
-	
+
 	@FXML
-    public void maxButtonPressed(MouseEvent e){
-		
+	public void maxButtonPressed(MouseEvent e) {
+
 		slider.setValue(slider.getMax());
-		
-    }
-	
+
+	}
+
 	@FXML
-    public void minusButtonPressed(MouseEvent e){
-		
-		
-			slider.setValue(slider.getValue()-1);
-		
-		
-		
-    }
-	
+	public void minusButtonPressed(MouseEvent e) {
+
+		slider.setValue(slider.getValue() - 1);
+
+	}
+
 	@FXML
-    public void plusButtonPressed(MouseEvent e){
-		
-		
+	public void plusButtonPressed(MouseEvent e) {
+
 		slider.setValue(slider.getValue()+1);
-		
-		
-		
-    }
+
+	}
 	
 	@FXML
     public void displacementButtonPressed(MouseEvent e){

@@ -280,6 +280,10 @@ public void aiAttack(Territory t1,Territory t2) {
 		defenderTanksLabel.setText(Integer.toString(territory2.getTanks()));
 		updateNumberButtons();
 		setDefTanks();
+		
+		if(GameController.getInstance().getTerritory1().getTanks()==1) {
+			blitzButton.setDisable(true);
+		}
 
 
 		if(GameController.getInstance().getTerritory2().getOwner().equals(GameController.getInstance().getTerritory1().getOwner())) {
