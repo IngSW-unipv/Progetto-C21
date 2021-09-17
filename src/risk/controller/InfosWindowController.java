@@ -16,7 +16,7 @@ import risk.model.Player;
 
 public class InfosWindowController implements Initializable{
 
-	// sfondo del titolo da colorare del colore del player atturale (oppure si puo' lasciare arancione)
+	// sfondo del titolo da colorare del colore del player attuale (oppure si puo' lasciare arancione)
 	@FXML
 	private AnchorPane titleBg;
 	
@@ -71,29 +71,6 @@ public class InfosWindowController implements Initializable{
 			}
 			break;
 		}
-		/*** Parti specializzate ***/
-		
-		/*	nuovo turno:
-				title -> nomePlayer's turno
-				subtitle -> hai ricevuto n carri
-				exitButton -> chiude il pop-up
-				
-			scambio carte non eseguito nel draft (da implementare nel tradeButtonPressed del CardController):
-				title -> Attenzione
-				subtitle -> puoi eseguire scambi solo durante la fase di draft
-				exitButton -> chiude il pop-up
-				
-			conquista di un territorio:
-				title -> nomeTerritorio conquistato
-				subtitle -> puoi scegliere quanti carri spostare sul territorio conquistato, oltre a quelli usati durante l'ultimo attacco
-				exitButton -> chiude il pop-up e apre la DisplacementWindow
-								dato che suppongo che se tu apra la DisplacementWindow da qui, rimarrebbere sotto sia il pop-up che la 
-								schermata di attcco, io proverei a fare in questo modo: alla pressione del pulsante chiudo il pop-up, 
-								dopodiche il flusso di istruzioni torna all'AttackController che... puo' fare in due modi: il primo è aprire 
-								lui stesso la DisplacementScene e una volta chiusa anch'essa si chiudera' anche l'AttackScene; il secondo
-								e' chiudersi e aprire la DispacementWindow dal GameController mediante un controllo. (opterei per la prima
-								di queste due versioni per semplicità). Quando hai letto sta pappardella poi cancella pure Zanni!
-		*/
 		
 	}
 	

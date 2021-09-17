@@ -49,30 +49,36 @@ public class CardSceneController implements Initializable{
 	
 	
 	
+	/**
+	 * Method called to initialize cards and buttons in window
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		/* Inizializzazione variabili */
+		/* variables initialize */
 		cardSet = new Card[3];
 		cardSet[0] = null;
 		cardSet[1] = null;
 		cardSet[2] = null;
 		
 
-		/* Inizializzazione grafica */
+		/* graphic initialize */
 		tradeButton.setDisable(true);
 		handlePlayerFigureNumber();
 		
 
 	}
 	
+	/**
+	 * Method called to handle cards in CardScene window
+	 */
 	private void handlePlayerFigureNumber() {
-		/* Azzero i contatori */
+		/* counters reset  */
 		artilleryNum = 0; 
 		infantryNum = 0; 
 		cavalryNum = 0; 
 		jollyNum = 0;
 		
-		/* Conto il numero di figure che il giocatore possiede */
+		/* counting number of figures */
 		for(Card c : GameController.game.getCurrentTurn().getCards()) {
 			switch (c.getFigure()) {
 			case ARTILLERY:
@@ -90,13 +96,13 @@ public class CardSceneController implements Initializable{
 			}
 		}
 		
-		/* Setto la grafica */
+		/* graphic set */
 		artilleryLeftLabel.setText(String.valueOf(artilleryNum) + " left");
 		infantryLeftLabel.setText(String.valueOf(infantryNum) + " left");
 		cavalryLeftLabel.setText(String.valueOf(cavalryNum) + " left");
 		jollyLeftLabel.setText(String.valueOf(jollyNum) + " left");
 		
-		/* Abilito/Disabilito i pulsanti */
+		/* enable/disable buttons */
 		if(artilleryNum <= 0)
 			addArtilleryButton.setDisable(true);
 		else
@@ -115,9 +121,12 @@ public class CardSceneController implements Initializable{
 			addJollyButton.setDisable(false);
 	}
 	
+	/**
+	 * Method called to check cards added by players 
+	 */
 	private void handleTradeButton() {
-		/* Controllo se sono state inserite almeno tre carte, in caso affermativo
-		allora controllo se il tris è valido e attivo il pulsante trade */
+		/* check if 3 cards are added,
+		 * then check if tris is corrected and enable trade button */
 		if(cardSet[0] != null && cardSet[1] != null && cardSet[2] != null) {
 			if(GameController.game.checkTris(cardSet[0], cardSet[1], cardSet[2]) != 0) {
 				tradeButton.setDisable(false);
@@ -139,11 +148,16 @@ public class CardSceneController implements Initializable{
 		removeCardToSet(2, cardImg3);
 	}
 	
+	/**
+	 * Method to remove a chosen card from the view
+	 * @param index of the card to remove from the scene
+	 * @param cardImg ImageView of the card to remove
+	 */
 	private void removeCardToSet(int index, ImageView cardImg) {
-		// rido' la carta al player se non e' null
+		// card given back to player if it is not null
 		if(cardSet[index] != null)
 			GameController.game.getCurrentTurn().giveCard(cardSet[index]);
-		// aggiorno la posizione come vuota
+		// update position
 		cardSet[index] = null;
 		try {
 			InputStream stream = new FileInputStream("src/risk/view/images/cards/empty.png");
@@ -157,6 +171,10 @@ public class CardSceneController implements Initializable{
 	}
 	
 	
+	/**
+	 * Method to trade card pressing the button trade
+	 * @param event ActionEvent button pressed
+	 */
 	@FXML
 	public void tradeButtonPressed(ActionEvent event){
 		if(GameController.getInstance().game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
@@ -169,13 +187,6 @@ public class CardSceneController implements Initializable{
 			GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.getInstance().game.getCurrentTurn().getBonusTanks()));
 			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
 			GameController.getInstance().updateCardsNumber();
-			/*
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Bonus");
-			alert.setHeaderText(null);
-			alert.setContentText("You received " + bonus + " bonus armies!");
-			alert.showAndWait();
-			*/
 			try {
 				GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
 				
@@ -186,13 +197,6 @@ public class CardSceneController implements Initializable{
 	    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.close();
 		} else {
-			/*
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Warning");
-			alert.setHeaderText("You can trade in cards only during DRAFT phase");
-			alert.setContentText(null);
-			alert.showAndWait();
-			*/
 			try {
 				GameController.getInstance().windowLoader("/risk/view/fxml/InfosWindow.fxml", "Territory conquered", true, true);
 				
@@ -203,9 +207,13 @@ public class CardSceneController implements Initializable{
 
 	}
 	
+	/**
+	 * Method to exit from the Card Scene window
+	 * @param event ActionEvent cancel button pressed
+	 */
 	@FXML
 	public void cancelButtonPressed(ActionEvent event){
-		// rido' le carte al giocatore e poi chiudo la finestra
+		// give back cards and close
 		removeCardToSet(0, cardImg1);
 		removeCardToSet(1, cardImg2);
 		removeCardToSet(2, cardImg3);
@@ -214,11 +222,11 @@ public class CardSceneController implements Initializable{
 		window.close();
 	}
 	
-	/* Ogni volta che viene premuto un tasto add:
-	 * 		1) controllo che ci sia spazio per inserire la carta
-	 * 		2) se c'e' spazio la inserisco, altrimenti non faccio niente
-	 * 		3) dopo averla inserita (o dopo il controllo) controllo nuovamente se ci sono 3 carte
-	 * 		4) se ci sono 3 carte attivo il button Trade altrimenti lo lascio disabilitato */
+	/* Every time add is pressed:
+	 * 		1) check if a card can be put
+	 * 		2) if there is a blank, i can insert it
+	 * 		3) after inserted, check again if there are 3 cards
+	 * 		4) 3 cards-> button trade enabled  */
 	@FXML
 	public void addArtilleryButtonPressed(ActionEvent event){
 		if(GameController.getInstance().getMusic())soundController.cardSound();
@@ -240,14 +248,16 @@ public class CardSceneController implements Initializable{
 		if(GameController.getInstance().getMusic())soundController.cardSound();
 		addCardToSet(FIGURE.JOLLY);
 	}
+	/**
+	 * Method to add cards to set View
+	 * @param figure ImageView of cards
+	 */
 	private void addCardToSet(FIGURE figure) {
 		ImageView[] cardImgArr = {cardImg1, cardImg2, cardImg3};
-		/* cerco la prima carta di tipo ARTILLERY tra le carte del player
-		 * quando la trovo la inserisco usando un altro ciclo, dopodiche' esco dal ciclo */
+		/* check the first ARTILLERY card in player's hand
+		 * when found insert in another loop, then exit */
 		for(Card c : GameController.game.getCurrentTurn().getCards()) {
 			if(c.getFigure().equals(figure)) {
-				/* eseguo un ciclo sui tre slot disponibili, ma appena ne trovo uno libero
-			     * inserisco la carta nello slot (array + grafica) e dopo esco dal ciclo */
 				for(int i = 0; i < 3; i++) {
 					if(cardSet[i] == null) {
 						cardSet[i] = c;
@@ -272,9 +282,9 @@ public class CardSceneController implements Initializable{
 			}
 		} // END for(playerCards)
 		
-		// aggiornamento grafica
+		// graphic update
 		handlePlayerFigureNumber();
-		// check per attivazione tradeButton
+		//trade Button enabled
 		handleTradeButton();
 			
 	}

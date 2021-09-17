@@ -1,7 +1,7 @@
 package risk.model;
 
 import java.util.ArrayList;
-//import java.awt.Color;
+
 
 public class Territory {
 
@@ -10,40 +10,22 @@ public class Territory {
 	private int tanks;
 	private ArrayList<Territory> confinanti;
 	private int id;
-	//Continent continent;
 	private String continent;
 
 
 	
-//	public Territory(String name, Continent continent, int id) {
-//	this.name = name;
-//	this.continent = continent;			//fare controllo sul continente che sia corretto in base al territorio (uso il nome??)
-//	tanks = 0;
-//	this.id = id;
-//}
 	
-//	public Territory(String name, int id, String continent, String hexaColor) {
-//		this.name = name;
-//		tanks = 0;
-//		this.id = id;
-//		this.hexaColor = hexaColor;
-//		this.continent = continent;
-//	}
-//	
-	
+
 	/**
-	 * Creates a new territory
-	 * 
-	 * @param name      is the name of the territory
-	 * @param id        is the numerical code used to identify the territory
-	 * //@param continent is the continent where the territory is located
-	 * @param hexaColor is the color of the territory on the map
+	 * Creates a Territory
+	 * @param name of the Territory
+	 * @param id number of the Territory
+	 * @param continent in which the Territory is
 	 */
 	public Territory(String name, int id, String continent) {
 		this.name = name;
 		tanks = 0;
 		this.id = id;
-//		this.hexaColor = hexaColor;
 		this.continent = continent;	
 	}
 
@@ -197,13 +179,7 @@ public class Territory {
 		}
 	}
 
-//	/**
-//	 * @return the continent
-//	 */
-//	public Continent getContinent() {
-//		return continent;
-//	}
-	
+
 	/**
 	 * @return the continent's name
 	 */
@@ -211,33 +187,5 @@ public class Territory {
 		return continent;
 	}
 	
-//invece di restituire il continente, restituisco solo il nome del continente
-	/**
-	 * Returns the name of the continent of the territory
-	 * 
-	 * @return continent
-	 */
-	/*
-	 * public String getContinent() { return continent; }
-	 * 
-	 *//**
-		 * Returns the color of the territory on the map
-		 * 
-		 * @return hexaColor
-		 */
-	/*
-	 * public String getHexaColor() { return hexaColor; }
-	 * 
-	 *//**
-		 * Converts the color from hexadecimal to RGB
-		 * 
-		 * @return color
-		 *//*
-			 * public Color getRGB () { return new Color(
-			 * Integer.valueOf(this.hexaColor.substring( 0, 2 ), 16 ),
-			 * Integer.valueOf(this.hexaColor.substring( 2, 4 ), 16 ),
-			 * Integer.valueOf(this.hexaColor.substring( 4, 6 ), 16 )); }
-			 * 
-			 */
 
 }

@@ -14,7 +14,6 @@ public class PlayerInfoController implements Initializable {
 
 	@FXML
 	private VBox playerInfo;
-	//private VBox playerInfo1, playerInfo2, playerInfo3, playerInfo4, playerInfo5, playerInfo6;
 	
 	@FXML
 	private HBox playerInfoColor1, playerInfoColor2, playerInfoColor3, playerInfoColor4, playerInfoColor5, playerInfoColor6;

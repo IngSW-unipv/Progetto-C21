@@ -660,7 +660,6 @@ public class GameController implements Initializable {
 			nextTurn();
 			game.nextPhase();
 			if (!game.getCurrentTurn().isAI()) {
-				System.out.println("bella");
 				phaseText.setText(game.getGamePhase().toString());				//down center label
 				phaseSwitch.setText(String.valueOf(game.getCurrentTurn().getBonusTanks()));		//center down label with number of tanks	
 				setPhaseTextArea("\n" + game.getCurrentTurn().getName() + " turn! You received " + game.getCurrentTurn().getBonusTanks() + " bonus armies");	//label in basso a destra
@@ -858,7 +857,6 @@ public class GameController implements Initializable {
 
 
 	private void tankAddedAnimation(MouseEvent event) {
-		// ANIMAZIONE
 		int translateSpan = 10;
 		plusAnimBox.setTranslateX(event.getSceneX() - plusAnimBox.getWidth()/2);
 		plusAnimBox.setTranslateY(event.getSceneY()- plusAnimBox.getHeight()+translateSpan);

@@ -95,10 +95,6 @@ public class DisplacementController implements Initializable {
 	
 	@FXML
     public void cancelButtonPressed(MouseEvent e){
-		
-		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
-		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
-		// deseleziono i territori attacker e defender
 		resetAll();
     	Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();

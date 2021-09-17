@@ -62,9 +62,6 @@ public class RisikoGame {
 		turnCounter = 0;
 		currentTurn = this.players[turnCounter];
 
-//		if(currentTurn.isAI()) {
-//			nextTurn();
-//		} 
 		 
 		
 	}
@@ -373,29 +370,6 @@ public class RisikoGame {
 		figures.add(ca1.getFigure());
 		figures.add(ca2.getFigure());
 		figures.add(ca3.getFigure());
-		/*
-		for (Territory t: territories) {
-			if(!(ca1.getFigure().equals(FIGURE.JOLLY))) {
-				if(ca1.getTerritory().equals(t)) {   //se la figura � diversa dal Jolly ma raffigura un territorio posseduto dal
-													//giocatore corrente
-					if (t.getOwner().equals(currentTurn)) 
-						bonus = bonus + 2;
-				}
-			}
-			if(!(ca2.getFigure().equals(FIGURE.JOLLY))) {
-				if(ca2.getTerritory().equals(t)) {
-					if (t.getOwner().equals(currentTurn)) 
-						bonus = bonus + 2;
-				}
-			}
-			if(!(ca3.getFigure().equals(FIGURE.JOLLY))) { 
-				if(ca3.getTerritory().equals(t)) {
-					if (t.getOwner().equals(currentTurn)) 
-						bonus = bonus + 2;
-				}
-			}	
-		}
-		*/
 		
 		// tris di figure uguali
 		if(ca1.getFigure() == ca2.getFigure() && ca2.getFigure() == ca3.getFigure()) {
@@ -408,8 +382,7 @@ public class RisikoGame {
 			} // tris di figure tutte diverse
 		} else if (figures.contains(FIGURE.ARTILLERY) && figures.contains(FIGURE.INFANTRY) && figures.contains(FIGURE.CAVALRY)) {
 			return 10+bonus;
-		} else if (figures.contains(FIGURE.JOLLY)) { // manca il controllo sulle altre due figure che devono essere
-														// uguali
+		} else if (figures.contains(FIGURE.JOLLY)) { 
 			return 12+bonus;
 		}
 		return 0;
@@ -481,21 +454,6 @@ public class RisikoGame {
      * @return array of Territories
      */
     private Territory[] shuffleTerritories() {
-    	/*
-    	Territory[] shuffledTerritories = new Territory[territories.size()];
-    	int k = 0;
-    	for(Territory t : territories) {
-    		shuffledTerritories[k] = t;
-    		k++;
-    	}
-        for (int i = 0; i < territories.size(); i++) {
-            int j = i + (int) ((territories.size() - i) * Math.random());   
-            Territory temp = shuffledTerritories[i];
-            shuffledTerritories[i] = shuffledTerritories[j];
-            shuffledTerritories[j] = temp;
-        }
-        return shuffledTerritories;
-        */	
     	Territory[] shuffledTerritories = new Territory[territories.size()];
     	ArrayList<Territory> shuffledList = (ArrayList<Territory>) territories.clone();
     	Collections.shuffle(shuffledList);
@@ -532,32 +490,13 @@ public class RisikoGame {
 	public void giveBonus(Player pl) {
 
 		pl.giveBonusTanks((int) Math.floor(pl.getTerritories() / 3));
-//		pl.giveBonusTanks((int)pl.getTerritories()/3);	
 		
 		for(Continent c : continents) {
 			if(isOwned(c)) {
-				// if(getRandomPlayer(c).equals(pl)) {
 					pl.giveBonusTanks(c.getBonus());
-				// }
 			}
 		}
 	}
-	
-
-	/**
-	 * Returns a random player 
-	 * @param c is the continent
-	 * @return Player
-	 */
-//	public Player getRandomPlayer(Continent c) {
-//		for (Territory t: territories) {
-//			if (t.getContinent().equals(c.getName())) {
-//				return t.getOwner();
-//			}
-//		}
-//		return null;
-//	}
-//	
 	
 	/**
 	 * Returns a list of all territories
@@ -692,12 +631,7 @@ public class RisikoGame {
 			getPlayer(currentTurn).giveCard(cards.get(0));
 			cards.remove(0);
 			shuffleCards();
-		}
-			
-		
-			
-		
-		
+		}	
 	}
 	
 	/**
@@ -725,7 +659,7 @@ public class RisikoGame {
 		return currentTurn.getBonusTanks();
 	}
 
-	/*
+	/**
 	 * Eliminates the Player p
 	 * @param p, the Player eliminated
 	 */

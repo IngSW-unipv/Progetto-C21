@@ -31,14 +31,4 @@ public class Die {
 	    return faceValue;
 	}
 	
-	
-	/*public static void main(String[] args){
-		
-		Die dado1 = new Die();
-		Die dado2 = new Die();
-		
-		System.out.println("Risultato dado 1 : " + dado1.roll() + "\n");
-		System.out.println("Risultato dado 2 : " + dado2.roll() + "\n");
-		
-	}*/
 }

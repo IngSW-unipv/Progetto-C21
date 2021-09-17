@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class PlayersList {
 
-	private static ArrayList<Player> players; // oppure meglio un array normale?
+	private static ArrayList<Player> players;
 
 	/**
 	 * Returns the players on the list

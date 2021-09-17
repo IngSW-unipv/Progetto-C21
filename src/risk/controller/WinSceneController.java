@@ -76,13 +76,11 @@ public class WinSceneController implements Initializable {
 		// hide window on H hold pressed
 		rootPane.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.H) {
-				//rootPane.getScene().getWindow().hide();
 				rootPane.getScene().getWindow().setOpacity(0);
 			}
 		});
 		rootPane.setOnKeyReleased((event) -> {
 			if (event.getCode() == KeyCode.H) {
-				//rootPane.getScene().getWindow().show();
 				rootPane.getScene().getWindow().setOpacity(1);
 			}
 		});

@@ -75,7 +75,7 @@ public class Continent {
 	 * @return territory
 	 */
 
-	// per la Mission 2 quando devi conquistare un Continente a tua scelta, da sistemare il random
+	// per la Mission 2 quando devi conquistare un Continente a tua scelta
 	public Territory getRandomTerritory() {
 		return territories.get(2);
 	}

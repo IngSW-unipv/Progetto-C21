@@ -248,10 +248,6 @@ public class AttackController implements Initializable {
 	 */
 	@FXML
 	public void cancelButtonPressed(ActionEvent e) throws IOException {
-
-		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
-		//GameController.getInstance().clearSelectedTerritory(GameController.getInstance().getAttacker());
-		// deseleziono i territori attacker e defender
 		onClosing();
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		window.close();

@@ -129,7 +129,7 @@ public class FileHandler {
 		int n=Integer.parseInt(in.readLine()) + 2;
 		
 		Territory territory=null;
-		FIGURE figure=null;		// Capire se lasciarlo di tipo String o trovare il modo per farlo leggere direttamente come tipo della ENUM
+		FIGURE figure=null;		
 		int code;
 		
 		for(int i=0; i<n; i++) {

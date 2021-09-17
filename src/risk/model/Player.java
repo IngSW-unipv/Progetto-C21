@@ -41,7 +41,6 @@ public class Player {
 		this.isAI = isAI;
 
 		this.eliminated = false;
-//		shaker = new DiceShaker();
 		this.tanks = 0;
 		this.continents = 0;
 		this.territories = 0;
@@ -289,7 +288,7 @@ public class Player {
 						temp.addTanks(1);
 						GameController.getInstance()
 								.setPhaseTextArea(this.name + " has placed " + 1 + " tanks" + " in " + temp.getName());
-						temp.getOwner().placeTank(1); // cambia metti 1 al posto di 21
+						temp.getOwner().placeTank(1);
 						counter++;
 						temp = GameController.game.getRandomCurrentPlayerTerritory();
 					}
@@ -437,7 +436,6 @@ public class Player {
 	public Territory[] findMovingTerritories() {
 		
 		Territory[] t1t2 = new Territory[2];
-		int counter = 0;
 		
 		for (Territory t : GameController.game.getTerritories()) {
 			
