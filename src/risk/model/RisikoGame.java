@@ -70,6 +70,11 @@ public class RisikoGame {
 	}
 	
 	
+	public RisikoGame() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	/**
 	 * The games goes to the next turn
 	 */
@@ -626,6 +631,28 @@ public class RisikoGame {
 		for(Territory te : territories) {
 			if(te.getId() == t.getId()) {
 				return te;
+			}
+		}
+		return null;
+	}
+	
+	
+	public Territory getTerritoryRandPlayer(Player p,int n) {
+		for(Territory te : territories) {
+			if(te.getOwner().getName().equals(p.getName())) {
+				te.setTanks(n);
+				return te;
+				
+			}
+		}
+		return null;
+	}
+	public Territory getTerritory1(Territory p) {
+		for(Territory te : territories) {
+			if(te.getId()==p.getId()) {
+				
+				return te;
+				
 			}
 		}
 		return null;

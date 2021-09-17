@@ -47,6 +47,14 @@ public class Territory {
 		this.continent = continent;	
 	}
 
+	
+	
+	public void setTanks(int tanks) {
+		this.tanks = tanks;
+	}
+
+
+
 	/**
 	 * Sets the borders of a territory through an array list
 	 * 
