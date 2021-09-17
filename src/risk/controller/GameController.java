@@ -420,6 +420,7 @@ public class GameController implements Initializable {
 						try {
 							stopMusic();
 							windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
+							restart(event);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -560,6 +561,7 @@ public class GameController implements Initializable {
 				try {
 					stopMusic();
 					windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
+					restart(event);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -1058,6 +1060,7 @@ public class GameController implements Initializable {
 			try {
 				soundController.stopMusic();
 				windowLoader("/risk/view/fxml/WinScene.fxml", "Win", true, true);
+				restart(event);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -1099,6 +1102,14 @@ public class GameController implements Initializable {
 	@FXML
 	private void pauseMenuRestartPressed(MouseEvent event) {
 		stopMusic();
+		restart(event);
+	}
+	
+	/**
+	 * Method called by pauseMenuRestartPressed to restart the game
+	 * @param event MouseEvent
+	 */
+	private void restart(MouseEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.close();
 		Platform.runLater(() -> new Main().start(new Stage()));

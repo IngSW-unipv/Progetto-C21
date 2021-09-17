@@ -274,7 +274,7 @@ public class Player {
 
 	
 	
-	
+	// fare che ritorna vero se ha vinto falso altrimenti; <-----------------------------
 	  public void playTurnAI() {
 	  
 			Territory temp = null;

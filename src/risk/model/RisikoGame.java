@@ -481,6 +481,7 @@ public class RisikoGame {
      * @return array of Territories
      */
     private Territory[] shuffleTerritories() {
+    	/*
     	Territory[] shuffledTerritories = new Territory[territories.size()];
     	int k = 0;
     	for(Territory t : territories) {
@@ -494,16 +495,12 @@ public class RisikoGame {
             shuffledTerritories[j] = temp;
         }
         return shuffledTerritories;
-//    	
-//    	Collections.shuffle(territories);
-//    	Territory[] shuffledTerritories = new Territory[territories.size()];		//NON CAPIAMO PERCHE' NON FUNZIONA
-//    	territories.toArray(shuffledTerritories);
-//    	Territory[] sh2 =new Territory[territories.size()];
-//    	sh2=shuffledTerritories.clone();
-//    	for(int i=0; i<sh2.length;i++) {
-//    		System.out.println(sh2[i]);
-//    	}
-//    	return sh2;
+        */	
+    	Territory[] shuffledTerritories = new Territory[territories.size()];
+    	ArrayList<Territory> shuffledList = (ArrayList<Territory>) territories.clone();
+    	Collections.shuffle(shuffledList);
+    	shuffledTerritories = shuffledList.toArray(shuffledTerritories);    	
+    	return shuffledTerritories;
     }
     
    

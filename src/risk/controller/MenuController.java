@@ -260,6 +260,7 @@ public class MenuController implements Initializable {
 	private void exit(final ActionEvent event) {
 		event.consume();
 		Platform.exit();
+		System.exit(0);
 	}
 	
 	/* Method called when play button is pressed */
