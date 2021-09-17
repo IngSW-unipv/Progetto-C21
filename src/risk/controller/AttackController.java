@@ -90,13 +90,12 @@ public class AttackController implements Initializable {
 	/**
 	 * Territory 1
 	 */
-	private Territory territory1;
+	private Territory territory1= GameController.getInstance().getTerritory1();
+	private Territory territory2= GameController.getInstance().getTerritory2();
 	
 	/**
 	 * Territory 2
-	 */
-	private Territory territory2;
-	
+	 */	
 	/**
 	 * SoundController
 	 */
@@ -112,18 +111,17 @@ public class AttackController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		territory1 = GameController.getInstance().getTerritory1();
-		territory2 = GameController.getInstance().getTerritory2();
 		attackButton.setDisable(true);
-		territoryAtkLabel.setText(territory1.getName());
-		territoryDefLabel.setText(territory2.getName());
-		attackerTanksLabel.setText(String.valueOf(territory1.getTanks()));
-		defenderTanksLabel.setText(String.valueOf(territory2.getTanks()));
-		soundController = new SoundController();
-		if(GameController.getInstance().getMusic()) soundController.battleMusic(); 
-		setDefTanks();
+    	territoryAtkLabel.setText(territory1.getName());
+    	territoryDefLabel.setText(territory2.getName());
+    	attackerTanksLabel.setText(String.valueOf(territory1.getTanks()));
+    	defenderTanksLabel.setText(String.valueOf(territory2.getTanks()));
+    	soundController = new SoundController();
+    	if(GameController.getInstance().getMusic()) soundController.battleMusic(); 
+    	setDefTanks();
 		attackDices = new DiceShaker();
 		defenderDices = new DiceShaker();
+
 
 		atkResults = new int[3];
 		defResults = new int[3];
@@ -174,47 +172,60 @@ public class AttackController implements Initializable {
 	 * @param t1 Territory attacker 
 	 * @param t2 Territory defender 
 	 */
-	public void aiAttack(Territory t1,Territory t2) {
+public void aiAttack(Territory t1,Territory t2) {
+    	
+    	int atNumber;
+    	int deNumber;
+    	
+    	if(t1.getTanks() > 3) {
+    		atNumber = 3;
+    	}
+    	else atNumber = t1.getTanks() -1;
+    	
+    	if(t2.getTanks() > 2) {
+			deNumber = 3;
+    	} else {
+    		deNumber = t2.getTanks();
+    	}
+    	
+    	
+    	System.out.println(t1.getName()+" attacca con "+atNumber+" e "+t2.getName()+" difende con "+deNumber);
+    	
+    	DiceShaker attackDices2 = new DiceShaker();
+		DiceShaker defenderDices2 = new DiceShaker();
 
-		territory1 = t1;
-		territory2 = t2;
+		int[] atkResults2 = new int[3];
+		int[] defResults2 = new int[3];
+		
+		atkResults2 = attackDices2.rollDices(atNumber);
+		defResults2 = defenderDices2.rollDices(deNumber);
+    	
+    	GameController.game.battle(atkResults2,defResults2, atNumber, deNumber,t1,t2);
+    	
+    	System.out.println("RISULTATI DADI:\n");
+    	for(int i = 0 ; i < Math.max(atNumber, deNumber); i++) {
+    		System.out.println("ATK "+i+"DEF "+i+"\n"+atkResults2[i]+"      "+defResults2[i]);
+        	
+    	}
+    	
+    	GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+				+" attacked "+t2.getName()+" from "+t1.getName());
+    	
+    	
+    	if(t2.getOwner().equals(t1.getOwner())) {
+    		GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
+    				+" conquered "+t2.getName());
 
-		setAtkTanks();
-		setDefTanks();
+//			GameController.game.giveCard();
+//			GameController.getInstance().setTerritory1(null);
+//	    	GameController.getInstance().setTerritory2(null);
+//			GameController.getInstance().updateCardsNumber();
+			
+			
+    	}
 
-		System.out.println("t1 "+t1.getName());
-		System.out.println("t2 "+t2.getName());
+    }
 
-		attackDices = new DiceShaker();
-		defenderDices = new DiceShaker();
-
-		atkResults = new int[3];
-		defResults = new int[3];
-
-		atkResults = attackDices.rollDices(atkTank);
-		defResults = defenderDices.rollDices(defTank);
-
-		GameController.game.battle(atkResults, defResults, atkTank, defTank, territory1, territory2);
-		for (int i = 0; i < Math.max(atkTank, defTank); i++) {
-			System.out.println("" + atkResults[i] + "-----" + defResults[i]);
-
-		}
-
-		GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
-				+ " attacked " + territory2.getName() + " from " + territory1.getName());
-
-
-		if (territory2.getOwner().equals(territory1.getOwner())) {
-			GameController.getInstance().setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName()
-					+ " conquered " + territory2.getName());
-
-			GameController.game.giveCard();
-			GameController.getInstance().updateCardsNumber();
-
-
-		}
-
-	}
 
 	
 	/**

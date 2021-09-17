@@ -232,7 +232,7 @@ public class GameController implements Initializable {
 			phasesDescriptionArea.setText("PHASES:\n");
 			attackButtonIcon.setDisable(true);
 			if (game.getCurrentTurn().isAI()) {
-				game.getCurrentTurn().playTurn();
+				game.getCurrentTurn().playTurnAI();
 				nextPhase();
 			}
 		} catch (NumberFormatException | IOException e) {
@@ -1107,7 +1107,7 @@ public class GameController implements Initializable {
 	/**
 	 * Method to update the visualization of the number of cards in the button
 	 */
-	protected void updateCardsNumber() {
+	public void updateCardsNumber() {
 		cardNumberText.setText(""+game.getCurrentTurn().getCards().size());
 	}
 	

@@ -1,5 +1,7 @@
 package risk.model;
 
+
+
 import java.util.ArrayList;
 
 import risk.controller.AttackController;
@@ -20,13 +22,9 @@ public class Player {
 	private DiceShaker shaker;
 	private ArrayList<Card> cards;
 	private Mission mission;
-	private int counter=0;
+	
 
-	/*
-	 * ? private int continents; //numero di continenti ? private int territories;
-	 * //numero di territori --> Ciascun player sa solo quanti continenti ha ma non
-	 * sa quali sono, la classe Risiko Game ha le varie associazioni
-	 */
+	
 
 	/**
 	 * Creates a new player
@@ -274,13 +272,14 @@ public class Player {
 	
 	
 	
-	  public void playTurn() {
+	  public void playTurnAI() {
 	  
 			Territory temp = null;
 
 			int counter = 0;
 			switch (GameController.game.getGamePhase()) {
 			case FIRSTTURN:
+				System.out.println(this.name+" "+this.getMissionDescription());
 				temp = GameController.game.getRandomCurrentPlayerTerritory();
 				if (bonusTanks > 0) {
 					while (counter < 3 && bonusTanks > 0) {
@@ -289,20 +288,15 @@ public class Player {
 								.setPhaseTextArea(this.name + " has placed " + 1 + " tanks" + " in " + temp.getName());
 						temp.getOwner().placeTank(1); // cambia metti 1 al posto di 21
 						counter++;
+						temp = GameController.game.getRandomCurrentPlayerTerritory();
 					}
 				}
 				counter = 0;
-//				GameController.getInstance().nextPhase();
-	  
-		  		//GameController.getInstance().nextPhase();
-
-		  //AIRecapSceneController.getInstance() .setText(this.name +
-			 //": armata posizionata sul territorio " + temp.getName() + "\n");
-			  //GameController.getInstance().firstTurn(); } 
 		  break;
 		  
 	  
 		case DRAFT:
+			System.out.println(this.name);
 	    	while (bonusTanks > 0) { 
 	    	temp = GameController.game.getRandomCurrentPlayerTerritory();
 	    	temp.addTanks(1);
@@ -310,119 +304,46 @@ public class Player {
 					" has placed "+1+" tanks"+" in "+ temp.getName());
 		  	temp.getOwner().placeTank(1); 
 	    	}
-	    		
-//			GameController.getInstance().nextPhase();
 	    	  break;
 	    
 	    	
 	    case ATTACK:
-	    	
-			AttackController at = new AttackController(); // static??
-			boolean enter = false;
-	    	for (Territory t : GameController.game.getTerritories()) { 		//fare metodo per restituire i territori in ordine casuale in 
-	    																			//quanto l'arrayList mantiene l'ordine??
-			  if (t.getTanks() > 2 && t.getOwner().equals(this)) {
-			  GameController.getInstance().setTerritory1(t);
-		  } 
-	  }
-		if (GameController.getInstance().getTerritory1() != null) {
-	    	for (Territory t : GameController.getInstance().getTerritory1().getConfinanti()) { 
-				if (!t.getOwner().equals(this)) {
-					enter = true;
-				  GameController.getInstance().setTerritory2(t);
-				  System.out.println("t1"+GameController.getInstance().getTerritory1().getName()+"t2 "+GameController.getInstance().getTerritory2().getName());
-					at.aiAttack(GameController.getInstance().getTerritory1(),
-							GameController.getInstance().getTerritory2());
-					
-					break;
-			  } 
-	    	}
-	    }
-	    	
-		if (enter == false) {
-			System.out.println("case attack");
-			System.out.println("Territorio 1 " + GameController.getInstance().getTerritory1() + "territorio 2 "+ GameController.getInstance().getTerritory2());
+			AttackController at = new AttackController(); 
+			int attackCounter = 0;	
+			while(tankAverage() > 2.4 && attackCounter < 3 ) {
+				
+				Territory[] temp1 = findAttackerandDefender();
+				
+				
+			if (temp1[0] != null && temp1[1] != null) {
+					at.aiAttack(temp1[0],
+							temp1[1]);
+					attackCounter++;
+		    }
+			else break;
 		}
-		GameController.getInstance().setTerritory1(null);
-		GameController.getInstance().setTerritory2(null);
-		 
-
-//	    GameController.getInstance().nextPhase();
-	    			
-	    	
 	    	break;
 	    	
 	    case FORTIFY:
 	    	
-			Territory t1 = GameController.getInstance().getTerritory1();
-			Territory t2 = GameController.getInstance().getTerritory2();
-			boolean fortified = false;
+	    	Territory[] moving = findMovingTerritories();
+	    	
+	    	
+	    	if(moving[0] != null && moving[1] != null) {
+	    		
+	    		GameController.game.moveTanks(moving[0],moving[1], 1);
 
-			for (Territory t : GameController.game.getTerritories()) {
-				if (t.getTanks() > 2 && t.getOwner().equals(this)) {
-					t1 = t;
-					break;
-				}
-			}
-			if (t1 != null) {
-				for (Territory t : t1.getConfinanti()) {
-
-					if (t.getOwner().equals(this)) {
-						t2 = t;
-						GameController.game.moveTanks(t1, t2, 1);
-
-						GameController.getInstance()
-								.setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName() + " moved "
-										+ 1 + " tanks from " + t1.getName() + " to " + t2.getName());
-						break;
-					}
-
-				}
-			}
-			System.out.println("case fortify");
-			System.out.println("Territorio 1 " + t1 + "territorio 2 " + t2);
-
-			GameController.getInstance().setTerritory1(null);
-			GameController.getInstance().setTerritory2(null);
-
-//			GameController.getInstance().nextPhase();
+				GameController.getInstance()
+						.setPhaseTextArea(GameController.getInstance().getCurrentPlayer().getName() + " moved "
+								+ 1 + " tanks from " + moving[0].getName() + " to " +moving[1].getName());
+	    		}
+	    	
+			
+			
 	    	break;
-	  }
+			}
 
 
-	  
-	  
-	  
-	  
-	  
-	  //	  
-//	  for (Territory t : GameController.getInstance().getGame().getTerritories()) { 
-//		  if (t.getTanks() > 3 && t.getOwner().equals(this)) {
-//			  GameController.getInstance().setTerritory12(t, null);
-//		  } 
-//	  }
-//	   
-//	   break;  
-	  
-	  /*if (GameController.territory1 != null) { for (Territory t :
-	  GameController.territory1.getConfinanti()) { if
-	  (!t.getOwner().equals(this) && t.getTanks() < 3) {
-	  GameController.getInstance().setTerritory2(t);
-	  AttackSceneController.aiAttack(); if (t.getTanks() == 0) {
-	  GameSceneController.getInstance().getGame().conquer(GameSceneController.
-	  territory1, t);
-	  GameSceneController.getInstance().getGame().moveTanks(GameSceneController.
-	  territory1, GameSceneController.territory2, 1); }
-	  AIRecapSceneController.getInstance() .setText(this.name + ": ha attaccato " +
-	  GameSceneController.territory2.getName() + "con " +
-	  GameSceneController.territory1.getName());
-	  GameSceneController.getInstance().updateTanks();
-	  GameSceneController.getInstance().setTerritory12(null, null); break; } } }
-	  
-	  GameSceneController.getInstance().nextTurn();
-	  
-	  break; }*/
-	 
 	  }
 	 
 	/**
@@ -431,7 +352,259 @@ public class Player {
 	public boolean isEliminated() {
 		return eliminated;
 	}
+	
+	public Territory[] findAttackerandDefender() {
+		
+		Territory[] attdef = new Territory[2];
+		
+		for (Territory t : GameController.game.getTerritories()) {
+			
+			if (t.getTanks() > 2 && t.getOwner().equals(this)) {
+				
+				if(numberOfWeakTerritories(t) != null) {
+					System.out.println("trovato uno con weak vicino");
+					attdef[0] = t;
+					attdef[1] = numberOfWeakTerritories(t);
+					return attdef;
+				}
+				
+			}
+			
+		}
 
+			if (mostOccupiedTerritory().getTanks() > 2 && (attackableTerritories(mostOccupiedTerritory()) > 0)) {
+				System.out.println("trovato quello con il max dei tank");
+				attdef[0] = mostOccupiedTerritory();
+				attdef[1] = worstDefender(attdef[0]);
+				
+			}
+				else {
+				for(Territory t : GameController.game.getTerritories()) {
+					
+					if(t.getOwner().equals(this) && t.getTanks() > 2) {
+						
+						for(Territory t1 : t.getConfinanti()) {
+							
+							if(!t1.getOwner().equals(this)) {
+								System.out.println("trovato uno random");
+								attdef[0] = t;
+								attdef[1] = t1;
+								return attdef;
+							}
+						}
+						
+					}
+				}
+			} 
+			
+			
+			
+			
+
+		return attdef;
+	}
+	
+	public Territory[] findMovingTerritories() {
+		
+		Territory[] t1t2 = new Territory[2];
+		int counter = 0;
+		
+		for (Territory t : GameController.game.getTerritories()) {
+			
+			if (t.getTanks() > 2 && t.getOwner().equals(this)) {
+				
+				for(Territory t1 : t.getConfinanti()) {
+					
+					if(t1.getOwner().equals(this)) {
+						t1t2[0] = t;
+						t1t2[1] = t1;
+						return t1t2;
+					}
+				}
+				
+			}
+			
+		}
+
+			
+		return t1t2;
+	}
+	
+	public Territory worstDefender(Territory territory) {
+		
+		for(Territory t : territory.getConfinanti()) {
+			
+			if(! t.getOwner().equals(this)) {
+				
+				if(t.getTanks() == 1) return t;
+				else return t;
+			}
+		}
+		return null;
+	}
+	
+	public int attackableTerritories(Territory territory) {
+		int c = 0;
+		for(Territory t : territory.getConfinanti()) {
+			if(! t.getOwner().equals(this)) c++;
+		}
+		return c;
+	}
+	
+	//return del primo territorio da attaccare con 1 carro solo
+	public Territory numberOfWeakTerritories(Territory territory) {
+		
+		
+		for(Territory t : territory.getConfinanti()) {
+			
+			if(!(t.getOwner().equals(this)) && t.getTanks() == 1) return t;
+		}
+		
+		return null;
+	}
+	
+	public Territory mostOccupiedTerritory() {
+		
+		Territory max = null;
+		
+		for(Territory t1: GameController.game.getTerritories()) {
+			if(t1.getOwner().equals(this)) {
+				max = t1;
+				break;
+			}
+		}
+		
+		for(Territory t: GameController.game.getTerritories()) {
+			if(t.getOwner().equals(this)) {
+				
+				if(t.getTanks() >= max.getTanks()) max = t;
+				
+			}
+		}
+		return max;
+	}
+	
+	public double tankAverage() {
+		int totalTanks = 0;
+		for(Territory t : GameController.game.getTerritories()) {
+			if(t.getOwner().equals(this))totalTanks += t.getTanks();
+		}
+		return  ((double)totalTanks/this.getTerritories());
+	}
+	
+	public void useCards() {
+		int bonus=0;
+		int a = 0;
+		
+		
+			
+			if(this.cards.size() == 3) {
+				
+				bonus = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(2));
+				
+				if(bonus > 0 ) {
+					playCard(cards.get(0));
+					playCard(cards.get(1));
+					playCard(cards.get(2));
+				}
+				
+				
+			}
+			if(this.cards.size() == 4) {
+				
+				a = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(3));
+				if(a > 0 ) {
+					playCard(cards.get(0));
+					playCard(cards.get(1));
+					playCard(cards.get(3));
+					bonus = a;
+				}else {
+					a = GameController.game.checkTris(cards.get(0),cards.get(2),cards.get(3));
+					if(a > 0 ) {
+						playCard(cards.get(0));
+						playCard(cards.get(2));
+						playCard(cards.get(3));
+						bonus = a;
+					}
+				}
+				if(a == 0) {
+					a = GameController.game.checkTris(cards.get(1),cards.get(2),cards.get(3));
+					if(a > 0 ) {
+						playCard(cards.get(1));
+						playCard(cards.get(2));
+						playCard(cards.get(3));
+						bonus = a;
+					}
+				}
+				
+				
+				
+			}
+			if(this.cards.size() == 5) {
+				a = 0;
+				
+				
+				a = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(4));
+				if(a > 0 ) {
+					playCard(cards.get(0));
+					playCard(cards.get(1));
+					playCard(cards.get(4));
+					bonus = a;
+				}else {
+					a = GameController.game.checkTris(cards.get(0),cards.get(2),cards.get(4));
+					if(a > 0 ) {
+						playCard(cards.get(0));
+						playCard(cards.get(2));
+						playCard(cards.get(4));
+						bonus = a;
+					}
+				}
+				if(a == 0) {
+					a = GameController.game.checkTris(cards.get(0),cards.get(3),cards.get(4));
+					if(a > 0 ) {
+						playCard(cards.get(0));
+						playCard(cards.get(3));
+						playCard(cards.get(4));
+						bonus = a;
+					}
+				}
+				if(a == 0) {
+					a = GameController.game.checkTris(cards.get(1),cards.get(2),cards.get(4));
+					if(a > 0 ) {
+						playCard(cards.get(1));
+						playCard(cards.get(2));
+						playCard(cards.get(4));
+						bonus = a;
+					}
+				}
+				if(a == 0) {
+					a = GameController.game.checkTris(cards.get(1),cards.get(3),cards.get(4));
+					if(a > 0 ) {
+						playCard(cards.get(1));
+						playCard(cards.get(3));
+						playCard(cards.get(4));
+						bonus = a;
+					}
+				}
+				if(a == 0) {
+					a = GameController.game.checkTris(cards.get(2),cards.get(3),cards.get(4));
+					if(a > 0 ) {
+						playCard(cards.get(2));
+						playCard(cards.get(3));
+						playCard(cards.get(4));
+						bonus = a;
+					}
+				}
+			
+		}
+		if(bonus > 0 ) {
+			giveBonusTanks(bonus);
+			System.out.println("BONUS CARTE");
+			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
+			GameController.getInstance().updateCardsNumber();
+			}
+		
+	}
 	/**
 	 * @param eliminated the current player
 	 */

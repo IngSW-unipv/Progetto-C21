@@ -83,7 +83,7 @@ public class RisikoGame {
 		
 		if (currentTurn.isAI() && gamePhase == GAME_PHASE.FIRSTTURN) {
 		  
-			 currentTurn.playTurn(); 
+			 currentTurn.playTurnAI(); 
 			
 		  }
 		 
@@ -106,18 +106,18 @@ public class RisikoGame {
 			giveBonus(currentTurn);
 			
 			if (currentTurn.isAI()) {
-				currentTurn.playTurn();
+				currentTurn.playTurnAI();
 			}
 			 
 			break;
 		case DRAFT:
 			gamePhase = GAME_PHASE.ATTACK;
-			if(currentTurn.isAI()) { currentTurn.playTurn(); }
+			if(currentTurn.isAI()) { currentTurn.playTurnAI(); }
 			
 			break;
 		case ATTACK:
 			gamePhase = GAME_PHASE.FORTIFY;
-			if(currentTurn.isAI()) { currentTurn.playTurn(); }
+			if(currentTurn.isAI()) { currentTurn.playTurnAI(); }
 			break;
 
 		case FORTIFY:
@@ -125,7 +125,7 @@ public class RisikoGame {
 			giveBonus(currentTurn);
 			gamePhase = GAME_PHASE.DRAFT;
 			if (currentTurn.isAI()) {
-				currentTurn.playTurn();
+				currentTurn.playTurnAI();
 			}
 			
 			
