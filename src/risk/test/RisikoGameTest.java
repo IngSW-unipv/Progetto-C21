@@ -1,20 +1,14 @@
 package risk.test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.Assert.*;
-
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Before;
-
+import org.junit.jupiter.api.Test;
 
 import risk.model.Player;
-import risk.model.PlayersList;
 import risk.model.RisikoGame;
 import risk.model.Territory;
 import risk.model.util.Color;
@@ -35,10 +29,7 @@ class RisikoGameTest {
 		Player1 = new Player("pippo", Color.BLACK, true);
 		Player2 = new Player("pluto", Color.GREEN, true);
 		
-		territory1.addTanks(3);
-		territory1.setOwner(Player1);
-		territory2.setOwner(Player2);
-		territory2.addTanks(2);
+
 		playersList.add(Player1);
 		playersList.add(Player2);
 		playersArr= new Player[playersList.size()];

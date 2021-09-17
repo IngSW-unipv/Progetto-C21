@@ -23,10 +23,6 @@ public class WinSceneController implements Initializable {
     @FXML
     private AnchorPane titleBg;
     
-	/* root pane */
-	@FXML
-	private AnchorPane rootPane;
-
     @FXML
     private Label titleLabel, tankNumLabel, terrNumLabel ,contNumLabel;
 
@@ -60,21 +56,9 @@ public class WinSceneController implements Initializable {
         Image image = new Image(file.toURI().toString());
         missionImage.setImage(image);
         
-		// hide window on H hold pressed
-		rootPane.setOnKeyPressed((event) -> {
-		    if (event.getCode() == KeyCode.H) {
-		        //rootPane.getScene().getWindow().hide();
-		        rootPane.getScene().getWindow().setOpacity(0);
-		    }
-		});
-		rootPane.setOnKeyReleased((event) -> {
-		    if (event.getCode() == KeyCode.H) {
-		        //rootPane.getScene().getWindow().show();
-		        rootPane.getScene().getWindow().setOpacity(1);
-		    }
-		});
 		
 		
+
      // setto il comportamento dei pulsanti
         newGameButton.setOnAction((event) -> {
         	GameController.getInstance().stopMusic();
@@ -91,6 +75,19 @@ public class WinSceneController implements Initializable {
 			System.exit(0);
         });
 
+		// hide window on H hold pressed
+		titleBg.setOnKeyPressed((event) -> {
+			if (event.getCode() == KeyCode.H) {
+				// rootPane.getScene().getWindow().hide();
+				titleBg.getScene().getWindow().setOpacity(0);
+			}
+		});
+		titleBg.setOnKeyReleased((event) -> {
+			if (event.getCode() == KeyCode.H) {
+				// rootPane.getScene().getWindow().show();
+				titleBg.getScene().getWindow().setOpacity(1);
+			}
+		});
 		
 	}
 	
