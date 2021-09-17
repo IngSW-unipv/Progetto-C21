@@ -66,6 +66,9 @@ public class SoundController {
 		playOneTime("src/risk/view/songs/cardSound.mp3");
 	}
 	
+	public void winningSound() {
+		playInLoop("src/risk/view/songs/winningSound.mp3");
+	}
 	
 	/**
 	 *

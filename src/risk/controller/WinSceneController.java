@@ -29,6 +29,7 @@ public class WinSceneController implements Initializable {
     private Button newGameButton, exitButton;
     
     String color;
+    private SoundController soundcontroller;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -37,7 +38,8 @@ public class WinSceneController implements Initializable {
 		Player winner = GameController.game.getCurrentTurn();
 		setColor(winner);
 		titleLabel.setText(winner.getName() + " is the winner!");
-		
+		soundcontroller = new SoundController();
+		soundcontroller.winningSound();
 		// setto i valori dei carri/territori/continenti
 		tankNumLabel.setText(winner.getTanks() + "");
 		terrNumLabel.setText(winner.getTerritories() + "");
@@ -55,11 +57,12 @@ public class WinSceneController implements Initializable {
 		
         // setto il comportamento dei pulsanti
         newGameButton.setOnAction((event) -> {
-        	
+        	soundcontroller.stopMusic();
         });
         
         exitButton.setOnAction((event) -> {
     		event.consume();
+    		soundcontroller.stopMusic();
     		Platform.exit();
         });
 		
