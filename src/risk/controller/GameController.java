@@ -1098,11 +1098,10 @@ public class GameController implements Initializable {
 	 */
 	@FXML
 	private void pauseMenuRestartPressed(MouseEvent event) {
-		// DA FARE
-//		event.consume();
-//		Platform.runLater(()-> new Main().start(new Stage()));
-		
-		
+		stopMusic();
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.close();
+		Platform.runLater(() -> new Main().start(new Stage()));
 	}
 	
 	/**

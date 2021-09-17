@@ -7,17 +7,25 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import risk.main.Main;
 import risk.model.Player;
 
 public class WinSceneController implements Initializable {
 
     @FXML
     private AnchorPane titleBg;
+    
+	/* root pane */
+	@FXML
+	private AnchorPane rootPane;
 
     @FXML
     private Label titleLabel, tankNumLabel, terrNumLabel ,contNumLabel;
@@ -51,17 +59,38 @@ public class WinSceneController implements Initializable {
         File file = new File(path);
         Image image = new Image(file.toURI().toString());
         missionImage.setImage(image);
-		
-		
-        // setto il comportamento dei pulsanti
-        newGameButton.setOnAction((event) -> {
-        	
-        });
         
+		// hide window on H hold pressed
+		rootPane.setOnKeyPressed((event) -> {
+		    if (event.getCode() == KeyCode.H) {
+		        //rootPane.getScene().getWindow().hide();
+		        rootPane.getScene().getWindow().setOpacity(0);
+		    }
+		});
+		rootPane.setOnKeyReleased((event) -> {
+		    if (event.getCode() == KeyCode.H) {
+		        //rootPane.getScene().getWindow().show();
+		        rootPane.getScene().getWindow().setOpacity(1);
+		    }
+		});
+		
+		
+     // setto il comportamento dei pulsanti
+        newGameButton.setOnAction((event) -> {
+        	GameController.getInstance().stopMusic();
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Stage mainWindow = (Stage) window.getScene().getWindow();
+			mainWindow.close();
+			window.close();
+			Platform.runLater(() -> new Main().start(new Stage()));
+//da sistemare perchè chiude solo la window più recente
+        }); 
         exitButton.setOnAction((event) -> {
     		event.consume();
     		Platform.exit();
+			System.exit(0);
         });
+
 		
 	}
 	
