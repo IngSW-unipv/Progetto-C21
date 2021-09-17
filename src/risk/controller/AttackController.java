@@ -172,7 +172,7 @@ public class AttackController implements Initializable {
 	 * @param t1 Territory attacker 
 	 * @param t2 Territory defender 
 	 */
-public void aiAttack(Territory t1,Territory t2) {
+	public void aiAttack(Territory t1,Territory t2) {
     	
     	int atNumber;
     	int deNumber;

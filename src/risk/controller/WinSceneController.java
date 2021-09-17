@@ -19,9 +19,9 @@ import risk.main.Main;
 import risk.model.Player;
 
 public class WinSceneController implements Initializable {
-
+	
     @FXML
-    private AnchorPane titleBg;
+    private AnchorPane rootPane, titleBg;
     
     @FXML
     private Label titleLabel, tankNumLabel, terrNumLabel ,contNumLabel;
@@ -60,49 +60,35 @@ public class WinSceneController implements Initializable {
 
 		
 		
-//        // setto il comportamento dei pulsanti
-//        newGameButton.setOnAction((event) -> {
-//        	soundcontroller.stopMusic();
-//        });
-
-        
-		
-		
-
      // setto il comportamento dei pulsanti
         newGameButton.setOnAction((event) -> {
         	GameController.getInstance().stopMusic();
         	soundcontroller.stopMusic();
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			Stage mainWindow = (Stage) window.getScene().getWindow();
-			mainWindow.close();
-			window.close();
-			Platform.runLater(() -> new Main().start(new Stage()));
-//da sistemare perch� chiude solo la window pi� recente
+        	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+    		window.close();
         }); 
         exitButton.setOnAction((event) -> {
-    		event.consume();
-    		soundcontroller.stopMusic();
-    		Platform.exit();
-			System.exit(0);
+        	event.consume();
+        	Platform.exit();
+        	System.exit(0);
         });
 
 		// hide window on H hold pressed
-		titleBg.setOnKeyPressed((event) -> {
+		rootPane.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.H) {
-				// rootPane.getScene().getWindow().hide();
-				titleBg.getScene().getWindow().setOpacity(0);
+				//rootPane.getScene().getWindow().hide();
+				rootPane.getScene().getWindow().setOpacity(0);
 			}
 		});
-		titleBg.setOnKeyReleased((event) -> {
+		rootPane.setOnKeyReleased((event) -> {
 			if (event.getCode() == KeyCode.H) {
-				// rootPane.getScene().getWindow().show();
-				titleBg.getScene().getWindow().setOpacity(1);
+				//rootPane.getScene().getWindow().show();
+				rootPane.getScene().getWindow().setOpacity(1);
 			}
 		});
-		
+
 	}
-	
+
 	public void setColor(Player p) {
 		color = p.getColorName();
 		titleBg.setStyle("-fx-background-color:" + color + ";");

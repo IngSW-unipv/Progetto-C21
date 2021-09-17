@@ -142,7 +142,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Text>
-                              <TextField id="p1name" fx:id="p1name" />
+                              <TextField id="p1name" fx:id="p1name" promptText="insert name" />
                               <CheckBox id="checkMenu_text" fx:id="p1check" disable="true" mnemonicParsing="false" text="AI Player" visible="false" />
                            </children>
                         </HBox>
@@ -153,7 +153,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Text>
-                              <TextField id="p2name" fx:id="p2name" />
+                              <TextField id="p2name" fx:id="p2name" promptText="insert name" />
                               <CheckBox id="checkMenu_text" fx:id="p2check" mnemonicParsing="false" text="AI Player" />
                            </children>
                         </HBox>
@@ -164,7 +164,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Text>
-                              <TextField id="p3name" fx:id="p3name" />
+                              <TextField id="p3name" fx:id="p3name" promptText="insert name" />
                               <CheckBox id="checkMenu_text" fx:id="p3check" mnemonicParsing="false" text="AI Player" />
                            </children>
                         </HBox>
@@ -175,7 +175,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Text>
-                              <TextField id="p4name" fx:id="p4name" />
+                              <TextField id="p4name" fx:id="p4name" promptText="insert name" />
                               <CheckBox id="checkMenu_text" fx:id="p4check" mnemonicParsing="false" text="AI Player" />
                            </children>
                         </HBox>
@@ -186,7 +186,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Text>
-                              <TextField id="p5name" fx:id="p5name" />
+                              <TextField id="p5name" fx:id="p5name" promptText="insert name" />
                               <CheckBox id="checkMenu_text" fx:id="p5check" mnemonicParsing="false" text="AI Player" />
                            </children>
                         </HBox>
@@ -197,7 +197,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Text>
-                              <TextField id="p6name" fx:id="p6name" />
+                              <TextField id="p6name" fx:id="p6name" promptText="insert name" />
                               <CheckBox id="checkMenu_text" fx:id="p6check" mnemonicParsing="false" text="AI Player" />
                            </children>
                         </HBox>
