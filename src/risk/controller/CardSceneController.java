@@ -22,6 +22,10 @@ import risk.model.Card;
 import risk.model.util.FIGURE;
 import risk.model.util.GAME_PHASE;
 
+/**
+ * @author utente
+ *
+ */
 public class CardSceneController implements Initializable{
 	
 	@FXML
@@ -177,14 +181,14 @@ public class CardSceneController implements Initializable{
 	 */
 	@FXML
 	public void tradeButtonPressed(ActionEvent event){
-		if(GameController.getInstance().game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
+		if(GameController.game.getGamePhase().equals(GAME_PHASE.DRAFT)) {
 			
 			if(cardSet[0] != null && cardSet[1] != null && cardSet[2] != null) {
 				bonus = GameController.game.checkTris(cardSet[0], cardSet[1], cardSet[2]);
 			}
 			if(GameController.getInstance().getMusic())soundController.tradeSound();
 			GameController.game.getCurrentTurn().giveBonusTanks(bonus);
-			GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.getInstance().game.getCurrentTurn().getBonusTanks()));
+			GameController.getInstance().setPhaseSwitchText(String.valueOf(GameController.game.getCurrentTurn().getBonusTanks()));
 			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
 			GameController.getInstance().updateCardsNumber();
 			try {
