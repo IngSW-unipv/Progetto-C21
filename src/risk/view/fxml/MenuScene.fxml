@@ -44,7 +44,7 @@
                <bottom>
                   <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button id="playButton" fx:id="preRulesButton" alignment="CENTER" mnemonicParsing="false" onAction="#rulesIt" prefHeight="50.0" prefWidth="400.0" text="R U L E S " textAlignment="CENTER">
+                        <Button id="playButton" fx:id="preRulesButton" alignment="CENTER" mnemonicParsing="false" onAction="#rulesIt" prefHeight="50.0" prefWidth="400.0" text="R E G O L E" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
