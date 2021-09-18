@@ -247,7 +247,7 @@ public class Player {
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
-
+//
 	/**
 	 * Verifies if two players are equal
 	 * 
