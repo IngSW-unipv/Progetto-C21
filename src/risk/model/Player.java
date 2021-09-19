@@ -1,14 +1,10 @@
 package risk.model;
 
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 
 import risk.controller.AttackController;
 import risk.controller.GameController;
-import risk.controller.SoundController;
-/*import java.io.IOException;*/
 import risk.model.util.Color;
 
 public class Player {
@@ -25,9 +21,7 @@ public class Player {
 	private ArrayList<Card> cards;
 	private Mission mission;
 
-	
 
-	
 
 	/**
 	 * Creates a new player
@@ -59,6 +53,9 @@ public class Player {
 		this.mission = mission;
 	}
 
+	/**
+	 * @return mission of the current player
+	 */
 	public Mission getMission() {
 		return mission;
 	}
@@ -207,6 +204,8 @@ public class Player {
 			return "Blue";
 		case BLACK:
 			return "Black";
+		default:
+			break;
 		}
 		return null;
 	}
@@ -244,10 +243,13 @@ public class Player {
 		cards.remove(c);
 	}
 
+	/**
+	 * @return the player's arrayList of Cards
+	 */
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
-//
+
 	/**
 	 * Verifies if two players are equal
 	 * 
@@ -273,8 +275,10 @@ public class Player {
 
 	
 	
-	// fare che ritorna vero se ha vinto falso altrimenti; <-----------------------------
-	  public void playTurnAI() {
+	/**
+	* 
+	*/
+	public void playTurnAI() {
 	  
 			Territory temp = null;
 
@@ -382,6 +386,19 @@ public class Player {
 		return eliminated;
 	}
 	
+	/**
+	 * Method that finds the attacker territory (which must have more than 2 tanks
+	 * and it's choosen in the order: if has a weak neighboring territory to attack
+	 * or if it's the territory with the maximum number of tanks Otherwise choose a
+	 * random territory of the current player with more than 2 tanks.)
+	 * 
+	 * @see numberOfWeakTerritories()
+	 * @see mostOccupiedTerritory() -and the defender territory
+	 * @return an array of Territory: in the first position the territory of the
+	 *         attacker (which is the most strategic territory to start an attack),
+	 *         in the second position the territory attacked (which is the weakest
+	 *         or a random territory if the attacker is not strategic)
+	 */
 	public Territory[] findAttackerandDefender() {
 		
 		Territory[] attdef = new Territory[2];
@@ -433,6 +450,11 @@ public class Player {
 		return attdef;
 	}
 	
+	/**
+	 * @return an array of territory: in the first position the territory from which
+	 *         you want to move the tanks, in the second position the territory on
+	 *         which you want to place the tanks
+	 */
 	public Territory[] findMovingTerritories() {
 		
 		Territory[] t1t2 = new Territory[2];
@@ -471,6 +493,13 @@ public class Player {
 		return null;
 	}
 	
+	/**
+	 * Method that return the number of territories that can be attacked from the
+	 * territory passed into the method
+	 * 
+	 * @param territory from which you want to attack
+	 * @return the number of attackable territories
+	 */
 	public int attackableTerritories(Territory territory) {
 		int c = 0;
 		for(Territory t : territory.getConfinanti()) {
@@ -479,7 +508,13 @@ public class Player {
 		return c;
 	}
 	
-	//return del primo territorio da attaccare con 1 carro solo
+	/**
+	 * Method that looks for the weak territories bordering the territory passed
+	 * into the method
+	 * 
+	 * @param territory for which to do the research
+	 * @return the first weak territory (with a single tank) found or null
+	 */
 	public Territory numberOfWeakTerritories(Territory territory) {
 		
 		
@@ -491,6 +526,11 @@ public class Player {
 		return null;
 	}
 	
+	/**
+	 * Method tha looks for the territory with the maximum number of tanks
+	 * 
+	 * @return the territory with the maximum number of tanks or null
+	 */
 	public Territory mostOccupiedTerritory() {
 		
 		Territory max = null;
@@ -512,6 +552,9 @@ public class Player {
 		return max;
 	}
 	
+	/**
+	 * @return the average of the tanks placed on the territories
+	 */
 	public double tankAverage() {
 		int totalTanks = 0;
 		for(Territory t : GameController.game.getTerritories()) {
@@ -520,119 +563,121 @@ public class Player {
 		return  ((double)totalTanks/this.getTerritories());
 	}
 	
-	public void useCards() {
-		int bonus=0;
-		int a = 0;
-		
-		
-			
-			if(this.cards.size() == 3) {
-				
-				bonus = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(2));
-				
-				if(bonus > 0 ) {
-					playCard(cards.get(0));
-					playCard(cards.get(1));
-					playCard(cards.get(2));
-				}
-				
-				
-			}
-			if(this.cards.size() == 4) {
-				
-				a = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(3));
-				if(a > 0 ) {
-					playCard(cards.get(0));
-					playCard(cards.get(1));
-					playCard(cards.get(3));
-					bonus = a;
-				}else {
-					a = GameController.game.checkTris(cards.get(0),cards.get(2),cards.get(3));
-					if(a > 0 ) {
-						playCard(cards.get(0));
-						playCard(cards.get(2));
-						playCard(cards.get(3));
-						bonus = a;
-					}
-				}
-				if(a == 0) {
-					a = GameController.game.checkTris(cards.get(1),cards.get(2),cards.get(3));
-					if(a > 0 ) {
-						playCard(cards.get(1));
-						playCard(cards.get(2));
-						playCard(cards.get(3));
-						bonus = a;
-					}
-				}
-				
-				
-				
-			}
-			if(this.cards.size() == 5) {
-				a = 0;
-				
-				
-				a = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(4));
-				if(a > 0 ) {
-					playCard(cards.get(0));
-					playCard(cards.get(1));
-					playCard(cards.get(4));
-					bonus = a;
-				}else {
-					a = GameController.game.checkTris(cards.get(0),cards.get(2),cards.get(4));
-					if(a > 0 ) {
-						playCard(cards.get(0));
-						playCard(cards.get(2));
-						playCard(cards.get(4));
-						bonus = a;
-					}
-				}
-				if(a == 0) {
-					a = GameController.game.checkTris(cards.get(0),cards.get(3),cards.get(4));
-					if(a > 0 ) {
-						playCard(cards.get(0));
-						playCard(cards.get(3));
-						playCard(cards.get(4));
-						bonus = a;
-					}
-				}
-				if(a == 0) {
-					a = GameController.game.checkTris(cards.get(1),cards.get(2),cards.get(4));
-					if(a > 0 ) {
-						playCard(cards.get(1));
-						playCard(cards.get(2));
-						playCard(cards.get(4));
-						bonus = a;
-					}
-				}
-				if(a == 0) {
-					a = GameController.game.checkTris(cards.get(1),cards.get(3),cards.get(4));
-					if(a > 0 ) {
-						playCard(cards.get(1));
-						playCard(cards.get(3));
-						playCard(cards.get(4));
-						bonus = a;
-					}
-				}
-				if(a == 0) {
-					a = GameController.game.checkTris(cards.get(2),cards.get(3),cards.get(4));
-					if(a > 0 ) {
-						playCard(cards.get(2));
-						playCard(cards.get(3));
-						playCard(cards.get(4));
-						bonus = a;
-					}
-				}
-			
-		}
-		if(bonus > 0 ) {
-			giveBonusTanks(bonus);
-			System.out.println("BONUS CARTE");
-			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
-			GameController.getInstance().updateCardsNumber();
-			}
-		
-	}
+	// non implementato in quanto l'AI diventerebbe troppo forte
+//	public void useCards() {
+//		int bonus=0;
+//		int a = 0;
+//		
+//		
+//			
+//			if(this.cards.size() == 3) {
+//				
+//				bonus = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(2));
+//				
+//				if(bonus > 0 ) {
+//					playCard(cards.get(0));
+//					playCard(cards.get(1));
+//					playCard(cards.get(2));
+//				}
+//				
+//				
+//			}
+//			if(this.cards.size() == 4) {
+//				
+//				a = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(3));
+//				if(a > 0 ) {
+//					playCard(cards.get(0));
+//					playCard(cards.get(1));
+//					playCard(cards.get(3));
+//					bonus = a;
+//				}else {
+//					a = GameController.game.checkTris(cards.get(0),cards.get(2),cards.get(3));
+//					if(a > 0 ) {
+//						playCard(cards.get(0));
+//						playCard(cards.get(2));
+//						playCard(cards.get(3));
+//						bonus = a;
+//					}
+//				}
+//				if(a == 0) {
+//					a = GameController.game.checkTris(cards.get(1),cards.get(2),cards.get(3));
+//					if(a > 0 ) {
+//						playCard(cards.get(1));
+//						playCard(cards.get(2));
+//						playCard(cards.get(3));
+//						bonus = a;
+//					}
+//				}
+//				
+//				
+//				
+//			}
+//			if(this.cards.size() == 5) {
+//				a = 0;
+//				
+//				
+//				a = GameController.game.checkTris(cards.get(0),cards.get(1),cards.get(4));
+//				if(a > 0 ) {
+//					playCard(cards.get(0));
+//					playCard(cards.get(1));
+//					playCard(cards.get(4));
+//					bonus = a;
+//				}else {
+//					a = GameController.game.checkTris(cards.get(0),cards.get(2),cards.get(4));
+//					if(a > 0 ) {
+//						playCard(cards.get(0));
+//						playCard(cards.get(2));
+//						playCard(cards.get(4));
+//						bonus = a;
+//					}
+//				}
+//				if(a == 0) {
+//					a = GameController.game.checkTris(cards.get(0),cards.get(3),cards.get(4));
+//					if(a > 0 ) {
+//						playCard(cards.get(0));
+//						playCard(cards.get(3));
+//						playCard(cards.get(4));
+//						bonus = a;
+//					}
+//				}
+//				if(a == 0) {
+//					a = GameController.game.checkTris(cards.get(1),cards.get(2),cards.get(4));
+//					if(a > 0 ) {
+//						playCard(cards.get(1));
+//						playCard(cards.get(2));
+//						playCard(cards.get(4));
+//						bonus = a;
+//					}
+//				}
+//				if(a == 0) {
+//					a = GameController.game.checkTris(cards.get(1),cards.get(3),cards.get(4));
+//					if(a > 0 ) {
+//						playCard(cards.get(1));
+//						playCard(cards.get(3));
+//						playCard(cards.get(4));
+//						bonus = a;
+//					}
+//				}
+//				if(a == 0) {
+//					a = GameController.game.checkTris(cards.get(2),cards.get(3),cards.get(4));
+//					if(a > 0 ) {
+//						playCard(cards.get(2));
+//						playCard(cards.get(3));
+//						playCard(cards.get(4));
+//						bonus = a;
+//					}
+//				}
+//			
+//		}
+//		if(bonus > 0 ) {
+//			giveBonusTanks(bonus);
+//			System.out.println("BONUS CARTE");
+//			GameController.getInstance().setPhaseTextArea(GameController.game.getCurrentTurn().getName() + " received " + bonus + " bonus armies");
+//			GameController.getInstance().updateCardsNumber();
+//			}
+//		
+//	}
+
 	/**
 	 * @param eliminated the current player
 	 */
